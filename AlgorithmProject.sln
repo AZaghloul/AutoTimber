@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2010
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmProject", "AlgorithmProject\AlgorithmProject.csproj", "{66C15A46-F605-449E-8A9F-67A5A1219D68}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BIMSpace", "BIMSpace\BIMSpace.csproj", "{60B891A3-4D40-469F-8755-971C0AB9A5C6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{66C15A46-F605-449E-8A9F-67A5A1219D68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{66C15A46-F605-449E-8A9F-67A5A1219D68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{66C15A46-F605-449E-8A9F-67A5A1219D68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{66C15A46-F605-449E-8A9F-67A5A1219D68}.Release|Any CPU.Build.0 = Release|Any CPU
+		{60B891A3-4D40-469F-8755-971C0AB9A5C6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{60B891A3-4D40-469F-8755-971C0AB9A5C6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{60B891A3-4D40-469F-8755-971C0AB9A5C6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{60B891A3-4D40-469F-8755-971C0AB9A5C6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2D86FBE8-ECE7-4461-96C7-CFED93D99C57}
+	EndGlobalSection
+EndGlobal
