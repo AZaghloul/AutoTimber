@@ -10,7 +10,7 @@ using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.MeasureResource;
 using Xbim.Common;
 
-namespace BIMSpace.General
+namespace Bim.Common
 {
     /// <summary>
     /// Wall object to Carry IFCStandardWall Data
@@ -62,26 +62,17 @@ namespace BIMSpace.General
 
         #region  static Methods
 
-        /// <summary>
-        /// obtain Collection of Ifcwallstandard Case from an Ifc File
-        /// </summary>
-        /// <param name="filePath"></param>
-        /// <returns></returns>
-        public static IEnumerable<IIfcWallStandardCase> GetWalls(string filePath)
-        {
-            var model = IfcStore.Open(filePath);
-            return IfcWalls = model.Instances.OfType<IIfcWallStandardCase>();
-
-
-        }
+       
+        
         /// <summary>
         /// 
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public static IEnumerable<IIfcWallStandardCase> GetWalls(IfcStore model)
+        public static IEnumerable<IIfcWallStandardCase> GetIfcWalls(Model model)
         {
-            return IfcWalls = model.Instances.OfType<IIfcWallStandardCase>();
+           
+            return IfcWalls = model.IfcModel.Instances.OfType<IIfcWallStandardCase>();
         }
 
         /// <summary>
@@ -118,8 +109,6 @@ namespace BIMSpace.General
 
             return wallsList;
         }
-
-
         #endregion
 
         #region Helper Private Functions

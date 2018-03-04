@@ -5,8 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xbim.Ifc4;
 using Xbim.Ifc4.Interfaces;
-using BIMSpace.General;
-namespace BIMSpace.Extensions
+using Bim.Common;
+namespace Bim.Extensions
 {
     public static class WallExtensions
     {

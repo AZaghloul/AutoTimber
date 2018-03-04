@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BIMSpace.General
+namespace Bim.Common
 {
     public class Dimension
     {

@@ -76,21 +76,24 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="General\Dimensions.cs" />
-    <Compile Include="General\Door.cs" />
+    <Compile Include="Common\Enums.cs" />
+    <Compile Include="Components\Dimensions.cs" />
+    <Compile Include="Components\Door.cs" />
     <Compile Include="Extensions\WallExtensions.cs" />
-    <Compile Include="General\IFCHandler.cs" />
-    <Compile Include="General\Opening.cs" />
-    <Compile Include="General\Location.cs" />
+    <Compile Include="Interfaces\IHandler.cs" />
+    <Compile Include="IO\IFCHandler.cs" />
+    <Compile Include="Components\Model.cs" />
+    <Compile Include="Components\Opening.cs" />
+    <Compile Include="Components\Location.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="General\Wall.cs" />
-    <Compile Include="General\Window.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <Compile Include="Components\Wall.cs" />
+    <Compile Include="Components\Window.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Utilities\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

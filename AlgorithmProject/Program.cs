@@ -8,27 +8,33 @@ using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.MeasureResource;
 using Xbim.Common;
-using BIMSpace.General;
 using System;
-using BIMSpace.Extensions;
+
+//using Bim.Common;
+//using Bim.Extensions;
+
 namespace AlgorithmProject
 {
     class Program
     {
         static string filepath = @"..\..\Models\ARCH-MODELv2.ifc";
 
-        static void Main(string[] args)
-        {
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Starting....");
+        //static void Main(string[] args)
+        //{
+        //    Console.ForegroundColor = ConsoleColor.Green;
+        //    Console.WriteLine("Starting....");
 
-            Wall.GetWalls(filepath);
-            var myWalls = Wall.ExtractWalls();
-            myWalls[0].CreateWall();
-            Console.ForegroundColor = ConsoleColor.Yellow;
-            Console.WriteLine("Done...");
+        //    Wall.GetWalls(filepath);
+        //    var myWalls = Wall.ExtractWalls();
 
-            Console.ReadLine();
-        }
+
+
+        //    myWalls[0].CreateWall();
+
+        //    Console.ForegroundColor = ConsoleColor.Yellow;
+        //    Console.WriteLine("Done...");
+
+        //    Console.ReadLine();
+        //}
     }
 }
