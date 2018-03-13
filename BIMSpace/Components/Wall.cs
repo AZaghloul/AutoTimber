@@ -84,7 +84,6 @@ namespace Bim.Common
             List<Wall> wallsList = new List<Wall>();
             foreach (var wall in IfcWalls)
             {
-
                 Wall crntWall=new Wall(new Dimension());
                 //get the wall x,y,z
                 var recD = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
@@ -103,8 +102,6 @@ namespace Bim.Common
                     wallsList.Add(crntWall);
 
                 }
-
-
             }
 
             return wallsList;
@@ -183,6 +180,9 @@ namespace Bim.Common
         }
         #endregion
 
+
+
     }
+
 }
 

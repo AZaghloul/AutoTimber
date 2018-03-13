@@ -6,13 +6,15 @@ using System.Threading.Tasks;
 using Xbim.Ifc4;
 using Xbim.Ifc4.Interfaces;
 using Bim.Common;
+using Xbim.Ifc;
+using Xbim.Ifc4.ProfileResource;
+using Xbim.Ifc4.GeometryResource;
+using Xbim.Ifc4.GeometricModelResource;
+
 namespace Bim.Extensions
 {
     public static class WallExtensions
     {
-        public static Wall CreateWall(this Wall wall)
-        {
-            return null;
-        }
+        
     }
 }

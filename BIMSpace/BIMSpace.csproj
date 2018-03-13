@@ -79,6 +79,7 @@
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Components\Dimensions.cs" />
     <Compile Include="Components\Door.cs" />
+    <Compile Include="Components\Stud.cs" />
     <Compile Include="Extensions\WallExtensions.cs" />
     <Compile Include="Interfaces\IHandler.cs" />
     <Compile Include="IO\IFCHandler.cs" />
@@ -90,10 +91,15 @@
     <Compile Include="Components\Window.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Release\" />
     <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\BIMSpace.dll" />
+    <Content Include="bin\Debug\BIMSpace.pdb" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

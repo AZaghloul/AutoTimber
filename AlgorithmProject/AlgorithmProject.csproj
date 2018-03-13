@@ -97,10 +97,20 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="bin\Debug\AlgorithmProject.exe.config" />
+    <None Include="bin\Debug\model.ifc" />
+    <None Include="bin\Debug\wall-stud.ifc" />
+    <None Include="bin\Debug\wall-stud2.ifc" />
+    <None Include="bin\Debug\wall-stud3.ifc" />
     <None Include="Models\ARCH-MODELv2.ifc" />
     <None Include="Models\ARCH-MODELv2.ifc.ifcxml" />
+    <None Include="Models\Beam-new.ifc" />
+    <None Include="Models\stud-new.ifc" />
+    <None Include="Models\stud3.ifc" />
+    <None Include="Models\ThreeWalls - Test.ifc" />
     <None Include="Models\ThreeWalls.ifc" />
     <None Include="Models\ThreeWalls.ifc.log" />
+    <None Include="Models\wall1-Test.ifc" />
     <None Include="Models\wall1.ifc" />
   </ItemGroup>
   <ItemGroup>
@@ -110,7 +120,30 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="bin\Release\" />
     <Folder Include="Logs\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="bin\Debug\AlgorithmProject.exe" />
+    <Content Include="bin\Debug\AlgorithmProject.pdb" />
+    <Content Include="bin\Debug\BIMSpace.dll" />
+    <Content Include="bin\Debug\BIMSpace.pdb" />
+    <Content Include="bin\Debug\Esent.Interop.dll" />
+    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\Debug\log4net.dll" />
+    <Content Include="bin\Debug\Xbim.CobieExpress.dll" />
+    <Content Include="bin\Debug\Xbim.Common.dll" />
+    <Content Include="bin\Debug\Xbim.Geometry.Engine.Interop.dll" />
+    <Content Include="bin\Debug\Xbim.Geometry.Engine32.dll" />
+    <Content Include="bin\Debug\Xbim.Geometry.Engine64.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc.Extensions.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc2x3.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc2x3.IO.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc4.dll" />
+    <Content Include="bin\Debug\Xbim.IO.dll" />
+    <Content Include="bin\Debug\Xbim.ModelGeometry.Scene.dll" />
+    <Content Include="bin\Debug\Xbim.Tessellator.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
