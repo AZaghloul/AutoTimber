@@ -111,13 +111,17 @@
     <None Include="Models\ARCH-MODELv2.ifc" />
     <None Include="Models\ARCH-MODELv2.ifc.ifcxml" />
     <None Include="Models\Beam-new.ifc" />
+    <None Include="Models\Beam-stud.ifc" />
     <None Include="Models\stud-new.ifc" />
     <None Include="Models\stud3.ifc" />
     <None Include="Models\ThreeWalls - Test.ifc" />
+    <None Include="Models\ThreeWalls - Test.ifcnew.ifc" />
     <None Include="Models\ThreeWalls.ifc" />
     <None Include="Models\ThreeWalls.ifc.log" />
     <None Include="Models\wall1-Test.ifc" />
     <None Include="Models\wall1.ifc" />
+    <None Include="Models\walls-noColumn.ifc" />
+    <None Include="Models\walls-noColumn.ifc.log" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

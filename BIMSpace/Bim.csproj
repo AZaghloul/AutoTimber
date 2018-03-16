@@ -87,6 +87,9 @@
     <Compile Include="Components\Model.cs" />
     <Compile Include="Components\Opening.cs" />
     <Compile Include="Components\Location.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_036C0B5B-1481-4323-8D20-8F5ADCB23D92.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_5937a670-0e60-4077-877b-f7221da3dda1.cs" />
+    <Compile Include="obj\Debug\TemporaryGeneratedFile_E7A71F73-0F8D-4B9B-B56E-8E70B10BC5D3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Wall.cs" />
     <Compile Include="Components\Window.cs" />
@@ -97,10 +100,23 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />
+    <None Include="obj\Release\BIMSpace.csproj.CoreCompileInputs.cache" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="bin\Debug\BIMSpace.dll" />
     <Content Include="bin\Debug\BIMSpace.pdb" />
+    <Content Include="bin\Debug\Esent.Interop.dll" />
+    <Content Include="bin\Debug\ICSharpCode.SharpZipLib.dll" />
+    <Content Include="bin\Debug\log4net.dll" />
+    <Content Include="bin\Debug\Xbim.CobieExpress.dll" />
+    <Content Include="bin\Debug\Xbim.Common.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc.Extensions.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc2x3.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc2x3.IO.dll" />
+    <Content Include="bin\Debug\Xbim.Ifc4.dll" />
+    <Content Include="bin\Debug\Xbim.IO.dll" />
+    <Content Include="bin\Debug\Xbim.Tessellator.dll" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
