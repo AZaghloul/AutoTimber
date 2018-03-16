@@ -79,6 +79,7 @@
     <Compile Include="Common\Enums.cs" />
     <Compile Include="Components\Dimensions.cs" />
     <Compile Include="Components\Door.cs" />
+    <Compile Include="Components\Sill.cs" />
     <Compile Include="Components\Stud.cs" />
     <Compile Include="Extensions\WallExtensions.cs" />
     <Compile Include="Interfaces\IHandler.cs" />
@@ -89,10 +90,10 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Components\Wall.cs" />
     <Compile Include="Components\Window.cs" />
+    <Compile Include="Utilities\ConsoleUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
-    <Folder Include="Utilities\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram1.cd" />

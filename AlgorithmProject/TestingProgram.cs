@@ -13,20 +13,29 @@ using System;
 using Bim.Common;
 using Bim.Extensions;
 using log4net;
-using BIMSpace.Components;
+using Bim.Components;
+using Bim.Utilities;
 
 namespace AlgorithmProject
 {
     class TestingProgram
     {
+        
+        
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
      (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        static string fileopen = @"..\..\Models\ThreeWalls.ifc";
-        static string newFile = @"..\..\Models\Beam-new.ifc";
+        static string fileopen = @"..\..\Models\walls-noColumn.ifc";
+        static string newFile = @"..\..\Models\Beam-stud.ifc";
 
         static void Main(string[] args)
         {
+            "enter x:".GetInput(foreColor: ConsoleColor.Red);
+             "Wall Framing Long Header ".Header(ConsoleColor.Yellow,ConsoleColor.Black);
+            "iam in the center".PrintCenter(ConsoleColor.Cyan);
+            "testing Position Function".PrintAtPosition(x:10, foreColor: ConsoleColor.Red);
+
+
             #region Header
             //Header
             Console.ForegroundColor = ConsoleColor.Green;
@@ -43,15 +52,37 @@ namespace AlgorithmProject
 
             var model=  Model.Open(fileopen);
             var beamModel = Model.NewModel("Stud","ITI-Building" ,true, newFile);
-              Wall.GetIfcWalls(model);
-             walls= Wall.ExtractWalls();
+            Wall.GetIfcWalls(model);
+            walls= Wall.ExtractWalls(model);
+            using (var txn=model.IfcModel.BeginTransaction("DeletingColumn"))
+            {
+                var columns = model.IfcModel.Instances.OfType<IIfcColumnStandardCase>();
+                int c = columns.Count();
+                for (int i = 0; i < c; i++)
+                {
 
-            Stud mystud = new Stud(beamModel, new Location(0,0,0),new Dimension(300,300,8000),"New-Stud");
-            Stud mystud2 = new Stud(beamModel, new Location(0, 0, 3000), new Dimension(400, 400, 6000), "New-Stud2");
+                    model.IfcModel.Delete(columns.FirstOrDefault());
 
-           
-            beamModel.Save(newFile,true);
+
+                }
+
+                txn.Commit();
+                model.IfcModel.SaveAs(@"..\..\Models\walls-noColumn.ifc");
+            }
+             int count = walls.Count();
+            for (int i = 0; i < count; i++)
+            {
+
+
+                Stud mystud = new Stud(beamModel, walls[i], new Location(0, 0, 0), new Dimension(1, 1, 8), "New-Stud");
+                // Sill mysill = new Sill(beamModel, new Location(3, -8, 0), new Dimension(6, 1, 1), "New-Sill");
+                Stud mystud2 = new Stud(beamModel, walls[i], new Location(2, 0, 0), new Dimension(1, 1, 8), "New-Stud");
+                Stud mystud3 = new Stud(beamModel, walls[i], new Location(4, 0, 0), new Dimension(1, 1, 8), "New-Stud");
+            }
+           // beamModel.Save(newFile,true);
+            model.Save(fileopen , true);
            // model.OpenWindow(filepath);
+
             #region Footer
 
             Console.WriteLine($"{walls.Count} wall(s) found!");

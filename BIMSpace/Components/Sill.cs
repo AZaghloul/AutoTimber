@@ -28,9 +28,9 @@ using Xbim.Ifc4.MeasureResource;
 using Xbim.Ifc4.PropertyResource;
 using Xbim.Ifc4.QuantityResource;
 
-namespace BIMSpace.Components
+namespace Bim.Components
 {
-    class Header
+   public class Sill
     {
         #region Properties
 
@@ -41,25 +41,42 @@ namespace BIMSpace.Components
         public Location location { get; set; }
         public Wall wall { get; set; }
         public Model Model { get; set; }
-        public IfcColumnStandardCase stud { get; set; }
+        public IfcBeamStandardCase sill { get; set; }
         #endregion
+
+
         #region Member Variables
+
         private IfcStore model;
         #endregion
 
+        #region Constructor
 
+        public Sill(Model model, float x, float y, float z, float xDim, float yDim, float height, string name)
+        {
+            Model = model;
+            this.model = model.IfcModel;
+            dimension = new Dimension(xDim, yDim, height);
+            location = new Location(x, y, z);
+            New(name);
 
-
-
-
-        public IfcBeamStandardCase New(string name)
+        }
+        public Sill(Model model, Location location, Dimension dimension, string name) : this(model, location.X, location.Y, location.Z, dimension.XDIM, dimension.YDIM, dimension.Height, name)
         {
 
+        }
 
+        #endregion
+
+
+
+        #region Methods
+        public IfcBeamStandardCase New(string name)
+        {
             using (var txn = model.BeginTransaction("New Beam"))
             {
-                var stud = model.Instances.New<IfcColumnStandardCase>();
-                stud.Name = name;
+                var sill = model.Instances.New<IfcBeamStandardCase>();
+                sill.Name = name;
                 //new recprofile
                 var recProfile = model.Instances.New<IfcRectangleProfileDef>();
                 //filling proerties eshta y3ny
@@ -101,7 +118,7 @@ namespace BIMSpace.Components
 
                 var rep = model.Instances.New<IfcProductDefinitionShape>();
                 rep.Representations.Add(shape);
-                stud.Representation = rep;
+                sill.Representation = rep;
 
                 //now place the wall into the model
 
@@ -110,22 +127,24 @@ namespace BIMSpace.Components
                 var lp = model.Instances.New<IfcLocalPlacement>();
                 var ax3D = model.Instances.New<IfcAxis2Placement3D>();
                 /*          Set Stud Location */
-                ax3D.Location = origin;
+                var point = model.Instances.New<IfcCartesianPoint>();
+                point.SetXYZ(0, 0, 0);
+                ax3D.Location = point;
                 ax3D.RefDirection = model.Instances.New<IfcDirection>();
                 ax3D.RefDirection.SetXYZ(1, 0, 0);
                 ax3D.Axis = model.Instances.New<IfcDirection>();
-                ax3D.Axis.SetXYZ(0, -1, 0);
+                ax3D.Axis.SetXYZ(0, 1, 0);
                 lp.RelativePlacement = ax3D;
-                stud.ObjectPlacement = lp;
+                sill.ObjectPlacement = lp;
 
                 // linear segment as IfcPolyline with two points is required for IfcWall
                 var ifcPolyline = model.Instances.New<IfcPolyline>();
                 var startPoint = model.Instances.New<IfcCartesianPoint>();
-                startPoint.SetXY(0, 0);
+                startPoint.SetXY(location.X, location.Y);
                 var endPoint = model.Instances.New<IfcCartesianPoint>();
 
                 /*          Set Stud Location */
-                endPoint.SetXY(4000, 0);
+                endPoint.SetXY(location.X+dimension.XDIM, location.Y+dimension.YDIM);
                 ifcPolyline.Points.Add(startPoint);
                 ifcPolyline.Points.Add(endPoint);
 
@@ -160,7 +179,7 @@ namespace BIMSpace.Components
                 material.Name = "some material";
                 var ifcRelAssociatesMaterial = model.Instances.New<IfcRelAssociatesMaterial>();
                 ifcRelAssociatesMaterial.RelatingMaterial = material;
-                ifcRelAssociatesMaterial.RelatedObjects.Add(stud);
+                ifcRelAssociatesMaterial.RelatedObjects.Add(sill);
 
                 ifcRelAssociatesMaterial.RelatingMaterial = ifcMaterialLayerSetUsage;
 
@@ -171,28 +190,22 @@ namespace BIMSpace.Components
 
                 //we need to give the stud a building.
                 var building = (IfcBuilding)model.Instances.OfType<IIfcBuilding>().FirstOrDefault();
-                building.AddElement(stud);
+                building.AddElement(sill);
                 #endregion
                 txn.Commit();
 
 
 
-                return this.stud = stud;
+                return this.sill = sill;
 
             }
 
-
-
-
-#endregion
-
-
-
-
-            #region Helper Method
-
-
-            #endregion
         }
+        #endregion
+
+        #region Helper Method
+
+
+        #endregion
     }
 }

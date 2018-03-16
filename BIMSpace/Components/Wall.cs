@@ -30,31 +30,35 @@ namespace Bim.Common
         public int Label { get; set; }
         public bool IsExternal { get; set; }
         #endregion
-
+        public IfcStore IfcModel { get; set; }
+        public static IfcStore ifcModel { get; set; }
+        public IIfcAxis2Placement3D WallAxis { get; set; }
+        public IIfcLocalPlacement localPlacement;
         #region Constructors
 
 
-        public Wall(float xDim, float yDim, float height, float x, float y, float z)
+        public Wall(IfcStore iifcModel,float xDim, float yDim, float height, float x, float y, float z)
         {
+            ifcModel = iifcModel;
+            IfcModel = iifcModel;
             Location = new Location(x, y, z);
             Dimensions = new Dimension(xDim, yDim, height);
             Doors = new List<Door>();
             windows = new List<Window>();
 
-
         }
 
-        public Wall(Dimension dimensions, Location l) : this(dimensions.XDIM, dimensions.YDIM, dimensions.Height, l.X, l.Y, l.Z)
+        public Wall(IfcStore ifcModel,Dimension dimensions, Location l) : this(ifcModel,dimensions.XDIM, dimensions.YDIM, dimensions.Height, l.X, l.Y, l.Z)
         {
 
 
         }
 
-        public Wall(Location location) : this(0, 0, 0, location.X, location.Y, location.Z)
+        public Wall(Location location) : this(null,0, 0, 0, location.X, location.Y, location.Z)
         {
 
         }
-        public Wall(Dimension dimensions) : this(dimensions.XDIM, dimensions.YDIM, dimensions.Height, 0, 0, 0)
+        public Wall(Dimension dimensions) : this(null,dimensions.XDIM, dimensions.YDIM, dimensions.Height, 0, 0, 0)
         {
 
         }
@@ -79,7 +83,7 @@ namespace Bim.Common
         ///Get Wall List from the static IfcWalls Collection
         /// </summary>
         /// <returns></returns>
-        public static List<Wall> ExtractWalls()
+        public static List<Wall> ExtractWalls(Model model)
         {
             List<Wall> wallsList = new List<Wall>();
             foreach (var wall in IfcWalls)
@@ -91,7 +95,7 @@ namespace Bim.Common
                 if (recD != null)
                 {
                     crntWall.Label = wall.EntityLabel;
-
+                    crntWall.IfcModel = model.IfcModel;
                     GetLocation(wall, crntWall);
                     GetDimension(wall, crntWall);
                     //Extract Openings
@@ -160,7 +164,9 @@ namespace Bim.Common
             // var recD = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
             //get the wall thickness
             //  var thickness = wall.HasAssociations.OfType<IIfcRelAssociatesMaterial>().OfType<IIfcMaterialLayerSetUsage>().Select(a => a.OffsetFromReferenceLine);//.OfType<IfcPositiveLengthMeasure>();
-            var location = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)wall.ObjectPlacement).RelativePlacement).Location;
+            crntWall.WallAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)wall.ObjectPlacement).RelativePlacement);
+            var location = crntWall.WallAxis.Location;
+            crntWall.localPlacement = (IIfcLocalPlacement)wall.ObjectPlacement;
             //using the Wall Class;
             crntWall.Location = new Location((float)location.X, (float)location.Y, (float)location.Z);
 
