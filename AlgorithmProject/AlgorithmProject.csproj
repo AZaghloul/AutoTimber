@@ -128,12 +128,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BIMSpace\Bim.csproj">
-      <Project>{60b891a3-4d40-469f-8755-971c0ab9a5c6}</Project>
-      <Name>Bim</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="bin\Release\" />
     <Folder Include="Logs\" />
   </ItemGroup>
@@ -158,6 +152,20 @@
     <Content Include="bin\Debug\Xbim.IO.dll" />
     <Content Include="bin\Debug\Xbim.ModelGeometry.Scene.dll" />
     <Content Include="bin\Debug\Xbim.Tessellator.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Bim.Application\Bim.Application.csproj">
+      <Project>{29097953-a4e3-4ebe-be15-209086133f10}</Project>
+      <Name>Bim.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bim.Domain\Bim.Domain.csproj">
+      <Project>{b468fbb6-cc77-40d7-a0e9-32b1f345b448}</Project>
+      <Name>Bim.Domain</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bim.IO\Bim.IO.csproj">
+      <Project>{9abae764-1e6e-4124-8d72-96332668d50e}</Project>
+      <Name>Bim.IO</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

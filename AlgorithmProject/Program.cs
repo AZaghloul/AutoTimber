@@ -9,7 +9,7 @@ using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.MeasureResource;
 using Xbim.Common;
 using System;
-
+using System.IO.Ports;
 //using Bim.Common;
 //using Bim.Extensions;
 
@@ -17,7 +17,10 @@ namespace AlgorithmProject
 {
     class Program
     {
-        static string filepath = @"..\..\Models\ARCH-MODELv2.ifc";
+       
+        
+        
+       // static string filepath = @"..\..\Models\ARCH-MODELv2.ifc";
 
         //static void Main(string[] args)
         //{

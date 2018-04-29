@@ -9,89 +9,101 @@ using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.MeasureResource;
 using Xbim.Common;
 using System;
-
-using Bim.Common;
-using Bim.Extensions;
 using log4net;
-using Bim.Components;
-using Bim.Utilities;
+using Bim.Application.Ifc;
+using Bim.IO.Utilities;
+using Bim.Domain.Ifc;
+using Xbim.Ifc4.SharedBldgElements;
+using System.IO.Ports;
 
 namespace AlgorithmProject
 {
     class TestingProgram
     {
-        
-        
+
+
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
      (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        static string fileopen = @"..\..\Models\walls-noColumn.ifc";
-        static string newFile = @"..\..\Models\Beam-stud.ifc";
+
 
         static void Main(string[] args)
         {
-            "enter x:".GetInput(foreColor: ConsoleColor.Red);
-             "Wall Framing Long Header ".Header(ConsoleColor.Yellow,ConsoleColor.Black);
-            "iam in the center".PrintCenter(ConsoleColor.Cyan);
-            "testing Position Function".PrintAtPosition(x:10, foreColor: ConsoleColor.Red);
-
-
+            Start();
             #region Header
-            //Header
-            Console.ForegroundColor = ConsoleColor.Green;
-            Console.WriteLine("Starting....");
-            Console.ResetColor();
-            Console.WriteLine("-------------------------- ");
+
+            "Wall Framing Solutions ".Header(ConsoleColor.Yellow, ConsoleColor.Black);
+            "Starting....".Print(ConsoleColor.Cyan);
+            "".PrintAtPosition(x: 10, foreColor: ConsoleColor.Red);
+            "-------------------------------------------- ".Print(ConsoleColor.White);
             #endregion
-         //   log.Debug("Starting Logging");
 
-            List<Wall> walls = new List<Wall>();
+            string fileName = @"..\..\Models\ThreeWalls - Test.ifc";
+            var model = IfModel.Open(fileName);
+            model.Delete<IfcBeamStandardCase>();
+            model.Delete<IfcColumnStandardCase>();
+            IfSill sill = new IfSill(model, new IfLocation(0, 0, 10), new IfDimension(3f, .2f, .6f), "sill");
+            model.Save(fileName);
 
-
-            //open IfcModel
-
-            var model=  Model.Open(fileopen);
-            var beamModel = Model.NewModel("Stud","ITI-Building" ,true, newFile);
-            Wall.GetIfcWalls(model);
-            walls= Wall.ExtractWalls(model);
-            using (var txn=model.IfcModel.BeginTransaction("DeletingColumn"))
-            {
-                var columns = model.IfcModel.Instances.OfType<IIfcColumnStandardCase>();
-                int c = columns.Count();
-                for (int i = 0; i < c; i++)
-                {
-
-                    model.IfcModel.Delete(columns.FirstOrDefault());
+            OpenWindow(fileName);
 
 
-                }
-
-                txn.Commit();
-                model.IfcModel.SaveAs(@"..\..\Models\walls-noColumn.ifc");
-            }
-             int count = walls.Count();
-            for (int i = 0; i < count; i++)
-            {
 
 
-                Stud mystud = new Stud(beamModel, walls[i], new Location(0, 0, 0), new Dimension(1, 1, 8), "New-Stud");
-                // Sill mysill = new Sill(beamModel, new Location(3, -8, 0), new Dimension(6, 1, 1), "New-Sill");
-                Stud mystud2 = new Stud(beamModel, walls[i], new Location(2, 0, 0), new Dimension(1, 1, 8), "New-Stud");
-                Stud mystud3 = new Stud(beamModel, walls[i], new Location(4, 0, 0), new Dimension(1, 1, 8), "New-Stud");
-            }
-           // beamModel.Save(newFile,true);
-            model.Save(fileopen , true);
-           // model.OpenWindow(filepath);
 
             #region Footer
 
-            Console.WriteLine($"{walls.Count} wall(s) found!");
-            //Footer
-            Console.WriteLine("-------------------------- ");
+
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Done!");
             #endregion
             Console.ReadLine();
         }
+        public static void OpenWindow(string filePath)
+        {
+            System.Diagnostics.Process.Start(filePath);
+        }
+        public static void CreateStuds()
+        {
+            string fileopen = @"..\..\Models\walls-noColumn.ifc";
+            string newFile = @"..\..\Models\Beam-stud.ifc";
+            List<IfWall> walls = new List<IfWall>();
+            //open IfcModel
+            var model = IfModel.Open(fileopen);
+            
+            var beamModel = IfModel.NewModel("Stud", "ITI-Building", true, newFile);
+            IfWall.GetIfcWalls(model);
+            walls = IfWall.ExtractWalls(model);
+
+            Console.WriteLine($"{walls.Count} wall(s) found!");
+            //Footer
+            Console.WriteLine("-------------------------- ");
+
+
+            int count = walls.Count();
+
+            for (int i = 0; i < count; i++)
+            {
+                IfStud mystud = new IfStud(beamModel, walls[i], new IfLocation(0, 0, 0), new IfDimension(.6f, .3f, 4), "New-Stud");
+                // IfcSill mysill = new IfcSill(beamModel, new IfLocation(3, -8, 0), new IfDimension(6, 1, 1), "New-Sill");
+                IfStud mystud2 = new IfStud(beamModel, walls[i], new IfLocation(2, 0, 0), new IfDimension(.6f, .3f, 4), "New-Stud");
+                IfStud mystud3 = new IfStud(beamModel, walls[i], new IfLocation(4, 0, 0), new IfDimension(.6f, .3f, 4), "New-Stud");
+            }
+            beamModel.Save(newFile);
+            model.Save(fileopen);
+            OpenWindow(fileopen);
+        }
+        public static void Start()
+        {
+            SerialPort serial = new SerialPort("COM4", 9600, 0, 6, StopBits.One);
+            //serial.Handshake = Handshake.RequestToSend;
+           // serial.
+            serial.Open();
+          var strr=  serial.ReadExisting();
+            var str = SerialPort.GetPortNames();
+           
+        }
     }
+
+
 }
