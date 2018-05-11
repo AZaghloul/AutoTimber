@@ -15,29 +15,30 @@ namespace Bim.Domain.Ifc
         public IIfcBuilding IfcBuilding { get; set; }
         List<IfStory> Stories { get; set; }
 
-        public IfBuilding()
+        public IfBuilding(IIfcBuilding ifcBuilding)
         {
-
             Stories = new List<IfStory>();
-            Inialize();
+            IfcBuilding = ifcBuilding;
+            Intialize();
         }
 
-      private   void Inialize()
+        private void Intialize()
         {
             Label = IfcBuilding.Name;
-            Id = (int)IfcBuilding.GlobalId.Value;
+            //Id = (int)IfcBuilding.GlobalId.Value;
 
             var stories = IfcBuilding.IsDecomposedBy.OfType<IIfcBuildingStorey>();
             IfStory ifStory;
             int counter = 0;
             foreach (var story in stories)
             {
-
-                ifStory = new IfStory();
-                ifStory.IfModel = IfModel;
-                ifStory.Id = (int)story.GlobalId.Value;
-                ifStory.Label = story.Name;
-                ifStory.StoryNo = counter;
+                ifStory = new IfStory
+                {
+                    IfModel = IfModel,
+                    Id = (int)story.GlobalId.Value,
+                    Label = story.Name,
+                    StoryNo = counter
+                };
                 Stories.Add(ifStory);
                 counter++;
             }

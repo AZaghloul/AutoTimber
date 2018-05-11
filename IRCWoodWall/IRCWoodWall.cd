@@ -1,0 +1,101 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="NameAndType">
+  <Comment CommentText="DomainLayer">
+    <Position X="4.809" Y="6.75" Height="0.291" Width="0.925" />
+  </Comment>
+  <Comment CommentText="I/O Layer">
+    <Position X="1.486" Y="6.756" Height="0.291" Width="0.925" />
+  </Comment>
+  <Comment CommentText="Application Layer">
+    <Position X="8.25" Y="6.75" Height="0.291" Width="1.201" />
+  </Comment>
+  <Class Name="IRCWoodWall.Physical.Stud">
+    <Position X="7" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Physical\Stud.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IRCWoodWall.Physical.Plate">
+    <Position X="8.75" Y="11" Width="1.5" />
+    <InheritanceLine Type="IRCWoodWall.Physical.Blank" ManuallyRouted="true">
+      <Path>
+        <Point X="7.75" Y="10.312" />
+        <Point X="7.75" Y="10.752" />
+        <Point X="9.5" Y="10.752" />
+        <Point X="9.5" Y="11" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Physical\Plate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IRCWoodWall.Physical.WoodWall">
+    <Position X="7" Y="7.25" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAgAAgA=</HashCode>
+      <FileName>Physical\WoodWall.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IRCWoodWall.Physical.Blank" Collapsed="true">
+    <Position X="7" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAIAAABAAAAAAAAQAAABAAAAAAA=</HashCode>
+      <FileName>Physical\Blank.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BIMSpace.Polygon.WallPolygon">
+    <Position X="4.5" Y="7.25" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BIMSpace.Polygon.Region">
+    <Position X="4.5" Y="10.75" Width="2" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BIM.Components.Door" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BIM.Components.Model" Collapsed="true">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BIM.Components.Opening" Collapsed="true">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BIM.Components.Sill" Collapsed="true">
+    <Position X="0.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BIM.Components.Stud" Collapsed="true">
+    <Position X="2.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Class Name="BIM.Components.Wall" BaseTypeListCollapsed="true">
+    <Position X="0.5" Y="8" Width="3.5" />
+    <TypeIdentifier />
+    <Lollipop Position="1.434" Collapsed="true" />
+  </Class>
+  <Class Name="BIM.Components.Window" Collapsed="true">
+    <Position X="0.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Class>
+  <Interface Name="BIM.Components.IWall" Collapsed="true">
+    <Position X="1.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier />
+  </Interface>
+  <Enum Name="IRCWoodWall.Common.WoodSecType" Collapsed="true">
+    <Position X="8.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAAADAEgAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Common\WoodSecType.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="BIM.Components.OpeningType" Collapsed="true">
+    <Position X="2.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier />
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

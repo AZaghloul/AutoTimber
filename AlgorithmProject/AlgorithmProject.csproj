@@ -112,6 +112,8 @@
     <None Include="Models\ARCH-MODELv2.ifc.ifcxml" />
     <None Include="Models\Beam-new.ifc" />
     <None Include="Models\Beam-stud.ifc" />
+    <None Include="Models\FramingExample.ifc" />
+    <None Include="Models\P1.ifc" />
     <None Include="Models\stud-new.ifc" />
     <None Include="Models\stud3.ifc" />
     <None Include="Models\ThreeWalls - Test.ifc" />

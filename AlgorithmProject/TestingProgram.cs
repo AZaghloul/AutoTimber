@@ -15,6 +15,7 @@ using Bim.IO.Utilities;
 using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
 using System.IO.Ports;
+using Bim.Domain;
 
 namespace AlgorithmProject
 {
@@ -29,7 +30,7 @@ namespace AlgorithmProject
 
         static void Main(string[] args)
         {
-            Start();
+            //Start();
             #region Header
 
             "Wall Framing Solutions ".Header(ConsoleColor.Yellow, ConsoleColor.Black);
@@ -38,10 +39,12 @@ namespace AlgorithmProject
             "-------------------------------------------- ".Print(ConsoleColor.White);
             #endregion
 
-            string fileName = @"..\..\Models\ThreeWalls - Test.ifc";
-            var model = IfModel.Open(fileName);
+            string fileName = @"..\..\Models\P1.ifc";
+            IfModel model = IfModel.Open(fileName);
             model.Delete<IfcBeamStandardCase>();
             model.Delete<IfcColumnStandardCase>();
+            List<IfWall> walls = IfWall.ExtractWalls(model);
+
             IfSill sill = new IfSill(model, new IfLocation(0, 0, 10), new IfDimension(3f, .2f, .6f), "sill");
             model.Save(fileName);
 

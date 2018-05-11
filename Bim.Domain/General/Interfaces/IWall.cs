@@ -6,8 +6,8 @@ namespace Bim.Domain
     {
         IDimension Dimensions { get; set; }
         List<IDoor> Doors { get; set; }
+        List<IWindow> Windows { get; set; }
         bool IsExternal { get; set; }
-       
         ILocation Location { get; set; }
     }
 }

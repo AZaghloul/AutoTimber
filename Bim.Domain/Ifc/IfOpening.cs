@@ -10,15 +10,16 @@ namespace Bim.Domain.Ifc
     {
         public ILocation Location { get; set; }
         public IDimension Dimensions { get; set; }
-        public string Type { get; set; }
+        public OpeningType OpeningType { get; set; }
         public int Id { get ; set ; }
-        public string Label { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
+        public string Label { get; set; }
+        public IElement WallOrSlap { get ; set; }
 
-        protected IfOpening(IfLocation location, IfDimension dimensions,string type)
+        protected IfOpening(IfLocation location, IfDimension dimensions, OpeningType type)
         {
             Location = location;
             Dimensions = dimensions;
-            Type = type;
+            OpeningType = type;
         }
     }
 }

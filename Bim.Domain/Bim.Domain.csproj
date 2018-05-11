@@ -95,6 +95,8 @@
     <Compile Include="Ifc\IfStory.cs" />
     <Compile Include="Ifc\IfWall.cs" />
     <Compile Include="Ifc\IfWindow.cs" />
+    <Compile Include="Polygon\Region.cs" />
+    <Compile Include="Polygon\WallPolygon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

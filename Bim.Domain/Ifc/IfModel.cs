@@ -29,14 +29,13 @@ namespace Bim.Domain.Ifc
         private static IfcHandler ifcHandler = new IfcHandler();
 
         public IfcStore IfcStore { get; set; }
-        public IfBuilding building { get; set; }
+        public IfBuilding Building { get; set; }
 
         #region Constructors
         public IfModel(IfcStore ifcStore)
         {
             IfcStore = ifcStore;
-            building = new IfBuilding();
-            Inialize();
+            Intialize();
         }
         public IfModel()
         {
@@ -146,10 +145,14 @@ namespace Bim.Domain.Ifc
                 return building;
             }
         }
-      private void  Inialize()
+        private void Intialize()
         {
-            building.IfcBuilding = IfcStore.Instances.OfType<IfcBuilding>().FirstOrDefault();
-            building.IfModel = this;
+            IIfcBuilding ifcBuilding = IfcStore.Instances.OfType<IIfcBuilding>().FirstOrDefault();
+            Building = new IfBuilding(ifcBuilding)
+            {
+                IfModel = this
+            };
+
         }
         #endregion
 

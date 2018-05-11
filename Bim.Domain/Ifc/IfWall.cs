@@ -25,15 +25,15 @@ namespace Bim.Domain.Ifc
 
         public ILocation Location { get; set; }
         public List<IDoor> Doors { get; set; }
-        public List<IfWindow> windows { get; set; }
+        public List<IWindow> Windows { get; set; }
         public IDimension Dimensions { get; set; }
         public int Label { get; set; }
         public bool IsExternal { get; set; }
         #endregion
         public IfcStore IfcStore { get; set; }
-        public static IfcStore ifcModel { get; set; }
+        public static IfcStore IfcModel { get; set; }
         public IIfcAxis2Placement3D WallAxis { get; set; }
-        public int Id { get ; set ; }
+        public int Id { get; set; }
         string IElement.Label { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public IIfcLocalPlacement localPlacement;
@@ -42,12 +42,12 @@ namespace Bim.Domain.Ifc
 
         public IfWall(IfcStore iifcModel, float xDim, float yDim, float ZDim, float x, float y, float z)
         {
-            ifcModel = iifcModel;
+            IfcModel = iifcModel;
             IfcStore = iifcModel;
             Location = new IfLocation(x, y, z);
             Dimensions = new IfDimension(xDim, yDim, ZDim);
             Doors = new List<IDoor>();
-            windows = new List<IfWindow>();
+            Windows = new List<IWindow>();
 
         }
 
@@ -78,7 +78,6 @@ namespace Bim.Domain.Ifc
         /// <returns></returns>
         public static IEnumerable<IIfcWallStandardCase> GetIfcWalls(IfModel model)
         {
-
             return IfcWalls = model.IfcStore.Instances.OfType<IIfcWallStandardCase>();
         }
 
@@ -89,16 +88,27 @@ namespace Bim.Domain.Ifc
         public static List<IfWall> ExtractWalls(IfModel model)
         {
             List<IfWall> wallsList = new List<IfWall>();
+            IfcWalls = model.IfcStore.Instances.OfType<IIfcWallStandardCase>();
             foreach (var wall in IfcWalls)
             {
-                IfWall crntWall = new IfWall(new IfDimension());
-                //get the wall x,y,z
-                var recD = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+                var recD =  wall.Representation.Representations
+                                .SelectMany(a => a.Items)
+                                .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                                .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
+                            wall.Representation.Representations
+                                .SelectMany(a => a.Items)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                                .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
 
+                //get the wall x,y,z
                 if (recD != null)
                 {
-                    crntWall.Label = wall.EntityLabel;
-                    crntWall.IfcStore = model.IfcStore;
+                    IfWall crntWall = new IfWall(new IfDimension())
+                    {
+                        Label = wall.EntityLabel,
+                        IfcStore = model.IfcStore
+                    };
                     GetLocation(wall, crntWall);
                     GetDimension(wall, crntWall);
                     //Extract Openings
@@ -107,7 +117,6 @@ namespace Bim.Domain.Ifc
                     //check if Wall is External
                     CheckExternal(wall, crntWall);
                     wallsList.Add(crntWall);
-
                 }
             }
 
@@ -154,7 +163,7 @@ namespace Bim.Domain.Ifc
                 else
                 {
 
-                    crntWall.windows.Add(new IfWindow((float)recDepth.FirstOrDefault(), (float)recProfile.YDim, (float)recProfile.XDim
+                    crntWall.Windows.Add(new IfWindow((float)recDepth.FirstOrDefault(), (float)recProfile.YDim, (float)recProfile.XDim
                         , (float)oLocation.X, (float)oLocation.Y, (float)oLocation.Z));
 
                 }
@@ -172,20 +181,41 @@ namespace Bim.Domain.Ifc
             crntWall.localPlacement = (IIfcLocalPlacement)wall.ObjectPlacement;
             //using the Wall Class;
             crntWall.Location = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
-
         }
         private static void GetDimension(IIfcWallStandardCase wall, IfWall crntWall)
         {
             //get the wall x,y,z
-            var recD = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
-            var other = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
-            var otherDepth = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
-            var depth = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
+            var recD = wall.Representation.Representations
+                            .SelectMany(a => a.Items)
+                            .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                            .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ?? 
+                       wall.Representation.Representations
+                            .SelectMany(a => a.Items)
+                            .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                            .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                            .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+
+            var depth = wall.Representation.Representations
+                            .SelectMany(a => a.Items)
+                            .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth) ?? 
+                        wall.Representation.Representations
+                            .SelectMany(a => a.Items)
+                            .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                            .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
+
+
+            //var recD = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+            //var recD1 = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+            //var otherDepth = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
+            //var depth = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
             //get the wall thickness
             var thickness = wall.HasAssociations.OfType<IIfcRelAssociatesMaterial>().OfType<IIfcMaterialLayerSetUsage>().Select(a => a.OffsetFromReferenceLine);//.OfType<IfcPositiveLengthMeasure>();
             var location = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)wall.ObjectPlacement).RelativePlacement).Location;
             //using the Wall Class;
-            crntWall.Dimensions = new IfDimension((float)recD.XDim, (float)recD.YDim, (float)depth.FirstOrDefault());
+            if (recD !=null && depth != null)
+            {
+                crntWall.Dimensions = new IfDimension((float)recD.XDim, (float)recD.YDim, (float)depth.FirstOrDefault());
+            }
         }
         #endregion
 
