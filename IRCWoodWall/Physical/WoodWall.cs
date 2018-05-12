@@ -1,13 +1,13 @@
-﻿using BIM.Common;
-using BIM.Components;
-using BIMSpace.Polygon;
+﻿using Bim.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bim.Domain.Polygon;
+using Bim.Domain;
 
-namespace IRCWoodWall.Physical
+namespace Bim.Application.IRCWood.Physical
 {
     class WoodWall
     {
@@ -22,12 +22,12 @@ namespace IRCWoodWall.Physical
         void SetStudsInLRegion()
         {
             Region LR = WallPolygon.RLeft[0];
-            Double RegionLength = LR.Dimensions.XDIM;
-            Location L = LR.Location;
+            Double RegionLength = LR.Dimensions.XDim;
+            ILocation L = LR.Location;
             Stud firstStud = new Stud
             {
-                Location = L,
-                Length = LR.Dimensions.Height
+                Location = (Bim.Common.Location)L,
+                Length = LR.Dimensions.ZDim
             };
             Studs.Add(firstStud);
         }

@@ -1,10 +1,10 @@
-﻿using IRCWoodWall.Common;
+﻿using Bim.Application.IRCWood.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCWoodWall.Physical
+namespace Bim.Application.IRCWood.Physical
 {
     internal class Plate:Blank
     {

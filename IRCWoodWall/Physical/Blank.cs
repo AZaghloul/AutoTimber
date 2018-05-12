@@ -1,12 +1,13 @@
-﻿using IRCWoodWall.Common;
+﻿using Bim.Common;
+using Bim.Application.IRCWood.Common;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BIM.Common;
 
-namespace IRCWoodWall.Physical
+
+namespace Bim.Application.IRCWood.Physical
 {
     internal abstract class Blank
     {

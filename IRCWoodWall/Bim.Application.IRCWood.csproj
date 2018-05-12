@@ -57,6 +57,10 @@
     <None Include="IRCWoodWall.cd" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bim.Domain\Bim.Domain.csproj">
+      <Project>{b468fbb6-cc77-40d7-a0e9-32b1f345b448}</Project>
+      <Name>Bim.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\BIMSpace\Bim.csproj">
       <Project>{60b891a3-4d40-469f-8755-971c0ab9a5c6}</Project>
       <Name>Bim</Name>

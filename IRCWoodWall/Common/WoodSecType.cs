@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace IRCWoodWall.Common
+namespace Bim.Application.IRCWood.Common
 {
     internal enum WoodSecType
     {
