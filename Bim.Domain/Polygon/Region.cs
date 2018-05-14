@@ -12,25 +12,33 @@ using Xbim.Common;
 
 namespace Bim.Domain.Polygon
 {
-    public enum Type
+    public enum RegionLocation
     {
-        R1,
-        R2,
-        R3,
-        R4,
-        R5
+        Right,
+        Left,
+        Middle,
+        Top,
+        Bottom
     };
     public class Region
     {
         public ILocation Location { get; set; }
         public IDimension Dimensions { get; set; }
-        public Type RType { get; set; }
+        public RegionLocation RegionLocation { get; set; }
+
+        public Region(float xDim, float yDim, float height, float x, float y, float z, RegionLocation regionLocation )
+        {
+            Location = new Location(x, y, z);
+            Dimensions = new Dimension(xDim, yDim, height);
+            RegionLocation = regionLocation;
+        }
 
         public Region(float xDim, float yDim, float height, float x, float y, float z)
         {
             Location = new Location(x, y, z);
             Dimensions = new Dimension(xDim, yDim, height);
         }
+
 
         public Region(IDimension dimensions, ILocation l) : this(dimensions.XDim, dimensions.YDim, dimensions.ZDim, l.X, l.Y, l.Z)
         {

@@ -16,6 +16,7 @@ using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
 using System.IO.Ports;
 using Bim.Domain;
+using Bim.Domain.Polygon;
 
 namespace AlgorithmProject
 {
@@ -45,7 +46,25 @@ namespace AlgorithmProject
             model.Delete<IfcColumnStandardCase>();
             List<IfWall> walls = IfWall.ExtractWalls(model);
 
-            IfSill sill = new IfSill(model, new IfLocation(0, 0, 10), new IfDimension(3f, .2f, .6f), "sill");
+            $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
+
+            List<WallPolygon> wallPolygons = new List<WallPolygon>();
+            int i = 0;
+            foreach (var item in walls)
+            {
+                $"wall no {i}".Print(ConsoleColor.Cyan);
+                wallPolygons.Add(new WallPolygon(item));
+                $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().Opens.Count} opens".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RRight.Count} Right regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RTop.Count} top regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
+                i++;
+            }
+
+
             model.Save(fileName);
 
             OpenWindow(fileName);
