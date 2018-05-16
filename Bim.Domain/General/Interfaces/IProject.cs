@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bim.Domain
 {
-    public interface IProject:IElement
+    public interface IProject
     {
     }
 }

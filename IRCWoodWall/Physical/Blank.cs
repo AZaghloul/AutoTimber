@@ -1,5 +1,6 @@
-﻿using Bim.Common;
+﻿
 using Bim.Application.IRCWood.Common;
+using Bim.Domain;
 using System;
 using System.Collections.Generic;
 using System.Linq;

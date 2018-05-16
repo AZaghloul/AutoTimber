@@ -1,13 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using Bim.Domain.Ifc;
+using System.Collections.Generic;
 
 namespace Bim.Domain
 {
-    public interface IWall:IElement
+    public interface IWall
     {
         IDimension Dimensions { get; set; }
+        ILocation Location { get; set; }
+        IfStory Story { get; set; }
         List<IDoor> Doors { get; set; }
         List<IWindow> Windows { get; set; }
         bool IsExternal { get; set; }
-        ILocation Location { get; set; }
+        
     }
 }

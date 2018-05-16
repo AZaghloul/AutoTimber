@@ -1,6 +1,6 @@
 ﻿namespace Bim.Domain
 {
-    public interface IWindow:IElement
+    public interface IWindow
     {
         IDimension Dimensions { get; set; }
         ILocation Location { get; set; }

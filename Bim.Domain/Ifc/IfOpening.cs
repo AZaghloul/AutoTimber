@@ -4,22 +4,64 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bim.Domain;
+using Xbim.Ifc4.Interfaces;
 namespace Bim.Domain.Ifc
 {
-  abstract public class IfOpening : IOpening
+    public class IfOpening : IfElement, IOpening
     {
+        
+        public IfWall IfWall { get; set; }
         public ILocation Location { get; set; }
         public IDimension Dimensions { get; set; }
         public OpeningType OpeningType { get; set; }
-        public int Id { get ; set ; }
-        public string Label { get; set; }
-        public IElement WallOrSlap { get ; set; }
+        public IIfcRelVoidsElement IfcOpening { get; set; }
+        public IElement WallOrSlap { get; set; }
 
-        protected IfOpening(IfLocation location, IfDimension dimensions, OpeningType type)
+        public IfOpening()
         {
-            Location = location;
-            Dimensions = dimensions;
-            OpeningType = type;
+            
+        }
+        public IfOpening(IfWall ifWall, IIfcRelVoidsElement ifcOpening)
+        {
+            IfWall = ifWall;
+            IfModel = IfWall.IfModel;
+            IfcOpening = ifcOpening;
+            IfModel.Instances.Add(this);
+        }
+
+        public static List<IfOpening> GetOpenings(IfWall ifWall)
+        {
+            var openings = new List<IfOpening>();
+            IfOpening ifopening;
+            foreach (var opening in ifWall.IfcWall.HasOpenings)
+            {
+                ifopening = new IfOpening(ifWall,opening);
+                
+                var opnng = (IIfcAxis2Placement3D)((IIfcLocalPlacement)opening
+                    .RelatedOpeningElement.ObjectPlacement).RelativePlacement;
+                var oLocation = opnng.Location;
+                var recProfile = opening.RelatedOpeningElement.Representation.Representations.SelectMany(a => a.Items)
+                    .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                    .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+                var recDepth = opening.RelatedOpeningElement.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
+                var filling = ((IIfcOpeningElement)opening.RelatedOpeningElement)
+                    .HasFillings.FirstOrDefault().RelatedBuildingElement.GetType().Name;
+               
+                ifopening.Location = new IfLocation((float)oLocation.X, (float)oLocation.Y, (float)oLocation.Z);
+                ifopening.Dimensions = new IfDimension((float)recProfile.XDim, (float)recDepth, (float)recProfile.YDim);
+
+                if (filling == "IfcDoor")
+                {
+                    ifopening.OpeningType = OpeningType.Door;
+                }
+                else
+                {
+                    ifopening.OpeningType = OpeningType.Window;
+                }
+                openings.Add(ifopening);
+            }
+
+            return openings;
         }
     }
 }

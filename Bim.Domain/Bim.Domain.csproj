@@ -89,6 +89,7 @@
     <Compile Include="General\Interfaces\IDoor.cs" />
     <Compile Include="General\Interfaces\IOpening.cs" />
     <Compile Include="General\Interfaces\IWindow.cs" />
+    <Compile Include="Ifc\IfElement.cs" />
     <Compile Include="Ifc\IfLocation.cs" />
     <Compile Include="Ifc\IfModel.cs" />
     <Compile Include="Ifc\IfOpening.cs" />

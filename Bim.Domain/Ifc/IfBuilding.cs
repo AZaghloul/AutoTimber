@@ -3,45 +3,81 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xbim.Ifc;
+using Xbim.Ifc4.GeometricConstraintResource;
+using Xbim.Ifc4.GeometryResource;
 using Xbim.Ifc4.Interfaces;
+using Xbim.Ifc4.Kernel;
+using Xbim.Ifc4.ProductExtension;
 
 namespace Bim.Domain.Ifc
 {
-    public class IfBuilding : IElement
+    public class IfBuilding : IfElement
     {
-        public int Id { get; set; }
-        public string Label { get; set; }
-        public IfModel IfModel { get; set; }
         public IIfcBuilding IfcBuilding { get; set; }
         List<IfStory> Stories { get; set; }
 
-        public IfBuilding(IIfcBuilding ifcBuilding)
+        #region Constructor
+        public IfBuilding()
         {
-            Stories = new List<IfStory>();
-            IfcBuilding = ifcBuilding;
+        }
+        public IfBuilding(IfModel ifModel)
+        {
+            IfModel = ifModel;
+            IfModel.Instances.Add(this);
             Intialize();
         }
+        #endregion
 
+        #region HelperMethod
         private void Intialize()
         {
-            Label = IfcBuilding.Name;
-            //Id = (int)IfcBuilding.GlobalId.Value;
+            if (Stories != null) return;
+            Stories = IfStory.GetStories(this);
 
-            var stories = IfcBuilding.IsDecomposedBy.OfType<IIfcBuildingStorey>();
-            IfStory ifStory;
-            int counter = 0;
-            foreach (var story in stories)
-            {
-                ifStory = new IfStory
-                {
-                    IfModel = IfModel,
-                    Id = (int)story.GlobalId.Value,
-                    Label = story.Name,
-                    StoryNo = counter
-                };
-                Stories.Add(ifStory);
-                counter++;
-            }
         }
+        #endregion
+
+        #region Methods
+        public static IfBuilding New(IfModel ifModel, string name)
+        {
+            IfBuilding ifBuilding = new IfBuilding();
+            var model = ifModel.IfcStore;
+            using (var txn = model.BeginTransaction("Create Building"))
+            {
+                var building = model.Instances.New<IfcBuilding>();
+                building.Name = name;
+                building.CompositionType = IfcElementCompositionEnum.ELEMENT;
+                var localPlacement = model.Instances.New<IfcLocalPlacement>();
+                building.ObjectPlacement = localPlacement;
+                var placement = model.Instances.New<IfcAxis2Placement3D>();
+                localPlacement.RelativePlacement = placement;
+                placement.Location = model.Instances.New<IfcCartesianPoint>(p => p.SetXYZ(0, 0, 0));
+                var project = model.Instances.OfType<IfcProject>().FirstOrDefault();
+                project?.AddBuilding(building);
+                txn.Commit();
+                //set the Ifcbuilding
+                ifBuilding.IfcBuilding = building;
+            }
+            return ifBuilding;
+        }
+
+        public static List<IfBuilding> GetBuildings(IfModel ifModel)
+        {
+            List<IfBuilding> ifBuildings = new List<IfBuilding>();
+            IfBuilding ifBuidling;
+            foreach (var building in ifModel.IfcStore.Instances.OfType<IIfcBuilding>())
+            {
+                ifBuidling = new IfBuilding(ifModel)
+                {
+                    IfcBuilding = building,
+                    IfModel = ifModel
+                };
+                ifBuildings.Add(ifBuidling);
+            }
+
+            return ifBuildings;
+        }
+        #endregion
     }
 }

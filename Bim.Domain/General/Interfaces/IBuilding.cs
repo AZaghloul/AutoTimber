@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Bim.Domain
 {
-    public interface IBuilding:IElement
+    public interface IBuilding
     {
+         List<IStory> Stories { get; set; }
     }
 }

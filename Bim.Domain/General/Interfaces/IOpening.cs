@@ -4,7 +4,7 @@
     {
         Door,Window
     }
-    public interface IOpening:IElement
+    public interface IOpening
     {
         IElement WallOrSlap { get; set; }
         IDimension Dimensions { get; set; }
@@ -26,7 +26,7 @@
 
         public Opening(IWall myWall, IDimension dimensions, ILocation location, OpeningType openingType)
         {
-            WallOrSlap = myWall;
+           // WallOrSlap = myWall;
             Dimensions = dimensions;
             Location = location;
             OpeningType = openingType;

@@ -1,4 +1,4 @@
-﻿using Bim.Common;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,9 +16,9 @@ namespace Bim.Application.IRCWood.Physical
         public WallPolygon WallPolygon { get; set; }
         public WoodWall(WallPolygon wallPolygon)
         {
+
             WallPolygon = wallPolygon;
         }
-
         void SetStudsInLRegion()
         {
             Region LR = WallPolygon.RLeft[0];
@@ -26,7 +26,7 @@ namespace Bim.Application.IRCWood.Physical
             ILocation L = LR.Location;
             Stud firstStud = new Stud
             {
-                Location = (Bim.Common.Location)L,
+                Location = (Location)L,
                 Length = LR.Dimensions.ZDim
             };
             Studs.Add(firstStud);
