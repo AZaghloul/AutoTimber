@@ -16,7 +16,10 @@ using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
 using System.IO.Ports;
 using Bim.Domain;
+<<<<<<< HEAD
 using Xbim.Ifc4.ProductExtension;
+=======
+>>>>>>> 251f527d360ac995e499b7e4f3d88a4d18ac4f6f
 
 namespace AlgorithmProject
 {
@@ -36,6 +39,7 @@ namespace AlgorithmProject
 
             string fileName = @"..\..\Models\BeamTest1.ifc";
             IfModel model = IfModel.Open(fileName);
+<<<<<<< HEAD
             var beams = model.IfcStore.Instances.OfType<IfcBeam>();
             //var s = model.Instances.OfType<IfBuilding>().Count();
             //var w= model.Instances.OfType<IfWall>().Count();
@@ -51,6 +55,39 @@ namespace AlgorithmProject
             //sill.New();
             //model.Save(fileName);
            // var type = sill.IfcBeam.GetType();
+=======
+            model.Delete<IfcBeamStandardCase>();
+            model.Delete<IfcColumnStandardCase>();
+            List<IfWall> walls = IfWall.ExtractWalls(model);
+
+            $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
+
+            List<WallPolygon> wallPolygons = new List<WallPolygon>();
+            int i = 0;
+            foreach (var item in walls)
+            {
+                $"wall no {i}".Print(ConsoleColor.Cyan);
+                wallPolygons.Add(new WallPolygon(item));
+                $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().Opens.Count} opens".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RRight.Count} Right regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RTop.Count} top regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
+                i++;
+            }
+
+
+            model.Save(fileName);
+
+            OpenWindow(fileName);
+
+
+
+
+
+>>>>>>> 251f527d360ac995e499b7e4f3d88a4d18ac4f6f
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Done!");

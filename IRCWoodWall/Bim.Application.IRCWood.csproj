@@ -54,7 +54,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="IRCWoodWall.cd" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bim.Domain\Bim.Domain.csproj">
