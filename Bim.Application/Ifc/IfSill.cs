@@ -16,16 +16,17 @@ using Xbim.Ifc4.ProductExtension;
 using Xbim.Ifc4.PresentationOrganizationResource;
 using Bim.Domain;
 using Bim.Domain.Ifc;
+using Xbim.Ifc4.Kernel;
 
 namespace Bim.Application.Ifc
 {
-    public class IfSill:IfElement
+    public class IfSill : IfElement
     {
         #region Properties
-       
-        
+
+
         public IfWall IfWall { get; set; }
-        
+
         public IfcBeamStandardCase IfcBeam { get; set; }
         public IfcAxis2Placement3D RelativeAxis { get; set; }
 
@@ -43,7 +44,7 @@ namespace Bim.Application.Ifc
         public IfSill(IfWall wall)
         {
             IfWall = wall;
-            
+
         }
 
         #endregion
@@ -165,20 +166,22 @@ namespace Bim.Application.Ifc
         //}
         public IfcBeamStandardCase New()
         {
-            var ifcModel = IfWall.IfModel.IfcStore;
-           // var mat = ifcModel.Instances.New<IfcMaterialProfileSetUsage>();
 
-           // mat.CardinalPoint = new IfcCardinalPointReference(2);
-           
+            var ifcModel = IfWall.IfModel.IfcStore;
+            // var mat = ifcModel.Instances.New<IfcMaterialProfileSetUsage>();
+
+            // mat.CardinalPoint = new IfcCardinalPointReference(2);
+
             using (var txn = ifcModel.BeginTransaction("New Beam"))
             {
                 IfcBeam = ifcModel.Instances.New<IfcBeamStandardCase>();
                 var ifcRelAssociatesMaterial = ifcModel.Instances.New<IfcRelAssociatesMaterial>();
-               
+
+                var t = ifcModel.CurrentTransaction;
                 var matUsage = ifcModel.Instances.New<IfcMaterialProfileSetUsage>();
                 var profileSet = ifcModel.Instances.New<IfcMaterialProfileSet>();
-                var matProfile= ifcModel.Instances.New<IfcMaterialProfile>();
-                var proDef= ifcModel.Instances.New<IfcProfileDef>();
+                var matProfile = ifcModel.Instances.New<IfcMaterialProfile>();
+                var proDef = ifcModel.Instances.New<IfcProfileDef>();
                 var ifcMat = ifcModel.Instances.New<IfcMaterial>();
                 var recProfile = ifcModel.Instances.New<IfcRectangleProfileDef>();
                 /*         <<<<<<( SETTING EVERY THING IN ITS PLACE)>>>>          */
@@ -193,7 +196,7 @@ namespace Bim.Application.Ifc
                 /*         <<<<<<( mODIEFIENG VALUES)>>>>          */
                 proDef.ProfileType = IfcProfileTypeEnum.AREA;
                 //
-                
+
 
                 //filling proerties eshta y3ny
                 recProfile.ProfileType = IfcProfileTypeEnum.AREA;
@@ -213,7 +216,7 @@ namespace Bim.Application.Ifc
                 SetMaterial(ifcModel);
                 //now place the wall into the model
                 IfcBeam.PredefinedType = IfcBeamTypeEnum.JOIST;
-                
+
                 var building = (IfcBuilding)IfWall.IfModel
                     .Buildings.FirstOrDefault().IfcBuilding;
 
@@ -229,9 +232,9 @@ namespace Bim.Application.Ifc
         #region Helper Method
         public void SetShape(IfcStore ifcModel)
         {
-            
+
             var recProfile = ifcModel.Instances.New<IfcRectangleProfileDef>();
-            
+
             //filling proerties eshta y3ny
             recProfile.ProfileType = IfcProfileTypeEnum.AREA;
             recProfile.XDim = IfDimension.XDim;
@@ -244,7 +247,7 @@ namespace Bim.Application.Ifc
             body.ExtrudedDirection = ifcModel.Instances.New<IfcDirection>();
             body.ExtrudedDirection.SetXYZ(0, 0, 1);
             //parameters to insert the geometry in the model
-           // var origin = ifcModel.Instances.New<IfcCartesianPoint>();
+            // var origin = ifcModel.Instances.New<IfcCartesianPoint>();
 
             /*          Set Stud Location */
             //origin.SetXYZ(IfLocation.X, IfLocation.Y, IfLocation.Z);
@@ -296,7 +299,7 @@ namespace Bim.Application.Ifc
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
             var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
             /*          Set Stud Location */
-            lp.PlacementRelTo= (IfcLocalPlacement)IfWall.LocalPlacement;
+            lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
             ax3D.Location = origin;
             ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
             ax3D.RefDirection.SetXYZ(1, 0, 0); //x-axis direction
@@ -312,15 +315,15 @@ namespace Bim.Application.Ifc
             var ifcMaterialLayerSet = ifcModel.Instances.New<IfcMaterialLayerSet>();
             var ifcMaterialLayer = ifcModel.Instances.New<IfcMaterialLayer>();
             //
-           //
+            //
             ifcMaterialLayer.LayerThickness = IfDimension.YDim;
-           
+
             ifcMaterialLayerSet.MaterialLayers.Add(ifcMaterialLayer);
             ifcMaterialLayerSetUsage.ForLayerSet = ifcMaterialLayerSet;
             ifcMaterialLayerSetUsage.LayerSetDirection = IfcLayerSetDirectionEnum.AXIS2;
             ifcMaterialLayerSetUsage.DirectionSense = IfcDirectionSenseEnum.POSITIVE;
             ifcMaterialLayerSetUsage.OffsetFromReferenceLine = 10;
-          
+
             // Add material to wall
 
 

@@ -9,13 +9,11 @@ namespace Bim.Domain.Ifc
     /// Wall object to Carry IFCStandardWall Data
     /// </summary>
 
-    public class IfWall : IfElement, IWall
+    public class IfWall : IfElement
     {
         #region wall Object Properties
        
         public IfStory Story { get; set; }
-        public ILocation Location { get; set; }
-        public IDimension Dimensions { get; set; }
         public List<IDoor> Doors { get; set; }
         public List<IWindow> Windows { get; set; }
         public List<IfOpening> Openings { get; set; }
@@ -111,7 +109,7 @@ namespace Bim.Domain.Ifc
             WallAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcWall.ObjectPlacement).RelativePlacement);
             var location = WallAxis.Location;
             LocalPlacement = (IIfcLocalPlacement)IfcWall.ObjectPlacement;
-            Location = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
+            IfLocation = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
         }
         private void GetDimension()
         {
@@ -145,7 +143,7 @@ namespace Bim.Domain.Ifc
             //using the Wall Class;
             if (recD != null && depth != null)
             {
-                Dimensions = new IfDimension((float)recD.XDim, (float)recD.YDim, (float)depth.FirstOrDefault());
+                IfDimension= new IfDimension((float)recD.XDim, (float)recD.YDim, (float)depth.FirstOrDefault());
             }
         }
         #endregion

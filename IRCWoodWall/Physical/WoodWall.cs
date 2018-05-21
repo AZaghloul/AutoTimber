@@ -16,7 +16,6 @@ namespace Bim.Application.IRCWood.Physical
         public WallPolygon WallPolygon { get; set; }
         public WoodWall(WallPolygon wallPolygon)
         {
-
             WallPolygon = wallPolygon;
         }
         void SetStudsInLRegion()

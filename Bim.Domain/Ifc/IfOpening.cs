@@ -7,12 +7,10 @@ using Bim.Domain;
 using Xbim.Ifc4.Interfaces;
 namespace Bim.Domain.Ifc
 {
-    public class IfOpening : IfElement, IOpening
+    public class IfOpening : IfElement
     {
         
         public IfWall IfWall { get; set; }
-        public ILocation Location { get; set; }
-        public IDimension Dimensions { get; set; }
         public OpeningType OpeningType { get; set; }
         public IIfcRelVoidsElement IfcOpening { get; set; }
         public IElement WallOrSlap { get; set; }
@@ -47,8 +45,8 @@ namespace Bim.Domain.Ifc
                 var filling = ((IIfcOpeningElement)opening.RelatedOpeningElement)
                     .HasFillings.FirstOrDefault().RelatedBuildingElement.GetType().Name;
                
-                ifopening.Location = new IfLocation((float)oLocation.X, (float)oLocation.Y, (float)oLocation.Z);
-                ifopening.Dimensions = new IfDimension((float)recProfile.XDim, (float)recDepth, (float)recProfile.YDim);
+                ifopening.IfLocation = new IfLocation((float)oLocation.X, (float)oLocation.Y, (float)oLocation.Z);
+                ifopening.IfDimension = new IfDimension((float)recProfile.XDim, (float)recDepth, (float)recProfile.YDim);
 
                 if (filling == "IfcDoor")
                 {

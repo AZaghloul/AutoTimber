@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace Bim.Application.IRCWood.Physical
 {
-    internal abstract class Blank
+    public abstract class Blank
     {
-        internal double Length { get; set; }
-        internal WoodSecType SecType { get; set; }
-        internal Location Location { get; set; }
+        public double Length { get; set; }
+        public WoodSecType SecType { get; set; }
+        public Location Location { get; set; }
         protected Orientaion Orientaion { get; set; }
 
         public Blank()

@@ -9,6 +9,7 @@ using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.MeasureResource;
 using Xbim.Common;
+using Bim.Domain.Ifc;
 
 namespace Bim.Domain.Polygon
 {
@@ -25,7 +26,7 @@ namespace Bim.Domain.Polygon
     };
     public class WallPolygon
     {
-        public List<IOpening> Opens { get; set; }
+        public List<IfOpening> Openings { get; set; }
         public List<Region> Regions { get; set; }
 
         public List<Region> RLeft
@@ -68,81 +69,72 @@ namespace Bim.Domain.Polygon
         public bool IsOpen { get; set; }
         public Direction Direction { get; set; }
 
-        public IWall MyWall { get; set; }
+        public IfWall IfWall { get; set; }
 
-        public WallPolygon(IWall MYWall)
+        public WallPolygon(IfWall ifWall)
         {
-            MyWall = MYWall;
-            Opens = new List<IOpening>();
+            IfWall = ifWall;
+            Openings = new List<IfOpening>();
             Regions = new List<Region>();
-            foreach (var door in MyWall.Doors)
-            {
-                IOpening open = new Opening(MyWall, door.Dimensions, door.Location, OpeningType.Door);
-                Opens.Add(open);
-            }
-            foreach (var window in MyWall.Windows)
-            {
-                IOpening open = new Opening(MyWall, window.Dimensions, window.Location, OpeningType.Window);
-                Opens.Add(open);
-            }
+            Openings = IfWall.Openings;
             GetRegions();
         }
 
         public void GetRegions()
         {
-            if (Opens.Count == 0)
+            if (Openings.Count == 0)
             {
                 IsOpen = false;
             }
             else
             {
                 IsOpen = true;
-                List<IOpening> SortedOpens = Opens.OrderBy(open => open.Location.X).ToList();
+                List<IfOpening> SortedOpens = Openings.OrderBy(open => open.IfLocation.X).ToList();
 
-                if (Opens.Count == 1)
+                if (Openings.Count == 1)
                 {
                     Region drr = new Region(
-                        MyWall.Dimensions.XDim - ((Opens[0].Location.X) + Opens[0].Dimensions.XDim),
-                        MyWall.Dimensions.YDim,
-                        MyWall.Dimensions.ZDim,
-                        (Opens[0].Location.X) + Opens[0].Dimensions.XDim, 0, 0, RegionLocation.Right);
+                        IfWall.IfDimension.XDim - ((Openings[0].IfLocation.X) + Openings[0].IfDimension.XDim),
+                        IfWall.IfDimension.YDim,
+                        IfWall.IfDimension.ZDim,
+                        (Openings[0].IfLocation.X) + Openings[0].IfDimension.XDim, 0, 0, RegionLocation.Right);
 
                     Region drl = new Region(
-                        Opens[0].Location.X,
-                        MyWall.Dimensions.YDim,
-                        MyWall.Dimensions.ZDim, 0, 0, 0, RegionLocation.Left);
+                        Openings[0].IfLocation.X,
+                        IfWall.IfDimension.YDim,
+                        IfWall.IfDimension.ZDim, 0, 0, 0, RegionLocation.Left);
 
                     Regions.Add(drr);
                     Regions.Add(drl);
 
-                    switch (Opens[0].OpeningType)
+                    switch (Openings[0].OpeningType)
                     {
 
                         case OpeningType.Door:
                             Region drt = new Region(
-                                Opens[0].Dimensions.XDim,
-                                MyWall.Dimensions.YDim,
-                                MyWall.Dimensions.ZDim - (Opens[0].Location.Z + Opens[0].Dimensions.ZDim),
-                                Opens[0].Location.X,
+                                Openings[0].IfDimension.XDim,
+                                IfWall.IfDimension.YDim,
+                                IfWall.IfDimension.ZDim - (Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim),
+                                Openings[0].IfLocation.X,
                                 0,
-                                Opens[0].Location.Z + Opens[0].Dimensions.ZDim, RegionLocation.Top);
+                                Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top);
 
                             Regions.Add(drt);
 
                             break;
                         case OpeningType.Window:
                             Region wrt = new Region(
-                                Opens[0].Dimensions.XDim,
-                                MyWall.Dimensions.YDim,
-                                MyWall.Dimensions.ZDim - (Opens[0].Location.Z + Opens[0].Dimensions.ZDim),
-                                Opens[0].Location.X, 0,
-                                Opens[0].Location.Z + Opens[0].Dimensions.ZDim, RegionLocation.Top);
+                                Openings[0].IfDimension.XDim,
+                                IfWall.IfDimension.YDim,
+                                IfWall.IfDimension.ZDim - (Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim),
+                                Openings[0].IfLocation.X, 0,
+                                Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top);
 
                             Region wrb = new Region(
-                                Opens[0].Dimensions.XDim,
-                                MyWall.Dimensions.YDim,
-                                Opens[0].Location.Z,
-                                Opens[0].Location.X,
+                                Openings[0].IfDimension.XDim,
+                                IfWall.IfDimension.YDim,
+                                Openings[0].IfLocation.Z,
+                                Openings[0].IfLocation.X,
                                 0, 0, RegionLocation.Bottom);
 
                             Regions.Add(wrt);
@@ -153,50 +145,50 @@ namespace Bim.Domain.Polygon
                 else
                 {
                     Region drr = new Region(
-                        MyWall.Dimensions.XDim - ((Opens[Opens.Count - 1].Location.X) + Opens[Opens.Count - 1].Dimensions.XDim),
-                        MyWall.Dimensions.YDim,
-                        MyWall.Dimensions.ZDim,
-                        (Opens[Opens.Count - 1].Location.X) + Opens[Opens.Count - 1].Dimensions.XDim,
+                        IfWall.IfDimension.XDim - ((Openings[Openings.Count - 1].IfLocation.X) + Openings[Openings.Count - 1].IfDimension.XDim),
+                        IfWall.IfDimension.YDim,
+                        IfWall.IfDimension.ZDim,
+                        (Openings[Openings.Count - 1].IfLocation.X) + Openings[Openings.Count - 1].IfDimension.XDim,
                         0, 0, RegionLocation.Right);
 
                     Region drl = new Region(
-                        Opens[0].Location.X,
-                        MyWall.Dimensions.YDim,
-                        MyWall.Dimensions.ZDim,
+                        Openings[0].IfLocation.X,
+                        IfWall.IfDimension.YDim,
+                        IfWall.IfDimension.ZDim,
                         0, 0, 0, RegionLocation.Left);
 
                     Regions.Add(drr);
                     Regions.Add(drl);
 
-                    for (int i = 0; i < Opens.Count - 1; i++)
+                    for (int i = 0; i < Openings.Count - 1; i++)
                     {
                         Region rbetween = new Region(
-                            Opens[i + 1].Location.X - (Opens[i].Location.X + Opens[i].Dimensions.XDim),
-                            MyWall.Dimensions.YDim,
-                            MyWall.Dimensions.ZDim,
-                            Opens[i].Location.X + Opens[i].Dimensions.XDim,
+                            Openings[i + 1].IfLocation.X - (Openings[i].IfLocation.X + Openings[i].IfDimension.XDim),
+                            IfWall.IfDimension.YDim,
+                            IfWall.IfDimension.ZDim,
+                            Openings[i].IfLocation.X + Openings[i].IfDimension.XDim,
                             0, 0, RegionLocation.Middle);
 
                         Regions.Add(rbetween);
                     }
-                    for (int i = 0; i < Opens.Count; i++)
+                    for (int i = 0; i < Openings.Count; i++)
                     {
                         Region rt = new Region(
-                            Opens[i].Dimensions.XDim,
-                            MyWall.Dimensions.YDim,
-                            MyWall.Dimensions.ZDim - (Opens[i].Location.Z + Opens[i].Dimensions.ZDim),
-                            Opens[i].Location.X,
+                            Openings[i].IfDimension.XDim,
+                            IfWall.IfDimension.YDim,
+                            IfWall.IfDimension.ZDim - (Openings[i].IfLocation.Z + Openings[i].IfDimension.ZDim),
+                            Openings[i].IfLocation.X,
                             0,
-                            Opens[i].Location.Z + Opens[i].Dimensions.ZDim, RegionLocation.Top);
+                            Openings[i].IfLocation.Z + Openings[i].IfDimension.ZDim, RegionLocation.Top);
 
                         Regions.Add(rt);
-                        if (Opens[i].OpeningType == OpeningType.Window)
+                        if (Openings[i].OpeningType == OpeningType.Window)
                         {
                             Region rb = new Region(
-                                Opens[i].Dimensions.XDim,
-                                MyWall.Dimensions.YDim,
-                                Opens[i].Location.Z,
-                                Opens[i].Location.X,
+                                Openings[i].IfDimension.XDim,
+                                IfWall.IfDimension.YDim,
+                                Openings[i].IfLocation.Z,
+                                Openings[i].IfLocation.X,
                                 0, 0, RegionLocation.Bottom);
 
                             Regions.Add(rb);
@@ -209,72 +201,72 @@ namespace Bim.Domain.Polygon
 }
 
 
-//if (MyWall.Doors != null)
+//if (IfWall.Doors != null)
 //{
-//    if (MyWall.Location.X == MyWall.Doors[0].Location.X & MyWall.Location.Y < MyWall.Doors[0].Location.Y)
+//    if (IfWall.IfLocation.X == IfWall.Doors[0].IfLocation.X & IfWall.IfLocation.Y < IfWall.Doors[0].IfLocation.Y)
 //    {
 //        Direction = Direction.XconstYpos;
 //    }
-//    else if (MyWall.Location.X == MyWall.Doors[0].Location.X & MyWall.Location.Y > MyWall.Doors[0].Location.Y)
+//    else if (IfWall.IfLocation.X == IfWall.Doors[0].IfLocation.X & IfWall.IfLocation.Y > IfWall.Doors[0].IfLocation.Y)
 //    {
 //        Direction = Direction.XconstYneg;
 //    }
-//    else if (MyWall.Location.Y == MyWall.Doors[0].Location.Y & MyWall.Location.X < MyWall.Doors[0].Location.X)
+//    else if (IfWall.IfLocation.Y == IfWall.Doors[0].IfLocation.Y & IfWall.IfLocation.X < IfWall.Doors[0].IfLocation.X)
 //    {
 //        Direction = Direction.XposYconst;
 //    }
-//    else if (MyWall.Location.Y == MyWall.Doors[0].Location.Y & MyWall.Location.X > MyWall.Doors[0].Location.X)
+//    else if (IfWall.IfLocation.Y == IfWall.Doors[0].IfLocation.Y & IfWall.IfLocation.X > IfWall.Doors[0].IfLocation.X)
 //    {
 //        Direction = Direction.XnegYconst;
 //    }
-//    else if (MyWall.Location.Y < MyWall.Doors[0].Location.Y & MyWall.Location.X < MyWall.Doors[0].Location.X)
+//    else if (IfWall.IfLocation.Y < IfWall.Doors[0].IfLocation.Y & IfWall.IfLocation.X < IfWall.Doors[0].IfLocation.X)
 //    {
 //        Direction = Direction.XposYpos;
 //    }
-//    else if (MyWall.Location.Y > MyWall.Doors[0].Location.Y & MyWall.Location.X > MyWall.Doors[0].Location.X)
+//    else if (IfWall.IfLocation.Y > IfWall.Doors[0].IfLocation.Y & IfWall.IfLocation.X > IfWall.Doors[0].IfLocation.X)
 //    {
 //        Direction = Direction.XnegYneg;
 //    }
-//    else if (MyWall.Location.Y > MyWall.Doors[0].Location.Y & MyWall.Location.X < MyWall.Doors[0].Location.X)
+//    else if (IfWall.IfLocation.Y > IfWall.Doors[0].IfLocation.Y & IfWall.IfLocation.X < IfWall.Doors[0].IfLocation.X)
 //    {
 //        Direction = Direction.XposYneg;
 //    }
-//    else if (MyWall.Location.Y < MyWall.Doors[0].Location.Y & MyWall.Location.X > MyWall.Doors[0].Location.X)
+//    else if (IfWall.IfLocation.Y < IfWall.Doors[0].IfLocation.Y & IfWall.IfLocation.X > IfWall.Doors[0].IfLocation.X)
 //    {
 //        Direction = Direction.XnegYpos;
 //    }
 //}
-//else if (MyWall.windows != null)
+//else if (IfWall.windows != null)
 //{
-//    if (MyWall.Location.X == MyWall.windows[0].Location.X & MyWall.Location.Y < MyWall.windows[0].Location.Y)
+//    if (IfWall.IfLocation.X == IfWall.windows[0].IfLocation.X & IfWall.IfLocation.Y < IfWall.windows[0].IfLocation.Y)
 //    {
 //        Direction = Direction.XconstYpos;
 //    }
-//    else if (MyWall.Location.X == MyWall.windows[0].Location.X & MyWall.Location.Y > MyWall.windows[0].Location.Y)
+//    else if (IfWall.IfLocation.X == IfWall.windows[0].IfLocation.X & IfWall.IfLocation.Y > IfWall.windows[0].IfLocation.Y)
 //    {
 //        Direction = Direction.XconstYneg;
 //    }
-//    else if (MyWall.Location.Y == MyWall.windows[0].Location.Y & MyWall.Location.X < MyWall.windows[0].Location.X)
+//    else if (IfWall.IfLocation.Y == IfWall.windows[0].IfLocation.Y & IfWall.IfLocation.X < IfWall.windows[0].IfLocation.X)
 //    {
 //        Direction = Direction.XposYconst;
 //    }
-//    else if (MyWall.Location.Y == MyWall.windows[0].Location.Y & MyWall.Location.X > MyWall.windows[0].Location.X)
+//    else if (IfWall.IfLocation.Y == IfWall.windows[0].IfLocation.Y & IfWall.IfLocation.X > IfWall.windows[0].IfLocation.X)
 //    {
 //        Direction = Direction.XnegYconst;
 //    }
-//    else if (MyWall.Location.Y < MyWall.windows[0].Location.Y & MyWall.Location.X < MyWall.windows[0].Location.X)
+//    else if (IfWall.IfLocation.Y < IfWall.windows[0].IfLocation.Y & IfWall.IfLocation.X < IfWall.windows[0].IfLocation.X)
 //    {
 //        Direction = Direction.XposYpos;
 //    }
-//    else if (MyWall.Location.Y > MyWall.windows[0].Location.Y & MyWall.Location.X > MyWall.windows[0].Location.X)
+//    else if (IfWall.IfLocation.Y > IfWall.windows[0].IfLocation.Y & IfWall.IfLocation.X > IfWall.windows[0].IfLocation.X)
 //    {
 //        Direction = Direction.XnegYneg;
 //    }
-//    else if (MyWall.Location.Y > MyWall.windows[0].Location.Y & MyWall.Location.X < MyWall.windows[0].Location.X)
+//    else if (IfWall.IfLocation.Y > IfWall.windows[0].IfLocation.Y & IfWall.IfLocation.X < IfWall.windows[0].IfLocation.X)
 //    {
 //        Direction = Direction.XposYneg;
 //    }
-//    else if (MyWall.Location.Y < MyWall.windows[0].Location.Y & MyWall.Location.X > MyWall.windows[0].Location.X)
+//    else if (IfWall.IfLocation.Y < IfWall.windows[0].IfLocation.Y & IfWall.IfLocation.X > IfWall.windows[0].IfLocation.X)
 //    {
 //        Direction = Direction.XnegYpos;
 //    }

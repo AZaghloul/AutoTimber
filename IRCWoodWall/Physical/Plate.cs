@@ -6,7 +6,7 @@ using System.Text;
 
 namespace Bim.Application.IRCWood.Physical
 {
-    internal class Plate:Blank
+    public class Plate:Blank
     {
         public Plate()
         {

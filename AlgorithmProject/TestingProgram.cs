@@ -1,64 +1,51 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Xbim.Ifc;
-using Xbim.Ifc.ViewModels;
-using Xbim.Ifc4.GeometricConstraintResource;
-using Xbim.Ifc4.Interfaces;
-using Xbim.Ifc4.MeasureResource;
-using Xbim.Common;
 using System;
-using log4net;
 using Bim.Application.Ifc;
 using Bim.IO.Utilities;
 using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
-using System.IO.Ports;
-using Bim.Domain;
-<<<<<<< HEAD
-using Xbim.Ifc4.ProductExtension;
-=======
->>>>>>> 251f527d360ac995e499b7e4f3d88a4d18ac4f6f
+using Bim.Domain.Polygon;
+using Xbim.Common.Step21;
 
 namespace AlgorithmProject
 {
     class TestingProgram
     {
-
         private static readonly log4net.ILog log = log4net.LogManager.GetLogger
      (System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         static void Main(string[] args)
         {
+
             #region Header
             "Wall Framing Solutions ".Header(ConsoleColor.Yellow, ConsoleColor.Black);
             "Starting....".Print(ConsoleColor.Cyan);
             "".PrintAtPosition(x: 10, foreColor: ConsoleColor.Red);
             "-------------------------------------------- ".Print(ConsoleColor.White);
+
             #endregion
 
-            string fileName = @"..\..\Models\BeamTest1.ifc";
+            string fileName = @"..\..\Models\ThreeWalls - Test.ifc";
             IfModel model = IfModel.Open(fileName);
-<<<<<<< HEAD
+
             var beams = model.IfcStore.Instances.OfType<IfcBeam>();
-            //var s = model.Instances.OfType<IfBuilding>().Count();
-            //var w= model.Instances.OfType<IfWall>().Count();
-            //var o= model.Instances.OfType<IfOpening>().Count();
+            
             var wall = model.Instances.OfType<IfWall>().FirstOrDefault();
-           // model.Delete<IfcBeamStandardCase>();
-            //IfSill sill = new IfSill(wall)
-            //{
-                
-            //    IfDimension = new IfDimension(4f, .3f,.2f)
-            //};
-            //sill.IfLocation  = new IfLocation(0, 0, sill.IfWall.Dimensions.ZDim);
-            //sill.New();
-            //model.Save(fileName);
-           // var type = sill.IfcBeam.GetType();
-=======
-            model.Delete<IfcBeamStandardCase>();
-            model.Delete<IfcColumnStandardCase>();
-            List<IfWall> walls = IfWall.ExtractWalls(model);
+            using (var tx=model.IfcStore.BeginTransaction("ddd"))
+            {
+                var ifcModel = model.IfcStore.Header.FileSchema = new StepFileSchema(IfcSchemaVersion.Ifc4);
+                tx.Commit();
+            }
+            
+            IfSill sill = new IfSill(wall)
+            {
+
+                IfDimension = new IfDimension(4f, .3f, .2f)
+            };
+            sill.IfLocation = new IfLocation(0, 0, sill.IfWall.IfDimension.ZDim);
+            sill.New();
+            
+            List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
 
             $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
 
@@ -69,7 +56,7 @@ namespace AlgorithmProject
                 $"wall no {i}".Print(ConsoleColor.Cyan);
                 wallPolygons.Add(new WallPolygon(item));
                 $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
-                $"\t {wallPolygons.Last().Opens.Count} opens".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().Openings.Count} opens".Print(ConsoleColor.Cyan);
                 $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);
                 $"\t {wallPolygons.Last().RRight.Count} Right regions".Print(ConsoleColor.Cyan);
                 $"\t {wallPolygons.Last().RTop.Count} top regions".Print(ConsoleColor.Cyan);
@@ -87,7 +74,7 @@ namespace AlgorithmProject
 
 
 
->>>>>>> 251f527d360ac995e499b7e4f3d88a4d18ac4f6f
+
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Done!");

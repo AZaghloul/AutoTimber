@@ -46,16 +46,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Physical\Blank.cs" />
+    <Compile Include="Physical\FloorFrame.cs" />
+    <Compile Include="Physical\FloorPolygon.cs" />
     <Compile Include="Physical\Plate.cs" />
+    <Compile Include="Physical\WallFrame.cs" />
     <Compile Include="Physical\WoodWall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Physical\Stud.cs" />
     <Compile Include="Common\WoodSecType.cs" />
+    <Compile Include="Physical\WoodFrame.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bim.Application\Bim.Application.csproj">
+      <Project>{29097953-a4e3-4ebe-be15-209086133f10}</Project>
+      <Name>Bim.Application</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bim.Domain\Bim.Domain.csproj">
       <Project>{b468fbb6-cc77-40d7-a0e9-32b1f345b448}</Project>
       <Name>Bim.Domain</Name>
