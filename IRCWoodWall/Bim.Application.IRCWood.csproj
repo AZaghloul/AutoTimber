@@ -45,6 +45,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRC\StudCell.cs" />
+    <Compile Include="IRC\StudTable.cs" />
     <Compile Include="Physical\Blank.cs" />
     <Compile Include="Physical\FloorFrame.cs" />
     <Compile Include="Physical\FloorPolygon.cs" />
@@ -64,14 +66,17 @@
       <Project>{29097953-a4e3-4ebe-be15-209086133f10}</Project>
       <Name>Bim.Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">
+      <Project>{04c837cf-0f12-45e5-8399-f8a53ddc9586}</Project>
+      <Name>Bim.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bim.Domain\Bim.Domain.csproj">
       <Project>{b468fbb6-cc77-40d7-a0e9-32b1f345b448}</Project>
       <Name>Bim.Domain</Name>
     </ProjectReference>
-    <ProjectReference Include="..\BIMSpace\Bim.csproj">
-      <Project>{60b891a3-4d40-469f-8755-971c0ab9a5c6}</Project>
-      <Name>Bim</Name>
-    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Tables\StudSpacingTable.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -50,6 +50,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnitsNet, Version=3.99.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\UnitsNet.3.99.0\lib\net40\UnitsNet.dll</HintPath>
+    </Reference>
     <Reference Include="Xbim.CobieExpress">
       <HintPath>..\..\xBIM Essensials Library\Xbim.CobieExpress.dll</HintPath>
     </Reference>
@@ -91,6 +94,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="IRC\StudCell.cs" />
+    <Compile Include="IRC\StudTable.cs" />
+    <Compile Include="IRC\TableManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Properties\Settings.Designer.cs">
@@ -124,6 +130,7 @@
     <None Include="Models\wall1.ifc" />
     <None Include="Models\walls-noColumn.ifc" />
     <None Include="Models\walls-noColumn.ifc.log" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -154,11 +161,16 @@
     <Content Include="bin\Debug\Xbim.IO.dll" />
     <Content Include="bin\Debug\Xbim.ModelGeometry.Scene.dll" />
     <Content Include="bin\Debug\Xbim.Tessellator.dll" />
+    <Content Include="Tables\StudSpacingTable.txt" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bim.Application\Bim.Application.csproj">
       <Project>{29097953-a4e3-4ebe-be15-209086133f10}</Project>
       <Name>Bim.Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">
+      <Project>{04c837cf-0f12-45e5-8399-f8a53ddc9586}</Project>
+      <Name>Bim.Common</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bim.Domain\Bim.Domain.csproj">
       <Project>{b468fbb6-cc77-40d7-a0e9-32b1f345b448}</Project>
@@ -167,6 +179,10 @@
     <ProjectReference Include="..\Bim.IO\Bim.IO.csproj">
       <Project>{9abae764-1e6e-4124-8d72-96332668d50e}</Project>
       <Name>Bim.IO</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IRCWoodWall\Bim.Application.IRCWood.csproj">
+      <Project>{9aec83fb-ad0f-46cb-8b09-ea2e8073f4c3}</Project>
+      <Name>Bim.Application.IRCWood</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -13,22 +13,11 @@ using Bim.Domain.Ifc;
 
 namespace Bim.Domain.Polygon
 {
-    public enum Direction
-    {
-        XconstYpos,
-        XconstYneg,
-        XposYconst,
-        XnegYconst,
-        XposYpos,
-        XposYneg,
-        XnegYpos,
-        XnegYneg
-    };
     public class WallPolygon
     {
+        #region Properties
         public List<IfOpening> Openings { get; set; }
         public List<Region> Regions { get; set; }
-
         public List<Region> RLeft
         {
             get
@@ -57,7 +46,6 @@ namespace Bim.Domain.Polygon
                 return Regions.Where(a => a.RegionLocation == RegionLocation.Bottom).ToList();
             }
         }
-
         public List<Region> RBetween
         {
             get
@@ -65,12 +53,12 @@ namespace Bim.Domain.Polygon
                 return Regions.Where(a => a.RegionLocation == RegionLocation.Middle).ToList();
             }
         }
-
         public bool IsOpen { get; set; }
-        public Direction Direction { get; set; }
-
         public IfWall IfWall { get; set; }
 
+        #endregion
+
+        #region Constructor
         public WallPolygon(IfWall ifWall)
         {
             IfWall = ifWall;
@@ -80,6 +68,9 @@ namespace Bim.Domain.Polygon
             GetRegions();
         }
 
+        #endregion
+
+        #region Methods
         public void GetRegions()
         {
             if (Openings.Count == 0)
@@ -197,6 +188,22 @@ namespace Bim.Domain.Polygon
                 }
             }
         }
+        #endregion
+        #region Static Methods
+
+
+        public static List<WallPolygon> GetPolygons(List<IfWall> walls)
+        {
+
+            List<WallPolygon> res = new List<WallPolygon>();
+            foreach (var wall in walls)
+            {
+                res.Add(new WallPolygon(wall));
+            }
+
+            return res;
+        }
+        #endregion
     }
 }
 

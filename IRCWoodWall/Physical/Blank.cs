@@ -1,6 +1,7 @@
 ﻿
 using Bim.Application.IRCWood.Common;
 using Bim.Domain;
+using Bim.Domain.Ifc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,13 +15,13 @@ namespace Bim.Application.IRCWood.Physical
     {
         public double Length { get; set; }
         public WoodSecType SecType { get; set; }
-        public Location Location { get; set; }
+        public IfLocation Location { get; set; }
         protected Orientaion Orientaion { get; set; }
 
         public Blank()
         {
             SecType = WoodSecType._2x4;
-            Location = new Location(0, 0, 0);
+            Location = new IfLocation(0, 0, 0);
         }
     }
 }

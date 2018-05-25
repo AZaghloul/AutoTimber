@@ -1,11 +1,6 @@
-﻿using Bim.Application.Ifc;
-using Bim.Application.IRCWood.Physical;
+﻿using Bim.Application.IRCWood.Physical;
 using Bim.Domain.Ifc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace IRCWoodWall.Physical
 {

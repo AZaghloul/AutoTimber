@@ -8,15 +8,15 @@ namespace Bim.Domain.Ifc
 {
     public class IfDimension : IDimension
     {
-        public float XDim { get; set; }
-        public float YDim { get; set; }
-        public float ZDim { get; set; }
+        public double XDim { get; set; }
+        public double YDim { get; set; }
+        public double ZDim { get; set; }
         public IfDimension()
         {
 
 
         }
-        public IfDimension(float xDim, float yDim, float zDim)
+        public IfDimension(double xDim, double yDim, double zDim)
         {
             XDim = xDim;
             YDim = yDim;

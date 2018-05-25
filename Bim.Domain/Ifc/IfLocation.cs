@@ -8,10 +8,10 @@ namespace Bim.Domain.Ifc
 {
    public class IfLocation : ILocation
     {
-        public float X { get; set; }
-        public float Y { get; set; }
-        public float Z { get; set; }
-        public IfLocation(float x,float y,float z)
+        public double X { get; set; }
+        public double Y { get; set; }
+        public double Z { get; set; }
+        public IfLocation(double x,double y,double z)
         {
             X = x;
             Y = y;

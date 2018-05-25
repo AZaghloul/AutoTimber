@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bim.Application.IRCWood.IRC
+namespace AlgorithmProject
 {
     public class StudTable
     {
-        public string[] Spacing { get; set; }
+        public string[] Headers { get; set; }
         public string[] Keys { get; set; }
         public int Floors { get; set; }
         public List<StudCell> Cells { get; set; }
@@ -20,30 +20,14 @@ namespace Bim.Application.IRCWood.IRC
             Floors = 3;
         }
 
-
-
-        public List<StudCell> GetSpace(int floor, double height, IfDimension dimension)
+        public bool LoadTable(string filePath)
         {
-
-            return Cells.Where(e =>
-             {
-
-                 return e.Floor == floor && e.Height >= height &&
-                e.Value.XDim == dimension.XDim && e.Value.YDim == dimension.YDim;
-
-             }).ToList();
-
-        }
-
-        public static StudTable Load(string filePath)
-        {
-            var table = new StudTable();
             string[] data = File.ReadAllLines(filePath);
-            table.Spacing = data[0].Split(',');
-            table.Keys = data[1].Split(',');
+            Headers = data[0].Split(',');
+            Keys = data[1].Split(',');
 
             string[] values = null;
-            for (int k = 0; k < table.Floors; k++)
+            for (int k = 0; k < Floors; k++)
             {
                 switch (k)
                 {
@@ -61,9 +45,9 @@ namespace Bim.Application.IRCWood.IRC
                         break;
                 }
 
-                for (int i = 0; i < table.Keys.Length; i++)
+                for (int i = 0; i < Keys.Length; i++)
                 {
-                    for (int j = 0; j < table.Spacing.Length; j++)
+                    for (int j = 0; j < Headers.Length; j++)
                     {
                         string[] dimRaw = values[i].Split(',');
                         var dim = dimRaw[j].Split(' ');
@@ -71,23 +55,37 @@ namespace Bim.Application.IRCWood.IRC
                         var x = Convert.ToDouble(dim[0]);
                         var y = Convert.ToDouble(dim[1]);
                         var cell = new StudCell(
-                           Convert.ToDouble(table.Spacing[j]),
-                            Convert.ToDouble(table.Keys[i]),
-                            new IfDimension(x, y, 0)
+                            Headers[j],
+                            Convert.ToInt16(Keys[i]),
+                            new IfDimension((float)x, (float)y, 0)
                             );
 
                         cell.Floor = k + 1;
-                        table.Cells.Add(cell);
+                        Cells.Add(cell);
                     }
                 }
 
             }
-
-
-            return table;
-
+            return true;
 
         }
+
+        public List<StudCell> GetSpace(int floor, int height, IfDimension dimension)
+        {
+
+           return Cells.Where(e =>
+            {
+                return e.Floor == floor && e.Height == height&&
+               e.Value.XDim==dimension.XDim&&e.Value.YDim==dimension.YDim ;
+
+
+
+
+
+                }).ToList();
+
+        }
+
 
 
     }

@@ -47,6 +47,9 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
+    <Reference Include="UnitsNet">
+      <HintPath>..\packages\UnitsNet.3.99.0\lib\net40\UnitsNet.dll</HintPath>
+    </Reference>
     <Reference Include="Xbim.CobieExpress">
       <HintPath>..\Refrences\Xbim.CobieExpress.dll</HintPath>
     </Reference>
@@ -65,8 +68,9 @@
     <Reference Include="Xbim.Ifc2x3.IO">
       <HintPath>..\Refrences\Xbim.Ifc2x3.IO.dll</HintPath>
     </Reference>
-    <Reference Include="Xbim.Ifc4">
-      <HintPath>..\Refrences\Xbim.Ifc4.dll</HintPath>
+    <Reference Include="Xbim.Ifc4, Version=4.0.0.0, Culture=neutral, PublicKeyToken=11e3655e576ec5a9, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Bim.IO\bin\Debug\Xbim.Ifc4.dll</HintPath>
     </Reference>
     <Reference Include="Xbim.IO">
       <HintPath>..\Refrences\Xbim.IO.dll</HintPath>
@@ -76,12 +80,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Startup.cs" />
     <Compile Include="General\Interfaces\IBuilding.cs" />
     <Compile Include="General\Interfaces\IElement.cs" />
     <Compile Include="General\Interfaces\ILocation.cs" />
     <Compile Include="General\Interfaces\IProject.cs" />
     <Compile Include="General\Interfaces\IStory.cs" />
     <Compile Include="Ifc\IfBuilding.cs" />
+    <Compile Include="Ifc\IfColor.cs" />
     <Compile Include="Ifc\IfDimensions.cs" />
     <Compile Include="Ifc\IfDoor.cs" />
     <Compile Include="General\Interfaces\IWall.cs" />
@@ -91,11 +97,16 @@
     <Compile Include="General\Interfaces\IWindow.cs" />
     <Compile Include="Ifc\IfElement.cs" />
     <Compile Include="Ifc\IfLocation.cs" />
+    <Compile Include="Ifc\IfMaterial.cs" />
     <Compile Include="Ifc\IfModel.cs" />
+    <Compile Include="Ifc\IfObject.cs" />
     <Compile Include="Ifc\IfOpening.cs" />
+    <Compile Include="Ifc\IfSill.cs" />
     <Compile Include="Ifc\IfStory.cs" />
+    <Compile Include="Ifc\IfStud.cs" />
     <Compile Include="Ifc\IfWall.cs" />
     <Compile Include="Ifc\IfWindow.cs" />
+    <Compile Include="Ifc\Version.cs" />
     <Compile Include="Polygon\Region.cs" />
     <Compile Include="Polygon\WallPolygon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

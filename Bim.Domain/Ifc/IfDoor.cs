@@ -13,7 +13,7 @@ namespace Bim.Domain.Ifc
         public int Id { get ; set ; }
         public string Label { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
-        public IfDoor(float xDim, float yDim, float ZDim, float x, float y, float z)
+        public IfDoor(double xDim, double yDim, double ZDim, double x, double y, double z)
         {
             Location = new IfLocation(x, y, z);
             Dimensions = new IfDimension(xDim, yDim, ZDim);

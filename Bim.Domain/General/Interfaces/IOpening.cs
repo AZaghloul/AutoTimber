@@ -1,4 +1,6 @@
-﻿namespace Bim.Domain
+﻿using Bim.Domain.Ifc;
+
+namespace Bim.Domain
 {
     public enum OpeningType
     {
@@ -6,19 +8,18 @@
     }
     public interface IOpening
     {
-        IElement WallOrSlap { get; set; }
+        IElement HostElement { get; set; }
         IDimension Dimensions { get; set; }
         ILocation Location { get; set; }
         OpeningType OpeningType { get; set; }
     }
     public class Opening : IOpening
     {
-        public IElement WallOrSlap { get; set; }
+        public IElement HostElement { get; set; }
         public IDimension Dimensions { get; set; }
         public ILocation Location { get; set; }
         public OpeningType OpeningType { get; set; }
-        public int Id { get; set; }
-        public string Label { get; set; }
+       
         public Opening()
         {
 

@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System;
-using Bim.Application.Ifc;
 using Bim.IO.Utilities;
 using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
 using Bim.Domain.Polygon;
-using Xbim.Common.Step21;
-
+using Bim.Application.IRCWood.Physical;
+using Bim.Domain.Configuration;
 namespace AlgorithmProject
 {
     class TestingProgram
@@ -25,30 +24,39 @@ namespace AlgorithmProject
 
             #endregion
 
-            string fileName = @"..\..\Models\ThreeWalls - Test.ifc";
+
+            string fileName = @"..\..\Models\ThreeWalls - Test.ifcnew.ifc";
             IfModel model = IfModel.Open(fileName);
+            Startup.Configuration(model);
 
-            var beams = model.IfcStore.Instances.OfType<IfcBeam>();
-            
-            var wall = model.Instances.OfType<IfWall>().FirstOrDefault();
-            using (var tx=model.IfcStore.BeginTransaction("ddd"))
-            {
-                var ifcModel = model.IfcStore.Header.FileSchema = new StepFileSchema(IfcSchemaVersion.Ifc4);
-                tx.Commit();
-            }
-            
-            IfSill sill = new IfSill(wall)
-            {
+            model.Delete<IfcBeam>();
+            //var wall = model.Instances.OfType<IfWall>().LastOrDefault();
+            //IfSill sill = new IfSill(wall)
+            //{
+            //    IfLocation = wall.IfLocation,
+            //    IfDimension = new IfDimension(6, .2f, .5f)
+            //};
+            //sill.New();
 
-                IfDimension = new IfDimension(4f, .3f, .2f)
-            };
-            sill.IfLocation = new IfLocation(0, 0, sill.IfWall.IfDimension.ZDim);
-            sill.New();
+            //var material = new IfMaterial(new IfColor(1, 1, 0))
+            //{
+            //    IfModel = model,
+            //    SpecularColor = .5,
+            //    Transparency = 0,
+            //    SpecularHighlight = 64
+            //};
+            //material.New();
+            //material.AttatchTo(sill);
+            model.Delete<IfcColumn>();
+
+            WoodFrame wf = new WoodFrame(model);
+            wf.FrameWalls();
             
+
+            model.Save(fileName);
+            OpenWindow(fileName);
             List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
-
             $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
-
             List<WallPolygon> wallPolygons = new List<WallPolygon>();
             int i = 0;
             foreach (var item in walls)
@@ -64,16 +72,6 @@ namespace AlgorithmProject
                 $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                 i++;
             }
-
-
-            model.Save(fileName);
-
-            OpenWindow(fileName);
-
-
-
-
-
 
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -92,7 +90,7 @@ namespace AlgorithmProject
             List<IfWall> walls = new List<IfWall>();
             //open IfcModel
             var model = IfModel.Open(fileopen);
-            
+
             var beamModel = IfModel.New("Stud", "ITI-Building", true, newFile);
             //IfWall.GetIfcWalls(model);
             //walls = IfWall.ExtractWalls(model);
@@ -115,7 +113,7 @@ namespace AlgorithmProject
             model.Save(fileopen);
             OpenWindow(fileopen);
         }
-       
+
 
     }
 

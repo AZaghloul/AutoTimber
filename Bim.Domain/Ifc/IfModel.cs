@@ -1,22 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xbim.Ifc;
-using Xbim.Ifc.ViewModels;
-using Xbim.Ifc4.GeometricConstraintResource;
-using Xbim.Ifc4.Interfaces;
-using Xbim.Ifc4.MeasureResource;
-using System.Reflection;
-
 using Xbim.Ifc4.Kernel;
-using System.Runtime.InteropServices;
-using Xbim.Ifc4.ProductExtension;
-using Xbim.Ifc4.GeometryResource;
 using Xbim.Common.Step21;
 using Xbim.Common;
-using Bim.Common;
 using Bim.IO;
 
 namespace Bim.Domain.Ifc
@@ -28,13 +15,15 @@ namespace Bim.Domain.Ifc
     {
         private static IfcHandler ifcHandler = new IfcHandler();
         public IfcStore IfcStore { get; set; }
-        public List<IfElement> Instances { get; set; }
+        public List<IfObject> Instances { get; set; }
+        public Version Version { get; set; }
         public List<IfBuilding> Buildings { get; set; }
+
         #region Constructors
         public IfModel(IfcStore ifcStore)
         {
             IfcStore = ifcStore;
-            Instances = new List<IfElement>();
+            Instances = new List<IfObject>();
             Intialize();
         }
         public IfModel()
@@ -130,6 +119,7 @@ namespace Bim.Domain.Ifc
             
             if (Buildings != null) return; //check if there is already buildings return
             Buildings = IfBuilding.GetBuildings(this);
+            Version = new Version(this);
         }
         #endregion
 

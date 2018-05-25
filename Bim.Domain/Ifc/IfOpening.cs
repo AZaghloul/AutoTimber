@@ -46,7 +46,7 @@ namespace Bim.Domain.Ifc
                     .HasFillings.FirstOrDefault().RelatedBuildingElement.GetType().Name;
                
                 ifopening.IfLocation = new IfLocation((float)oLocation.X, (float)oLocation.Y, (float)oLocation.Z);
-                ifopening.IfDimension = new IfDimension((float)recProfile.XDim, (float)recDepth, (float)recProfile.YDim);
+                ifopening.IfDimension = new IfDimension((float)recProfile.YDim, (float)recDepth, (float)recProfile.XDim);
 
                 if (filling == "IfcDoor")
                 {
