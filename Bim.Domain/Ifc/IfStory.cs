@@ -9,29 +9,27 @@ namespace Bim.Domain.Ifc
 {
     public class IfStory : IfElement, IStory
     {
-
         IIfcBuildingStorey _ifcBuildingStorey;
-
         public int StoryNo { get; set; }
-        List<IfWall> Walls { get; set; }
-        
+        public List<IfWall> IfWalls { get; set; }
         public IfBuilding IfBuilding { get; set; }
         public IIfcBuildingStorey IfcStory
         {
             get { return _ifcBuildingStorey; }
             set { _ifcBuildingStorey = value; Initialize(); }
         }
+        public IBuilding Building { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
         public IfStory()
         {
 
         }
-        public IfStory(IfModel ifModel,IIfcBuildingStorey ifcStory)
+        public IfStory(IfModel ifModel, IIfcBuildingStorey ifcStory)
         {
             IfModel = ifModel;
             IfcStory = ifcStory;
             Initialize();
             IfModel.Instances.Add(this);
-            
+
         }
         private void Initialize()
         {
@@ -39,9 +37,9 @@ namespace Bim.Domain.Ifc
             Label = IfcStory.EntityLabel;
             Description = IfcStory.Description;
 
-            if (Walls!=null) return;
-           
-            Walls = IfWall.GetWalls(this);
+            if (IfWalls != null) return;
+
+            IfWalls = IfWall.GetWalls(this);
         }
 
         public static List<IfStory> GetStories(IfBuilding ifBuilding)
@@ -58,7 +56,7 @@ namespace Bim.Domain.Ifc
                 ifStories.Add(ifStory);
                 counter++;
             }
-           
+
             return ifStories;
         }
     }

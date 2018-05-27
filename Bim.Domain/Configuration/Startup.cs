@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Bim.Common.Measures;
 using Bim.Domain.Ifc;
 namespace Bim.Domain.Configuration
 {
@@ -11,17 +7,32 @@ namespace Bim.Domain.Configuration
 
         public static void Configuration(IfModel ifModel)
         {
+            //configure the Length class
+            Length.RoundValue = 4;
 
-            IfMaterial.Defaults = new Dictionary<string, IfMaterial>()
+            IfMaterial.Setup = new Setup()
             {
                 {"Header",new IfMaterial(ifModel,new IfColor(0,255,0)) },
                 {"TopPlate",new IfMaterial(ifModel,new IfColor(255,102,255)) },
                 {"BottomPlate",new IfMaterial(ifModel,new IfColor(0, 0, 255)) },
                 {"Stud",new IfMaterial(ifModel,new IfColor(255, 255, 0)) },
                 {"Sill",new IfMaterial(ifModel,new IfColor(0, 255, 255)) },
-                {"Plate",new IfMaterial(ifModel,new IfColor(153, 102, 0)) }
+                {"Plate",new IfMaterial(ifModel,new IfColor(153, 102, 0)) },
+                {"RLeft",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.DodgerBlue)) },
+                {"RRight",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.DarkGolden)) },
+                {"RBetween",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.Orange)) },
             };
 
+            IfStud.Setup = new Setup()
+            {
+                 {"Dimension",new IfDimension(2,6,2) }
+            };
+
+            IfSill.Setup = new Setup()
+            {
+                {"Dimension",new IfDimension(2,6,2) }
+            };
+            
         }
 
 

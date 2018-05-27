@@ -8,14 +8,16 @@ using Xbim.Ifc4.RepresentationResource;
 using Xbim.Ifc4.SharedBldgElements;
 using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
-using Bim.Domain.Ifc;
+using Bim.Domain.Configuration;
 
 namespace Bim.Domain.Ifc
 {
     public class IfSill : IfElement
     {
+        public static Setup Setup { get; set; }
         #region Properties
         public IfWall IfWall { get; set; }
+
         public IfcAxis2Placement3D RelativeAxis { get; set; }
         #endregion
 
@@ -30,15 +32,15 @@ namespace Bim.Domain.Ifc
         public IfSill(IfWall wall)
         {
             IfWall = wall;
-
         }
 
         #endregion
         #region Methods
-        
+
         public void New()
         {
             var model = IfWall.IfModel.IfcStore;
+           // CheckUnits();
             using (var txn = model.BeginTransaction("New Sill"))
             {
                 //beam proprties.
@@ -47,20 +49,18 @@ namespace Bim.Domain.Ifc
                 IfcElement.ObjectType = "wood-Sill";
                 SetLocation(model);
                 SetShape(model);
-               
-                var building = (IfcBuilding)IfWall.IfModel
-                    .Buildings.FirstOrDefault().IfcBuilding;
 
+                var building = (IfcBuilding)IfWall.IfModel
+                    .IfBuildings.FirstOrDefault().IfcBuilding;
                 building.AddElement(IfcElement);
                 txn.Commit();
             }
-
         }
 
         #endregion
 
         #region Helper Method
-        public void SetShape(IfcStore ifcModel)
+        private void SetShape(IfcStore ifcModel)
         {
 
             var recProfile = ifcModel.Instances.New<IfcRectangleProfileDef>();
@@ -118,7 +118,7 @@ namespace Bim.Domain.Ifc
             rep.Representations.Add(shape2D);
             IfcElement.Representation = rep;
         }
-        public void SetLocation(IfcStore ifcModel)
+        private void SetLocation(IfcStore ifcModel)
         {
             //parameters to insert the geometry in the model
             var origin = ifcModel.Instances.New<IfcCartesianPoint>();
@@ -140,8 +140,27 @@ namespace Bim.Domain.Ifc
 
             IfcElement.ObjectPlacement = lp;
         }
-        
+        private void CheckUnits()
+        {
+            var unit = IfModel.IfUnit.LengthUnit;
+            switch (unit)
+            {
+                case UnitName.METRE:
+                    IfDimension = IfDimension.ToMeters();
+                    IfLocation = IfLocation.ToMeters();
+                    break;
 
+                case UnitName.MILLIMETRE:
+                    IfDimension = IfDimension.ToMilliMeters();
+                    IfLocation = IfLocation.ToMilliMeters();
+                    break;
+
+                case UnitName.FOOT:
+                    break;
+                default:
+                    break;
+            }
+        }
         #endregion
     }
 }

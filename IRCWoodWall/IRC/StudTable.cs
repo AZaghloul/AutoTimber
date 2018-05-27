@@ -1,11 +1,12 @@
-﻿using Bim.Domain.Ifc;
+﻿using Bim.Domain.Configuration;
+using Bim.Domain.Ifc;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using UnitsNet.Units;
 namespace Bim.Application.IRCWood.IRC
 {
     public class StudTable
@@ -18,9 +19,18 @@ namespace Bim.Application.IRCWood.IRC
         {
             Cells = new List<StudCell>();
             Floors = 3;
+
         }
 
+        public StudTable(StudTable s)
+        {
+            Spacing = s.Spacing;
+            Keys = s.Keys;
+            Floors = s.Floors;
+            Cells = s.Cells;
 
+
+        }
 
         public List<StudCell> GetSpace(int floor, double height, IfDimension dimension)
         {
@@ -29,10 +39,38 @@ namespace Bim.Application.IRCWood.IRC
              {
 
                  return e.Floor == floor && e.Height >= height &&
-                e.Value.XDim == dimension.XDim && e.Value.YDim == dimension.YDim;
+                e.Dimension.XDim == dimension.XDim && e.Dimension.YDim == dimension.YDim;
 
              }).ToList();
 
+        }
+
+        public StudTable ToMeters()
+        {
+            var tableMeter = new StudTable(this);
+            var cellsMeter = new List<StudCell>();
+            foreach (var cell in Cells)
+            {
+                var cl = cell.ToMeters();
+                cellsMeter.Add(cl);
+            }
+            tableMeter.Cells = cellsMeter;
+
+            return tableMeter;
+        }
+
+        public StudTable ToMilliMeters()
+        {
+            var tableMilliMeters = new StudTable(this);
+            var cellsMilliMeter = new List<StudCell>();
+            foreach (var cell in Cells)
+            {
+                var cl = cell.ToMilliMeter();
+                cellsMilliMeter.Add(cl);
+            }
+            tableMilliMeters.Cells = cellsMilliMeter;
+
+            return tableMilliMeters;
         }
 
         public static StudTable Load(string filePath)
@@ -83,11 +121,11 @@ namespace Bim.Application.IRCWood.IRC
 
             }
 
-
             return table;
 
-
         }
+
+
 
 
     }

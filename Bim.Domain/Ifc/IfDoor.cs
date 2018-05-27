@@ -1,18 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Bim.Domain;
+﻿
+
 namespace Bim.Domain.Ifc
 {
-   public class IfDoor : IDoor
+    public class IfDoor : IDoor
     {
         public ILocation Location { get; set; }
         public IDimension Dimensions { get; set; }
-        public int Id { get ; set ; }
-        public string Label { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-
         public IfDoor(double xDim, double yDim, double ZDim, double x, double y, double z)
         {
             Location = new IfLocation(x, y, z);

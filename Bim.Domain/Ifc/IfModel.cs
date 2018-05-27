@@ -6,24 +6,25 @@ using Xbim.Common.Step21;
 using Xbim.Common;
 using Bim.IO;
 
+
 namespace Bim.Domain.Ifc
 {
     /// <summary>
     /// This class imports, inzialize and Handle  the model 
     /// </summary>
-    public class IfModel : Common.IModel
+    public class IfModel : IModel
     {
         private static IfcHandler ifcHandler = new IfcHandler();
         public IfcStore IfcStore { get; set; }
-        public List<IfObject> Instances { get; set; }
-        public Version Version { get; set; }
-        public List<IfBuilding> Buildings { get; set; }
-
+        public List<IObject> Instances { get; set; }
+        public IVersion Version { get; set; }
+        public List<IfBuilding> IfBuildings { get; set; }
+        public IfUnit IfUnit { get; set; }
         #region Constructors
         public IfModel(IfcStore ifcStore)
         {
             IfcStore = ifcStore;
-            Instances = new List<IfObject>();
+            Instances = new List<IObject>();
             Intialize();
         }
         public IfModel()
@@ -44,21 +45,8 @@ namespace Bim.Domain.Ifc
         {
             IfcStore.SaveAs(filePath);
         }
-        public void Delete<T>() where T : IPersistEntity
-        {
-            using (var txn = IfcStore.BeginTransaction("Deleting"))
-            {
-                var columns = IfcStore.Instances.OfType<T>();
-                int c = columns.Count();
-                for (int i = 0; i < c; i++)
-                {
-                    IfcStore.Delete(columns.FirstOrDefault());
-                }
 
-                txn.Commit();
-
-            }
-        }
+        
         #endregion
 
         #region Static Functions
@@ -105,7 +93,7 @@ namespace Bim.Domain.Ifc
                 model.SaveAs(filepath);
             }
 
-            ifModel.Buildings.Add(IfBuilding.New(ifModel, buildingName));
+            ifModel.IfBuildings.Add(IfBuilding.New(ifModel, buildingName));
 
             return ifModel;
 
@@ -116,10 +104,27 @@ namespace Bim.Domain.Ifc
         #region Helper Function
         private void Intialize()
         {
-            
-            if (Buildings != null) return; //check if there is already buildings return
-            Buildings = IfBuilding.GetBuildings(this);
-            Version = new Version(this);
+            if (IfBuildings != null) return; //check if there is already buildings return
+            IfBuildings = IfBuilding.GetBuildings(this);
+            Version = new IfVersion(this);
+            IfUnit = new IfUnit(this);
+        }
+
+        
+        public void Delete<T>() where T : IPersistEntity
+        {
+            using (var txn = IfcStore.BeginTransaction("Deleting"))
+            {
+                var columns = IfcStore.Instances.OfType<T>();
+                int c = columns.Count();
+                for (int i = 0; i < c; i++)
+                {
+                    IfcStore.Delete(columns.FirstOrDefault());
+                }
+
+                txn.Commit();
+
+            }
         }
         #endregion
 

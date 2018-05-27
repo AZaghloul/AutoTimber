@@ -80,12 +80,16 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Configuration\Setup.cs" />
     <Compile Include="Configuration\Startup.cs" />
     <Compile Include="General\Interfaces\IBuilding.cs" />
     <Compile Include="General\Interfaces\IElement.cs" />
     <Compile Include="General\Interfaces\ILocation.cs" />
+    <Compile Include="General\Interfaces\IModel.cs" />
+    <Compile Include="General\Interfaces\IObject.cs" />
     <Compile Include="General\Interfaces\IProject.cs" />
     <Compile Include="General\Interfaces\IStory.cs" />
+    <Compile Include="General\Interfaces\IVersion.cs" />
     <Compile Include="Ifc\IfBuilding.cs" />
     <Compile Include="Ifc\IfColor.cs" />
     <Compile Include="Ifc\IfDimensions.cs" />
@@ -104,6 +108,7 @@
     <Compile Include="Ifc\IfSill.cs" />
     <Compile Include="Ifc\IfStory.cs" />
     <Compile Include="Ifc\IfStud.cs" />
+    <Compile Include="Ifc\IfUnit.cs" />
     <Compile Include="Ifc\IfWall.cs" />
     <Compile Include="Ifc\IfWindow.cs" />
     <Compile Include="Ifc\Version.cs" />
@@ -120,6 +125,9 @@
       <Project>{9abae764-1e6e-4124-8d72-96332668d50e}</Project>
       <Name>Bim.IO</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Xml\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

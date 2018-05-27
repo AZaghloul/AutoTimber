@@ -4,11 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Bim.Domain
+namespace Bim.Common.Measures
 {
-    public interface IBuilding
+    class Quantity
     {
-         List<IStory> Stories { get; set; }
-        IModel Model { get; set; }
     }
 }

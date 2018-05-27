@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.ProfileResource;
 using Xbim.Ifc;
@@ -10,26 +6,21 @@ using Xbim.Ifc4.GeometryResource;
 using Xbim.Ifc4.RepresentationResource;
 using Xbim.Ifc4.SharedBldgElements;
 using Xbim.Ifc4.GeometricConstraintResource;
-using Xbim.Ifc4.MaterialResource;
 using Xbim.Ifc4.ProductExtension;
-using Xbim.Ifc4.PresentationOrganizationResource;
-using Xbim.Ifc4;
-
 using Xbim.Ifc4.GeometricModelResource;
-using Bim.Domain;
-using Bim.Domain.Ifc;
+using Bim.Domain.Configuration;
 
 namespace Bim.Domain.Ifc
 {
-    public class IfStud:IfElement
+    public class IfStud : IfElement
     {
         #region Properties
-        
+
         public IfWall IfWall { get; set; }
         public IfcAxis2Placement3D RelativeAxis { get; set; }
 
         #endregion
-
+        public static Setup Setup { get; set; }
         #region Constructor
         public IfStud()
         {
@@ -38,7 +29,7 @@ namespace Bim.Domain.Ifc
         {
             IfWall = wall;
         }
-       
+
 
         #endregion
 
@@ -47,6 +38,8 @@ namespace Bim.Domain.Ifc
         public void New()
         {
             var ifcModel = IfWall.IfModel.IfcStore;
+           // CheckUnits();
+
             using (var txn = ifcModel.BeginTransaction("New Stud"))
             {
                 IfcElement = ifcModel.Instances.New<IfcColumnStandardCase>();
@@ -54,7 +47,7 @@ namespace Bim.Domain.Ifc
                 ((IfcColumnStandardCase)IfcElement).PredefinedType = IfcColumnTypeEnum.COLUMN;
                 SetLocation(ifcModel);
                 SetShape(ifcModel);
-                
+
                 var building = (IfcBuilding)ifcModel.
                     Instances.OfType<IIfcBuilding>().FirstOrDefault();
                 building.AddElement(IfcElement);
@@ -63,7 +56,7 @@ namespace Bim.Domain.Ifc
 
         }
         #endregion
-        public void SetShape(IfcStore ifcModel)
+        private void SetShape(IfcStore ifcModel)
         {
             var recProfile = ifcModel.Instances.New<IfcRectangleProfileDef>();
 
@@ -155,7 +148,7 @@ namespace Bim.Domain.Ifc
             //rep.Representations.Add(shape);
             //IfcElement.Representation = rep;
         }
-        public void SetLocation(IfcStore ifcModel)
+        private void SetLocation(IfcStore ifcModel)
         {
             var origin = ifcModel.Instances.New<IfcCartesianPoint>();
 
@@ -215,6 +208,27 @@ namespace Bim.Domain.Ifc
             //ifcPolyline.Points.Add(endPoint);
 
             IfcElement.ObjectPlacement = lp;
+        }
+        private void CheckUnits()
+        {
+            var unit = IfModel.IfUnit.LengthUnit;
+            switch (unit)
+            {
+                case UnitName.METRE:
+                   IfDimension=  IfDimension.ToMeters();
+                   IfLocation=  IfLocation.ToMeters();
+                    break;
+
+                case UnitName.MILLIMETRE:
+                   IfDimension=  IfDimension.ToMilliMeters();
+                    IfLocation = IfLocation.ToMilliMeters();
+                    break;
+
+                case UnitName.FOOT:
+                    break;
+                default:
+                    break;
+            }
         }
     }
 }

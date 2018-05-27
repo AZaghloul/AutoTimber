@@ -28,12 +28,9 @@ namespace Bim.Application.IRCWood.Physical
         #region Methods
         public void FrameWalls()
         {
-            var dimensions = new Dictionary<string, IfDimension>();
-            dimensions.Add("Stud", new IfDimension(2, 6, 0));
-            dimensions.Add("TopPlate", new IfDimension(0, .6, .2));
-            dimensions.Add("BottomPlate", new IfDimension(0, .6, .2));
-            dimensions.Add("Header", new IfDimension(0, .6, .6));
+            
             var studTable =  StudTable.Load(@"..\..\Tables\StudSpacingTable.txt");
+          
 
             var walls = IfModel.Instances.OfType<IfWall>().ToList();
             var polygons = WallPolygon.GetPolygons(walls);
@@ -43,7 +40,6 @@ namespace Bim.Application.IRCWood.Physical
                 try
                 {
                     wf = new WallFrame(polygon);
-                    wf.Dimensions = dimensions;
                     wf.StudTable = studTable;
                     wf.New();
                 }

@@ -15,8 +15,8 @@ namespace Bim.Domain.Ifc
     public class IfBuilding : IfElement
     {
         public IIfcBuilding IfcBuilding { get; set; }
-        List<IfStory> Stories { get; set; }
-
+        protected List<IfStory> IfStories { get; set; }
+        public IModel Model { get; set; }
         #region Constructor
         public IfBuilding()
         {
@@ -32,8 +32,8 @@ namespace Bim.Domain.Ifc
         #region HelperMethod
         private void Intialize()
         {
-            if (Stories != null) return;
-            Stories = IfStory.GetStories(this);
+            if (IfStories != null) return;
+            IfStories = IfStory.GetStories(this);
 
         }
         #endregion

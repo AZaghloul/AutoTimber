@@ -5,8 +5,11 @@ using Bim.IO.Utilities;
 using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
 using Bim.Domain.Polygon;
-using Bim.Application.IRCWood.Physical;
 using Bim.Domain.Configuration;
+using Bim.Common.Measures;
+using Bim.Application.IRCWood.Physical;
+using Bim.Common.Geometery;
+
 namespace AlgorithmProject
 {
     class TestingProgram
@@ -25,36 +28,26 @@ namespace AlgorithmProject
             #endregion
 
 
-            string fileName = @"..\..\Models\ThreeWalls - Test.ifcnew.ifc";
+            
+            string fileName = @"..\..\Models\ThreeWalls.ifc";
+
             IfModel model = IfModel.Open(fileName);
+           
+
             Startup.Configuration(model);
+            
+            var a = Length.FromMeters(8);
+            var x = Math.Round(a.MilliMeter);
 
             model.Delete<IfcBeam>();
-            //var wall = model.Instances.OfType<IfWall>().LastOrDefault();
-            //IfSill sill = new IfSill(wall)
-            //{
-            //    IfLocation = wall.IfLocation,
-            //    IfDimension = new IfDimension(6, .2f, .5f)
-            //};
-            //sill.New();
-
-            //var material = new IfMaterial(new IfColor(1, 1, 0))
-            //{
-            //    IfModel = model,
-            //    SpecularColor = .5,
-            //    Transparency = 0,
-            //    SpecularHighlight = 64
-            //};
-            //material.New();
-            //material.AttatchTo(sill);
             model.Delete<IfcColumn>();
 
             WoodFrame wf = new WoodFrame(model);
             wf.FrameWalls();
-            
-
+            //model.Delete<IfcWall>();
             model.Save(fileName);
             OpenWindow(fileName);
+
             List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
             $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
             List<WallPolygon> wallPolygons = new List<WallPolygon>();
@@ -78,6 +71,7 @@ namespace AlgorithmProject
             Console.WriteLine("Done!");
             #endregion
             Console.ReadLine();
+
         }
         public static void OpenWindow(string filePath)
         {

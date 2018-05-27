@@ -4,7 +4,7 @@ namespace Bim.Domain
 {
     public enum OpeningType
     {
-        Door,Window
+        Door,Window,NotDefined
     }
     public interface IOpening
     {

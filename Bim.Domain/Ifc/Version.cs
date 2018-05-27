@@ -4,13 +4,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xbim.Common.Step21;
+using Xbim.Ifc;
 
 namespace Bim.Domain.Ifc
 {
-   public class Version
+   public class IfVersion:IVersion
     {
         public IfModel IfModel { get; set; }
         public string CurrentVersion { get; set; }
+        public IModel Model
+        {
+            get { return IfModel; }
+            set { IfModel = (IfModel)Model; }
+        }
 
         public void Upgrade()
         {
@@ -21,7 +27,8 @@ namespace Bim.Domain.Ifc
                     new StepFileSchema(IfcSchemaVersion.Ifc4);
                 tx.Commit();
             }
-            Initialize();
+            CurrentVersion= CurrentVersion = IfModel.IfcStore.Header.FileSchema.
+                Schemas.FirstOrDefault(); 
         }
         public void Downgrade()
         {
@@ -35,7 +42,7 @@ namespace Bim.Domain.Ifc
             Initialize();
         }
 
-        public Version(IfModel ifModel)
+        public IfVersion(IfModel ifModel)
         {
             IfModel = ifModel;
             Initialize();
@@ -45,6 +52,14 @@ namespace Bim.Domain.Ifc
         {
             CurrentVersion= IfModel.IfcStore.Header.FileSchema.
                 Schemas.FirstOrDefault();
+
+            if (CurrentVersion != "IFC4")
+            {
+                Upgrade();
+                var name = IfModel.IfcStore.FileName;
+                IfModel.IfcStore.SaveAs(name);
+               IfModel.IfcStore = IfcStore.Open(name);
+            }
         }
     }
 }

@@ -9,12 +9,13 @@ using Xbim.Ifc4.PresentationAppearanceResource;
 using Xbim.Ifc4.MeasureResource;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.ProductExtension;
+using Bim.Domain.Configuration;
 
 namespace Bim.Domain.Ifc
 {
     public class IfMaterial : IfObject
     {
-        public static Dictionary<string,IfMaterial> Defaults { get; set; }
+        public static Setup Setup { get; set; }
         public IfModel IfModel { get; set; }
         public IfColor IfColor { get; set; }
         public double Transparency { get; set; }

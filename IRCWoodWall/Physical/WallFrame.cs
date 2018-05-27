@@ -1,5 +1,6 @@
 ﻿using Bim.Application.IRCWood.IRC;
 using Bim.Common.Geometery;
+using Bim.Common.Measures;
 using Bim.Domain.Ifc;
 using Bim.Domain.Polygon;
 
@@ -18,7 +19,6 @@ namespace Bim.Application.IRCWood.Physical
         public List<IfSill> Headers { get; set; }
         public List<Plate> Plates { get; set; }
         public StudTable StudTable { get; set; }
-        public Dictionary<string, IfDimension> Dimensions { get; set; }
         public WallFrame(WallPolygon wallPolygon)
         {
             WallPolygon = wallPolygon;
@@ -31,20 +31,74 @@ namespace Bim.Application.IRCWood.Physical
         private void SetLeftRegion()
         {
             var storyNo = WallPolygon.IfWall.Story.StoryNo;
-            var height = WallPolygon.IfWall.IfDimension.ZDim * 3.28084;
-            var s = StudTable.GetSpace(storyNo + 1, height, Dimensions["Stud"]).LastOrDefault();
-            var maxdistance = s.Spacing;
-            var dim = Dimensions["Stud"];
+            double height = 0;
+            UnitName unit = WallPolygon.IfWall.IfModel.IfUnit.LengthUnit;
+            switch (unit)
+            {
+                case UnitName.MILLIMETRE:
+                    height = Length.FromMilliMeters(WallPolygon.IfWall.IfDimension.ZDim).Feet;
+                    break;
+
+                case UnitName.FOOT:
+                    height = WallPolygon.IfWall.IfDimension.ZDim;
+                    break;
+                case UnitName.METRE:
+                    height = Length.FromMeters(WallPolygon.IfWall.IfDimension.ZDim).Feet;
+                    break;
+                default:
+                    break;
+            }
+
+            var dim = IfStud.Setup.Get<IfDimension>("Dimension");
+
+            var maxdistance = StudTable.GetSpace(storyNo + 1, height, dim)
+                .LastOrDefault().Spacing;
+
+            // set maxdistance unit
+            switch (unit)
+            {
+                case UnitName.MILLIMETRE:
+                    maxdistance = Length.FromInches(maxdistance).MilliMeter;
+                    dim = dim.ToMilliMeters();
+                    break;
+
+                case UnitName.METRE:
+                    maxdistance = Length.FromInches(maxdistance).Meter;
+                    dim = dim.ToMeters();
+                    break;
+
+                default:
+                    maxdistance = Length.FromInches(maxdistance).Feet;
+                    dim = dim.ToFeet();
+                    break;
+            }
+
+            //set Left Region
             foreach (var region in WallPolygon.RLeft)
             {
+                double distance = 0;
+                switch (unit)
+                {
+                    case UnitName.MILLIMETRE:
+                        distance = region.Dimension.XDim;
+                        break;
+                    case UnitName.FOOT:
+                        distance = Length.FromInches(region.Dimension.XDim).Feet;
+                        break;
+                    case UnitName.METRE:
+                        distance = region.Dimension.XDim;
+                        break;
+                    default:
+                        break;
+                }
 
-                var spaces = Split.Distance(region.Dimension.XDim, Convert.ToDouble(maxdistance) * 0.0254); //to inch
+                var spaces = Split.Distance(dim.XDim / 2,distance, maxdistance, maxdistance);
 
-                spaces = spaces.Where(e => e > .2).ToList();
-                spaces.Insert(0, 0);
+                
+                
+
                 for (int i = 0; i < spaces.Count; i++)
                 {
-                    if (i == 0) { spaces[i] += 0.05 / 2; };
                     var ifStud = new IfStud(WallPolygon.IfWall)
                     {
                         IfModel = WallPolygon.IfWall.IfModel,
@@ -55,13 +109,121 @@ namespace Bim.Application.IRCWood.Physical
                                      region.Location.Z),
 
                         IfDimension = new IfDimension(
-                                       .05f,
-                                        .4f,
+                                       dim.XDim,
+                                        dim.YDim,
                                        region.Dimension.ZDim),
 
-                        IfMaterial = IfMaterial.Defaults["Stud"]
+                        IfMaterial = IfMaterial.Setup.Get<IfMaterial>("RLeft")
+                    };
 
-                };
+                    ifStud.New();
+                    ifStud.IfMaterial.AttatchTo(ifStud);
+                    //add to studs elments
+                    IfStuds.Add(ifStud);
+
+
+
+
+                    //
+                }
+            }
+            //set right Region
+            foreach (var region in WallPolygon.RRight)
+            {
+                double distance = 0;
+                switch (unit)
+                {
+                    case UnitName.MILLIMETRE:
+                        distance = region.Dimension.XDim;
+                        break;
+                    case UnitName.FOOT:
+                        distance = Length.FromInches(region.Dimension.XDim).Feet;
+                        break;
+                    case UnitName.METRE:
+                        distance = region.Dimension.XDim;
+                        break;
+                    default:
+                        break;
+                }
+
+                var spaces = Split.Distance(dim.XDim / 2,distance, maxdistance, maxdistance);
+
+                
+                
+
+                for (int i = 0; i < spaces.Count; i++)
+                {
+                    var ifStud = new IfStud(WallPolygon.IfWall)
+                    {
+                        IfModel = WallPolygon.IfWall.IfModel,
+                        IfWall = WallPolygon.IfWall,
+                        IfLocation =
+                                     new IfLocation(region.Location.X + spaces[i],
+                                     region.Location.Y,
+                                     region.Location.Z),
+
+                        IfDimension = new IfDimension(
+                                       dim.XDim,
+                                        dim.YDim,
+                                       region.Dimension.ZDim),
+
+                        IfMaterial = IfMaterial.Setup.Get<IfMaterial>("RRight")
+                    };
+
+                    ifStud.New();
+                    ifStud.IfMaterial.AttatchTo(ifStud);
+                    //add to studs elments
+                    IfStuds.Add(ifStud);
+
+
+
+
+                    //
+                }
+            }
+            //set between regions
+            foreach (var region in WallPolygon.RBetween)
+            {
+                double distance = 0;
+                switch (unit)
+                {
+                    case UnitName.MILLIMETRE:
+                        distance = region.Dimension.XDim;
+                        break;
+                    case UnitName.FOOT:
+                        distance = Length.FromInches(region.Dimension.XDim).Feet;
+                        break;
+                    case UnitName.METRE:
+                        distance = region.Dimension.XDim;
+                        break;
+                    default:
+                        break;
+                }
+
+                var spaces = Split.Distance(dim.XDim / 2, distance, maxdistance, maxdistance);
+
+
+
+
+                for (int i = 0; i < spaces.Count; i++)
+                {
+                    var ifStud = new IfStud(WallPolygon.IfWall)
+                    {
+                        IfModel = WallPolygon.IfWall.IfModel,
+                        IfWall = WallPolygon.IfWall,
+                        IfLocation =
+                                     new IfLocation(region.Location.X + spaces[i],
+                                     region.Location.Y,
+                                     region.Location.Z),
+
+                        IfDimension = new IfDimension(
+                                       dim.XDim,
+                                        dim.YDim,
+                                       region.Dimension.ZDim),
+
+                        IfMaterial = IfMaterial.Setup.Get<IfMaterial>("RBetween")
+                    };
+
                     ifStud.New();
                     ifStud.IfMaterial.AttatchTo(ifStud);
                     //add to studs elments
@@ -78,10 +240,11 @@ namespace Bim.Application.IRCWood.Physical
         {
 
             var storyNo = WallPolygon.IfWall.Story.StoryNo;
-            var height = WallPolygon.IfWall.IfDimension.ZDim * 3.28084;
-            var s = StudTable.GetSpace(storyNo + 1, height, Dimensions["Stud"]).LastOrDefault();
+            var height = WallPolygon.IfWall.IfDimension.ZDim;
+            var dim = IfStud.Setup.Get<IfDimension>("Dimension");
+            var s = StudTable.GetSpace(storyNo + 1, height, dim).LastOrDefault();
             var maxdistance = s.Spacing;
-            var dim = Dimensions["Stud"];
+
             foreach (var region in WallPolygon.RBetween)
             {
 
@@ -106,7 +269,7 @@ namespace Bim.Application.IRCWood.Physical
                                         .4f,
                                        region.Dimension.ZDim),
 
-                        
+
 
                     };
 
@@ -125,10 +288,11 @@ namespace Bim.Application.IRCWood.Physical
         {
 
             var storyNo = WallPolygon.IfWall.Story.StoryNo;
-            var height = WallPolygon.IfWall.IfDimension.ZDim * 3.28084;
-            var s = StudTable.GetSpace(storyNo + 1, height, Dimensions["Stud"]).LastOrDefault();
-            var maxdistance = s.Spacing;
-            var dim = Dimensions["Stud"];
+            var height = WallPolygon.IfWall.IfDimension.ZDim;
+            var dim = IfStud.Setup.Get<IfDimension>("Dimension");
+            var maxdistance = StudTable.GetSpace(storyNo + 1, height, dim).LastOrDefault().Spacing;
+
+
             foreach (var region in WallPolygon.RRight)
             {
 
@@ -166,34 +330,68 @@ namespace Bim.Application.IRCWood.Physical
         {
             var wl = WallPolygon.IfWall.IfLocation;
             var wd = WallPolygon.IfWall.IfDimension;
-            var dim = Dimensions["TopPlate"];
+            var dim = IfSill.Setup.Get<IfDimension>("Dimension");
+            UnitName unit = WallPolygon.IfWall.IfModel.IfUnit.LengthUnit;
+
+            switch (unit)
+            {
+                case UnitName.MILLIMETRE:
+                    dim = dim.ToMilliMeters();
+                    break;
+
+                case UnitName.METRE:
+
+                    dim = dim.ToMeters();
+                    break;
+
+                default:
+                    dim = dim.ToFeet();
+                    break;
+            }
+
             var location = new IfLocation(wd.XDim / 2, 0, wd.ZDim);
             var plate = new IfSill(WallPolygon.IfWall)
             {
                 IfLocation = location,
                 IfDimension = new IfDimension(wd.XDim, dim.YDim, dim.ZDim),
-                IfMaterial = IfMaterial.Defaults["TopPlate"]
-                
+                IfMaterial = IfMaterial.Setup.Get<IfMaterial>("TopPlate"),
+                IfModel = WallPolygon.IfWall.IfModel
             };
-            // IfMaterial.AttatchTo(plate);
+
             plate.New();
             plate.IfMaterial.AttatchTo(plate);
         }
-
         private void SetBottomPlate()
         {
             var wl = WallPolygon.IfWall.IfLocation;
             var wd = WallPolygon.IfWall.IfDimension;
-            var dim = Dimensions["BottomPlate"];
+            var dim = IfSill.Setup.Get<IfDimension>("Dimension");
+            UnitName unit = WallPolygon.IfWall.IfModel.IfUnit.LengthUnit;
+
+            switch (unit)
+            {
+                case UnitName.MILLIMETRE:
+                    dim = dim.ToMilliMeters();
+                    break;
+
+                case UnitName.METRE:
+
+                    dim = dim.ToMeters();
+                    break;
+
+                default:
+                    dim = dim.ToFeet();
+                    break;
+            }
             var location = new IfLocation(wd.XDim / 2, 0, -dim.ZDim);
             var plate = new IfSill(WallPolygon.IfWall)
             {
                 IfLocation = location,
                 IfDimension = new IfDimension(wd.XDim, dim.YDim, dim.ZDim),
-                IfMaterial = IfMaterial.Defaults["BottomPlate"]
+                IfMaterial = IfMaterial.Setup.Get<IfMaterial>("BottomPlate"),
+                IfModel = WallPolygon.IfWall.IfModel
             };
 
-            //  IfMaterial.AttatchTo(plate);
             plate.New();
             plate.IfMaterial.AttatchTo(plate);
         }
@@ -201,7 +399,25 @@ namespace Bim.Application.IRCWood.Physical
         {
             var wl = WallPolygon.IfWall.IfLocation;
             var wd = WallPolygon.IfWall.IfDimension;
-            var dim = Dimensions["Header"];
+            var dim = IfSill.Setup.Get<IfDimension>("Dimension");
+            UnitName unit = WallPolygon.IfWall.IfModel.IfUnit.LengthUnit;
+
+            switch (unit)
+            {
+                case UnitName.MILLIMETRE:
+                    dim = dim.ToMilliMeters();
+                    break;
+
+                case UnitName.METRE:
+
+                    dim = dim.ToMeters();
+                    break;
+
+                default:
+                    dim = dim.ToFeet();
+                    break;
+            }
+
             var regions = WallPolygon.RTop;
             foreach (var region in regions)
             {
@@ -212,8 +428,9 @@ namespace Bim.Application.IRCWood.Physical
                 header.IfDimension = new IfDimension(d.XDim, dim.YDim, d.ZDim / 2);
                 header.New();
                 Headers.Add(header);
-                header.IfMaterial = IfMaterial.Defaults["Header"];
+                header.IfMaterial = IfMaterial.Setup.Get<IfMaterial>("Header");
                 header.IfMaterial.AttatchTo(header);
+                header.IfModel = WallPolygon.IfWall.IfModel;
 
             }
 
@@ -225,11 +442,31 @@ namespace Bim.Application.IRCWood.Physical
             SetTopPlate();
             SetBottomPlate();
             SetLeftRegion();
-            //SetBetweenRegion();
-            //SetRightRegion();
+           
             SetTopRegion();
         }
 
+        private double FromInches(double value)
+        {
+            double res = 0;
+            UnitName unit = WallPolygon.IfWall.IfModel.IfUnit.LengthUnit;
+
+            switch (unit)
+            {
+                case UnitName.MILLIMETRE:
+                    res = Length.FromInches(res).MilliMeter;
+                    break;
+
+                case UnitName.METRE:
+                    res = Length.FromInches(res).Meter;
+                    break;
+
+                default:
+                    break;
+            }
+            return res;
+
+        }
 
 
 

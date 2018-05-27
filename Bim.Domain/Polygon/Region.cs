@@ -15,8 +15,8 @@ using UnitsNet.Units;
     };
     public class Region
     {
-        public ILocation Location { get; set; }
-        public IDimension Dimension { get; set; }
+        public IfLocation Location { get; set; }
+        public IfDimension Dimension { get; set; }
         public RegionLocation RegionLocation { get; set; }
 
         public Region(double xDim, double yDim, double height, double x, double y, double z, RegionLocation regionLocation )
