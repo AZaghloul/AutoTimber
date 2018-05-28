@@ -4,7 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bim.Domain;
+using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.Interfaces;
+using Xbim.Ifc4.ProductExtension;
+
 namespace Bim.Domain.Ifc
 {
     public class IfOpening : IfElement
@@ -15,6 +18,7 @@ namespace Bim.Domain.Ifc
         public IIfcRelVoidsElement IfcOpening { get; set; }
         public IElement WallOrSlap { get; set; }
 
+        public IIfcLocalPlacement LocalPlacement { get; set; }
         public IfOpening()
         {
 
@@ -37,7 +41,9 @@ namespace Bim.Domain.Ifc
 
                 var opnng = (IIfcAxis2Placement3D)((IIfcLocalPlacement)opening
                     .RelatedOpeningElement.ObjectPlacement).RelativePlacement;
+
                 var oLocation = opnng.Location;
+
                 var recProfile = opening.RelatedOpeningElement.Representation.Representations.SelectMany(a => a.Items)
                     .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
                     .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
@@ -46,8 +52,9 @@ namespace Bim.Domain.Ifc
                     Representations.SelectMany(a => a.Items).
                     OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
 
-                var voids = ((IIfcOpeningElement)opening.RelatedOpeningElement)
+                var voids = ((IfcOpeningElement)opening.RelatedOpeningElement)
                     .HasFillings.FirstOrDefault();
+                ifopening.LocalPlacement = (IIfcLocalPlacement)voids.RelatedBuildingElement.ObjectPlacement;
                 string filling = " ";
                 if (voids != null)
                 {
@@ -60,15 +67,19 @@ namespace Bim.Domain.Ifc
 
 
                 ifopening.IfLocation = new IfLocation(oLocation.X, oLocation.Y, oLocation.Z);
+
                 ifopening.IfDimension = new IfDimension(recProfile.YDim, recDepth, recProfile.XDim);
 
                 switch (filling)
                 {
                     case "IfcDoor":
                         ifopening.OpeningType = OpeningType.Door;
+                        ifopening.IfDimension = new IfDimension(recProfile.XDim, recDepth, recProfile.YDim );
+                        
                         break;
                     case "IfcWindow":
                         ifopening.OpeningType = OpeningType.Window;
+                        ifopening.IfDimension = new IfDimension(recProfile.YDim, recDepth, recProfile.XDim);
                         break;
                     default:
                         ifopening.OpeningType = OpeningType.Window;

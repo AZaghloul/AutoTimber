@@ -17,8 +17,7 @@ namespace Bim.Domain.Ifc
         public static Setup Setup { get; set; }
         #region Properties
         public IfWall IfWall { get; set; }
-
-        public IfcAxis2Placement3D RelativeAxis { get; set; }
+        public IIfcLocalPlacement LocalPlacement { get; set; }
         #endregion
 
         #region Member Variables
@@ -40,7 +39,7 @@ namespace Bim.Domain.Ifc
         public void New()
         {
             var model = IfWall.IfModel.IfcStore;
-           // CheckUnits();
+            // CheckUnits();
             using (var txn = model.BeginTransaction("New Sill"))
             {
                 //beam proprties.
@@ -129,14 +128,22 @@ namespace Bim.Domain.Ifc
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
             var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
             /*          Set Stud Location */
-            lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
-
+            lp.PlacementRelTo =( IfcLocalPlacement)IfWall.LocalPlacement;
             ax3D.Location = origin;
             ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
-            ax3D.RefDirection.SetXYZ(1, 0, 0); //x-axis direction
-            ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
-            ax3D.Axis.SetXYZ(0, 0, 1); //z-axis direction
-            lp.RelativePlacement = ax3D;
+            try
+            {
+                ax3D.RefDirection = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
+                ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
+                ax3D.Axis = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis; //z-axis direction
+                lp.RelativePlacement = ax3D;
+            }
+            catch (System.Exception e)
+            {
+
+                
+            }
+          
 
             IfcElement.ObjectPlacement = lp;
         }

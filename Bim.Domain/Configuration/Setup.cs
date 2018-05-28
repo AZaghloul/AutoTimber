@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bim.Domain.Configuration
 {
-    public class Setup : Dictionary<string, object> 
+    public class Setup :  Dictionary<string, object> 
     {
         public Setup()
         {

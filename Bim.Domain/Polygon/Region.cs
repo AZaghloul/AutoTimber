@@ -2,8 +2,9 @@
 using Bim.Domain.Ifc;
 using UnitsNet;
 using UnitsNet.Units;
+using Xbim.Ifc4.Interfaces;
 
-    namespace Bim.Domain.Polygon
+namespace Bim.Domain.Polygon
 {
     public enum RegionLocation
     {
@@ -18,13 +19,13 @@ using UnitsNet.Units;
         public IfLocation Location { get; set; }
         public IfDimension Dimension { get; set; }
         public RegionLocation RegionLocation { get; set; }
-
-        public Region(double xDim, double yDim, double height, double x, double y, double z, RegionLocation regionLocation )
+        public IIfcLocalPlacement LocalPlacement { get; set; }
+        public Region(double xDim, double yDim, double height, double x, double y, double z, RegionLocation regionLocation)
         {
             Location = new IfLocation(x, y, z);
             Dimension = new IfDimension(xDim, yDim, height);
             RegionLocation = regionLocation;
-            
+
         }
 
         public Region(double xDim, double yDim, double height, double x, double y, double z)

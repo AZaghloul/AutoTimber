@@ -7,6 +7,8 @@ using Bim.Domain.Polygon;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xbim.Ifc4.GeometricConstraintResource;
+using Xbim.Ifc4.GeometryResource;
 
 namespace Bim.Application.IRCWood.Physical
 
@@ -92,10 +94,10 @@ namespace Bim.Application.IRCWood.Physical
                         break;
                 }
 
-                var spaces = Split.Distance(dim.XDim / 2,distance, maxdistance, maxdistance);
+                var spaces = Split.Distance(dim.XDim / 2, distance, maxdistance, maxdistance);
 
-                
-                
+
+
 
                 for (int i = 0; i < spaces.Count; i++)
                 {
@@ -113,7 +115,8 @@ namespace Bim.Application.IRCWood.Physical
                                         dim.YDim,
                                        region.Dimension.ZDim),
 
-                        IfMaterial = IfMaterial.Setup.Get<IfMaterial>("RLeft")
+                        IfMaterial = IfMaterial.Setup.Get<IfMaterial>("RLeft"),
+
                     };
 
                     ifStud.New();
@@ -146,10 +149,10 @@ namespace Bim.Application.IRCWood.Physical
                         break;
                 }
 
-                var spaces = Split.Distance(dim.XDim / 2,distance, maxdistance, maxdistance);
+                var spaces = Split.Distance(dim.XDim / 2, distance, maxdistance, maxdistance);
 
-                
-                
+
+
 
                 for (int i = 0; i < spaces.Count; i++)
                 {
@@ -355,7 +358,8 @@ namespace Bim.Application.IRCWood.Physical
                 IfLocation = location,
                 IfDimension = new IfDimension(wd.XDim, dim.YDim, dim.ZDim),
                 IfMaterial = IfMaterial.Setup.Get<IfMaterial>("TopPlate"),
-                IfModel = WallPolygon.IfWall.IfModel
+                IfModel = WallPolygon.IfWall.IfModel,
+                LocalPlacement = WallPolygon.IfWall.LocalPlacement
             };
 
             plate.New();
@@ -389,7 +393,8 @@ namespace Bim.Application.IRCWood.Physical
                 IfLocation = location,
                 IfDimension = new IfDimension(wd.XDim, dim.YDim, dim.ZDim),
                 IfMaterial = IfMaterial.Setup.Get<IfMaterial>("BottomPlate"),
-                IfModel = WallPolygon.IfWall.IfModel
+                IfModel = WallPolygon.IfWall.IfModel,
+                LocalPlacement = WallPolygon.IfWall.LocalPlacement
             };
 
             plate.New();
@@ -424,13 +429,31 @@ namespace Bim.Application.IRCWood.Physical
                 var header = new IfSill(WallPolygon.IfWall);
                 var l = region.Location;
                 var d = region.Dimension;
-                header.IfLocation = new IfLocation(l.X - d.XDim / 2, l.Y, l.Z);
+                if (((IfcAxis2Placement3D)region.LocalPlacement.RelativePlacement).Axis != null)
+                {
+                    var locPlac = ((IfcAxis2Placement3D)region.LocalPlacement.RelativePlacement).Axis.X;
+                    if (locPlac == -1)
+                    {
+                        header.IfLocation = new IfLocation(l.X + d.XDim / 2, l.Y, l.Z);
+                    }
+                    else
+                    {
+                        header.IfLocation = new IfLocation(l.X - d.XDim / 2, l.Y, l.Z);
+                    }
+                }
+                else
+                {
+                    header.IfLocation = new IfLocation(l.X + d.XDim / 2, l.Y, l.Z);
+                }
+
+
                 header.IfDimension = new IfDimension(d.XDim, dim.YDim, d.ZDim / 2);
+                header.IfModel = WallPolygon.IfWall.IfModel;
+                header.LocalPlacement = region.LocalPlacement;
                 header.New();
                 Headers.Add(header);
                 header.IfMaterial = IfMaterial.Setup.Get<IfMaterial>("Header");
                 header.IfMaterial.AttatchTo(header);
-                header.IfModel = WallPolygon.IfWall.IfModel;
 
             }
 
@@ -442,7 +465,6 @@ namespace Bim.Application.IRCWood.Physical
             SetTopPlate();
             SetBottomPlate();
             SetLeftRegion();
-           
             SetTopRegion();
         }
 

@@ -109,7 +109,7 @@ namespace Bim.Domain.Polygon
                                 Openings[0].IfLocation.X,
                                 0,
                                 Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top);
-
+                            drt.LocalPlacement = Openings[0].LocalPlacement;
                             Regions.Add(drt);
 
                             break;
@@ -120,14 +120,14 @@ namespace Bim.Domain.Polygon
                                 IfWall.IfDimension.ZDim - (Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim),
                                 Openings[0].IfLocation.X, 0,
                                 Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top);
-
+                            wrt.LocalPlacement = Openings[0].LocalPlacement;
                             Region wrb = new Region(
                                 Openings[0].IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
                                 Openings[0].IfLocation.Z,
                                 Openings[0].IfLocation.X,
                                 0, 0, RegionLocation.Bottom);
-
+                            wrt.LocalPlacement = Openings[0].LocalPlacement;
                             Regions.Add(wrt);
                             Regions.Add(wrb);
                             break;
@@ -171,7 +171,7 @@ namespace Bim.Domain.Polygon
                             Openings[i].IfLocation.X,
                             0,
                             Openings[i].IfLocation.Z + Openings[i].IfDimension.ZDim, RegionLocation.Top);
-
+                        rt.LocalPlacement = Openings[i].LocalPlacement;
                         Regions.Add(rt);
                         if (Openings[i].OpeningType == OpeningType.Window)
                         {
@@ -181,7 +181,7 @@ namespace Bim.Domain.Polygon
                                 Openings[i].IfLocation.Z,
                                 Openings[i].IfLocation.X,
                                 0, 0, RegionLocation.Bottom);
-
+                            rb.LocalPlacement = Openings[i].LocalPlacement;
                             Regions.Add(rb);
                         }
                     }

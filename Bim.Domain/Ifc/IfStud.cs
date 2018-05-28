@@ -18,7 +18,7 @@ namespace Bim.Domain.Ifc
 
         public IfWall IfWall { get; set; }
         public IfcAxis2Placement3D RelativeAxis { get; set; }
-
+        public IfcLocalPlacement LocalPlacement { get; set; }
         #endregion
         public static Setup Setup { get; set; }
         #region Constructor
@@ -162,10 +162,13 @@ namespace Bim.Domain.Ifc
 
             ax3D.Location = origin;
             ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
-            ax3D.RefDirection.SetXYZ(1, 0, 0); //x-axis direction
+            // ax3D.RefDirection=((IfcAxis2Placement3D)IfWall.LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
             ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
-            ax3D.Axis.SetXYZ(0, 0, 1); //z-axis direction
+            ax3D.RefDirection.SetXYZ(1, 0, 0);
+            ax3D.Axis.SetXYZ(0, 0, 1);
+            // ax3D.Axis= ((IfcAxis2Placement3D)IfWall.LocalPlacement.RelativePlacement).Axis; //z-axis direction
             lp.RelativePlacement = ax3D;
+
 
             IfcElement.ObjectPlacement = lp;
             ////parameters to insert the geometry in the model

@@ -22,13 +22,13 @@ namespace Bim.Application.IRCWood.Physical
         {
             Region LR = WallPolygon.RLeft[0];
             Double RegionLength = LR.Dimension.XDim;
-           // Location L = LR.IfLocation;
+            // Location L = LR.IfLocation;
             Stud firstStud = new Stud
             {
-                //Location = L,
                 Length = LR.Dimension.ZDim
             };
             Studs.Add(firstStud);
+
         }
     }
 }

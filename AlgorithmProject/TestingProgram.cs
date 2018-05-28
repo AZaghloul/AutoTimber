@@ -26,17 +26,15 @@ namespace AlgorithmProject
             "-------------------------------------------- ".Print(ConsoleColor.White);
 
             #endregion
-
-
             
             string fileName = @"..\..\Models\ThreeWalls.ifc";
 
             IfModel model = IfModel.Open(fileName);
-           
-
+          
             Startup.Configuration(model);
             
             var a = Length.FromMeters(8);
+            
             var x = Math.Round(a.MilliMeter);
 
             model.Delete<IfcBeam>();
