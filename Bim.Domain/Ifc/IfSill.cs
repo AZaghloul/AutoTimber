@@ -133,7 +133,8 @@ namespace Bim.Domain.Ifc
             ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
             try
             {
-                ax3D.RefDirection = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
+                ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
+                ax3D.RefDirection.SetXYZ(0, 0, 0);// ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
                 ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
                 ax3D.Axis = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis; //z-axis direction
                 lp.RelativePlacement = ax3D;

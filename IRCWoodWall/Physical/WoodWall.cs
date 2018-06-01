@@ -21,11 +21,11 @@ namespace Bim.Application.IRCWood.Physical
         void SetStudsInLRegion()
         {
             Region LR = WallPolygon.RLeft[0];
-            Double RegionLength = LR.Dimension.XDim;
+            Double RegionLength = LR.IfDimension.XDim;
             // Location L = LR.IfLocation;
             Stud firstStud = new Stud
             {
-                Length = LR.Dimension.ZDim
+                Length = LR.IfDimension.ZDim
             };
             Studs.Add(firstStud);
 

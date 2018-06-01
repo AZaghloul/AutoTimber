@@ -16,22 +16,23 @@ namespace Bim.Domain.Polygon
     };
     public class Region
     {
-        public IfLocation Location { get; set; }
-        public IfDimension Dimension { get; set; }
+        public IfLocation IfLocation { get; set; }
+        public IfDimension IfDimension { get; set; }
         public RegionLocation RegionLocation { get; set; }
+        public Direction Direction { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
-        public Region(double xDim, double yDim, double height, double x, double y, double z, RegionLocation regionLocation)
+        public Region(double xDim, double yDim, double height, double x, double y, double z, RegionLocation regionLocation,Direction dir)
         {
-            Location = new IfLocation(x, y, z);
-            Dimension = new IfDimension(xDim, yDim, height);
+            IfLocation = new IfLocation(x, y, z);
+            IfDimension = new IfDimension(xDim, yDim, height);
             RegionLocation = regionLocation;
-
+            Direction = dir;
         }
 
         public Region(double xDim, double yDim, double height, double x, double y, double z)
         {
-            Location = new IfLocation(x, y, z);
-            Dimension = new IfDimension(xDim, yDim, height);
+            IfLocation = new IfLocation(x, y, z);
+            IfDimension = new IfDimension(xDim, yDim, height);
         }
         public Region(IDimension dimensions, ILocation l) : this(dimensions.XDim, dimensions.YDim, dimensions.ZDim, l.X, l.Y, l.Z)
         {
@@ -45,5 +46,32 @@ namespace Bim.Domain.Polygon
         {
 
         }
+        public Region()
+        {
+
+        }
+
+         public void Flip(Axis axis)
+        {
+            switch (axis)
+            {
+                case Axis.xAxis:
+                    IfLocation.X = IfLocation.X - IfDimension.XDim;
+                    break;
+                case Axis.yAxis:
+                    IfLocation.Y = IfLocation.Y - IfDimension.YDim;
+                    break;
+                case Axis.zAxis:
+                    IfLocation.Z = IfLocation.Z - IfDimension.ZDim;
+                    break;
+                default:
+                    IfLocation.X = IfLocation.X - IfDimension.XDim;
+                    IfLocation.Y = IfLocation.Y - IfDimension.YDim;
+                    IfLocation.Z = IfLocation.Z - IfDimension.ZDim;
+                    break;
+            }
+        }
+        
+       
     }
 }

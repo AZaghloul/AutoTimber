@@ -109,6 +109,7 @@
     <Compile Include="Ifc\IfStory.cs" />
     <Compile Include="Ifc\IfStud.cs" />
     <Compile Include="Ifc\IfUnit.cs" />
+    <Compile Include="Ifc\IfVector.cs" />
     <Compile Include="Ifc\IfWall.cs" />
     <Compile Include="Ifc\IfWindow.cs" />
     <Compile Include="Ifc\Version.cs" />

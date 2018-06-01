@@ -9,6 +9,7 @@ using Bim.Domain.Configuration;
 using Bim.Common.Measures;
 using Bim.Application.IRCWood.Physical;
 using Bim.Common.Geometery;
+using Bim.Domain;
 
 namespace AlgorithmProject
 {
@@ -27,19 +28,15 @@ namespace AlgorithmProject
 
             #endregion
             
-            string fileName = @"..\..\Models\ThreeWalls.ifc";
+            string fileName = @"..\..\Models\wall-meter-test.ifc";
 
             IfModel model = IfModel.Open(fileName);
           
             Startup.Configuration(model);
-            
-            var a = Length.FromMeters(8);
-            
-            var x = Math.Round(a.MilliMeter);
 
             model.Delete<IfcBeam>();
             model.Delete<IfcColumn>();
-
+            var doors=model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door);
             WoodFrame wf = new WoodFrame(model);
             wf.FrameWalls();
             //model.Delete<IfcWall>();

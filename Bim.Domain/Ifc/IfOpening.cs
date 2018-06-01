@@ -10,14 +10,28 @@ using Xbim.Ifc4.ProductExtension;
 
 namespace Bim.Domain.Ifc
 {
+
+    public enum Direction
+    {
+        Positive,
+        Negative
+    }
+    public enum Axis
+    {
+        xAxis,
+        yAxis,
+        zAxis,
+        Other
+            
+    }
     public class IfOpening : IfElement
     {
 
         public IfWall IfWall { get; set; }
         public OpeningType OpeningType { get; set; }
-        public IIfcRelVoidsElement IfcOpening { get; set; }
-        public IElement WallOrSlap { get; set; }
+        public Direction Direction { get; set; }
 
+        public IIfcRelVoidsElement IfcOpening { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
         public IfOpening()
         {
@@ -30,6 +44,38 @@ namespace Bim.Domain.Ifc
             IfcOpening = ifcOpening;
             IfModel.Instances.Add(this);
         }
+        public IfOpening( IfOpening opening)
+        {
+            IfWall = opening.IfWall;
+            OpeningType = opening.OpeningType;
+            Direction = opening.Direction;
+            IfcOpening = opening.IfcOpening;
+            LocalPlacement = opening.LocalPlacement;
+            IfLocation = new IfLocation( opening.IfLocation);
+            IfDimension = new IfDimension( opening.IfDimension);
+        }
+
+        public void Flip(Axis axis)
+        {
+            switch (axis)
+            {
+                case Axis.xAxis:
+                    IfLocation.X = IfLocation.X - IfDimension.XDim;
+                    break;
+                case Axis.yAxis:
+                    IfLocation.Y = IfLocation.Y - IfDimension.YDim;
+                    break;
+                case Axis.zAxis:
+                    IfLocation.Z = IfLocation.Z - IfDimension.ZDim;
+                    break;
+                default:
+                    IfLocation.X = IfLocation.X - IfDimension.XDim;
+                    IfLocation.Y = IfLocation.Y - IfDimension.YDim;
+                    IfLocation.Z = IfLocation.Z - IfDimension.ZDim;
+                    break;
+            }
+        }
+
 
         public static List<IfOpening> GetOpenings(IfWall ifWall)
         {
@@ -37,24 +83,30 @@ namespace Bim.Domain.Ifc
             IfOpening ifopening;
             foreach (var opening in ifWall.IfcWall.HasOpenings)
             {
+
                 ifopening = new IfOpening(ifWall, opening);
 
                 var opnng = (IIfcAxis2Placement3D)((IIfcLocalPlacement)opening
                     .RelatedOpeningElement.ObjectPlacement).RelativePlacement;
 
-                var oLocation = opnng.Location;
+                var oLocation = opnng.Location;//get opening location point
 
                 var recProfile = opening.RelatedOpeningElement.Representation.Representations.SelectMany(a => a.Items)
                     .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
-                    .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+                    .OfType<IIfcRectangleProfileDef>().FirstOrDefault(); //get rec profile
 
                 var recDepth = opening.RelatedOpeningElement.Representation.
                     Representations.SelectMany(a => a.Items).
                     OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
-
+                //get filling elment doors or windows
                 var voids = ((IfcOpeningElement)opening.RelatedOpeningElement)
                     .HasFillings.FirstOrDefault();
-                ifopening.LocalPlacement = (IIfcLocalPlacement)voids.RelatedBuildingElement.ObjectPlacement;
+
+                var voidsPlacement = (IfcLocalPlacement)voids.RelatedBuildingElement.ObjectPlacement;
+                ifopening.LocalPlacement = voidsPlacement;
+
+                var dir = ((IIfcAxis2Placement3D)voidsPlacement.RelativePlacement).RefDirection;
+
                 string filling = " ";
                 if (voids != null)
                 {
@@ -74,8 +126,8 @@ namespace Bim.Domain.Ifc
                 {
                     case "IfcDoor":
                         ifopening.OpeningType = OpeningType.Door;
-                        ifopening.IfDimension = new IfDimension(recProfile.XDim, recDepth, recProfile.YDim );
-                        
+                        ifopening.IfDimension = new IfDimension(recProfile.XDim, recDepth, recProfile.YDim);
+
                         break;
                     case "IfcWindow":
                         ifopening.OpeningType = OpeningType.Window;
@@ -87,7 +139,15 @@ namespace Bim.Domain.Ifc
 
                 }
 
-
+                if (dir!=null &&dir.X < 0)
+                {
+                    ifopening.Direction = Direction.Negative;
+                    //ifopening.Flip(Axis.xAxis);
+                }
+                else
+                {
+                    ifopening.Direction = Direction.Positive;
+                }
 
                 openings.Add(ifopening);
             }
