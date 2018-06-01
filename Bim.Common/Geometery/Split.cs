@@ -20,6 +20,7 @@ namespace Bim.Common.Geometery
         {
             // double full
             List<double> res = new List<double>();
+            //<<(1)
             double crntDistance = start;
             res.Add(crntDistance);
 
@@ -33,8 +34,17 @@ namespace Bim.Common.Geometery
             {
                 res.Add(crntDistance + distance - crntDistance);
             }
+            //>>
             return res;
 
+            //(1)
+            //double length = distance - start;
+            //int n = (int)(length / maxDistance);
+            //double spacing = length / n;
+            //for (int i = 0; i < n; i++)
+            //{
+            //    res.Add(start + i * spacing);
+            //}
         }
 
 
