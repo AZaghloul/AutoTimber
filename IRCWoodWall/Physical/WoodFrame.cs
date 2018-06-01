@@ -30,7 +30,7 @@ namespace Bim.Application.IRCWood.Physical
         {
             
             var studTable =  StudTable.Load(@"..\..\Tables\StudSpacingTable.txt");
-          
+            Table502_3_1 JoistTable = Table502_3_1.Load(@"..\..\..\IRCWoodWall\Tables\table502.3.1(1).txt");
 
             var walls = IfModel.Instances.OfType<IfWall>().ToList();
             var polygons = WallPolygon.GetPolygons(walls);
