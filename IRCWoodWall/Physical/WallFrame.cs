@@ -86,7 +86,7 @@ namespace Bim.Application.IRCWood.Physical
                         distance = region.IfDimension.XDim;
                         break;
                     case UnitName.FOOT:
-                        distance = Length.FromInches(region.IfDimension.XDim).Feet;
+                        distance = region.IfDimension.XDim;
                         break;
                     case UnitName.METRE:
                         distance = region.IfDimension.XDim;
@@ -134,7 +134,7 @@ namespace Bim.Application.IRCWood.Physical
                         distance = region.IfDimension.XDim;
                         break;
                     case UnitName.FOOT:
-                        distance = Length.FromInches(region.IfDimension.XDim).Feet;
+                        distance = region.IfDimension.XDim;
                         break;
                     case UnitName.METRE:
                         distance = region.IfDimension.XDim;
@@ -185,7 +185,7 @@ namespace Bim.Application.IRCWood.Physical
                         distance = region.IfDimension.XDim;
                         break;
                     case UnitName.FOOT:
-                        distance = Length.FromInches(region.IfDimension.XDim).Feet;
+                        distance = region.IfDimension.XDim;
                         break;
                     case UnitName.METRE:
                         distance = region.IfDimension.XDim;
@@ -239,7 +239,7 @@ namespace Bim.Application.IRCWood.Physical
                         distance = region.IfDimension.XDim;
                         break;
                     case UnitName.FOOT:
-                        distance = Length.FromInches(region.IfDimension.XDim).Feet;
+                        distance = region.IfDimension.XDim;
                         break;
                     case UnitName.METRE:
                         distance = region.IfDimension.XDim;
@@ -287,7 +287,7 @@ namespace Bim.Application.IRCWood.Physical
                         distance = region.IfDimension.XDim;
                         break;
                     case UnitName.FOOT:
-                        distance = Length.FromInches(region.IfDimension.XDim).Feet;
+                        distance = region.IfDimension.XDim;
                         break;
                     case UnitName.METRE:
                         distance = region.IfDimension.XDim;

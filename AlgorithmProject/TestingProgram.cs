@@ -10,6 +10,7 @@ using Bim.Common.Measures;
 using Bim.Application.IRCWood.Physical;
 using Bim.Common.Geometery;
 using Bim.Domain;
+using Bim.Application.IRCWood.IRC;
 
 namespace AlgorithmProject
 {
@@ -28,10 +29,13 @@ namespace AlgorithmProject
 
             #endregion
             
-            string fileName = @"..\..\Models\wall-meter-test.ifc";
+            string fileName = @"..\..\Models\wall-meter-2floor.ifc";
 
             IfModel model = IfModel.Open(fileName);
-          
+
+            StudTable s = StudTable.Load (@"..\..\Tables\StudSpacingTable.txt");
+            
+           var spaces= s.GetSpace(1, 10, new IfDimension(2, 6, 2));
             Startup.Configuration(model);
 
             model.Delete<IfcBeam>();

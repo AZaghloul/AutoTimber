@@ -11,8 +11,9 @@ namespace Bim.Domain.Ifc
 
     public class IfWall : IfElement
     {
+        public static Option DetectExternalWalls { get; set; } = Option.Auto;
         #region wall Object Properties
-       
+
         public IfStory Story { get; set; }
         public List<IDoor> Doors { get; set; }
         public List<IWindow> Windows { get; set; }
@@ -21,6 +22,7 @@ namespace Bim.Domain.Ifc
         public IIfcWallStandardCase IfcWall { get; set; }
         public IIfcAxis2Placement3D WallAxis { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
+        public Direction Direction { get; set; }
         #endregion
 
         #region Constructors
@@ -28,7 +30,7 @@ namespace Bim.Domain.Ifc
         {
 
         }
-        public IfWall(IfModel ifModel,IIfcWallStandardCase ifcWall)
+        public IfWall(IfModel ifModel, IIfcWallStandardCase ifcWall)
         {
             IfcWall = ifcWall;
             IfModel = ifModel;
@@ -47,8 +49,10 @@ namespace Bim.Domain.Ifc
                  .FirstOrDefault()
                  .RelatedElements.OfType<IIfcWallStandardCase>();
 
+
             foreach (var wall in walls)
             {
+                var dir = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)wall.ObjectPlacement).RelativePlacement).RefDirection;
                 var recD = wall.Representation.Representations
                                 .SelectMany(a => a.Items)
                                 .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
@@ -62,9 +66,22 @@ namespace Bim.Domain.Ifc
                 //get the wall x,y,z
                 if (recD != null)
                 {
-                    IfWall crntWall = new IfWall(ifStory.IfModel,wall);
-                    crntWall.Story = ifStory;
-                    crntWall.IfModel = ifStory.IfModel;
+                    IfWall crntWall = new IfWall(ifStory.IfModel, wall)
+                    {
+                        Story = ifStory,
+                        IfModel = ifStory.IfModel
+                    };
+
+                    if (dir != null && dir.X < 0)
+                    {
+                        crntWall.Direction = Direction.Negative;
+                    }
+                    else
+                    {
+                        crntWall.Direction = Direction.Positive;
+                    }
+
+
                     wallsList.Add(crntWall);
                 }
             }
@@ -72,6 +89,10 @@ namespace Bim.Domain.Ifc
             return wallsList;
         }
 
+        public static void SetExternalWalls(List<IfWall> walls)
+        {
+
+        }
         #endregion
 
         #region Helper Private Functions
@@ -84,25 +105,18 @@ namespace Bim.Domain.Ifc
             CheckExternal();
             GetDimension();
             if (Openings != null) return;
-            
+
             Openings = IfOpening.GetOpenings(this);
         }
 
         private void CheckExternal()
         {
-            var res = (bool)IfcWall.IsDefinedBy
-                    .Where(r => r.RelatingPropertyDefinition is IIfcPropertySet)
-                    .SelectMany(r => ((IIfcPropertySet)r.RelatingPropertyDefinition).HasProperties)
-                    .OfType<IIfcPropertySingleValue>().Where(a => a.Name == "IsExternal").Select(a => a.NominalValue).FirstOrDefault().Value;
-            if (res == true)
-            {
-                IsExternal = true;
-            }
-            else
-            {
-                IsExternal = false;
-            }
-
+            IsExternal = (bool)IfcWall.IsDefinedBy
+                   .Where(r => r.RelatingPropertyDefinition is IIfcPropertySet)
+                   .SelectMany(r => ((IIfcPropertySet)r.RelatingPropertyDefinition).HasProperties)
+                   .OfType<IIfcPropertySingleValue>().
+                   Where(a => a.Name == "IsExternal").
+                   Select(a => a.NominalValue).FirstOrDefault().Value;
         }
         private void GetLocation()
         {
@@ -124,13 +138,29 @@ namespace Bim.Domain.Ifc
                          .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
                          .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
 
-            var depth = IfcWall.Representation.Representations
-                         .SelectMany(a => a.Items)
-                         .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth) ??
-                        IfcWall.Representation.Representations
-                            .SelectMany(a => a.Items)
-                            .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
-                            .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
+            var depth =
+                 IfcWall.Representation.Representations
+                        .SelectMany(a => a.Items)
+                        .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
+
+            if (depth == 0)
+            {
+                try
+                {
+                    depth = ((IIfcExtrudedAreaSolid)IfcWall.Representation.Representations
+                 .SelectMany(a => a.Items)
+                 .OfType<IIfcBooleanClippingResult>().
+                 Select(a => a.FirstOperand).FirstOrDefault()).Depth;
+                }
+                catch (System.Exception)
+                {
+
+
+                }
+
+
+            }
+
 
 
             //var recD = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
@@ -143,8 +173,12 @@ namespace Bim.Domain.Ifc
             //using the Wall Class;
             if (recD != null && depth != null)
             {
-                IfDimension= new IfDimension((float)recD.XDim, (float)recD.YDim, (float)depth.FirstOrDefault());
+                IfDimension = new IfDimension(recD.XDim, recD.YDim, depth);
             }
+        }
+        private void GetDirection()
+        {
+
         }
         #endregion
 
