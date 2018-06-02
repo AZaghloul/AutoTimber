@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Common", "Bim.Common\Bi
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Application.IRCWood", "IRCWoodWall\Bim.Application.IRCWood.csproj", "{9AEC83FB-AD0F-46CB-8B09-EA2E8073F4C3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCWoodTest", "IRCWoodTest\IRCWoodTest.csproj", "{29CF04D7-B7AD-49A7-A124-814BEDAD1794}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +69,10 @@ Global
 		{9AEC83FB-AD0F-46CB-8B09-EA2E8073F4C3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9AEC83FB-AD0F-46CB-8B09-EA2E8073F4C3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9AEC83FB-AD0F-46CB-8B09-EA2E8073F4C3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
