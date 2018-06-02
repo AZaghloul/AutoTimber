@@ -15,12 +15,11 @@ namespace Bim.Domain.Configuration
                 {"Header",new IfMaterial(ifModel,new IfColor(0,255,0)) },
                 {"TopPlate",new IfMaterial(ifModel,new IfColor(255,102,255)) },
                 {"BottomPlate",new IfMaterial(ifModel,new IfColor(0, 0, 255)) },
-                {"Stud",new IfMaterial(ifModel,new IfColor(255, 255, 0)) },
-                {"Sill",new IfMaterial(ifModel,new IfColor(0, 255, 255)) },
-                {"Plate",new IfMaterial(ifModel,new IfColor(153, 102, 0)) },
                 {"RLeft",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.DodgerBlue)) },
                 {"RRight",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.DarkGolden)) },
                 {"RBetween",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.Orange)) },
+                {"TopStud",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.LightSlateGrey)) },
+                {"BottomStud",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.DeepSkyBlue)) },
             };
 
             IfStud.Setup = new Setup()

@@ -85,15 +85,16 @@ namespace Bim.Domain.Polygon
                 if (Openings.Count == 1)
                 {
                     Region drr = new Region(
-                        IfWall.IfDimension.XDim - ((Openings[0].IfLocation.X) + Openings[0].IfDimension.XDim),
+                       Math.Abs( IfWall.IfDimension.XDim - ((Openings[0].IfLocation.X) + Openings[0].IfDimension.XDim)),
                         IfWall.IfDimension.YDim,
                         IfWall.IfDimension.ZDim,
-                        (Openings[0].IfLocation.X) + Openings[0].IfDimension.XDim, 0, 0, RegionLocation.Right);
+                        Math.Abs((Openings[0].IfLocation.X) + Openings[0].IfDimension.XDim), 0, 0, RegionLocation.Right, Openings[0].Direction);
+
 
                     Region drl = new Region(
                         Openings[0].IfLocation.X,
                         IfWall.IfDimension.YDim,
-                        IfWall.IfDimension.ZDim, 0, 0, 0, RegionLocation.Left);
+                        IfWall.IfDimension.ZDim, 0, 0, 0, RegionLocation.Left,Openings[0].Direction);
 
                     Regions.Add(drr);
                     Regions.Add(drl);
@@ -105,10 +106,10 @@ namespace Bim.Domain.Polygon
                             Region drt = new Region(
                                 Openings[0].IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
-                                IfWall.IfDimension.ZDim - (Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim),
+                               Math.Abs(IfWall.IfDimension.ZDim - (Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim)),
                                 Openings[0].IfLocation.X,
                                 0,
-                                Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top);
+                                Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top,Openings[0].Direction);
                             drt.LocalPlacement = Openings[0].LocalPlacement;
                             Regions.Add(drt);
 
@@ -119,14 +120,14 @@ namespace Bim.Domain.Polygon
                                 IfWall.IfDimension.YDim,
                                 IfWall.IfDimension.ZDim - (Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim),
                                 Openings[0].IfLocation.X, 0,
-                                Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top);
+                                Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top, Openings[0].Direction);
                             wrt.LocalPlacement = Openings[0].LocalPlacement;
                             Region wrb = new Region(
                                 Openings[0].IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
                                 Openings[0].IfLocation.Z,
                                 Openings[0].IfLocation.X,
-                                0, 0, RegionLocation.Bottom);
+                                0, 0, RegionLocation.Bottom,Openings[0].Direction);
                             wrt.LocalPlacement = Openings[0].LocalPlacement;
                             Regions.Add(wrt);
                             Regions.Add(wrb);
@@ -135,53 +136,74 @@ namespace Bim.Domain.Polygon
                 }
                 else
                 {
+                    var tempOpening = new IfOpening(Openings.Last());
+                    var flippedOpenning = new List<IfOpening>();
+                    if (tempOpening.Direction==Direction.Negative)
+                    {
+                        tempOpening.Flip(Axis.xAxis);
+                    }
                     Region drr = new Region(
-                        IfWall.IfDimension.XDim - ((Openings[Openings.Count - 1].IfLocation.X) + Openings[Openings.Count - 1].IfDimension.XDim),
+                        Math.Abs(IfWall.IfDimension.XDim - ((tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim)),
                         IfWall.IfDimension.YDim,
                         IfWall.IfDimension.ZDim,
-                        (Openings[Openings.Count - 1].IfLocation.X) + Openings[Openings.Count - 1].IfDimension.XDim,
-                        0, 0, RegionLocation.Right);
+                        (tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim,
+                        0, 0, RegionLocation.Right,tempOpening.Direction);
 
                     Region drl = new Region(
                         Openings[0].IfLocation.X,
                         IfWall.IfDimension.YDim,
                         IfWall.IfDimension.ZDim,
-                        0, 0, 0, RegionLocation.Left);
+                        0, 0, 0, RegionLocation.Left,tempOpening.Direction);
 
                     Regions.Add(drr);
                     Regions.Add(drl);
 
                     for (int i = 0; i < Openings.Count - 1; i++)
                     {
+                        
+
+                        foreach (var opening in Openings)
+                        {
+                            flippedOpenning.Add(new IfOpening(opening));
+                        }
+                        foreach (var fo in flippedOpenning)
+                        {
+                            if (fo.Direction==Direction.Negative)
+                            {
+                                fo.Flip(Axis.xAxis);
+                               fo.Direction= Direction.Positive;
+                            }
+                        }
+                        Region rr = new Region();
                         Region rbetween = new Region(
-                            Openings[i + 1].IfLocation.X - (Openings[i].IfLocation.X + Openings[i].IfDimension.XDim),
+                            Math.Abs(flippedOpenning[i + 1].IfLocation.X - (flippedOpenning[i].IfLocation.X + flippedOpenning[i].IfDimension.XDim)),
                             IfWall.IfDimension.YDim,
                             IfWall.IfDimension.ZDim,
-                            Openings[i].IfLocation.X + Openings[i].IfDimension.XDim,
-                            0, 0, RegionLocation.Middle);
+                            flippedOpenning[i].IfLocation.X + flippedOpenning[i].IfDimension.XDim,
+                            0, 0, RegionLocation.Middle, flippedOpenning[i].Direction);
 
                         Regions.Add(rbetween);
                     }
-                    for (int i = 0; i < Openings.Count; i++)
+                    for (int i = 0; i < flippedOpenning.Count; i++)
                     {
                         Region rt = new Region(
-                            Openings[i].IfDimension.XDim,
+                            flippedOpenning[i].IfDimension.XDim,
                             IfWall.IfDimension.YDim,
-                            IfWall.IfDimension.ZDim - (Openings[i].IfLocation.Z + Openings[i].IfDimension.ZDim),
-                            Openings[i].IfLocation.X,
+                            IfWall.IfDimension.ZDim - (flippedOpenning[i].IfLocation.Z + flippedOpenning[i].IfDimension.ZDim),
+                            flippedOpenning[i].IfLocation.X,
                             0,
-                            Openings[i].IfLocation.Z + Openings[i].IfDimension.ZDim, RegionLocation.Top);
-                        rt.LocalPlacement = Openings[i].LocalPlacement;
+                            flippedOpenning[i].IfLocation.Z + flippedOpenning[i].IfDimension.ZDim, RegionLocation.Top, flippedOpenning[i].Direction);
+                        rt.LocalPlacement = flippedOpenning[i].LocalPlacement;
                         Regions.Add(rt);
-                        if (Openings[i].OpeningType == OpeningType.Window)
+                        if (flippedOpenning[i].OpeningType == OpeningType.Window)
                         {
                             Region rb = new Region(
-                                Openings[i].IfDimension.XDim,
+                               flippedOpenning[i].IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
-                                Openings[i].IfLocation.Z,
-                                Openings[i].IfLocation.X,
-                                0, 0, RegionLocation.Bottom);
-                            rb.LocalPlacement = Openings[i].LocalPlacement;
+                                flippedOpenning[i].IfLocation.Z,
+                                flippedOpenning[i].IfLocation.X,
+                                0, 0, RegionLocation.Bottom, flippedOpenning[i].Direction);
+                            rb.LocalPlacement = flippedOpenning[i].LocalPlacement;
                             Regions.Add(rb);
                         }
                     }

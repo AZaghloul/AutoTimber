@@ -17,6 +17,13 @@ namespace Bim.Domain.Ifc
 
 
         }
+        public IfDimension(IfDimension dimension)
+        {
+            XDim = dimension.XDim;
+            YDim = dimension.YDim;
+            ZDim = dimension.ZDim;
+
+        }
         public IfDimension(double xDim, double yDim, double zDim)
         {
             XDim = xDim;
@@ -50,6 +57,13 @@ namespace Bim.Domain.Ifc
             d.ZDim = Length.FromInches(ZDim).Feet;
 
             return d;
+        }
+
+
+        public static IfDimension operator -(IfDimension d1, IfDimension d2)
+        {
+            return new IfDimension(d1.XDim - d2.XDim, d1.YDim - d2.YDim, d1.ZDim - d2.ZDim);
+
         }
     }
 }

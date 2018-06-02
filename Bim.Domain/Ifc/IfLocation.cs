@@ -22,6 +22,12 @@ namespace Bim.Domain.Ifc
         {
 
         }
+        public IfLocation(IfLocation location)
+        {
+            X = location.X;
+            Y = location.Y;
+            Z = location.Z;
+        }
 
         public IfLocation ToMeters()
         {

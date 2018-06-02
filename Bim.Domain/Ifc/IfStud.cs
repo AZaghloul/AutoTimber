@@ -38,7 +38,7 @@ namespace Bim.Domain.Ifc
         public void New()
         {
             var ifcModel = IfWall.IfModel.IfcStore;
-           // CheckUnits();
+            // CheckUnits();
 
             using (var txn = ifcModel.BeginTransaction("New Stud"))
             {
@@ -151,65 +151,17 @@ namespace Bim.Domain.Ifc
         private void SetLocation(IfcStore ifcModel)
         {
             var origin = ifcModel.Instances.New<IfcCartesianPoint>();
-
-            /*          Set Stud Location */
-            origin.SetXYZ(IfLocation.X, IfLocation.Y, IfLocation.Z);
-
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
             var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
             /*          Set Stud Location */
+            origin.SetXYZ(IfLocation.X, IfLocation.Y, IfLocation.Z);
             lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
-
             ax3D.Location = origin;
             ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
-            // ax3D.RefDirection=((IfcAxis2Placement3D)IfWall.LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
+            ax3D.RefDirection.SetXYZ(0, 0, 0);
             ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
-            ax3D.RefDirection.SetXYZ(1, 0, 0);
             ax3D.Axis.SetXYZ(0, 0, 1);
-            // ax3D.Axis= ((IfcAxis2Placement3D)IfWall.LocalPlacement.RelativePlacement).Axis; //z-axis direction
             lp.RelativePlacement = ax3D;
-
-
-            IfcElement.ObjectPlacement = lp;
-            ////parameters to insert the geometry in the model
-            //var origin = ifcModel.Instances.New<IfcCartesianPoint>();
-            //origin.SetXYZ(IfLocation.X, IfLocation.Y, IfLocation.Z);
-            ///*          Set Stud Location */
-            //var lp = ifcModel.Instances.New<IfcLocalPlacement>();
-            //var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
-            //lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
-            ///*          Set Stud IfLocation */
-            //ax3D.Location = origin;
-            //ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
-
-            //ax3D.RefDirection.SetXYZ(1, 0, 0);//x-axis direction
-            //ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
-            //ax3D.Axis.SetXYZ(0, 0, 1); //z-axis direction
-            //                           /***         Set Stud Relative Axis  ***/
-            //if (RelativeAxis == null)
-            //{
-            //    lp.RelativePlacement = ax3D;
-            //}
-            //else
-            //{
-            //    lp.RelativePlacement = ax3D;
-            //    //  relativeAxis.IfLocation =  origin;
-            //}
-
-            //IfcElement.ObjectPlacement = lp;
-            //// linear segment as IfcPolyline with two points is required for IfcWall
-
-            ///***         Set Stud 2D coordinations  ***/
-            //var ifcPolyline = ifcModel.Instances.New<IfcPolyline>();
-            //var startPoint = ifcModel.Instances.New<IfcCartesianPoint>();
-            //startPoint.SetXY(origin.X, origin.Y);
-            //var endPoint = ifcModel.Instances.New<IfcCartesianPoint>();
-
-            ///*          Set Stud IfLocation */
-            //endPoint.SetXY(origin.X + IfDimension.XDim, origin.Y + IfDimension.YDim);
-            //ifcPolyline.Points.Add(startPoint);
-            //ifcPolyline.Points.Add(endPoint);
-
             IfcElement.ObjectPlacement = lp;
         }
         private void CheckUnits()
@@ -218,12 +170,12 @@ namespace Bim.Domain.Ifc
             switch (unit)
             {
                 case UnitName.METRE:
-                   IfDimension=  IfDimension.ToMeters();
-                   IfLocation=  IfLocation.ToMeters();
+                    IfDimension = IfDimension.ToMeters();
+                    IfLocation = IfLocation.ToMeters();
                     break;
 
                 case UnitName.MILLIMETRE:
-                   IfDimension=  IfDimension.ToMilliMeters();
+                    IfDimension = IfDimension.ToMilliMeters();
                     IfLocation = IfLocation.ToMilliMeters();
                     break;
 
