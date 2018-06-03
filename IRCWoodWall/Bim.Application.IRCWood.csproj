@@ -84,6 +84,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\ConvexHull.cs" />
     <Compile Include="IRC\StudCell.cs" />
     <Compile Include="IRC\StudTable.cs" />
     <Compile Include="IRC\Table502.3.1.cs" />

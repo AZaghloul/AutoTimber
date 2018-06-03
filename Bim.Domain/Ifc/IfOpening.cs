@@ -11,19 +11,8 @@ using Xbim.Ifc4.ProductExtension;
 namespace Bim.Domain.Ifc
 {
 
-    public enum Direction
-    {
-        Positive,
-        Negative
-    }
-    public enum Axis
-    {
-        xAxis,
-        yAxis,
-        zAxis,
-        Other
-            
-    }
+   
+   
     public class IfOpening : IfElement
     {
 

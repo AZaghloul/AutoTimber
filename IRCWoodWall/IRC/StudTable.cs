@@ -38,8 +38,11 @@ namespace Bim.Application.IRCWood.IRC
             return Cells.Where(e =>
              {
 
-                 return e.Floor == floor && e.Height >= height &&
-                e.Dimension.XDim == dimension.XDim && e.Dimension.YDim == dimension.YDim;
+                 return
+                 e.Floor == floor &&
+                 e.Height >= height &&
+                e.Dimension.XDim == dimension.XDim &&
+                e.Dimension.YDim == dimension.YDim;
 
              }).ToList();
 
