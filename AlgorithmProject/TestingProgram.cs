@@ -28,23 +28,19 @@ namespace AlgorithmProject
             "-------------------------------------------- ".Print(ConsoleColor.White);
 
             #endregion
+          var d=  Split.Equal(13, .65);
             
             string fileName = @"..\..\Models\FramingExample.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
 
             IfModel model = IfModel.Open(fileName);
-
-            StudTable s = StudTable.Load (@"..\..\Tables\StudSpacingTable.txt");
-            
-           var spaces= s.GetSpace(1, 10, new IfDimension(2, 6, 2));
             Startup.Configuration(model);
-
             model.Delete<IfcBeam>();
             model.Delete<IfcColumn>();
             var doors=model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door);
             WoodFrame wf = new WoodFrame(model);
             wf.FrameWalls();
-            //model.Delete<IfcWall>();
+            model.Delete<IfcWall>();
             model.Save(saveName);
             OpenWindow(fileName);
             OpenWindow(saveName);
@@ -66,7 +62,6 @@ namespace AlgorithmProject
                 $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                 i++;
             }
-
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Done!");
