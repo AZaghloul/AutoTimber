@@ -29,7 +29,8 @@ namespace AlgorithmProject
 
             #endregion
             
-            string fileName = @"..\..\Models\wall-meter-2floor.ifc";
+            string fileName = @"..\..\Models\FramingExample.ifc";
+            string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
 
             IfModel model = IfModel.Open(fileName);
 
@@ -44,8 +45,9 @@ namespace AlgorithmProject
             WoodFrame wf = new WoodFrame(model);
             wf.FrameWalls();
             //model.Delete<IfcWall>();
-            model.Save(fileName);
+            model.Save(saveName);
             OpenWindow(fileName);
+            OpenWindow(saveName);
 
             List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
             $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);

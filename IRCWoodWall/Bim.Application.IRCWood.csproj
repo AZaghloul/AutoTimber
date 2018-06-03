@@ -103,9 +103,6 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
-    <Content Include="Tables\table502.3.1%281%29.txt">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bim.Application\Bim.Application.csproj">
@@ -123,6 +120,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Tables\StudSpacingTable.txt" />
+    <Content Include="Tables\table502.3.1%281%29.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
