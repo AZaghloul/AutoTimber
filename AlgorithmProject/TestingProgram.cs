@@ -39,7 +39,7 @@ namespace AlgorithmProject
             var doors=model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door);
             WoodFrame wf = new WoodFrame(model);
             wf.FrameWalls();
-            //model.Delete<IfcWall>();
+            model.Delete<IfcWall>();
             model.Save(fileName);
             OpenWindow(fileName);
 
@@ -60,7 +60,6 @@ namespace AlgorithmProject
                 $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                 i++;
             }
-
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Done!");
