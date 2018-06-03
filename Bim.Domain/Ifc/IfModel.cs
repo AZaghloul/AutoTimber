@@ -104,9 +104,10 @@ namespace Bim.Domain.Ifc
         #region Helper Function
         private void Intialize()
         {
+            Version = new IfVersion(this);
             if (IfBuildings != null) return; //check if there is already buildings return
             IfBuildings = IfBuilding.GetBuildings(this);
-            Version = new IfVersion(this);
+            
             IfUnit = new IfUnit(this);
         }
 
