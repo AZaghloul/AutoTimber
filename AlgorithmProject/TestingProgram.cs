@@ -28,22 +28,17 @@ namespace AlgorithmProject
             "-------------------------------------------- ".Print(ConsoleColor.White);
 
             #endregion
+          var d=  Split.Equal(13, .65);
             
-            string fileName = @"..\..\Models\wall-meter-2floor.ifc";
-
+            string fileName = @"..\..\Models\home-2floor-ft.ifc";
             IfModel model = IfModel.Open(fileName);
-
-            StudTable s = StudTable.Load (@"..\..\Tables\StudSpacingTable.txt");
-            
-           var spaces= s.GetSpace(1, 10, new IfDimension(2, 6, 2));
             Startup.Configuration(model);
-
             model.Delete<IfcBeam>();
             model.Delete<IfcColumn>();
             var doors=model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door);
             WoodFrame wf = new WoodFrame(model);
             wf.FrameWalls();
-            //model.Delete<IfcWall>();
+           // model.Delete<IfcWall>();
             model.Save(fileName);
             OpenWindow(fileName);
 
