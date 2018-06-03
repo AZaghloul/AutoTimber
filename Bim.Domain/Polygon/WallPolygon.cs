@@ -75,26 +75,44 @@ namespace Bim.Domain.Polygon
         {
             if (Openings.Count == 0)
             {
-                IsOpen = false;
+                var reg = new Region()
+                {
+                    IfDimension = new IfDimension(IfWall.IfDimension),
+                    IfLocation = new IfLocation(),
+                    RegionLocation = RegionLocation.Left,
+                    Direction = IfWall.Direction
+
+                };
+                RLeft.Add(reg);
+                Regions.Add(reg);
             }
             else
             {
                 IsOpen = true;
-                List<IfOpening> SortedOpens = Openings.OrderBy(open => open.IfLocation.X).ToList();
+                Openings = Openings.OrderBy(open => open.IfLocation.X).ToList();
 
+
+              
                 if (Openings.Count == 1)
                 {
+                    var tempOpening = new IfOpening(Openings[0]);
+                    if (tempOpening.Direction == Direction.Negative)
+                    {
+                        tempOpening.Flip(Axis.xAxis);
+                        tempOpening.Direction = Direction.Positive;
+                    }
+
                     Region drr = new Region(
-                       Math.Abs( IfWall.IfDimension.XDim - ((Openings[0].IfLocation.X) + Openings[0].IfDimension.XDim)),
+                       Math.Abs( IfWall.IfDimension.XDim - ((tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim)),
                         IfWall.IfDimension.YDim,
                         IfWall.IfDimension.ZDim,
-                        Math.Abs((Openings[0].IfLocation.X) + Openings[0].IfDimension.XDim), 0, 0, RegionLocation.Right, Openings[0].Direction);
+                        Math.Abs((tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim), 0, 0, RegionLocation.Right, tempOpening.Direction);
 
 
                     Region drl = new Region(
-                        Openings[0].IfLocation.X,
+                        tempOpening.IfLocation.X,
                         IfWall.IfDimension.YDim,
-                        IfWall.IfDimension.ZDim, 0, 0, 0, RegionLocation.Left,Openings[0].Direction);
+                        IfWall.IfDimension.ZDim, 0, 0, 0, RegionLocation.Left, tempOpening.Direction);
 
                     Regions.Add(drr);
                     Regions.Add(drl);
@@ -104,31 +122,31 @@ namespace Bim.Domain.Polygon
 
                         case OpeningType.Door:
                             Region drt = new Region(
-                                Openings[0].IfDimension.XDim,
+                                tempOpening.IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
-                               Math.Abs(IfWall.IfDimension.ZDim - (Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim)),
-                                Openings[0].IfLocation.X,
+                               Math.Abs(IfWall.IfDimension.ZDim - (tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim)),
+                                tempOpening.IfLocation.X,
                                 0,
-                                Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top,Openings[0].Direction);
-                            drt.LocalPlacement = Openings[0].LocalPlacement;
+                                tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim, RegionLocation.Top,tempOpening.Direction);
+                            drt.LocalPlacement = tempOpening.LocalPlacement;
                             Regions.Add(drt);
 
                             break;
                         case OpeningType.Window:
                             Region wrt = new Region(
-                                Openings[0].IfDimension.XDim,
+                                tempOpening.IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
-                                IfWall.IfDimension.ZDim - (Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim),
-                                Openings[0].IfLocation.X, 0,
-                                Openings[0].IfLocation.Z + Openings[0].IfDimension.ZDim, RegionLocation.Top, Openings[0].Direction);
-                            wrt.LocalPlacement = Openings[0].LocalPlacement;
+                                IfWall.IfDimension.ZDim - (tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim),
+                                tempOpening.IfLocation.X, 0,
+                                tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim, RegionLocation.Top, tempOpening.Direction);
+                            wrt.LocalPlacement = tempOpening.LocalPlacement;
                             Region wrb = new Region(
-                                Openings[0].IfDimension.XDim,
+                                tempOpening.IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
-                                Openings[0].IfLocation.Z,
-                                Openings[0].IfLocation.X,
-                                0, 0, RegionLocation.Bottom,Openings[0].Direction);
-                            wrt.LocalPlacement = Openings[0].LocalPlacement;
+                                tempOpening.IfLocation.Z,
+                                tempOpening.IfLocation.X,
+                                0, 0, RegionLocation.Bottom,tempOpening.Direction);
+                            wrt.LocalPlacement = tempOpening.LocalPlacement;
                             Regions.Add(wrt);
                             Regions.Add(wrb);
                             break;
@@ -149,8 +167,13 @@ namespace Bim.Domain.Polygon
                         (tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim,
                         0, 0, RegionLocation.Right,tempOpening.Direction);
 
+                    tempOpening =new IfOpening( Openings[0]);
+                    if (tempOpening.Direction == Direction.Negative)
+                    {
+                        tempOpening.Flip(Axis.xAxis);
+                    }
                     Region drl = new Region(
-                        Openings[0].IfLocation.X,
+                        tempOpening.IfLocation.X,
                         IfWall.IfDimension.YDim,
                         IfWall.IfDimension.ZDim,
                         0, 0, 0, RegionLocation.Left,tempOpening.Direction);

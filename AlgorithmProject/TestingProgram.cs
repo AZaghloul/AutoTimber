@@ -10,6 +10,7 @@ using Bim.Common.Measures;
 using Bim.Application.IRCWood.Physical;
 using Bim.Common.Geometery;
 using Bim.Domain;
+using Bim.Application.IRCWood.IRC;
 
 namespace AlgorithmProject
 {
@@ -27,21 +28,22 @@ namespace AlgorithmProject
             "-------------------------------------------- ".Print(ConsoleColor.White);
 
             #endregion
+          var d=  Split.Equal(13, .65);
             
-            string fileName = @"..\..\Models\wall-meter-test.ifc";
+            string fileName = @"..\..\Models\FramingExample.ifc";
+            string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
 
             IfModel model = IfModel.Open(fileName);
-          
             Startup.Configuration(model);
-
             model.Delete<IfcBeam>();
             model.Delete<IfcColumn>();
             var doors=model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door);
             WoodFrame wf = new WoodFrame(model);
             wf.FrameWalls();
-            //model.Delete<IfcWall>();
-            model.Save(fileName);
+            model.Delete<IfcWall>();
+            model.Save(saveName);
             OpenWindow(fileName);
+            OpenWindow(saveName);
 
             List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
             $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
@@ -60,7 +62,6 @@ namespace AlgorithmProject
                 $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                 i++;
             }
-
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;
             Console.WriteLine("Done!");

@@ -90,6 +90,9 @@
     <Compile Include="Configuration\General\Interfaces\IProject.cs" />
     <Compile Include="Configuration\General\Interfaces\IStory.cs" />
     <Compile Include="Configuration\General\Interfaces\IVersion.cs" />
+    <Compile Include="Ifc\Enums\AxisEnum.cs" />
+    <Compile Include="Ifc\Enums\DirectionEnum.cs" />
+    <Compile Include="Ifc\Enums\OptionEnum.cs" />
     <Compile Include="Ifc\IfBuilding.cs" />
     <Compile Include="Ifc\IfColor.cs" />
     <Compile Include="Ifc\IfDimensions.cs" />

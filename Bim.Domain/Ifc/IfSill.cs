@@ -49,9 +49,8 @@ namespace Bim.Domain.Ifc
                 SetLocation(model);
                 SetShape(model);
 
-                var building = (IfcBuilding)IfWall.IfModel
-                    .IfBuildings.FirstOrDefault().IfcBuilding;
-                building.AddElement(IfcElement);
+                var story = IfWall.IfcWall.ContainedInStructure.FirstOrDefault().RelatedElements;
+                story.Add(IfcElement);
                 txn.Commit();
             }
         }
