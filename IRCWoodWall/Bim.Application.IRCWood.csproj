@@ -87,10 +87,13 @@
     <Compile Include="IRC\StudCell.cs" />
     <Compile Include="IRC\StudTable.cs" />
     <Compile Include="IRC\Table502.3.1.cs" />
+    <Compile Include="IRC\Table502.5.cs" />
     <Compile Include="IRC\TableCell502.3.1.cs" />
+    <Compile Include="IRC\TableCell502.5.cs" />
     <Compile Include="Physical\Blank.cs" />
     <Compile Include="Physical\FloorFrame.cs" />
     <Compile Include="Physical\FloorPolygon.cs" />
+    <Compile Include="Physical\Joist.cs" />
     <Compile Include="Physical\Plate.cs" />
     <Compile Include="Physical\WallFrame.cs" />
     <Compile Include="Physical\WoodWall.cs" />
@@ -107,6 +110,8 @@
     </Content>
     <None Include="Tables\table502.3.1%281%29.csv" />
     <None Include="Tables\table502.3.1%282%29.csv" />
+    <None Include="Tables\table502.5%282%29.csv" />
+    <None Include="Tables\table502.5%281%29.csv" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bim.Application\Bim.Application.csproj">

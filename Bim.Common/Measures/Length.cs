@@ -7,6 +7,16 @@ using static System.Math;
 
 namespace Bim.Common.Measures
 {
+    public struct FeetAndInches
+    {
+        public double Feet { get; set; }
+        public double Inches { get; set; }
+        public FeetAndInches(double feet, double inches)
+        {
+            Feet = feet;
+            Inches = inches;
+        }
+    }
     public struct Length
     {
         private double _metricValue;
@@ -14,18 +24,19 @@ namespace Bim.Common.Measures
         public double Meter { get; set; }
         public double MilliMeter { get; set; }
         public double Feet { get; set; }
+        public FeetAndInches FeetAndInches { get; set; }
         public double Inches { get; set; }
         public double Value { get => _initialValue; }
-        public static int RoundValue { get; set; } =4;
+        public static int RoundValue { get; set; } = 4;
 
         public static Length FromMeters(double value)
         {
-            return new Length(value , value);
+            return new Length(value, value);
 
         }
         public static Length FromMilliMeters(double value)
         {
-            return new Length(value /1000, value);
+            return new Length(value / 1000, value);
 
         }
         public static Length FromInches(double value)
@@ -37,6 +48,11 @@ namespace Bim.Common.Measures
         {
             return new Length(value * 0.3048, value);
         }
+        public static Length FromFeetAndInches(double Feet, double Inch)
+        {
+            return new Length(Feet * 0.3048 + Inch * 0.0254, Feet * 12 + Inch);
+        }
+
         private Length(double metricValue, double ivalue)
         {
             _metricValue = metricValue;
@@ -45,6 +61,7 @@ namespace Bim.Common.Measures
             MilliMeter = Round(_metricValue * 1000, RoundValue);
             Feet = Round(_metricValue * 3.28084, RoundValue);
             Inches = Round(_metricValue * 39.3701, RoundValue);
+            FeetAndInches = new FeetAndInches((int)(metricValue * 3.28084), Round(((metricValue * 3.28084 - (int)(metricValue * 3.28084)) * 12), RoundValue));
         }
 
     }

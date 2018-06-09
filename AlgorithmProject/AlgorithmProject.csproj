@@ -106,7 +106,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="bin\Debug\AlgorithmProject.exe.config" />
     <None Include="bin\Debug\model.ifc" />
     <None Include="bin\Debug\wall-stud.ifc" />
     <None Include="bin\Debug\wall-stud2.ifc" />
@@ -138,8 +137,6 @@
     <Folder Include="Logs\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="bin\Debug\AlgorithmProject.exe" />
-    <Content Include="bin\Debug\AlgorithmProject.pdb" />
     <Content Include="bin\Debug\BIMSpace.dll" />
     <Content Include="bin\Debug\BIMSpace.pdb" />
     <Content Include="bin\Debug\Esent.Interop.dll" />

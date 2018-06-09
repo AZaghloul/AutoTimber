@@ -4,20 +4,36 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bim.Application.IRCWood.Physical;
 using TableCell = Bim.Application.IRCWood.IRC.TableCell502_3_1;
 using Table = Bim.Application.IRCWood.IRC.Table502_3_1;
+using Bim.Domain.Ifc;
+using Bim.Common.Measures;
 
 namespace Bim.Application.IRCWood.IRC
 {
     public class Table502_3_1
     {
         public List<TableCell> Cells { get; set; }
-
-
+        public Table502_3_1()
+        {
+            Cells = new List<TableCell>();
+        }
+        public List<TableCell> GetCells(WoodType WT, WoodGrade WG, double DeadLoadPsf, double SpanInInches, double SectionDepth)
+        {
+            return Cells.Where(e =>
+                e.WoodGrade == WG &&
+                e.WoodType == WT &&
+                e.DeadLoadPsF >= DeadLoadPsf &&
+                e.SpanToInch > SpanInInches &&
+                e.Section.Depth >= SectionDepth)
+                .OrderBy(e => e.Section.Depth)
+                .OrderBy(e => e.SpanToInch)
+                .ToList();
+        }
         public static Table Load(string filePath)
         {
             var table = new Table();
-            table.Cells = new List<TableCell>();
             string[] file = File.ReadAllLines(filePath).Where(e => e != ",,,,,,,,").ToArray();
 
             string[] Keys = file[0].Split(new char[] { ',', ';' }, StringSplitOptions.RemoveEmptyEntries);
@@ -32,9 +48,11 @@ namespace Bim.Application.IRCWood.IRC
                 for (int j = 3; j < 7; j++)
                 {
                     Double space = Double.Parse(cells[i][0]);
-                    Domain.Ifc.IfDimension Dim = new Domain.Ifc.IfDimension(int.Parse(Keys[j].Split('*')[0]),
-                        int.Parse(Keys[j].Split('*')[1]),
-                        int.Parse(cells[i][j].Split('-')[0])*12 + int.Parse(cells[i][j].Split('-')[1]));
+                    TimperSection section = new TimperSection(int.Parse(Keys[j].Split('*')[0]), int.Parse(Keys[j].Split('*')[1]));
+                    Length L = Length.FromFeetAndInches(int.Parse(cells[i][j].Split('-')[0]), int.Parse(cells[i][j].Split('-')[1]));
+                    //Domain.Ifc.IfDimension Dim = new Domain.Ifc.IfDimension(int.Parse(Keys[j].Split('*')[0]),
+                    //    int.Parse(Keys[j].Split('*')[1]),
+                    //    int.Parse(cells[i][j].Split('-')[0]) * 12 + int.Parse(cells[i][j].Split('-')[1]));
                     WoodType WT = WoodType.Douglas_fir_larch;
                     WoodGrade WG = new WoodGrade();
                     int DLPsf = int.Parse(cells[i][7]);
@@ -75,17 +93,15 @@ namespace Bim.Application.IRCWood.IRC
                     table.Cells.Add(new TableCell()
                     {
                         Spacing = space,
-                        Dimension = Dim,
+                        Section = section,
+                        Span = L,
                         WoodType = WT,
                         WoodGrade = WG,
-                        AreaType = AreaType.SleepingArea,
                         DeadLoadPsF = DLPsf
                     });
                 }
             }
-
             return table;
-
         }
     }
 }
