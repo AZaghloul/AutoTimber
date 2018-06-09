@@ -19,7 +19,7 @@ namespace Bim.Domain.Ifc
         public List<IWindow> Windows { get; set; }
         public List<IfOpening> Openings { get; set; }
         public bool IsExternal { get; set; }
-        public IIfcWallStandardCase IfcWall { get; set; }
+        public IIfcWall IfcWall { get; set; }
         public IIfcAxis2Placement3D WallAxis { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
         public Direction Direction { get; set; }
@@ -30,7 +30,7 @@ namespace Bim.Domain.Ifc
         {
 
         }
-        public IfWall(IfModel ifModel, IIfcWallStandardCase ifcWall)
+        public IfWall(IfModel ifModel, IIfcWall ifcWall)
         {
             IfcWall = ifcWall;
             IfModel = ifModel;
@@ -47,7 +47,7 @@ namespace Bim.Domain.Ifc
             List<IfWall> wallsList = new List<IfWall>();
             var walls = ifStory.IfcStory.ContainsElements
                  .FirstOrDefault()
-                 .RelatedElements.OfType<IIfcWallStandardCase>();
+                 .RelatedElements.OfType<IIfcWall>();
 
 
             foreach (var wall in walls)

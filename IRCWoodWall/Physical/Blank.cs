@@ -11,6 +11,10 @@ using System.Threading.Tasks;
 
 namespace Bim.Application.IRCWood.Physical
 {
+    enum TimperSections
+    {
+        _2x3,_2x4,_2x6,_2x8,_2x10,_2x12
+    }
     public abstract class Blank
     {
         public double Length { get; set; }

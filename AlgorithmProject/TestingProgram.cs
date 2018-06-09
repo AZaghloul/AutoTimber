@@ -30,37 +30,42 @@ namespace AlgorithmProject
             #endregion
           var d=  Split.Equal(13, .65);
             
-            string fileName = @"..\..\Models\FramingExample.ifc";
+            string fileName = @"..\..\Models\ITI.Qondos.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
 
-            IfModel model = IfModel.Open(fileName);
-            Startup.Configuration(model);
-            model.Delete<IfcBeam>();
-            model.Delete<IfcColumn>();
-            var doors=model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door);
-            WoodFrame wf = new WoodFrame(model);
-            wf.FrameWalls();
-            model.Delete<IfcWall>();
-            model.Save(saveName);
-            OpenWindow(fileName);
-            OpenWindow(saveName);
+            Table502_3_1 tableSleepingArea = Table502_3_1.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.3.1(1).csv");
+            Table502_3_1 tableLivingArea = Table502_3_1.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.3.1(2).csv");
 
-            List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
-            $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
-            List<WallPolygon> wallPolygons = new List<WallPolygon>();
-            int i = 0;
-            foreach (var item in walls)
+            using (IfModel model = IfModel.Open(fileName))
             {
-                $"wall no {i}".Print(ConsoleColor.Cyan);
-                wallPolygons.Add(new WallPolygon(item));
-                $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
-                $"\t {wallPolygons.Last().Openings.Count} opens".Print(ConsoleColor.Cyan);
-                $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);
-                $"\t {wallPolygons.Last().RRight.Count} Right regions".Print(ConsoleColor.Cyan);
-                $"\t {wallPolygons.Last().RTop.Count} top regions".Print(ConsoleColor.Cyan);
-                $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
-                $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
-                i++;
+                Startup.Configuration(model);
+                model.Delete<IfcBeam>();
+                model.Delete<IfcColumn>();
+                var doors = model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door).ToList();
+                WoodFrame wf = new WoodFrame(model);
+                wf.FrameWalls();
+                //model.Delete<IfcWall>();
+                model.Save(saveName);
+                OpenWindow(fileName);
+                OpenWindow(saveName);
+
+                List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
+                $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
+                List<WallPolygon> wallPolygons = new List<WallPolygon>();
+                int i = 0;
+                foreach (var item in walls)
+                {
+                    $"wall no {i}".Print(ConsoleColor.Cyan);
+                    wallPolygons.Add(new WallPolygon(item));
+                    $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
+                    $"\t {wallPolygons.Last().Openings.Count} opens".Print(ConsoleColor.Cyan);
+                    $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);
+                    $"\t {wallPolygons.Last().RRight.Count} Right regions".Print(ConsoleColor.Cyan);
+                    $"\t {wallPolygons.Last().RTop.Count} top regions".Print(ConsoleColor.Cyan);
+                    $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
+                    $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
+                    i++;
+                }
             }
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;
