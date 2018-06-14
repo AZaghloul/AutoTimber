@@ -2,6 +2,7 @@
 using System.Linq;
 using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
+using Xbim.Ifc4.SharedBldgElements;
 
 namespace Bim.Domain.Ifc
 {
@@ -19,7 +20,6 @@ namespace Bim.Domain.Ifc
         public List<IWindow> Windows { get; set; }
         public List<IfOpening> Openings { get; set; }
         public bool IsExternal { get; set; }
-        public IIfcWallStandardCase IfcWall { get; set; }
         public IIfcAxis2Placement3D WallAxis { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
         public Direction Direction { get; set; }
@@ -32,7 +32,7 @@ namespace Bim.Domain.Ifc
         }
         public IfWall(IfModel ifModel, IIfcWallStandardCase ifcWall)
         {
-            IfcWall = ifcWall;
+            base.IfcElement = (IfcWallStandardCase)ifcWall;
             IfModel = ifModel;
             IfModel.Instances.Add(this);
             Initialize();
@@ -98,9 +98,9 @@ namespace Bim.Domain.Ifc
         #region Helper Private Functions
         private void Initialize()
         {
-            Guid = IfcWall.GlobalId;
-            Name = IfcWall.Name;
-            Label = IfcWall.EntityLabel;
+            Guid = IfcElement.GlobalId;
+            Name = IfcElement.Name;
+            Label = IfcElement.EntityLabel;
             GetLocation();
             CheckExternal();
             GetDimension();
@@ -111,7 +111,7 @@ namespace Bim.Domain.Ifc
 
         private void CheckExternal()
         {
-            IsExternal = (bool)IfcWall.IsDefinedBy
+            IsExternal = (bool)IfcElement.IsDefinedBy
                    .Where(r => r.RelatingPropertyDefinition is IIfcPropertySet)
                    .SelectMany(r => ((IIfcPropertySet)r.RelatingPropertyDefinition).HasProperties)
                    .OfType<IIfcPropertySingleValue>().
@@ -120,26 +120,26 @@ namespace Bim.Domain.Ifc
         }
         private void GetLocation()
         {
-            WallAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcWall.ObjectPlacement).RelativePlacement);
+            WallAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcElement.ObjectPlacement).RelativePlacement);
             var location = WallAxis.Location;
-            LocalPlacement = (IIfcLocalPlacement)IfcWall.ObjectPlacement;
+            LocalPlacement = (IIfcLocalPlacement)IfcElement.ObjectPlacement;
             IfLocation = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
         }
         private void GetDimension()
         {
             //get the wall x,y,z
-            var recD = IfcWall.Representation.Representations
+            var recD = IfcElement.Representation.Representations
                          .SelectMany(a => a.Items)
                          .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
                          .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
-                       IfcWall.Representation.Representations
+                       IfcElement.Representation.Representations
                          .SelectMany(a => a.Items)
                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
                          .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
                          .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
 
             var depth =
-                 IfcWall.Representation.Representations
+                 IfcElement.Representation.Representations
                         .SelectMany(a => a.Items)
                         .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
 
@@ -147,7 +147,7 @@ namespace Bim.Domain.Ifc
             {
                 try
                 {
-                    depth = ((IIfcExtrudedAreaSolid)IfcWall.Representation.Representations
+                    depth = ((IIfcExtrudedAreaSolid)IfcElement.Representation.Representations
                  .SelectMany(a => a.Items)
                  .OfType<IIfcBooleanClippingResult>().
                  Select(a => a.FirstOperand).FirstOrDefault()).Depth;
@@ -168,8 +168,8 @@ namespace Bim.Domain.Ifc
             //var otherDepth = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
             //var depth = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
             //get the wall thickness
-            var thickness = IfcWall.HasAssociations.OfType<IIfcRelAssociatesMaterial>().OfType<IIfcMaterialLayerSetUsage>().Select(a => a.OffsetFromReferenceLine);//.OfType<IfcPositiveLengthMeasure>();
-            var location = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcWall.ObjectPlacement).RelativePlacement).Location;
+            var thickness = IfcElement.HasAssociations.OfType<IIfcRelAssociatesMaterial>().OfType<IIfcMaterialLayerSetUsage>().Select(a => a.OffsetFromReferenceLine);//.OfType<IfcPositiveLengthMeasure>();
+            var location = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcElement.ObjectPlacement).RelativePlacement).Location;
             //using the Wall Class;
             if (recD != null && depth != null)
             {

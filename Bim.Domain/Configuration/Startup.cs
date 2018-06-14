@@ -20,6 +20,7 @@ namespace Bim.Domain.Configuration
                 {"RBetween",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.Orange)) },
                 {"TopStud",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.LightSlateGrey)) },
                 {"BottomStud",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.DeepSkyBlue)) },
+
             };
 
             IfStud.Setup = new Setup()

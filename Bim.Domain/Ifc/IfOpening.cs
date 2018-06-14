@@ -70,7 +70,7 @@ namespace Bim.Domain.Ifc
         {
             var openings = new List<IfOpening>();
             IfOpening ifopening;
-            foreach (var opening in ifWall.IfcWall.HasOpenings)
+            foreach (var opening in ifWall.IfcElement.HasOpenings)
             {
 
                 ifopening = new IfOpening(ifWall, opening);
