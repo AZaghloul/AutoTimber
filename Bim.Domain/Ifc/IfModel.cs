@@ -5,14 +5,14 @@ using Xbim.Ifc4.Kernel;
 using Xbim.Common.Step21;
 using Xbim.Common;
 using Bim.IO;
-
+using System;
 
 namespace Bim.Domain.Ifc
 {
     /// <summary>
     /// This class imports, inzialize and Handle  the model 
     /// </summary>
-    public class IfModel : IModel
+    public class IfModel : IModel,IDisposable
     {
         private static IfcHandler ifcHandler = new IfcHandler();
         public IfcStore IfcStore { get; set; }
@@ -126,6 +126,11 @@ namespace Bim.Domain.Ifc
                 txn.Commit();
 
             }
+        }
+
+        public void Dispose()
+        {
+            ((IDisposable)IfcStore).Dispose();
         }
         #endregion
 
