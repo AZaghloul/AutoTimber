@@ -29,8 +29,8 @@ namespace Bim.Application.IRCWood.Physical
         public void FrameWalls()
         {
             
-            var studTable =  StudTable.Load(@"..\..\Tables\StudSpacingTable.txt");
-            Table502_3_1 JoistTable = Table502_3_1.Load(@"..\..\..\IRCWoodWall\Tables\table502.3.1(1).txt");
+            var studTable =  StudTable.Load();
+            Table502_3_1 JoistTable = Table502_3_1.Load(null);
 
             var walls = IfModel.Instances.OfType<IfWall>().ToList();
             var polygons = WallPolygon.GetPolygons(walls);

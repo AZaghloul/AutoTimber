@@ -5,12 +5,9 @@ using Bim.IO.Utilities;
 using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
 using Bim.Domain.Polygon;
-using Bim.Domain.Configuration;
-using Bim.Common.Measures;
 using Bim.Application.IRCWood.Physical;
-using Bim.Common.Geometery;
 using Bim.Domain;
-using Bim.Application.IRCWood.IRC;
+using Bim.Application.IRCWood.Common;
 
 namespace AlgorithmProject
 {
@@ -31,7 +28,7 @@ namespace AlgorithmProject
 
             string fileName = @"..\..\Models\home-2floor-ft.ifc";
             IfModel model = IfModel.Open(fileName);
-            Startup.Configuration(model);
+            IfStartup.Configuration(model);
             model.Delete<IfcBeam>();
             model.Delete<IfcColumn>();
             var doors = model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door);

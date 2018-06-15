@@ -9,7 +9,7 @@ using Xbim.Ifc4.PresentationAppearanceResource;
 using Xbim.Ifc4.MeasureResource;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.ProductExtension;
-using Bim.Domain.Configuration;
+using Bim.Domain.General;
 
 namespace Bim.Domain.Ifc
 {

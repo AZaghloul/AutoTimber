@@ -14,6 +14,7 @@ namespace Bim.Application.IRCWood.IRC
 {
     public class Table502_3_1
     {
+        public static string FilePath { get; set; }
         public List<TableCell> Cells { get; set; }
         public Table502_3_1()
         {
@@ -33,6 +34,9 @@ namespace Bim.Application.IRCWood.IRC
         }
         public static Table Load(string filePath)
         {
+            //get filepath from load function or use the default one
+            filePath = filePath ?? FilePath;
+            //
             var table = new Table();
             string[] file = File.ReadAllLines(filePath).Where(e => e != ",,,,,,,,").ToArray();
 

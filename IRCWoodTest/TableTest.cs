@@ -46,6 +46,7 @@ namespace Bim.Application.IRCWood.IRC
             List<TableCell502_3_1> T2cells = table2.GetCells(WoodType.Southern_pine, WoodGrade._1, 10, 20 * 12,7);
             TableCell502_3_1 tableCell1 = T2cells.FirstOrDefault();
             Assert.IsTrue(true);
+
         }
     }
 }

@@ -8,8 +8,9 @@ namespace Bim.Domain.Ifc
 {
     public enum Option
     {
+        Auto,
         Enable,
-        Disable,
-        Auto
+        Disable
+
     }
 }

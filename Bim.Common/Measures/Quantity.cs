@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Bim.Common.Measures
 {
-    class Quantity
+    public struct Quantity
     {
     }
 }

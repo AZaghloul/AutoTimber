@@ -45,7 +45,6 @@ namespace Bim.Domain.Ifc
         {
             IfcStore.SaveAs(filePath);
         }
-
         
         #endregion
 

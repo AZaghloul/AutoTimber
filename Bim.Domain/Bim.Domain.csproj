@@ -80,16 +80,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Configuration\Setup.cs" />
-    <Compile Include="Configuration\Startup.cs" />
-    <Compile Include="Configuration\General\Interfaces\IBuilding.cs" />
-    <Compile Include="Configuration\General\Interfaces\IElement.cs" />
-    <Compile Include="Configuration\General\Interfaces\ILocation.cs" />
-    <Compile Include="Configuration\General\Interfaces\IModel.cs" />
-    <Compile Include="Configuration\General\Interfaces\IObject.cs" />
-    <Compile Include="Configuration\General\Interfaces\IProject.cs" />
-    <Compile Include="Configuration\General\Interfaces\IStory.cs" />
-    <Compile Include="Configuration\General\Interfaces\IVersion.cs" />
+    <Compile Include="General\Interfaces\IBuilding.cs" />
+    <Compile Include="General\Interfaces\IElement.cs" />
+    <Compile Include="General\Interfaces\ILocation.cs" />
+    <Compile Include="General\Interfaces\IModel.cs" />
+    <Compile Include="General\Interfaces\IObject.cs" />
+    <Compile Include="General\Interfaces\IProject.cs" />
+    <Compile Include="General\Interfaces\IStory.cs" />
+    <Compile Include="General\Interfaces\IVersion.cs" />
+    <Compile Include="General\Setup.cs" />
     <Compile Include="Ifc\Enums\AxisEnum.cs" />
     <Compile Include="Ifc\Enums\DirectionEnum.cs" />
     <Compile Include="Ifc\Enums\OptionEnum.cs" />
@@ -97,11 +96,11 @@
     <Compile Include="Ifc\IfColor.cs" />
     <Compile Include="Ifc\IfDimensions.cs" />
     <Compile Include="Ifc\IfDoor.cs" />
-    <Compile Include="Configuration\General\Interfaces\IWall.cs" />
-    <Compile Include="Configuration\General\Interfaces\IDimension.cs" />
-    <Compile Include="Configuration\General\Interfaces\IDoor.cs" />
-    <Compile Include="Configuration\General\Interfaces\IOpening.cs" />
-    <Compile Include="Configuration\General\Interfaces\IWindow.cs" />
+    <Compile Include="General\Interfaces\IWall.cs" />
+    <Compile Include="General\Interfaces\IDimension.cs" />
+    <Compile Include="General\Interfaces\IDoor.cs" />
+    <Compile Include="General\Interfaces\IOpening.cs" />
+    <Compile Include="General\Interfaces\IWindow.cs" />
     <Compile Include="Ifc\IfElement.cs" />
     <Compile Include="Ifc\IfLocation.cs" />
     <Compile Include="Ifc\IfMaterial.cs" />

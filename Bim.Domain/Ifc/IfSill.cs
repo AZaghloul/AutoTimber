@@ -8,7 +8,7 @@ using Xbim.Ifc4.RepresentationResource;
 using Xbim.Ifc4.SharedBldgElements;
 using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
-using Bim.Domain.Configuration;
+using Bim.Domain.General;
 
 namespace Bim.Domain.Ifc
 {

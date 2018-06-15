@@ -1,0 +1,63 @@
+﻿
+@{
+    ViewBag.Title = "Upload";
+}
+
+<h2>Upload</h2>
+
+<div class="input-group mb-3">
+    <div class="input-group-prepend">
+        <button id="btn-upload" class="btn btn-outline-secondary" type="button">Upload</button>
+    </div>
+    <div class="custom-file">
+        <input type="file" class="custom-file-input" id="input-upload" multiple>
+        <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+    </div>
+</div>
+
+<div>
+    <input id="btn-design" type="button" class="btn btn-default" value="Design" />
+</div>
+
+<script>
+
+    $('#btn-upload').on('click', function (e) {
+        var input = document.getElementById("input-upload");
+        var files = input.files;
+        console.log(files);
+        //var myID = 3; //uncomment this to make sure the ajax URL works
+        if (files.length > 0) {
+            if (window.FormData !== undefined) {
+                var data = new FormData();
+                for (var x = 0; x < files.length; x++) {
+                    data.append("file" + x, files[x]);
+                }
+                $.ajax({
+                    type: "POST",
+                    url: './upload',
+                    contentType: false,
+                    processData: false,
+                    data: data,
+                    success: function (result) {
+                        console.log(result);
+                    }
+
+                });
+            }
+        }
+    }
+    );
+
+    $('#btn-design').click(() => {
+        $.ajax({
+            type: "POST",
+            url: './design/',
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                console.log(result);
+            }
+
+        });
+    });
+</script>
