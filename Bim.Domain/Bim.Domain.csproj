@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\ConvexHull.cs" />
     <Compile Include="General\DesignOptions.cs" />
     <Compile Include="General\Interfaces\IBuilding.cs" />
     <Compile Include="General\Interfaces\IElement.cs" />
@@ -94,6 +95,8 @@
     <Compile Include="General\Result.cs" />
     <Compile Include="General\Setup.cs" />
     <Compile Include="General\State.cs" />
+    <Compile Include="General\Vector3D.cs" />
+    <Compile Include="General\WallModel.cs" />
     <Compile Include="Ifc\Enums\AxisEnum.cs" />
     <Compile Include="Ifc\Enums\DirectionEnum.cs" />
     <Compile Include="Ifc\Enums\OptionEnum.cs" />

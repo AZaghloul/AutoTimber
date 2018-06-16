@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using Bim.Common.Geometery;
+using Bim.Domain.General;
+using System.Collections.Generic;
 using System.Linq;
 using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
@@ -85,12 +87,101 @@ namespace Bim.Domain.Ifc
                 }
             }
 
-            return wallsList;
+
+            return /*wallsList;*/ ifStory.IfModel.WallCollection = SetExternalWalls(wallsList);
+
         }
 
-        public static void SetExternalWalls(List<IfWall> walls)
+        public static List<IfWall> SetExternalWalls(List<IfWall> walls)
         {
+            #region Logic 3
+            var pointList = new List<IfLocation>();
 
+            //get wall model ready
+            List<WallModel> wallModels = new List<WallModel>();
+            walls.ForEach(e => wallModels.Add(new WallModel(e)));
+            //get list of mid and start points
+            wallModels.ForEach(e =>
+            {
+                pointList.Add(e.IfLocation);
+                pointList.Add(e.EndPoint);
+            });
+
+            var outerPoints = ConvexHull.GetConvexHull(pointList);
+            var outerWalls = new List<IfWall>();
+
+            foreach (var point in outerPoints)
+            {
+               var wall = wallModels.
+                    Where(w => 
+                    { return (
+                        w.IfLocation.X == point.X && w.IfLocation.Y == point.Y) ||
+                        (w.EndPoint.X == point.X && w.EndPoint.Y == point.Y); }).
+                   
+                    Select(e => e.IfWall).FirstOrDefault();
+
+                outerWalls.Add(wall);
+            }
+            #endregion
+            #region Logic 2
+            //var pointList = new List<IfLocation>();
+
+            ////new Logic
+            //var wallModelDict = new Dictionary<IfLocation, WallModel>();
+            //List<WallModel> wallModels = new List<WallModel>();
+
+            //walls.ForEach(e => wallModels.Add(new WallModel(e)));
+            //wallModels.ForEach(e =>
+            //{
+            //    pointList.Add(e.IfLocation);
+            //    pointList.Add(e.MidPoint);
+            //});
+
+
+            ////get wallModels Ready from Wall List
+
+
+            //wallModels.ForEach(e =>
+            //    wallModelDict.Add(e.EndPoint, e)
+            //);
+
+            //var midPoints = wallModels.Select(e => e.EndPoint).ToList();
+
+            //var outerPoints = ConvexHull.GetConvexHull(midPoints);
+            //var outerWalls = new List<IfWall>();
+
+            //foreach (var point in outerPoints)
+            //{
+            //    var key = wallModelDict.Keys.Where(e => e.X == point.X && e.Y == point.Y)
+            //          .FirstOrDefault();
+            //    outerWalls.Add(wallModelDict[key].IfWall);
+            //}
+            #endregion
+
+            #region Logic 1
+
+
+            ////mid point -iflocation
+            //var midPointsDict = new Dictionary<IfLocation, IfWall>();
+
+            //foreach (var wall in walls)
+            //{
+            //    //calculate mid points
+            //    var midPoint = Vector3D.DivideDistance(wall.IfLocation, wall.IfDimension);
+            //    midPointsDict.Add(midPoint, wall);
+            //}
+
+
+            //var outerPoints = ConvexHull.GetConvexHull(midPointsDict.Keys.ToList());
+            //var outerWalls = new List<IfWall>();
+            //foreach (var point in outerPoints)
+            //{
+            //    var key = midPointsDict.Keys.Where(e => e.X == point.X && e.Y == point.Y)
+            //          .FirstOrDefault();
+            //    outerWalls.Add(midPointsDict[key]);
+            //}
+            #endregion
+            return outerWalls;
         }
         #endregion
 

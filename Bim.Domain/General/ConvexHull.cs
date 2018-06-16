@@ -1,20 +1,21 @@
 ﻿using Bim.Domain;
+using Bim.Domain.Ifc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IRCWoodWall.Common
+namespace Bim.Domain.General
 {
     public class ConvexHull
     {
-        public static double Cross(ILocation O, ILocation A, ILocation B)
+        public static double Cross(IfLocation O, IfLocation A, IfLocation B)
         {
             return (A.X - O.X) * (B.Y - O.Y) - (A.Y - O.Y) * (B.X - O.X);
         }
 
-        public static List<ILocation> GetConvexHull(List<ILocation> points)
+        public static List<IfLocation> GetConvexHull(List<IfLocation> points)
         {
             if (points == null)
                 return null;
@@ -23,7 +24,7 @@ namespace IRCWoodWall.Common
                 return points;
 
             int n = points.Count(), k = 0;
-            List<ILocation> H = new List<ILocation>(new ILocation[2 * n]);
+            List<IfLocation> H = new List<IfLocation>(new IfLocation[2 * n]);
 
             points.Sort((a, b) =>
                  a.X == b.X ? a.Y.CompareTo(b.Y) : a.X.CompareTo(b.X));

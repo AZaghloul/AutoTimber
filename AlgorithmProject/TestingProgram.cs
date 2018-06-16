@@ -29,7 +29,7 @@ namespace AlgorithmProject
             #endregion
             StudTable.FilePath = @"..\..\Tables\StudSpacingTable.csv";
             Table502_3_1.FilePath = @"..\..\Tables\table502.3.1(1).txt";
-            string fileName = @"..\..\Models\home-2floor-ft.ifc";
+            string fileName = @"..\..\Models\outer-walls-5.ifc";
             //   IfModel model = IfModel.Open(fileName);
 
             Stopwatch sw = new Stopwatch();
@@ -46,35 +46,29 @@ namespace AlgorithmProject
             wf.Optimize();
             wf.Write();
             model.Save(fileName + "-structure");
+            model.Delete<IfcBeam>();
+            model.Delete<IfcColumn>();
             sw.Stop();
             Console.WriteLine($"time Elapsed{sw.ElapsedMilliseconds}");
             OpenWindow(fileName + "-structure"+".ifc");
-          //  model.Delete<IfcBeam>();
-          //  model.Delete<IfcColumn>();
-          //  var doors = model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door);
-          //  WoodFrame wf = new WoodFrame(model);
-          ////  wf.GetWallPolygons();
-          //  // model.Delete<IfcWall>();
-          //  model.Save(fileName);
-          //  OpenWindow(fileName);
 
-          //  List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
-          //  $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
-          //  List<WallPolygon> wallPolygons = new List<WallPolygon>();
-          //  int i = 0;
-          //  foreach (var item in walls)
-          //  {
-          //      $"wall no {i}".Print(ConsoleColor.Cyan);
-          //      wallPolygons.Add(new WallPolygon(item));
-          //      $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
-          //      $"\t {wallPolygons.Last().Openings.Count} opens".Print(ConsoleColor.Cyan);
-          //      $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);
-          //      $"\t {wallPolygons.Last().RRight.Count} Right regions".Print(ConsoleColor.Cyan);
-          //      $"\t {wallPolygons.Last().RTop.Count} top regions".Print(ConsoleColor.Cyan);
-          //      $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
-          //      $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
-          //      i++;
-          //  }
+            List<IfWall> walls = model.WallCollection.OfType<IfWall>().ToList();
+            $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
+            List<WallPolygon> wallPolygons = new List<WallPolygon>();
+            int i = 0;
+            foreach (var item in walls)
+            {
+                $"wall no {i}".Print(ConsoleColor.Cyan);
+                wallPolygons.Add(new WallPolygon(item));
+                $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().Openings.Count} opens".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RRight.Count} Right regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RTop.Count} top regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
+                $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
+                i++;
+            }
 
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;

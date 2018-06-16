@@ -73,7 +73,7 @@ namespace Bim.Domain.Ifc
             foreach (var opening in ifWall.IfcElement.HasOpenings)
             {
 
-                ifopening = new IfOpening(ifWall, opening);
+        
 
                 var opnng = (IIfcAxis2Placement3D)((IIfcLocalPlacement)opening
                     .RelatedOpeningElement.ObjectPlacement).RelativePlacement;
@@ -91,7 +91,12 @@ namespace Bim.Domain.Ifc
                 var voids = ((IfcOpeningElement)opening.RelatedOpeningElement)
                     .HasFillings.FirstOrDefault();
 
+                if (voids == null) return openings;
                 var voidsPlacement = (IfcLocalPlacement)voids.RelatedBuildingElement.ObjectPlacement;
+
+
+                ifopening = new IfOpening(ifWall, opening);
+                //set properties
                 ifopening.LocalPlacement = voidsPlacement;
 
                 var dir = ((IIfcAxis2Placement3D)voidsPlacement.RelativePlacement).RefDirection;

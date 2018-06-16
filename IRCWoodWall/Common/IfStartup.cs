@@ -3,7 +3,7 @@ using Bim.Application.IRCWood.Physical;
 using Bim.Common.Measures;
 using Bim.Domain.General;
 using Bim.Domain.Ifc;
-using IRCWoodWall.Common;
+
 using System.Threading.Tasks;
 
 namespace Bim.Application.IRCWood.Common
