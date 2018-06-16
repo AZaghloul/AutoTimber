@@ -79,6 +79,7 @@
     <Compile Include="General\IHandler.cs" />
     <Compile Include="Ifc\Enums.cs" />
     <Compile Include="Ifc\IfcHandler.cs" />
+    <Compile Include="Ifc\ServerIO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\ConsoleUtilities.cs" />
   </ItemGroup>

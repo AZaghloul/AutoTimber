@@ -1,4 +1,5 @@
 ﻿using Bim.Application.IRCWood.IRC;
+using Bim.Application.IRCWood.Physical;
 using Bim.Common.Measures;
 using Bim.Domain.General;
 using Bim.Domain.Ifc;
@@ -9,35 +10,18 @@ namespace Bim.Application.IRCWood.Common
 {
     public class IfStartup
     {
-        #region Properties
-        public static StudTable Studtable { get; set; }
-        public static DesignOptions DesignOptions { get; set; }
-        #endregion
-        
-        #region AsyncMethods
-        public static Task LoadDesignOptionsAsync = Task.Factory.StartNew(() =>
-         {
-             //load settings from Database;
-             DesignOptions = new DesignOptions();
+      
 
-         });
-
-        public static Task LoadConfigurationAsync = Task.Factory.StartNew(() =>
+        public IfStartup()
         {
-            //load configuration file from database or whatever;
-        });
 
-        //public static Task<StudTable> LoadTablesAsync = Task.Factory.StartNew(() =>
-        //{
-        //    //load Tables;
-        // return  // Studtable = StudTable.Load(" ");
-        //});
-        public static Task LoadFileAsync = Task.Factory.StartNew(() =>
-         {
-             //load Tables;
-         });
+        }
+        #region AsyncMethods
+       
         #endregion
-        public static void Configuration(IfModel ifModel)
+
+
+        public void Configuration(IfModel ifModel)
         {
             //configure the Length class
             Length.RoundValue = 4;
@@ -67,11 +51,54 @@ namespace Bim.Application.IRCWood.Common
 
         }
 
-
-        static IfStartup()
+        public void Configure(IfModel ifModel,WoodFrame woodFrame)
         {
+
+            #region AsyncMethods
+            //string filePath = @"..\..\Models\home-2floor-ft.ifc";
+            //Task<IfModel> LoadModelAsync = Task.Factory.StartNew<IfModel>((filepath) =>
+            //{
+            //    //load Tables;
+            //    return IfModel.Open(filePath);
+            //}, filePath);
+
+            Task<DesignOptions> LoadDesignOptionsAsync = Task.Factory.StartNew(() =>
+           {
+               //load settings from Database;
+               return new DesignOptions();
+
+           });
+
+            Task LoadConfigurationAsync = Task.Factory.StartNew(() =>
+           {
+               //load configuration file from database or whatever;
+           });
+
+            Task<StudTable> LoadStudTablesAsync = Task.Factory.StartNew(() =>
+           {
+               //  load Tables;
+               return StudTable.Load();
+           });
+
+            Task<Table502_3_1> LoadHeaderTablesAsync = Task.Factory.StartNew(() =>
+            {
+                //  load Tables;
+                return Table502_3_1.Load(null);
+            });
+            //
+
+            #endregion
+
+            //load model design option and configuration
+            ifModel.DesignOptions = LoadDesignOptionsAsync.Result;
+            
+
+            //load wood frame tables
+            woodFrame.StudTable= LoadStudTablesAsync.Result;
+            woodFrame.JoistTable = LoadHeaderTablesAsync.Result;
 
         }
 
+       
     }
 }

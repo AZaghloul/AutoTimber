@@ -28,8 +28,7 @@ namespace Bim.Domain.Ifc
             IfModel = ifModel;
             IfcStory = ifcStory;
             Initialize();
-            IfModel.Instances.Add(this);
-
+            IfModel.StoriesCollection.Add(this);
         }
         private void Initialize()
         {
@@ -47,14 +46,27 @@ namespace Bim.Domain.Ifc
             var ifStories = new List<IfStory>();
             var ifcStories = ifBuilding.IfModel.IfcStore.Instances.OfType<IIfcBuildingStorey>();
             IfStory ifStory;
-            int counter = 0;
+            int counter = ifcStories.Count();
+
+            //state of stories
+            #region Updat Model State
+            if (counter < 1)
+            {
+                ifBuilding.IfModel.State.Warrnings("There is No Stories found!", "Re export the ifc file again");
+            }
+            else if (counter >= 1)
+            {
+                ifBuilding.IfModel.State.HasBuilding = true;
+                ifBuilding.IfModel.State.Passed($"{counter} Stories(s) found!", " ");
+            }
+            #endregion
+
             foreach (var story in ifcStories)
             {
                 ifStory = new IfStory(ifBuilding.IfModel, story);
                 ifStory.StoryNo = counter;
-
                 ifStories.Add(ifStory);
-                counter++;
+                counter--;
             }
 
             return ifStories;

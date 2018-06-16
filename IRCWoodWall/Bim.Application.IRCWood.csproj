@@ -84,7 +84,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\DesignOptions.cs" />
     <Compile Include="Common\ConvexHull.cs" />
     <Compile Include="Common\IfStartup.cs" />
     <Compile Include="IRC\StudCell.cs" />

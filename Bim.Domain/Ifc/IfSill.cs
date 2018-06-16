@@ -20,6 +20,7 @@ namespace Bim.Domain.Ifc
         public IIfcLocalPlacement LocalPlacement { get; set; }
         #endregion
 
+
         #region Member Variables
 
 
@@ -127,7 +128,7 @@ namespace Bim.Domain.Ifc
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
             var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
             /*          Set Stud Location */
-            lp.PlacementRelTo =( IfcLocalPlacement)IfWall.LocalPlacement;
+            lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
             ax3D.Location = origin;
             ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
             try
@@ -141,9 +142,9 @@ namespace Bim.Domain.Ifc
             catch (System.Exception e)
             {
 
-                
+
             }
-          
+
 
             IfcElement.ObjectPlacement = lp;
         }

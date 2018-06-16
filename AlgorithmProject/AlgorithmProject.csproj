@@ -115,6 +115,10 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Tables\table502.3.1%281%29.csv" />
+    <None Include="Tables\table502.3.1%282%29.csv" />
+    <None Include="Tables\table502.5%281%29.csv" />
+    <None Include="Tables\table502.5%282%29.csv" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="bin\Release\" />
@@ -140,7 +144,10 @@
     <Content Include="bin\Debug\Xbim.IO.dll" />
     <Content Include="bin\Debug\Xbim.ModelGeometry.Scene.dll" />
     <Content Include="bin\Debug\Xbim.Tessellator.dll" />
-    <Content Include="Tables\StudSpacingTable.txt" />
+    <None Include="Tables\StudSpacingTable.csv" />
+    <Content Include="Tables\table502.3.1%281%29.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">

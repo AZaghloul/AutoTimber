@@ -66,7 +66,24 @@ namespace Bim.Domain.Ifc
         {
             List<IfBuilding> ifBuildings = new List<IfBuilding>();
             IfBuilding ifBuidling;
-            foreach (var building in ifModel.IfcStore.Instances.OfType<IIfcBuilding>())
+
+            var buidlings = ifModel.IfcStore.Instances.OfType<IIfcBuilding>();
+            var buildingCount = buidlings.Count();
+
+            //state of building
+            #region Updat Model State
+            if (buildingCount<1)
+            {
+                ifModel.State.Warrnings("There is No building found!", "Re export the ifc file again");
+            }
+            else if(buildingCount >= 1)
+            {
+                ifModel.State.HasBuilding = true;
+                ifModel.State.Passed($"{buildingCount} building(s) found!"," ");
+            }
+            #endregion
+            //
+            foreach (var building in buidlings)
             {
                 ifBuidling = new IfBuilding(ifModel)
                 {
@@ -75,6 +92,7 @@ namespace Bim.Domain.Ifc
                 };
                 ifBuildings.Add(ifBuidling);
             }
+            
 
             return ifBuildings;
         }

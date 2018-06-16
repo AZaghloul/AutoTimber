@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace IRCWoodWall.Common
+namespace Bim.Domain.General
 {
     public class DesignOptions
     {
-
         public Option FrameWalls { get; set; }
         public Option FrameFloors { get; set; }
         public Option FrameRafter { get; set; }
@@ -18,6 +17,6 @@ namespace IRCWoodWall.Common
         public Option OptimizeFloors { get; set; }
         public Option OptimizeRafter { get; set; }
         public Option Exclude { get; set; }
-
+        public Option DeleteArcWalls { get; set; }
     }
 }

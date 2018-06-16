@@ -80,6 +80,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="General\DesignOptions.cs" />
     <Compile Include="General\Interfaces\IBuilding.cs" />
     <Compile Include="General\Interfaces\IElement.cs" />
     <Compile Include="General\Interfaces\ILocation.cs" />
@@ -88,7 +89,11 @@
     <Compile Include="General\Interfaces\IProject.cs" />
     <Compile Include="General\Interfaces\IStory.cs" />
     <Compile Include="General\Interfaces\IVersion.cs" />
+    <Compile Include="General\Message.cs" />
+    <Compile Include="General\MessageTypeEnum.cs" />
+    <Compile Include="General\Result.cs" />
     <Compile Include="General\Setup.cs" />
+    <Compile Include="General\State.cs" />
     <Compile Include="Ifc\Enums\AxisEnum.cs" />
     <Compile Include="Ifc\Enums\DirectionEnum.cs" />
     <Compile Include="Ifc\Enums\OptionEnum.cs" />

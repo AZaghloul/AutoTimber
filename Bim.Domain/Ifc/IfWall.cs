@@ -34,7 +34,7 @@ namespace Bim.Domain.Ifc
         {
             base.IfcElement = (IfcWallStandardCase)ifcWall;
             IfModel = ifModel;
-            IfModel.Instances.Add(this);
+            IfModel.WallCollection.Add(this);
             Initialize();
         }
 
@@ -48,7 +48,6 @@ namespace Bim.Domain.Ifc
             var walls = ifStory.IfcStory.ContainsElements
                  .FirstOrDefault()
                  .RelatedElements.OfType<IIfcWallStandardCase>();
-
 
             foreach (var wall in walls)
             {

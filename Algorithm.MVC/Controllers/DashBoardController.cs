@@ -64,12 +64,18 @@ namespace Algorithm.MVC.Controllers
             var filePath = Server.MapPath($"~/Users/input-files/{fileName}");
             var outputFile = Server.MapPath($"~/Users/output-files/{fileName}-Structure");
             IfModel model = IfModel.Open(filePath);
-            IfStartup.Configuration(model);
+            //IfStartup.Configuration(model);
             model.Delete<IfcBeam>();
             model.Delete<IfcColumn>();
             WoodFrame wf = new WoodFrame(model);
 
-            wf.FrameWalls();
+           // wf.StudTable = IfStartup.LoadTablesAsync.Result;
+
+            wf.JoistTable = Table502_3_1.Load(null);
+
+           // wf.TestAsync();
+
+
             // model.Delete<IfcWall>();
             model.Save(outputFile);
             // OpenWindow(fileName);

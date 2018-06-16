@@ -54,7 +54,7 @@ namespace Bim.Application.IRCWood.Physical
 
             var dim = IfStud.Setup.Get<IfDimension>("Dimension");
 
-            var maxdistance = StudTable.GetSpace(storyNo + 1, height, dim)
+            var maxdistance = StudTable.GetSpace(storyNo , height, dim)
                 .LastOrDefault().Spacing;
 
             // set maxdistance unit
@@ -326,7 +326,7 @@ namespace Bim.Application.IRCWood.Physical
             var storyNo = WallPolygon.IfWall.Story.StoryNo;
             var height = WallPolygon.IfWall.IfDimension.ZDim;
             var dim = IfStud.Setup.Get<IfDimension>("Dimension");
-            var s = StudTable.GetSpace(storyNo + 1, height, dim).LastOrDefault();
+            var s = StudTable.GetSpace(storyNo, height, dim).LastOrDefault();
             var maxdistance = s.Spacing;
 
             foreach (var region in WallPolygon.RBetween)
@@ -374,7 +374,7 @@ namespace Bim.Application.IRCWood.Physical
             var storyNo = WallPolygon.IfWall.Story.StoryNo;
             var height = WallPolygon.IfWall.IfDimension.ZDim;
             var dim = IfStud.Setup.Get<IfDimension>("Dimension");
-            var maxdistance = StudTable.GetSpace(storyNo + 1, height, dim).LastOrDefault().Spacing;
+            var maxdistance = StudTable.GetSpace(storyNo, height, dim).LastOrDefault().Spacing;
 
 
             foreach (var region in WallPolygon.RRight)
