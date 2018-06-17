@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Bim.Common.Geometery
 {
-   public class Vector3D
+   public class Distance3D
     {
 
        public static IfLocation DivideDistance(IfLocation p1, IfDimension p2)

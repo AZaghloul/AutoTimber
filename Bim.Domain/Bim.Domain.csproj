@@ -39,8 +39,15 @@
     <Reference Include="log4net">
       <HintPath>..\Refrences\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Numerics, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Numerics.3.8.0\lib\net40\MathNet.Numerics.dll</HintPath>
+    </Reference>
+    <Reference Include="MathNet.Spatial, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MathNet.Spatial.0.4.0\lib\net40\MathNet.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -95,7 +102,7 @@
     <Compile Include="General\Result.cs" />
     <Compile Include="General\Setup.cs" />
     <Compile Include="General\State.cs" />
-    <Compile Include="General\Vector3D.cs" />
+    <Compile Include="General\Distance3D.cs" />
     <Compile Include="General\WallModel.cs" />
     <Compile Include="Ifc\Enums\AxisEnum.cs" />
     <Compile Include="Ifc\Enums\DirectionEnum.cs" />
@@ -139,6 +146,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Xml\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

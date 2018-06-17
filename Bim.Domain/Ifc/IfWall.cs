@@ -5,6 +5,7 @@ using System.Linq;
 using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.SharedBldgElements;
+using MathNet.Spatial.Euclidean;
 
 namespace Bim.Domain.Ifc
 {

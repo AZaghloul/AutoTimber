@@ -28,7 +28,7 @@ namespace Bim.Domain.General
                 Direction = Direction.Positive;
 
             }
-            MidPoint = Vector3D.DivideDistance(IfWall.IfLocation, IfWall.IfDimension);
+            MidPoint = Distance3D.DivideDistance(IfWall.IfLocation, IfWall.IfDimension);
             EndPoint = GetEndPoint();
         }
 
