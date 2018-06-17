@@ -17,7 +17,7 @@ namespace Bim.Common.Measures
             Inches = inches;
         }
     }
-    public struct Length
+    public struct Length :IEquatable<Length>
     {
         private double _metricValue;
         private double _initialValue;
@@ -53,6 +53,21 @@ namespace Bim.Common.Measures
             return new Length(Feet * 0.3048 + Inch * 0.0254, Feet * 12 + Inch);
         }
 
+        public bool Equals(Length other)
+        {
+            return this.Inches == other.Inches;
+        }
+
+        public override bool Equals(object obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
         private Length(double metricValue, double ivalue)
         {
             _metricValue = metricValue;
@@ -62,6 +77,16 @@ namespace Bim.Common.Measures
             Feet = Round(_metricValue * 3.28084, RoundValue);
             Inches = Round(_metricValue * 39.3701, RoundValue);
             FeetAndInches = new FeetAndInches((int)(metricValue * 3.28084), Round(((metricValue * 3.28084 - (int)(metricValue * 3.28084)) * 12), RoundValue));
+        }
+
+        public static bool operator== (Length L1 , Length L2)
+        {
+            return L1.Inches - L2.Inches < 0.0001;
+        }
+
+        public static bool operator !=(Length L1, Length L2)
+        {
+            return !(L1 == L2);
         }
 
     }

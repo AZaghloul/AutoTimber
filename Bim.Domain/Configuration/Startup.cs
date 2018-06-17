@@ -1,5 +1,6 @@
 ﻿using Bim.Common.Measures;
 using Bim.Domain.Ifc;
+
 namespace Bim.Domain.Configuration
 {
     public static class Startup
@@ -20,6 +21,8 @@ namespace Bim.Domain.Configuration
                 {"RBetween",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.Orange)) },
                 {"TopStud",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.LightSlateGrey)) },
                 {"BottomStud",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.DeepSkyBlue)) },
+                {"Joist",new IfMaterial(ifModel,IfColor.GetColor(IfColorEnum.Violet)) },
+
             };
 
             IfStud.Setup = new Setup()
@@ -31,13 +34,14 @@ namespace Bim.Domain.Configuration
             {
                 {"Dimension",new IfDimension(2,6,2) }
             };
-            
+
+
         }
 
 
-        static Startup( )
+        static Startup()
         {
-           
+
         }
 
     }

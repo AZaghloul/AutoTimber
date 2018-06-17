@@ -41,7 +41,7 @@ namespace Bim.Application.IRCWood.IRC
                 e.WoodType == WoodType.Douglas_fir_larch &&
                 e.WoodGrade == WoodGrade.SS &&
                 e.Span.Inches >= 15 * 12 &&
-                e.Section.Depth == 8).OrderBy(e=> e.Span.Inches).ToList();
+                e.Section.Depth.Inches == 8).OrderBy(e=> e.Span.Inches).ToList();
             TableCell502_3_1 tableCell = T1cells.FirstOrDefault();
             List<TableCell502_3_1> T2cells = table2.GetCells(WoodType.Southern_pine, WoodGrade._1, 10, 20 * 12,7);
             TableCell502_3_1 tableCell1 = T2cells.FirstOrDefault();

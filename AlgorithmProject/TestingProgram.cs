@@ -11,6 +11,7 @@ using Bim.Application.IRCWood.Physical;
 using Bim.Common.Geometery;
 using Bim.Domain;
 using Bim.Application.IRCWood.IRC;
+using Xbim.Ifc;
 
 namespace AlgorithmProject
 {
@@ -30,15 +31,20 @@ namespace AlgorithmProject
             #endregion
           var d=  Split.Equal(13, .65);
             
-            string fileName = @"..\..\Models\ITI.Qondos.ifc";
+            string fileName = @"..\..\Models\ITI.Qondos.1FloorOnly.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
+
+            IfcStore ifcStore = IfcStore.Open(fileName);
+            ifcStore.SaveAs(fileName, Xbim.IO.IfcStorageType.IfcXml);
 
             Table502_3_1 tableSleepingArea = Table502_3_1.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.3.1(1).csv");
             Table502_3_1 tableLivingArea = Table502_3_1.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.3.1(2).csv");
-
+            Table502_5 table502_5_1 = Table502_5.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.5(1).csv");
+            Table502_5 table502_5_2 = Table502_5.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.5(2).csv");
             using (IfModel model = IfModel.Open(fileName))
             {
                 Startup.Configuration(model);
+                model.Save(fileName);
                 model.Delete<IfcBeam>();
                 model.Delete<IfcColumn>();
                 var doors = model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door).ToList();
@@ -50,7 +56,11 @@ namespace AlgorithmProject
                 OpenWindow(saveName);
 
                 List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
+                List<IfFloor> floors = model.Instances.OfType<IfFloor>().ToList();
+
                 $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
+                $"{floors.Count} floors are found".Print(ConsoleColor.Cyan);
+
                 List<WallPolygon> wallPolygons = new List<WallPolygon>();
                 int i = 0;
                 foreach (var item in walls)
@@ -72,7 +82,6 @@ namespace AlgorithmProject
             Console.WriteLine("Done!");
             #endregion
             Console.ReadLine();
-
         }
         public static void OpenWindow(string filePath)
         {

@@ -92,7 +92,6 @@
     <Compile Include="IRC\TableCell502.5.cs" />
     <Compile Include="Physical\Blank.cs" />
     <Compile Include="Physical\FloorFrame.cs" />
-    <Compile Include="Physical\FloorPolygon.cs" />
     <Compile Include="Physical\Joist.cs" />
     <Compile Include="Physical\Plate.cs" />
     <Compile Include="Physical\WallFrame.cs" />

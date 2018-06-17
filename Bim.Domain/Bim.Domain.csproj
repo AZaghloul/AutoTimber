@@ -96,6 +96,7 @@
     <Compile Include="Ifc\IfBuilding.cs" />
     <Compile Include="Ifc\IfColor.cs" />
     <Compile Include="Ifc\IfDimensions.cs" />
+    <Compile Include="Ifc\IfDirection.cs" />
     <Compile Include="Ifc\IfDoor.cs" />
     <Compile Include="Configuration\General\Interfaces\IWall.cs" />
     <Compile Include="Configuration\General\Interfaces\IDimension.cs" />
@@ -103,6 +104,8 @@
     <Compile Include="Configuration\General\Interfaces\IOpening.cs" />
     <Compile Include="Configuration\General\Interfaces\IWindow.cs" />
     <Compile Include="Ifc\IfElement.cs" />
+    <Compile Include="Ifc\IfFloor.cs" />
+    <Compile Include="Ifc\IfJoist.cs" />
     <Compile Include="Ifc\IfLocation.cs" />
     <Compile Include="Ifc\IfMaterial.cs" />
     <Compile Include="Ifc\IfModel.cs" />
@@ -115,7 +118,9 @@
     <Compile Include="Ifc\IfVector.cs" />
     <Compile Include="Ifc\IfWall.cs" />
     <Compile Include="Ifc\IfWindow.cs" />
+    <Compile Include="Ifc\RecSection.cs" />
     <Compile Include="Ifc\Version.cs" />
+    <Compile Include="Polygon\FloorPolygon.cs" />
     <Compile Include="Polygon\Region.cs" />
     <Compile Include="Polygon\WallPolygon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -12,6 +12,8 @@ namespace Bim.Domain.Ifc
         IIfcBuildingStorey _ifcBuildingStorey;
         public int StoryNo { get; set; }
         public List<IfWall> IfWalls { get; set; }
+        public List<IfFloor> IfFloors { get; set; }
+
         public IfBuilding IfBuilding { get; set; }
         public IIfcBuildingStorey IfcStory
         {
@@ -37,9 +39,16 @@ namespace Bim.Domain.Ifc
             Label = IfcStory.EntityLabel;
             Description = IfcStory.Description;
 
-            if (IfWalls != null) return;
+            if (IfWalls != null)
+                return;
+            else
+                IfWalls = IfWall.GetWalls(this);
 
-            IfWalls = IfWall.GetWalls(this);
+            if (IfFloors != null)
+                return;
+            else
+                IfFloors = IfFloor.GetFloors(this);
+
         }
 
         public static List<IfStory> GetStories(IfBuilding ifBuilding)

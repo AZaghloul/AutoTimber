@@ -61,7 +61,21 @@ namespace Bim.Domain.Ifc
                                 .SelectMany(a => a.Items)
                                 .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
                                 .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                                .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
+                            wall.Representation.Representations
+                                .SelectMany(a => a.Items)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                                .OfType<IIfcRectangleProfileDef>().FirstOrDefault()??
+                            wall.Representation.Representations
+                                .SelectMany(a => a.Items)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
                                 .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+
 
                 //get the wall x,y,z
                 if (recD != null)
@@ -136,7 +150,22 @@ namespace Bim.Domain.Ifc
                          .SelectMany(a => a.Items)
                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
                          .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
-                         .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+                         .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
+                       IfcWall.Representation.Representations
+                         .SelectMany(a => a.Items)
+                         .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                         .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                         .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                         .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
+                      IfcWall.Representation.Representations
+                          .SelectMany(a => a.Items)
+                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                          .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                          .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+
+
 
             var depth =
                  IfcWall.Representation.Representations
