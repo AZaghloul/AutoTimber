@@ -113,10 +113,6 @@
     <None Include="Tables\table502.5%281%29.csv" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Bim.Application\Bim.Application.csproj">
-      <Project>{29097953-a4e3-4ebe-be15-209086133f10}</Project>
-      <Name>Bim.Application</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">
       <Project>{04c837cf-0f12-45e5-8399-f8a53ddc9586}</Project>
       <Name>Bim.Common</Name>

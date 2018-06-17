@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ifcXML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:ifc="http://www.buildingsmart-tech.org/ifcXML/IFC4/Add1" xsi:schemaLocation="http://www.buildingsmart-tech.org/ifcXML/IFC4/Add1 http://www.buildingsmart-tech.org/ifcXML/IFC4/Add1/IFC4_ADD1.xsd" id="uos_1" express="http://www.buildingsmart-tech.org/ifc/IFC4/Add1/IFC4_ADD1.exp" configuration="http://www.buildingsmart-tech.org/ifcXML/IFC4/Add1/IFC4_ADD1_config.xml" xmlns="http://www.buildingsmart-tech.org/ifcXML/IFC4/Add1">
   <header>
-    <time_stamp>2018-06-16T16:04:56</time_stamp>
+    <time_stamp>2018-06-17T23:14:23</time_stamp>
     <author />
     <organization />
     <preprocessor_version>Xbim File Processor version 4.0.0.0</preprocessor_version>
@@ -6262,6 +6262,1756 @@
                           <Styles>
                             <IfcSurfaceStyleRendering id="i3479" pos="0" Transparency="0" ReflectanceMethod="blinn">
                               <SurfaceColour id="i3480" xsi:type="IfcColourRgb" Red="0.93333333333333335" Green="0.50980392156862742" Blue="0.93333333333333335" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3490" GlobalId="3pLZT1FHr21QSdet6g89ke">
+    <OwnerHistory id="i3491" xsi:type="IfcOwnerHistory" ChangeAction="added" CreationDate="0">
+      <OwningUser id="i3494" xsi:type="IfcPersonAndOrganization">
+        <ThePerson id="i3492" xsi:type="IfcPerson" FamilyName="engmk" GivenName="" MiddleNames="" PrefixTitles="" SuffixTitles="" />
+        <TheOrganization id="i3493" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningUser>
+      <OwningApplication id="i3495" xsi:type="IfcApplication" Version="Unspecified" ApplicationFullName="Unspecified" ApplicationIdentifier="">
+        <ApplicationDeveloper id="i3496" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningApplication>
+    </OwnerHistory>
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3482" Name="">
+        <HasRepresentation id="i3483" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3484" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3485" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3486" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3487" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3488" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3489" xsi:type="IfcColourRgb" Red="0" Green="1" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3505" GlobalId="0U$V81RcHEUPZ7TBfg7OhC">
+    <OwnerHistory ref="i3491" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3497" Name="">
+        <HasRepresentation id="i3498" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3499" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3500" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3501" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3502" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3503" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3504" xsi:type="IfcColourRgb" Red="1" Green="0.4" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3514" GlobalId="1U0rwhom1CSgb7a9p2tFwf">
+    <OwnerHistory ref="i3491" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3506" Name="">
+        <HasRepresentation id="i3507" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3508" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3509" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3510" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3511" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3512" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3513" xsi:type="IfcColourRgb" Red="0" Green="0" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3523" GlobalId="1dH7HKmzn9bv5Hc$mPfZDG">
+    <OwnerHistory ref="i3491" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3515" Name="">
+        <HasRepresentation id="i3516" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3517" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3518" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3519" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3520" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3521" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3522" xsi:type="IfcColourRgb" Red="0.11764705882352941" Green="0.56470588235294117" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3532" GlobalId="2dRdEmVP1FjAMKKl5HGnaU">
+    <OwnerHistory ref="i3491" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3524" Name="">
+        <HasRepresentation id="i3525" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3526" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3527" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3528" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3529" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3530" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3531" xsi:type="IfcColourRgb" Red="0.72156862745098038" Green="0.52549019607843139" Blue="0.043137254901960784" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3541" GlobalId="2catpsUTb9ix76KzkFZFUq">
+    <OwnerHistory ref="i3491" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3533" Name="">
+        <HasRepresentation id="i3534" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3535" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3536" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3537" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3538" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3539" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3540" xsi:type="IfcColourRgb" Red="1" Green="0.27058823529411763" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3550" GlobalId="3xh5sSmET6xxKE7XsW1$JQ">
+    <OwnerHistory ref="i3491" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3542" Name="">
+        <HasRepresentation id="i3543" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3544" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3545" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3546" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3547" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3548" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3549" xsi:type="IfcColourRgb" Red="0.46666666666666667" Green="0.53333333333333333" Blue="0.6" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3559" GlobalId="2Y7SRskAv1zhYc0IvPwRGT">
+    <OwnerHistory ref="i3491" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3551" Name="">
+        <HasRepresentation id="i3552" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3553" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3554" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3555" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3556" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3557" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3558" xsi:type="IfcColourRgb" Red="1" Green="0" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3568" GlobalId="3u6_mjP916xxZomKQOPGe1">
+    <OwnerHistory ref="i3491" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3560" Name="">
+        <HasRepresentation id="i3561" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3562" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3563" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3564" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3565" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3566" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3567" xsi:type="IfcColourRgb" Red="0.93333333333333335" Green="0.50980392156862742" Blue="0.93333333333333335" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3577" GlobalId="3DWour7AX4yv7yzY04Tsm_">
+    <OwnerHistory id="i3578" xsi:type="IfcOwnerHistory" ChangeAction="added" CreationDate="0">
+      <OwningUser id="i3581" xsi:type="IfcPersonAndOrganization">
+        <ThePerson id="i3579" xsi:type="IfcPerson" FamilyName="amr Fayez" GivenName="" MiddleNames="" PrefixTitles="" SuffixTitles="" />
+        <TheOrganization id="i3580" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningUser>
+      <OwningApplication id="i3582" xsi:type="IfcApplication" Version="Unspecified" ApplicationFullName="Unspecified" ApplicationIdentifier="">
+        <ApplicationDeveloper id="i3583" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningApplication>
+    </OwnerHistory>
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3569" Name="">
+        <HasRepresentation id="i3570" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3571" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3572" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3573" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3574" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3575" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3576" xsi:type="IfcColourRgb" Red="0" Green="1" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3592" GlobalId="0FMQtv4W93swqwZ3yL2$qj">
+    <OwnerHistory ref="i3578" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3584" Name="">
+        <HasRepresentation id="i3585" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3586" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3587" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3588" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3589" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3590" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3591" xsi:type="IfcColourRgb" Red="1" Green="0.4" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3601" GlobalId="0y9725rDf4ivJVhEC34Bza">
+    <OwnerHistory ref="i3578" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3593" Name="">
+        <HasRepresentation id="i3594" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3595" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3596" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3597" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3598" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3599" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3600" xsi:type="IfcColourRgb" Red="0" Green="0" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3610" GlobalId="0A4IMy9W91APOqdF8CqDzh">
+    <OwnerHistory ref="i3578" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3602" Name="">
+        <HasRepresentation id="i3603" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3604" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3605" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3606" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3607" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3608" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3609" xsi:type="IfcColourRgb" Red="0.11764705882352941" Green="0.56470588235294117" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3619" GlobalId="2Kn0alJm163RQWUtL2H6gz">
+    <OwnerHistory ref="i3578" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3611" Name="">
+        <HasRepresentation id="i3612" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3613" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3614" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3615" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3616" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3617" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3618" xsi:type="IfcColourRgb" Red="0.72156862745098038" Green="0.52549019607843139" Blue="0.043137254901960784" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3628" GlobalId="2bX_LRz5jDAfgF0HqvJxGQ">
+    <OwnerHistory ref="i3578" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3620" Name="">
+        <HasRepresentation id="i3621" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3622" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3623" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3624" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3625" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3626" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3627" xsi:type="IfcColourRgb" Red="1" Green="0.27058823529411763" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3637" GlobalId="3esnxayIX9Aho_A47zCu9Y">
+    <OwnerHistory ref="i3578" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3629" Name="">
+        <HasRepresentation id="i3630" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3631" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3632" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3633" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3634" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3635" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3636" xsi:type="IfcColourRgb" Red="0.46666666666666667" Green="0.53333333333333333" Blue="0.6" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3646" GlobalId="3GG8xAa4H4ZPdMTqyLeX2Y">
+    <OwnerHistory ref="i3578" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3638" Name="">
+        <HasRepresentation id="i3639" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3640" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3641" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3642" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3643" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3644" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3645" xsi:type="IfcColourRgb" Red="1" Green="0" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3655" GlobalId="1fhdB7ojH5RfVxA1l1nTtm">
+    <OwnerHistory ref="i3578" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3647" Name="">
+        <HasRepresentation id="i3648" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3649" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3650" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3651" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3652" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3653" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3654" xsi:type="IfcColourRgb" Red="0.93333333333333335" Green="0.50980392156862742" Blue="0.93333333333333335" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3664" GlobalId="1dYVtFbKjDGv3Lh7vS9AqP">
+    <OwnerHistory id="i3665" xsi:type="IfcOwnerHistory" ChangeAction="added" CreationDate="0">
+      <OwningUser id="i3668" xsi:type="IfcPersonAndOrganization">
+        <ThePerson id="i3666" xsi:type="IfcPerson" FamilyName="amr Fayez" GivenName="" MiddleNames="" PrefixTitles="" SuffixTitles="" />
+        <TheOrganization id="i3667" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningUser>
+      <OwningApplication id="i3669" xsi:type="IfcApplication" Version="Unspecified" ApplicationFullName="Unspecified" ApplicationIdentifier="">
+        <ApplicationDeveloper id="i3670" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningApplication>
+    </OwnerHistory>
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3656" Name="">
+        <HasRepresentation id="i3657" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3658" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3659" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3660" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3661" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3662" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3663" xsi:type="IfcColourRgb" Red="0" Green="1" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3679" GlobalId="1o3VMnOmD7Chwt6HsMhVkC">
+    <OwnerHistory ref="i3665" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3671" Name="">
+        <HasRepresentation id="i3672" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3673" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3674" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3675" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3676" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3677" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3678" xsi:type="IfcColourRgb" Red="1" Green="0.4" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3688" GlobalId="2Sw6RYe_X2ofP7VmpZLgTP">
+    <OwnerHistory ref="i3665" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3680" Name="">
+        <HasRepresentation id="i3681" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3682" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3683" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3684" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3685" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3686" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3687" xsi:type="IfcColourRgb" Red="0" Green="0" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3697" GlobalId="36n2pHSH528AjZJa7q$MvV">
+    <OwnerHistory ref="i3665" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3689" Name="">
+        <HasRepresentation id="i3690" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3691" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3692" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3693" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3694" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3695" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3696" xsi:type="IfcColourRgb" Red="0.11764705882352941" Green="0.56470588235294117" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3706" GlobalId="3NBOpcFJ9BfQidU$VwV8g9">
+    <OwnerHistory ref="i3665" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3698" Name="">
+        <HasRepresentation id="i3699" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3700" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3701" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3702" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3703" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3704" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3705" xsi:type="IfcColourRgb" Red="0.72156862745098038" Green="0.52549019607843139" Blue="0.043137254901960784" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3715" GlobalId="3QND3KCobAkPB0$yOOIIMm">
+    <OwnerHistory ref="i3665" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3707" Name="">
+        <HasRepresentation id="i3708" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3709" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3710" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3711" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3712" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3713" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3714" xsi:type="IfcColourRgb" Red="1" Green="0.27058823529411763" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3724" GlobalId="0gQHJmUsz73Pb0tmdd9dsx">
+    <OwnerHistory ref="i3665" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3716" Name="">
+        <HasRepresentation id="i3717" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3718" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3719" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3720" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3721" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3722" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3723" xsi:type="IfcColourRgb" Red="0.46666666666666667" Green="0.53333333333333333" Blue="0.6" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3733" GlobalId="3LXuNtR71B$QGaSslIaKiG">
+    <OwnerHistory ref="i3665" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3725" Name="">
+        <HasRepresentation id="i3726" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3727" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3728" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3729" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3730" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3731" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3732" xsi:type="IfcColourRgb" Red="1" Green="0" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3742" GlobalId="26GRGEpDbDvAsVoEBLLkrN">
+    <OwnerHistory ref="i3665" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3734" Name="">
+        <HasRepresentation id="i3735" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3736" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3737" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3738" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3739" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3740" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3741" xsi:type="IfcColourRgb" Red="0.93333333333333335" Green="0.50980392156862742" Blue="0.93333333333333335" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3751" GlobalId="3S6eaGQLLDhe3VCF4pXiXZ">
+    <OwnerHistory id="i3752" xsi:type="IfcOwnerHistory" ChangeAction="added" CreationDate="0">
+      <OwningUser id="i3755" xsi:type="IfcPersonAndOrganization">
+        <ThePerson id="i3753" xsi:type="IfcPerson" FamilyName="amr Fayez" GivenName="" MiddleNames="" PrefixTitles="" SuffixTitles="" />
+        <TheOrganization id="i3754" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningUser>
+      <OwningApplication id="i3756" xsi:type="IfcApplication" Version="Unspecified" ApplicationFullName="Unspecified" ApplicationIdentifier="">
+        <ApplicationDeveloper id="i3757" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningApplication>
+    </OwnerHistory>
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3743" Name="">
+        <HasRepresentation id="i3744" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3745" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3746" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3747" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3748" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3749" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3750" xsi:type="IfcColourRgb" Red="0" Green="1" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3766" GlobalId="2WSsO_mTX6WAfFXjmqD9gS">
+    <OwnerHistory ref="i3752" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3758" Name="">
+        <HasRepresentation id="i3759" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3760" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3761" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3762" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3763" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3764" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3765" xsi:type="IfcColourRgb" Red="1" Green="0.4" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3775" GlobalId="1mg23WoW54ewbOO_E4eQgc">
+    <OwnerHistory ref="i3752" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3767" Name="">
+        <HasRepresentation id="i3768" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3769" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3770" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3771" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3772" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3773" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3774" xsi:type="IfcColourRgb" Red="0" Green="0" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3784" GlobalId="3BTaz4IcfF5A6jMhCJWTC5">
+    <OwnerHistory ref="i3752" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3776" Name="">
+        <HasRepresentation id="i3777" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3778" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3779" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3780" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3781" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3782" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3783" xsi:type="IfcColourRgb" Red="0.11764705882352941" Green="0.56470588235294117" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3793" GlobalId="00lxFmnYb6egjGDIWnz8S6">
+    <OwnerHistory ref="i3752" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3785" Name="">
+        <HasRepresentation id="i3786" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3787" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3788" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3789" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3790" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3791" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3792" xsi:type="IfcColourRgb" Red="0.72156862745098038" Green="0.52549019607843139" Blue="0.043137254901960784" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3802" GlobalId="2vbDxMEWz7f9bYIpwvPhdN">
+    <OwnerHistory ref="i3752" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3794" Name="">
+        <HasRepresentation id="i3795" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3796" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3797" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3798" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3799" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3800" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3801" xsi:type="IfcColourRgb" Red="1" Green="0.27058823529411763" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3811" GlobalId="1mKd9Usr13j8k5EZ653LzU">
+    <OwnerHistory ref="i3752" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3803" Name="">
+        <HasRepresentation id="i3804" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3805" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3806" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3807" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3808" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3809" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3810" xsi:type="IfcColourRgb" Red="0.46666666666666667" Green="0.53333333333333333" Blue="0.6" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3820" GlobalId="2Na8_K2pL5kg2Mmh8eYWWa">
+    <OwnerHistory ref="i3752" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3812" Name="">
+        <HasRepresentation id="i3813" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3814" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3815" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3816" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3817" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3818" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3819" xsi:type="IfcColourRgb" Red="1" Green="0" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3829" GlobalId="0pr_FE1OP34RQD71m1r0Ew">
+    <OwnerHistory ref="i3752" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3821" Name="">
+        <HasRepresentation id="i3822" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3823" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3824" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3825" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3826" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3827" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3828" xsi:type="IfcColourRgb" Red="0.93333333333333335" Green="0.50980392156862742" Blue="0.93333333333333335" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3838" GlobalId="3NI3oyTLH8fQfIClPO5mx1">
+    <OwnerHistory id="i3839" xsi:type="IfcOwnerHistory" ChangeAction="added" CreationDate="0">
+      <OwningUser id="i3842" xsi:type="IfcPersonAndOrganization">
+        <ThePerson id="i3840" xsi:type="IfcPerson" FamilyName="amr Fayez" GivenName="" MiddleNames="" PrefixTitles="" SuffixTitles="" />
+        <TheOrganization id="i3841" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningUser>
+      <OwningApplication id="i3843" xsi:type="IfcApplication" Version="Unspecified" ApplicationFullName="Unspecified" ApplicationIdentifier="">
+        <ApplicationDeveloper id="i3844" xsi:type="IfcOrganization" Name="Unspecified" />
+      </OwningApplication>
+    </OwnerHistory>
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3830" Name="">
+        <HasRepresentation id="i3831" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3832" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3833" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3834" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3835" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3836" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3837" xsi:type="IfcColourRgb" Red="0" Green="1" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3853" GlobalId="2mPhh6f8T6lQeRg4zjQsVD">
+    <OwnerHistory ref="i3839" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3845" Name="">
+        <HasRepresentation id="i3846" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3847" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3848" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3849" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3850" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3851" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3852" xsi:type="IfcColourRgb" Red="1" Green="0.4" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3862" GlobalId="1XC9sH36X6Qwk727Y3obY6">
+    <OwnerHistory ref="i3839" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3854" Name="">
+        <HasRepresentation id="i3855" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3856" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3857" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3858" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3859" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3860" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3861" xsi:type="IfcColourRgb" Red="0" Green="0" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3871" GlobalId="2r8tsqEUj13Q9FXV2uMya1">
+    <OwnerHistory ref="i3839" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3863" Name="">
+        <HasRepresentation id="i3864" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3865" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3866" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3867" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3868" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3869" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3870" xsi:type="IfcColourRgb" Red="0.11764705882352941" Green="0.56470588235294117" Blue="1" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3880" GlobalId="0bqBNysZr7P9hhArZpWhPG">
+    <OwnerHistory ref="i3839" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3872" Name="">
+        <HasRepresentation id="i3873" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3874" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3875" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3876" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3877" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3878" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3879" xsi:type="IfcColourRgb" Red="0.72156862745098038" Green="0.52549019607843139" Blue="0.043137254901960784" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3889" GlobalId="1WfSjmqtT6RAC9XzSWNKNr">
+    <OwnerHistory ref="i3839" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3881" Name="">
+        <HasRepresentation id="i3882" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3883" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3884" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3885" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3886" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3887" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3888" xsi:type="IfcColourRgb" Red="1" Green="0.27058823529411763" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3898" GlobalId="01M1zbkYn949JWTWeVRJjS">
+    <OwnerHistory ref="i3839" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3890" Name="">
+        <HasRepresentation id="i3891" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3892" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3893" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3894" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3895" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3896" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3897" xsi:type="IfcColourRgb" Red="0.46666666666666667" Green="0.53333333333333333" Blue="0.6" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3907" GlobalId="3cMq1zQP56PflhlOHB0kUo">
+    <OwnerHistory ref="i3839" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3899" Name="">
+        <HasRepresentation id="i3900" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3901" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3902" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3903" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3904" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3905" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3906" xsi:type="IfcColourRgb" Red="1" Green="0" Blue="0" />
+                              <SpecularColour>
+                                <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
+                              </SpecularColour>
+                              <SpecularHighlight>
+                                <IfcSpecularExponent-wrapper>0</IfcSpecularExponent-wrapper>
+                              </SpecularHighlight>
+                            </IfcSurfaceStyleRendering>
+                          </Styles>
+                        </IfcSurfaceStyle>
+                      </Styles>
+                    </IfcPresentationStyleAssignment>
+                  </Styles>
+                </IfcStyledItem>
+              </Items>
+            </IfcStyledRepresentation>
+          </Representations>
+        </HasRepresentation>
+      </IfcMaterial>
+    </RelatingMaterial>
+  </IfcRelAssociatesMaterial>
+  <IfcRelAssociatesMaterial id="i3916" GlobalId="2MPhc$5VbEo9DWCeY0uT$K">
+    <OwnerHistory ref="i3839" xsi:type="IfcOwnerHistory" xsi:nil="true" />
+    <RelatedObjects />
+    <RelatingMaterial>
+      <IfcMaterial id="i3908" Name="">
+        <HasRepresentation id="i3909" xsi:type="IfcMaterialDefinitionRepresentation">
+          <Representations>
+            <IfcStyledRepresentation id="i3910" pos="0" RepresentationIdentifier="Style" RepresentationType="Material">
+              <ContextOfItems ref="i106" xsi:type="IfcGeometricRepresentationContext" xsi:nil="true" />
+              <Items>
+                <IfcStyledItem id="i3911" pos="0">
+                  <Styles>
+                    <IfcPresentationStyleAssignment id="i3912" pos="0">
+                      <Styles>
+                        <IfcSurfaceStyle id="i3913" pos="0" Side="both">
+                          <Styles>
+                            <IfcSurfaceStyleRendering id="i3914" pos="0" Transparency="0" ReflectanceMethod="blinn">
+                              <SurfaceColour id="i3915" xsi:type="IfcColourRgb" Red="0.93333333333333335" Green="0.50980392156862742" Blue="0.93333333333333335" />
                               <SpecularColour>
                                 <IfcNormalisedRatioMeasure-wrapper>0.5</IfcNormalisedRatioMeasure-wrapper>
                               </SpecularColour>

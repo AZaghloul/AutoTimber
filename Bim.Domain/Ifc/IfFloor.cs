@@ -9,8 +9,8 @@ namespace Bim.Domain.Ifc
 {
     public class IfFloor : IfElement
     {
-
-        #region wall Object Properties
+        public static Setup Setup { get; set; }
+        #region Floor Object Properties
 
         public IfStory Story { get; set; }
         public IIfcSlab IfcSlab { get; set; }
@@ -18,7 +18,7 @@ namespace Bim.Domain.Ifc
         public IIfcAxis2Placement3D SlabAxis { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
         public IfDirection ShortDirection { get; set; }
-        public static Setup Setup { get; set; }
+       
         #endregion
 
         #region Constructors
@@ -41,7 +41,8 @@ namespace Bim.Domain.Ifc
             Guid = IfcSlab.GlobalId;
             Name = IfcSlab.Name;
             Label = IfcSlab.EntityLabel;
-            PolyLine = IfcSlab.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcPolyline>().FirstOrDefault();
+            PolyLine = IfcSlab.Representation.Representations.SelectMany(a => a.Items).
+                OfType<IIfcPolyline>().FirstOrDefault();
             GetLocation();
             GetDimension();
         }

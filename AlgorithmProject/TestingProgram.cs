@@ -29,25 +29,20 @@ namespace AlgorithmProject
             "-------------------------------------------- ".Print(ConsoleColor.White);
 
             #endregion
-          var d=  Split.Equal(13, .65);
-            
+            var d = Split.Equal(13, .65);
+
             string fileName = @"..\..\Models\ITI.Qondos.1FloorOnly.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
 
             IfcStore ifcStore = IfcStore.Open(fileName);
             ifcStore.SaveAs(fileName, Xbim.IO.IfcStorageType.IfcXml);
 
-            Table502_3_1 tableSleepingArea = Table502_3_1.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.3.1(1).csv");
-            Table502_3_1 tableLivingArea = Table502_3_1.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.3.1(2).csv");
-            Table502_5 table502_5_1 = Table502_5.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.5(1).csv");
-            Table502_5 table502_5_2 = Table502_5.Load(@"F:\ITI Projects\ITI.Qondos\AlgorithmProject\IRCWoodWall\Tables\table502.5(2).csv");
             using (IfModel model = IfModel.Open(fileName))
             {
                 Startup.Configuration(model);
                 model.Save(fileName);
-                model.Delete<IfcBeam>();
-                model.Delete<IfcColumn>();
-                var doors = model.Instances.OfType<IfOpening>().Where(e => e.OpeningType == OpeningType.Door).ToList();
+                //model.Delete<IfcBeam>();
+               // model.Delete<IfcColumn>();
                 WoodFrame wf = new WoodFrame(model);
                 wf.FrameWalls();
                 //model.Delete<IfcWall>();
@@ -86,36 +81,6 @@ namespace AlgorithmProject
         public static void OpenWindow(string filePath)
         {
             System.Diagnostics.Process.Start(filePath);
-        }
-        public static void CreateStuds()
-        {
-            string fileopen = @"..\..\Models\walls-noColumn.ifc";
-            string newFile = @"..\..\Models\Beam-stud.ifc";
-            List<IfWall> walls = new List<IfWall>();
-            //open IfcModel
-            var model = IfModel.Open(fileopen);
-
-            var beamModel = IfModel.New("Stud", "ITI-Building", true, newFile);
-            //IfWall.GetIfcWalls(model);
-            //walls = IfWall.ExtractWalls(model);
-
-            Console.WriteLine($"{walls.Count} wall(s) found!");
-            //Footer
-            Console.WriteLine("-------------------------- ");
-
-
-            int count = walls.Count();
-
-            //for (int i = 0; i < count; i++)
-            //{
-            //    IfStud mystud = new IfStud(beamModel, walls[i], new IfLocation(0, 0, 0), new IfDimension(.6f, .3f, 4), "New-Stud");
-            //    // IfcSill mysill = new IfcSill(beamModel, new IfLocation(3, -8, 0), new IfDimension(6, 1, 1), "New-Sill");
-            //    IfStud mystud2 = new IfStud(beamModel, walls[i], new IfLocation(2, 0, 0), new IfDimension(.6f, .3f, 4), "New-Stud");
-            //    IfStud mystud3 = new IfStud(beamModel, walls[i], new IfLocation(4, 0, 0), new IfDimension(.6f, .3f, 4), "New-Stud");
-            //}
-            beamModel.Save(newFile);
-            model.Save(fileopen);
-            OpenWindow(fileopen);
         }
 
 
