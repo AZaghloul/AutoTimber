@@ -31,6 +31,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Application.IRCWood", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCWoodTest", "IRCWoodTest\IRCWoodTest.csproj", "{29CF04D7-B7AD-49A7-A124-814BEDAD1794}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.BOQ", "Bim.BOQ\Bim.BOQ.csproj", "{91E959B4-6103-483C-8498-A1A0EB89D5B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.BOQ.Test", "Bim.BOQ.Test\Bim.BOQ.Test.csproj", "{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -61,6 +65,14 @@ Global
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|Any CPU.Build.0 = Release|Any CPU
+		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

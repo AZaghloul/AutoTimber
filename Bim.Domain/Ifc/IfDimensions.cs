@@ -65,5 +65,15 @@ namespace Bim.Domain.Ifc
             return new IfDimension(d1.XDim - d2.XDim, d1.YDim - d2.YDim, d1.ZDim - d2.ZDim);
 
         }
+
+        public static bool operator ==(IfDimension d1, IfDimension d2)
+        {
+            return Math.Abs(d1.ToMilliMeters().XDim - d2.ToMilliMeters().XDim) < 0.001 && Math.Abs(d1.ToMilliMeters().YDim - d2.ToMilliMeters().YDim) < 0.001 && Math.Abs(d1.ToMilliMeters().ZDim - d2.ToMilliMeters().ZDim) < 0.001;
+        }
+        public static bool operator !=(IfDimension d1, IfDimension d2)
+        {
+            return !(d1 == d2);
+        }
+
     }
 }
