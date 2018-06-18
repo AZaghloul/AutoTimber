@@ -119,15 +119,34 @@ namespace Bim.Domain.Ifc
                 );
             placment.RefDirection = ifcModel.Instances.New<IfcDirection>();
             placment.Axis = ifcModel.Instances.New<IfcDirection>();
+
             placment.Axis.SetXYZ(
                 IfFloor.ShortDirection.X,
                 IfFloor.ShortDirection.Y,
                 IfFloor.ShortDirection.Z
                 );
+
+            var zDirc = new Vector3D(
+                IfFloor.ShortDirection.X,
+                IfFloor.ShortDirection.Y,
+                IfFloor.ShortDirection.Z);
+
+            var nDirc = new Vector3D(
+                IfFloor.LongDirection.X,
+                IfFloor.LongDirection.Y,
+                IfFloor.LongDirection.Z
+                );
+            var xDir = zDirc.CrossProduct(nDirc);
             //placment.Axis.SetXYZ(
             //    0,0,1
             //    );
-            placment.RefDirection.SetXYZ(1, 0, 0);
+
+            // placment.RefDirection.SetXYZ(xDir.X, xDir.Y,xDir.Z);
+            placment.RefDirection.SetXYZ(
+                IfFloor.LongDirection.X,
+                 IfFloor.LongDirection.Y,
+                 IfFloor.LongDirection.Z
+                );
             lp.RelativePlacement = placment;
 
             //setting the relativ placement

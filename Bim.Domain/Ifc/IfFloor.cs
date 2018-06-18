@@ -4,6 +4,7 @@ using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
 using System;
 using Bim.Domain.Configuration;
+using MathNet.Spatial.Euclidean;
 
 namespace Bim.Domain.Ifc
 {
@@ -18,7 +19,8 @@ namespace Bim.Domain.Ifc
         public IIfcAxis2Placement3D SlabAxis { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
         public IfDirection ShortDirection { get; set; }
-       
+
+        public IfDirection LongDirection { get; set; }
         #endregion
 
         #region Constructors
@@ -59,13 +61,14 @@ namespace Bim.Domain.Ifc
             //get the wall x,y,z
 
             double shortDimension = Math.Sqrt(GetLengthSquare(PolyLine.Points[0], PolyLine.Points[1]));
+            //
             ShortDirection = new IfDirection(PolyLine.Points[0], PolyLine.Points[1]);
-
+           
             double LongDimension = 0;
 
             int noOfPoints = PolyLine.Points.ToArray().Length;
 
-            double GetLengthSquare(IIfcCartesianPoint P1 , IIfcCartesianPoint P2)
+            double GetLengthSquare(IIfcCartesianPoint P1, IIfcCartesianPoint P2)
             {
                 if (!double.IsNaN(P1.Z) && !double.IsNaN(P2.Z))
                     return (Math.Pow(P1.X - P2.X, 2) + Math.Pow(P1.Y - P2.Y, 2) + Math.Pow(P1.Z - P2.Z, 2));
@@ -75,7 +78,7 @@ namespace Bim.Domain.Ifc
             for (int i = 0; i < noOfPoints - 1; i++)
             {
                 double Length = Math.Sqrt(GetLengthSquare(PolyLine.Points[i], PolyLine.Points[i + 1]));
-                if (shortDimension>Length)
+                if (shortDimension > Length)
                 {
                     shortDimension = Length;
                     ShortDirection = new IfDirection(PolyLine.Points[i], PolyLine.Points[i + 1]);
@@ -104,6 +107,16 @@ namespace Bim.Domain.Ifc
 
                 }
             }
+            var sDir = new Vector3D
+               (
+               ShortDirection.X,
+               ShortDirection.Y,
+               ShortDirection.Z
+               );
+            var zDir = new Vector3D(0, 0, 1);
+            var vec = zDir.CrossProduct(sDir);
+            LongDirection = new IfDirection(vec.X, vec.Y, vec.Z);
+
             IfDimension = new IfDimension(shortDimension, LongDimension, depth);
 
 
@@ -116,7 +129,7 @@ namespace Bim.Domain.Ifc
             //var thickness = IfcSlab.HasAssociations.OfType<IIfcRelAssociatesMaterial>().OfType<IIfcMaterialLayerSetUsage>().Select(a => a.OffsetFromReferenceLine);//.OfType<IfcPositiveLengthMeasure>();
             //var location = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcSlab.ObjectPlacement).RelativePlacement).Location;
             //using the Wall Class;
-            
+
         }
         public static List<IfFloor> GetFloors(IfStory ifStory)
         {
@@ -129,7 +142,7 @@ namespace Bim.Domain.Ifc
             foreach (var Floor in Floors)
             {
                 var dir = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)Floor.ObjectPlacement).RelativePlacement).RefDirection;
-                var recD =  Floor.Representation.Representations
+                var recD = Floor.Representation.Representations
                                 .SelectMany(a => a.Items)
                                 .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
                                 .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
