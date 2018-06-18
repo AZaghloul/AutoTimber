@@ -18,6 +18,7 @@ namespace Algorithm.MVC.Models
         }
     }
 
+
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
         public ApplicationDbContext()

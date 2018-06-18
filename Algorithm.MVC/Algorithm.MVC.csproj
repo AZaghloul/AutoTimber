@@ -242,6 +242,8 @@
     <Compile Include="Controllers\DashBoardController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="DAL\Repository.cs" />
+    <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -317,6 +319,7 @@
     <Content Include="Views\DashBoard\Upload.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Managers\" />
     <Folder Include="Users\input-files\" />
     <Folder Include="Users\output-files\" />
   </ItemGroup>
