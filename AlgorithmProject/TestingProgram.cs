@@ -47,7 +47,7 @@ namespace AlgorithmProject
                 wf.FrameWalls();
                 //model.Delete<IfcWall>();
                 model.Save(saveName);
-                OpenWindow(fileName);
+               // OpenWindow(fileName);
                 OpenWindow(saveName);
 
                 List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();

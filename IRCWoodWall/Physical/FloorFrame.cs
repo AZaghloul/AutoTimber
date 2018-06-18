@@ -73,7 +73,7 @@ namespace Bim.Application.IRCWood.Physical
                         IfDimension = new IfDimension(
                                        section.Width.Inches,
                                         section.Depth.Inches,
-                                       reg.IfDimension.ZDim),
+                                       reg.IfDimension.XDim),
 
                         IfMaterial = IfMaterial.Setup.Get<IfMaterial>("Joist")
                     };
