@@ -31,7 +31,7 @@ namespace AlgorithmProject
             #endregion
             var d = Split.Equal(13, .65);
 
-            string fileName = @"..\..\Models\ITI.Qondos.1FloorOnly.ifc";
+            string fileName = @"..\..\Models\ITI.Qondos.2.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
 
             IfcStore ifcStore = IfcStore.Open(fileName);

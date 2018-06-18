@@ -66,34 +66,14 @@ namespace Bim.Domain.Ifc
             //rectangle profile
             body.SweptArea = recProfile;
             body.ExtrudedDirection = ifcModel.Instances.New<IfcDirection>();
-            //  body.ExtrudedDirection.SetXYZ(0, 0, 1);
-            body.ExtrudedDirection.SetXYZ(
-                IfFloor.ShortDirection.X,
-                  IfFloor.ShortDirection.Y,
-                   IfFloor.ShortDirection.Z
-                );
+            body.ExtrudedDirection.SetXYZ(0, 0, 1);
+            //  body.ExtrudedDirection.SetXYZ();
+
+
             var point = ifcModel.Instances.New<IfcCartesianPoint>();
             point.SetXYZ(0, 0, 0);
             body.Position = ifcModel.Instances.New<IfcAxis2Placement3D>();
             body.Position.Location = point;
-            body.Position.RefDirection = ifcModel.Instances.New<IfcDirection>();
-            body.Position.Axis = ifcModel.Instances.New<IfcDirection>();
-
-            //body.Position.Axis.SetXYZ(IfFloor.ShortDirection.X,
-            //     IfFloor.ShortDirection.Y,
-            //      IfFloor.ShortDirection.Z);
-
-            body.Position.Axis.SetXYZ(0,0,1);
-            //get x Vector
-            var zVector = new Vector3D(
-                IfFloor.ShortDirection.X,
-                  IfFloor.ShortDirection.Y,
-                   IfFloor.ShortDirection.Z
-                );
-            var yVector = new Vector3D(0, 0, 1);
-            var xVector = yVector.CrossProduct(zVector);
-
-            body.Position.RefDirection.SetXYZ(xVector.X, xVector.Y, xVector.Z);
 
             //Create a Definition shape to hold the geometry
             var shape = ifcModel.Instances.New<IfcShapeRepresentation>();
@@ -125,10 +105,13 @@ namespace Bim.Domain.Ifc
         private void SetLocation(IfcStore ifcModel)
         {
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
-            // set the position of the joist(ref-axis,location) ;
+            var relPlacement = ifcModel.Instances.New<IfcLocalPlacement>();
+
             var placment = ifcModel.Instances.New<IfcAxis2Placement3D>();
+            //
+            // setting the location
+            //
             placment.Location = ifcModel.Instances.New<IfcCartesianPoint>();
-            var loc = (IfcCartesianPoint)IfFloor.PolyLine.Points[0];
             placment.Location.SetXYZ(
                 IfLocation.X,
                IfLocation.Y,
@@ -136,72 +119,24 @@ namespace Bim.Domain.Ifc
                 );
             placment.RefDirection = ifcModel.Instances.New<IfcDirection>();
             placment.Axis = ifcModel.Instances.New<IfcDirection>();
-            placment.Axis.SetXYZ(0, 0, 1);
-            placment.RefDirection.SetXYZ(1, 0, 0);
-            //placment.Axis.SetXYZ(IfFloor.ShortDirection.X,
-            //      IfFloor.ShortDirection.Y,
-            //       IfFloor.ShortDirection.Z);
-            ////get x Vector
-            //var zVector = new Vector3D(
-            //    IfFloor.ShortDirection.X,
-            //      IfFloor.ShortDirection.Y,
-            //       IfFloor.ShortDirection.Z
+            placment.Axis.SetXYZ(
+                IfFloor.ShortDirection.X,
+                IfFloor.ShortDirection.Y,
+                IfFloor.ShortDirection.Z
+                );
+            //placment.Axis.SetXYZ(
+            //    0,0,1
             //    );
-            //var yVector = new Vector3D(0, 0, 1);
-            //var xVector = zVector.CrossProduct(yVector);
-
-            //placment.RefDirection.SetXYZ(xVector.X, xVector.Y, xVector.Z);
-
+            placment.RefDirection.SetXYZ(1, 0, 0);
             lp.RelativePlacement = placment;
-            lp.PlacementRelTo = ((IfcLocalPlacement)IfFloor.IfcSlab.ObjectPlacement).PlacementRelTo;
-            var relPlacement = ifcModel.Instances.New<IfcLocalPlacement>();
 
+            //setting the relativ placement
+            lp.PlacementRelTo = relPlacement;
+            relPlacement.PlacementRelTo = ((IfcLocalPlacement)IfFloor.IfcSlab.ObjectPlacement).PlacementRelTo;
+
+            var loc = (IfcCartesianPoint)IfFloor.PolyLine.Points[0];
             relPlacement.RelativePlacement = ifcModel.Instances.New<IfcAxis2Placement3D>();
             ((IfcAxis2Placement3D)relPlacement.RelativePlacement).Location = (IfcCartesianPoint)IfFloor.PolyLine.Points[0];
-
-
-            //     lp.PlacementRelTo = relPlacement;
-            //parameters to insert the geometry in the model
-            //var origin = ifcModel.Instances.New<IfcCartesianPoint>();
-            //origin.SetXYZ(IfLocation.X, IfLocation.Y, IfLocation.Z);
-
-            //var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
-
-            //lp.PlacementRelTo = ((IfcLocalPlacement)IfFloor.IfcSlab.ObjectPlacement).PlacementRelTo;
-
-            ///*          Set Stud Location */
-            ////var locPlacment= ifcModel.Instances.New<IfcLocalPlacement>();
-            ////locPlacment.RelativePlacement.= IfFloor.PolyLine.Points[0]
-            ////    OfType<IfcExtrudedAreaSolid>().FirstOrDefault().Position;
-
-
-            //try
-            //{
-            //    ax3D.Location = origin;
-            //    ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
-            //    ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
-
-            //    ax3D.Axis.SetXYZ(IfFloor.ShortDirection.X,
-            //        IfFloor.ShortDirection.Y,
-            //        IfFloor.ShortDirection.Z);
-
-            //    ax3D.RefDirection.SetXYZ(0, 0, 1);
-            //    lp.RelativePlacement = ax3D;
-
-            //}
-            //catch (System.Exception e)
-            //{
-
-
-            //}
-
-            ////body.Position.Location = point;
-
-            ////body.Position.RefDirection = ifcModel.Instances.New<IfcDirection>();
-            ////body.Position.RefDirection.SetXYZ(IfFloor.ShortDirection.X, IfFloor.ShortDirection.Y, IfFloor.ShortDirection.Z);
-
-            ////body.Position.Axis = ifcModel.Instances.New<IfcDirection>();
-            ////body.Position.Axis.SetXYZ(0, 0, -1);
 
             IfcElement.ObjectPlacement = lp;
         }

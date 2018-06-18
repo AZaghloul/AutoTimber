@@ -3,6 +3,7 @@ using Bim.Common.Geometery;
 using Bim.Common.Measures;
 using Bim.Domain.Ifc;
 using Bim.Domain.Polygon;
+using MathNet.Spatial.Euclidean;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -61,14 +62,18 @@ namespace Bim.Application.IRCWood.Physical
 
                 for (int i = 0; i < spaces.Count; i++)
                 {
+                    //var spacingVec = new Vector3D(spaces[i], spaces[i], spaces[i]);
+                    var DircVec = new IfLocation(
+                        FloorPolygon.IfFloor.ShortDirection.Y*spaces[i],
+                        FloorPolygon.IfFloor.ShortDirection.X * spaces[i],
+                        FloorPolygon.IfFloor.ShortDirection.Z * spaces[i]
+                        );
+
                     var ifJoist = new IfJoist(FloorPolygon.IfFloor)
                     {
                         IfModel = FloorPolygon.IfFloor.IfModel,
                         IfFloor = FloorPolygon.IfFloor,
-                        IfLocation =
-                                     new IfLocation(reg.IfLocation.X + spaces[i] + section.Width.Inches/2,
-                                     reg.IfLocation.Y,
-                                     reg.IfLocation.Z),
+                        IfLocation = DircVec,
 
                         IfDimension = new IfDimension(
                                        section.Width.Inches,
