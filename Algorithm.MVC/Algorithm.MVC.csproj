@@ -246,9 +246,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\FileController.cs" />
     <Compile Include="DAL\Repository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Global.asax.cs">
@@ -323,12 +323,15 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
-    <Content Include="Views\DashBoard\Upload.cshtml" />
+    <Content Include="Views\Files\Upload.cshtml" />
+    <Content Include="Views\Files\ViewFile.cshtml" />
+    <Content Include="Views\Files\Design.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Managers\" />
     <Folder Include="Users\input-files\" />
     <Folder Include="Users\output-files\" />
+    <Folder Include="Views\DashBoard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

@@ -88,9 +88,7 @@ namespace Bim.Domain.Ifc
                 }
             }
 
-
-            return /*wallsList;*/ ifStory.IfModel.WallCollection = SetExternalWalls(wallsList);
-
+            return  ifStory.IfModel.WallCollection = wallsList; //SetExternalWalls(wallsList);
         }
 
         public static List<IfWall> SetExternalWalls(List<IfWall> walls)
@@ -113,13 +111,15 @@ namespace Bim.Domain.Ifc
 
             foreach (var point in outerPoints)
             {
-               var wall = wallModels.
-                    Where(w => 
-                    { return (
-                        w.IfLocation.X == point.X && w.IfLocation.Y == point.Y) ||
-                        (w.EndPoint.X == point.X && w.EndPoint.Y == point.Y); }).
-                   
-                    Select(e => e.IfWall).FirstOrDefault();
+                var wall = wallModels.
+                     Where(w =>
+                     {
+                         return (
+                          w.IfLocation.X == point.X && w.IfLocation.Y == point.Y) ||
+                          (w.EndPoint.X == point.X && w.EndPoint.Y == point.Y);
+                     }).
+
+                     Select(e => e.IfWall).FirstOrDefault();
 
                 outerWalls.Add(wall);
             }

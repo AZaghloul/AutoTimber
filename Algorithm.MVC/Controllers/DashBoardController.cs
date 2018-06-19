@@ -27,35 +27,6 @@ namespace Algorithm.MVC.Controllers
             return View();
         }
 
-        [HttpPost]
-        public async Task<JsonResult> Upload(string data)
-        {
-            try
-            {
-                foreach (string file in Request.Files)
-                {
-                    var fileContent = Request.Files[file];
-                    if (fileContent != null && fileContent.ContentLength > 0)
-                    {
-
-                        // and optionally write the file to disk
-                        var fileName = fileContent.FileName;
-                        var path = Path.Combine(Server.MapPath("~/Users/input-files/"), fileName);
-                        fileContent.SaveAs(path);
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json("Upload failed");
-            }
-
-            return Json("File uploaded successfully");
-
-        }
-
-
         public void Design(string fileName)
         {
             StudTable.FilePath = Server.MapPath(@"~\App_Data\Tables\StudSpacingTable.csv");

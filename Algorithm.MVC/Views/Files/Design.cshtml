@@ -1,0 +1,38 @@
+﻿
+@{
+    ViewBag.Title = "Design";
+}
+
+
+
+<h2>Design</h2>
+
+<div style="height:20px">
+
+</div>
+<div class=" input-group">
+    <div class="row ">
+        <input type="text" id="tb-design" />
+    </div>
+    <div class=" row">
+        <input class="btn btn-default" type="button" id="btn-design" value="Design" />
+    </div>
+</div>
+
+<script>
+
+    $('#btn-design').click(() => {
+
+        var fileName = $('#tb-design').val();
+        $.ajax({
+            type: "POST",
+            url: './design?fileName='+fileName,
+            contentType: false,
+            processData: false,
+            success: function (result) {
+                console.log(result);
+            }
+
+        });
+    });
+</script>
