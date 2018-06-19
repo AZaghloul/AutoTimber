@@ -12,6 +12,7 @@ using Bim.Common.Geometery;
 using Bim.Domain;
 using Bim.Application.IRCWood.IRC;
 using Xbim.Ifc;
+using Bim.BOQ;
 
 namespace AlgorithmProject
 {
@@ -71,6 +72,9 @@ namespace AlgorithmProject
                     $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                     i++;
                 }
+                GeometryCollection GC1 = new GeometryCollection();
+                GC1.AddToCollection(model.Instances.OfType<IfJoist>());
+                int q = 0;
             }
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;

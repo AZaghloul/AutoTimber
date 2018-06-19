@@ -169,5 +169,11 @@ namespace Bim.Domain.Ifc
             }
         }
         #endregion
+
+        public override string ToString()
+        {
+            return $"Wall Sill {IfDimension.XDim} × {IfDimension.YDim} × {IfDimension.ZDim}";
+        }
+
     }
 }

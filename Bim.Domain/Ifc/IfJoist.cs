@@ -163,6 +163,9 @@ namespace Bim.Domain.Ifc
         }
         #endregion
 
-
+        public override string ToString()
+        {
+            return $"Floor Joist {IfDimension.XDim} × {IfDimension.YDim} × {IfDimension.ZDim}";
+        }
     }
 }

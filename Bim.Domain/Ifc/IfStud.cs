@@ -216,5 +216,11 @@ namespace Bim.Domain.Ifc
                     break;
             }
         }
+
+        public override string ToString()
+        {
+            return $"Wall Stud {IfDimension.XDim} × {IfDimension.YDim} × {IfDimension.ZDim}";
+        }
+
     }
 }
