@@ -95,6 +95,7 @@
     <Compile Include="Configuration\General\Interfaces\IVersion.cs" />
     <Compile Include="Ifc\Enums\AxisEnum.cs" />
     <Compile Include="Ifc\Enums\DirectionEnum.cs" />
+    <Compile Include="Ifc\Enums\IfUnitEnum.cs" />
     <Compile Include="Ifc\Enums\OptionEnum.cs" />
     <Compile Include="Ifc\IfBuilding.cs" />
     <Compile Include="Ifc\IfColor.cs" />
@@ -114,7 +115,10 @@
     <Compile Include="Ifc\IfModel.cs" />
     <Compile Include="Ifc\IfObject.cs" />
     <Compile Include="Ifc\IfOpening.cs" />
+    <Compile Include="Ifc\IfProperties.cs" />
+    <Compile Include="Ifc\IfQuantity.cs" />
     <Compile Include="Ifc\IfSill.cs" />
+    <Compile Include="Ifc\IfSingleValue.cs" />
     <Compile Include="Ifc\IfStory.cs" />
     <Compile Include="Ifc\IfStud.cs" />
     <Compile Include="Ifc\IfUnit.cs" />

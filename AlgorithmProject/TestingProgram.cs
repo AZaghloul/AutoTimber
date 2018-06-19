@@ -12,6 +12,9 @@ using Bim.Common.Geometery;
 using Bim.Domain;
 using Bim.Application.IRCWood.IRC;
 using Xbim.Ifc;
+using Xbim.Ifc4.Interfaces;
+using Xbim.Ifc4.ProductExtension;
+using Bim.Domain.Ifc.Enums;
 
 namespace AlgorithmProject
 {
@@ -31,23 +34,45 @@ namespace AlgorithmProject
             #endregion
             var d = Split.Equal(13, .65);
 
-            string fileName = @"..\..\Models\ITI.Qondos.2.ifc";
+            string fileName = @"..\..\Models\beam-amr-setup.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
 
             IfcStore ifcStore = IfcStore.Open(fileName);
-            ifcStore.SaveAs(fileName, Xbim.IO.IfcStorageType.IfcXml);
+            //  ifcStore.SaveAs(fileName, Xbim.IO.IfcStorageType.IfcXml);
+            var beams = ifcStore.Instances.OfType<IIfcBeam>();
+
+            var prop = new IfProperties((IfcBuildingElement)beams.FirstOrDefault());
+            var sList = new List<IfSingleValue>()
+            {
+                new IfSingleValue("test value1", "100"),
+                new IfSingleValue("test value2", "400"),
+                new IfSingleValue("test value2", "300"),
+             };
+            var qList = new List<IfQuantity>()
+            {
+                new IfQuantity("test Quantity  value1", "100",IfUnitEnum.AREAUNIT),
+                new IfQuantity("test Quantity value2", "200",IfUnitEnum.AREAUNIT),
+                new IfQuantity("test Quantity value2", "300",IfUnitEnum.AREAUNIT),
+            };
+            prop.AddSingleValue("sss value List", sList);
+            prop.AddQuantities("Quantity value List", qList);
+            prop.FindByName("Join Status");
+            prop.FindByValue("Both joins enabled");
+            prop.FindSVProperty(new IfSingleValue("Join Status", "Both joins enabled"));
+        prop.New();
+            ifcStore.SaveAs((fileName + "prop"));
 
             using (IfModel model = IfModel.Open(fileName))
             {
                 Startup.Configuration(model);
                 model.Save(fileName);
                 //model.Delete<IfcBeam>();
-               // model.Delete<IfcColumn>();
+                // model.Delete<IfcColumn>();
                 WoodFrame wf = new WoodFrame(model);
                 wf.FrameWalls();
                 //model.Delete<IfcWall>();
                 model.Save(saveName);
-               // OpenWindow(fileName);
+                // OpenWindow(fileName);
                 OpenWindow(saveName);
 
                 List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
