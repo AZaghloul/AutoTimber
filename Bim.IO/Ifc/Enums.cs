@@ -12,7 +12,7 @@ namespace Bim.IO
         Ifc4,
         Ifc3x2,
     }
-    public enum SaveAs
+    public enum Extension
     {
         Ifc,
         IfcXml,

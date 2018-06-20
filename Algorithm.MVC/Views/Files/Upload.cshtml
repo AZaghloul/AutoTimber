@@ -1,29 +1,46 @@
-﻿
+﻿@model UploadVM
 @{
     ViewBag.Title = "Upload";
 }
 
 <h2>Upload</h2>
+@using (Html.BeginForm("Upload","Files", FormMethod.Post,  new { enctype ="multipart/form-data" }))
+{
+    <div class="input-group mb-10">
 
-<div class="input-group mb-3">
-    <div class="input-group-prepend">
-        <button id="btn-upload" class="btn btn-outline-secondary" type="button">Upload</button>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" , id="txt-title" } })
+                @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Desciption, htmlAttributes: new { @class = "control-label col-md-5" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Desciption, new { htmlAttributes = new { @class = "form-control", id="txt-description" } })
+                @Html.ValidationMessageFor(model => model.Desciption, "", new { @class = "text-danger" })
+            </div>
+        </div>
+        <div class="custom-file">
+            <input type="file" name="files" class="custom-file-input" id="files">
+            <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
+        </div>
+        <div class="input-group-prepend">
+            <button id="btn-upload" class="btn btn-outline-secondary" type="submit">Upload</button>
+        </div>
     </div>
-    <div class="custom-file">
-        <input type="file" class="custom-file-input" id="input-upload" multiple>
-        <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
-    </div>
-</div>
+}
 
-<div>
-    <input id="btn-design" type="button" class="btn btn-default" value="Design" />
-</div>
 
-<script>
+    <script>
 
-    $('#btn-upload').on('click', function (e) {
+    @*$('#btn-upload').on('click', function (e) {
         var input = document.getElementById("input-upload");
         var files = input.files;
+
+       
         console.log(files);
         //var myID = 3; //uncomment this to make sure the ajax URL works
         if (files.length > 0) {
@@ -32,9 +49,13 @@
                 for (var x = 0; x < files.length; x++) {
                     data.append("file" + x, files[x]);
                 }
+
+               
+                     
+                  
                 $.ajax({
                     type: "POST",
-                    url: './upload',
+                    url: '@Url.Action("Upload", "Files")',
                     contentType: false,
                     processData: false,
                     data: data,
@@ -46,7 +67,7 @@
             }
         }
     }
-    );
+    );*@
 
     $('#btn-design').click(() => {
         $.ajax({
@@ -60,4 +81,4 @@
 
         });
     });
-</script>
+    </script>

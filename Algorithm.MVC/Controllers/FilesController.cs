@@ -2,56 +2,110 @@
 using Bim.Application.IRCWood.IRC;
 using Bim.Application.IRCWood.Physical;
 using Bim.Domain.Ifc;
+using Bim.IO;
+
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
-using System.Web;
 using System.Web.Mvc;
-using Xbim.Ifc4.SharedBldgElements;
+using Algorithm.DB.ViewModels;
+using System.Web;
+using System.Collections.Generic;
+using Algorithm.MVC.DAL;
+using Algorithm.DB;
+using Algorithm.DB.Models;
+using Microsoft.AspNet.Identity;
+using Algorithm.MVC.Helper;
 
 namespace Algorithm.MVC.Controllers
 {
     public class FilesController : Controller
     {
+
         // GET: Files
         public ActionResult Upload()
         {
-            return View();
+
+
+            return View(new UploadVM());
         }
 
         [HttpPost]
-        public async Task<JsonResult> Upload(string files)
+        public  ActionResult Upload(UploadVM model, IEnumerable<HttpPostedFileBase> files)
         {
+            FileData fileData=new FileData();
+
+            //if found the same file redirect to the show Action
+           
             try
             {
-                foreach (string file in Request.Files)
+                foreach (var file in files)
                 {
-                    var fileContent = Request.Files[file];
-                    if (fileContent != null && fileContent.ContentLength > 0)
+
+                    if (file != null && file.ContentLength > 0)
                     {
 
-                        // and optionally write the file to disk
-                        var fileName = fileContent.FileName;
-                        var path = Path.Combine(Server.MapPath("~/Users/input-files/"), fileName);
-                        fileContent.SaveAs(path);
+                        //create FileData object to hold all file paths
+                         fileData = new FileData(file.FileName);
+
+                        if (IfcHandler.CheckFileExist(fileData.InputPath))
+                        {
+                           return RedirectToAction("Show", "Files", fileData);
+                        }
+                        //write the file to the desk
+                        file.SaveAs(fileData.InputPath);
+
+                        //send the input data to the database
+                        UnitOfWork uow = new UnitOfWork(new AlgorithmDB());
+                        var l = Guid.TryParse(User.Identity.GetUserId(), out Guid userid);
+                        model.FileName = file.FileName;
+
+                        var proj = new Project()
+                        {
+                            Id = Guid.NewGuid(),
+                            Title = model.Title,
+                            Description = model.Desciption,
+                            FileName = model.FileName,
+                            UserId = userid
+                        };
+                        uow.Projects.Insert(proj);
+                        uow.SaveChanges();
+                        //send the data Model to the Show Action
+                        return RedirectToAction("Show", "Files", fileData);
+                        
                     }
                 }
+
+                Response.StatusCode = (int)HttpStatusCode.OK;
+
             }
             catch (Exception)
             {
-                Response.StatusCode = (int)HttpStatusCode.BadRequest;
-                return Json("Upload failed");
+                return View();
             }
 
-            return Json("File uploaded successfully");
+
+            return RedirectToAction("Show", "Files", fileData);
+
+
 
         }
-        public ActionResult ViewFile(string name)
+        public ActionResult Show(FileData fileData)
         {
-            return View();
+
+
+            if (! IfcHandler.CheckFileExist(fileData.wexBIMPath))
+            {
+                IfcHandler.ToWexBim(fileData.InputPath, fileData.wexBIMPath);
+            } 
+
+            return View(fileData);
+        }
+
+        public ActionResult Viewer(string FileName)
+        {
+            return File(new FileData(FileName).wexBIMPath, "application/octet-stream", FileName);
         }
 
 
@@ -69,7 +123,7 @@ namespace Algorithm.MVC.Controllers
             fileName = fileName ?? "home-2floor-ft.ifc";
             var filePath = Server.MapPath($"~/Users/input-files/{fileName}");
             var outputFile = Server.MapPath($"~/Users/output-files/{fileName}-Structure");
-            
+
 
             var startup = new IfStartup();
             IfModel model = IfModel.Open(filePath);
@@ -80,24 +134,15 @@ namespace Algorithm.MVC.Controllers
             wf.Optimize();
             wf.Write();
             model.Save(outputFile);
-          
-            
-
-        }
-
-        public void Show(string fileName)
-        {
-           
 
 
 
         }
 
 
-        public void ToWexBim(string fileName )
-        {
 
-        }
+
+      
 
     }
 }

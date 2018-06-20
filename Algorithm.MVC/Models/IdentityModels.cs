@@ -21,6 +21,7 @@ namespace Algorithm.MVC.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        // our Custom Data Models
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {

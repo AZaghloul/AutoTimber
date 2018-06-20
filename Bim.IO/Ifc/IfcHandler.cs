@@ -1,13 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xbim.Ifc;
 using Xbim.IO;
 using Bim.IO.General;
-using Bim.Common;
+using Xbim.ModelGeometry.Scene;
 namespace Bim.IO
 {
     public class IfcHandler : IHandler
@@ -29,7 +25,6 @@ namespace Bim.IO
         }
 
         public string FileName { get; set; }
-        public bool IsVisible { get; set; }
         #region Helper Methods
 
         #endregion
@@ -41,27 +36,40 @@ namespace Bim.IO
             model = IfcStore.Open(_filePath);
             return model;
         }
-        public void Export()
-        {
-            model.SaveAs(Path.ChangeExtension(_filePath, "ifcxml"));
-        }
-        public void Export(string filePath, SaveAs extension)
+
+        public void SaveAs(string filePath, Extension extension)
         {
             switch (extension)
             {
-                case SaveAs.Ifc:
+                case Extension.Ifc:
                     model.SaveAs(filePath, IfcStorageType.Ifc);
 
                     break;
-                case SaveAs.IfcXml:
+                case Extension.IfcXml:
                     model.SaveAs(filePath, IfcStorageType.IfcXml);
 
                     break;
-                case SaveAs.IfcZip:
+                case Extension.IfcZip:
                     model.SaveAs(filePath, IfcStorageType.IfcZip);
                     break;
-                case SaveAs.WexBim:
-                    // model.SaveAsWexBim();
+                case Extension.WexBim:
+                    // create wexBim file
+                    using (var model = IfcStore.Open(filePath))
+                    {
+                        var context = new Xbim3DModelContext(model);
+                        context.CreateContext();
+
+                        var wexBimFilename = Path.ChangeExtension(filePath, "wexBIM");
+                        using (var wexBiMfile = File.Create(wexBimFilename))
+                        {
+                            using (var wexBimBinaryWriter = new BinaryWriter(wexBiMfile))
+                            {
+                                model.SaveAsWexBim(wexBimBinaryWriter);
+                                wexBimBinaryWriter.Close();
+                            }
+                            wexBiMfile.Close();
+                        }
+                    }
                     break;
                 default:
                     break;
@@ -74,7 +82,7 @@ namespace Bim.IO
             throw new NotImplementedException();
         }
 
-       
+
 
         public void Delete()
         {
@@ -88,15 +96,31 @@ namespace Bim.IO
             throw new NotImplementedException();
         }
 
-        void IHandler.Open(string fileName)
+        #endregion
+
+        public static void ToWexBim(string filePath,string outputPath)
         {
-            throw new NotImplementedException();
+            using (var model = IfcStore.Open(filePath))
+            {
+                var context = new Xbim3DModelContext(model);
+                context.CreateContext();
+                
+                using (var wexBiMfile = File.Create(outputPath))
+                {
+                    using (var wexBimBinaryWriter = new BinaryWriter(wexBiMfile))
+                    {
+                        model.SaveAsWexBim(wexBimBinaryWriter);
+                        wexBimBinaryWriter.Close();
+                    }
+                    wexBiMfile.Close();
+                }
+            }
         }
 
-
-
-
-        #endregion
+        public static bool CheckFileExist(string filePath)
+        {
+            return File.Exists(filePath);
+        }
     }
 
 
