@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Bim.Domain.General;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace Algorithm.DB.Models
@@ -13,5 +14,8 @@ namespace Algorithm.DB.Models
         public string Description { get; set; }
         public string Thumbnail { get; set; }
         public DesignState DesignState { get; set; }
+        public bool AddToGallery { get; set; }
+        public DesignOptions DesignOptions { get; set; }
     }
+
 }

@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Bim.Domain.General.DesignOptions>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrameWalls)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrameFloors)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FrameRafter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DetectExternalWalls)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OptimizeWalls)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OptimizeFloors)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.OptimizeRafter)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Exclude)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DeleteArcWalls)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrameWalls)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrameFloors)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FrameRafter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DetectExternalWalls)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OptimizeWalls)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OptimizeFloors)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.OptimizeRafter)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Exclude)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DeleteArcWalls)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Id }) |
+            @Html.ActionLink("Details", "Details", new { id=item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Id })
+        </td>
+    </tr>
+}
+
+</table>

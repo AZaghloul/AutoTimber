@@ -10,6 +10,7 @@ using Bim.Domain;
 using Bim.Application.IRCWood.Common;
 using Bim.Application.IRCWood.IRC;
 using System.Diagnostics;
+using Bim.IO;
 
 namespace AlgorithmProject
 {
@@ -29,8 +30,11 @@ namespace AlgorithmProject
             #endregion
             StudTable.FilePath = @"..\..\Tables\StudSpacingTable.csv";
             Table502_3_1.FilePath = @"..\..\Tables\table502.3.1(1).txt";
-            string fileName = @"..\..\Models\outer-walls-5.ifc";
+            string fileName = @"..\..\Models\ITI.Qondos.2-Solved.ifc";
             //   IfModel model = IfModel.Open(fileName);
+
+            IfcHandler.ToWexBim(@"D:\ITI\myProjects\Algorithm Project\AlgorithmProject\AlgorithmProject\Models\ITI.Qondos.2-Solved.ifc"
+);
 
             Stopwatch sw = new Stopwatch();
             sw.Start();

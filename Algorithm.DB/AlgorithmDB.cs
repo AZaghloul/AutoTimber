@@ -6,13 +6,14 @@ using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Algorithm.DB.Models;
+using Bim.Domain.General;
 
 namespace Algorithm.DB
 {
     public class AlgorithmDB : DbContext
     {
-        DbSet<Project> Projects { get; set; }
-
+        public DbSet<Project> Projects { get; set; }
+        public DbSet<DesignOptions> DesignOptions { get; set; }
         public AlgorithmDB() : base("DefaultConnection")
         {
 
@@ -23,5 +24,7 @@ namespace Algorithm.DB
 
 
         }
+
+
     }
 }

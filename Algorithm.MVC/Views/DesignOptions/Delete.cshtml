@@ -1,0 +1,104 @@
+﻿@model Bim.Domain.General.DesignOptions
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>DesignOptions</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProjectId)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProjectId)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrameWalls)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrameWalls)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrameFloors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrameFloors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FrameRafter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FrameRafter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DetectExternalWalls)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DetectExternalWalls)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OptimizeWalls)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OptimizeWalls)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OptimizeFloors)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OptimizeFloors)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.OptimizeRafter)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.OptimizeRafter)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Exclude)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Exclude)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DeleteArcWalls)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DeleteArcWalls)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

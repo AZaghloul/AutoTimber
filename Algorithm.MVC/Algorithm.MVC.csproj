@@ -250,9 +250,11 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\DashBoardController.cs" />
+    <Compile Include="Controllers\DesignOptionsController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -368,6 +370,16 @@
     <Content Include="Views\Files\ViewFile.cshtml" />
     <Content Include="Views\Files\Design.cshtml" />
     <Content Include="Views\Files\Show.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\DesignOptions\Create.cshtml" />
+    <Content Include="Views\DesignOptions\Delete.cshtml" />
+    <Content Include="Views\DesignOptions\Details.cshtml" />
+    <Content Include="Views\DesignOptions\Edit.cshtml" />
+    <Content Include="Views\DesignOptions\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Users\input-files\" />

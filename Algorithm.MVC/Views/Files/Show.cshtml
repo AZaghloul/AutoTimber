@@ -84,7 +84,7 @@
             //document.getElementById("productId").value = arg.id;
 
         }
-            
+
         //viewer.on('loaded', function () { viewer.background = [255, 255, 255, 255] })
         viewer.on('pick', pickFunc);
             viewer.on('dblclick', function (arg) { viewer.zoomTo(arg.id); viewer2.zoomTo(arg.id); })
@@ -190,17 +190,19 @@
         };
 
         //Add Navigation Cube
-        var navCube = new xNavigationCube();
-        navCube.ratio = .1;
-        viewer.addPlugin(navCube);
 
 
         //Load Architecture and Structure Models and start the viewers
         viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model[1].FileName })');
-        viewer2.start();
-        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
-        viewer.start();
+    viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
 
+    //var navCube = new xNavigationCube();
+    //navCube.ratio = .1;
+    //viewer.addPlugin(navCube);
+
+
+        viewer.start();
+    viewer2.start();
 
 </script>
 
