@@ -11,14 +11,16 @@
 <h2>Show</h2>
 
 <div id="content" class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <canvas id="xbim-viewer" height="400" style="width:100%"></canvas>
-        </div>
+<div class="row">
+     </div>
+            <div class="col-md-3 asd">
+                <canvas id="viewer" width="350" height="200"></canvas>
+            </div>
+            <div class="col-md-6 bsd">
+                <canvas id="viewer2" width="800" height="500"></canvas>
+            </div>
     </div>
 </div>
-
-
 
 @section scripts{
     <script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
@@ -26,16 +28,95 @@
 
         $(document).ready(function () {
 
-            var viewer = new xViewer('xbim-viewer');
+        var viewer = new xViewer("viewer");
+        var viewer2 = new xViewer("viewer2");
 
-        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName })');
-        viewer.start();
+        colorsEnum = Object.freeze({ 'red': 0, 'blue': 1 });
+
+        viewer.background = [0, 0, 0, 0];
+        viewer2.background = [0, 0, 0, 0];
+
+        var cam1 = viewer.getCameraPosition();
+        var cam2 = viewer2.getCameraPosition();
 
 
+        viewer.on("loaded", function () {
+            var shouldRotate = true;
 
+            function rotate() {
+                viewer.setCameraPosition(viewer2.getCameraPosition());
+
+                if (!shouldRotate) {
+                    return;
+                }
+
+                var origin = viewer._origin;
+                var origin2 = viewer2._origin;
+
+                var camera = viewer.getCameraPosition();
+                var camera2 = viewer2.getCameraPosition();
+
+                //get origin coordinates in view space
+                var mvOrigin = vec3.transformMat4(vec3.create(), origin, viewer._mvMatrix)
+                var mvOrigin2 = vec3.transformMat4(vec3.create(), origin2, viewer2._mvMatrix)
+
+                //movement factor needs to be dependant on the distance but one meter is a minimum so that movement wouldn't stop when camera is in 0 distance from navigation origin
+                var distanceVec = vec3.subtract(vec3.create(), origin, camera);
+                var distance = Math.max(vec3.length(distanceVec), viewer._handles[0]._model.meter);
+
+                var distanceVec2 = vec3.subtract(vec3.create(), origin2, camera2);
+                var distance2 = Math.max(vec3.length(distanceVec2), viewer2._handles[0]._model.meter);
+
+                //move to the navigation origin in view space
+                var transform = mat4.translate(mat4.create(), mat4.create(), mvOrigin)
+                var transform2 = mat4.translate(mat4.create(), mat4.create(), mvOrigin2)
+
+                //z rotation around model z axis
+                var mvZ = vec3.transformMat3(vec3.create(), [0, 0, 1], mat3.fromMat4(mat3.create(), viewer._mvMatrix));
+                mvZ = vec3.normalize(vec3.create(), mvZ);
+                transform = mat4.rotate(mat4.create(), transform, Math.PI / 700.0, mvZ);
+
+                var mvZ2 = vec3.transformMat3(vec3.create(), [0, 0, 1], mat3.fromMat4(mat3.create(), viewer2._mvMatrix));
+                mvZ2 = vec3.normalize(vec3.create(), mvZ2);
+                transform2 = mat4.rotate(mat4.create(), transform2, Math.PI / 700.0, mvZ2);
+                //reverse the translation in view space and leave only navigation changes
+                var translation = vec3.negate(vec3.create(), mvOrigin);
+                transform = mat4.translate(mat4.create(), transform, translation);
+
+                var translation2 = vec3.negate(vec3.create(), mvOrigin2);
+                transform2 = mat4.translate(mat4.create(), transform2, translation2);
+
+                //apply transformation in right order
+                viewer._mvMatrix = mat4.multiply(mat4.create(), transform, viewer._mvMatrix);
+
+                viewer2._mvMatrix = mat4.multiply(mat4.create(), transform2, viewer2._mvMatrix);
+            }
+            $("#viewer").mousedown(function () { shouldRotate = false; });
+            $("#viewer2").mousedown(function () { shouldRotate = false; });
+            setInterval(rotate, 20);
+        });
+
+        viewer2.on('pick', function (args) {
+            var id = args.id;
+            viewer.setState(xState.HIDDEN, [args.id]);
+            viewer2.setState(xState.HIDDEN, [args.id]);
+            var span = document.getElementById('productId');
+            if (span) {
+                span.innerHTML = id ? id : 'model';
+            }
 
         });
-      
+
+
+
+        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName })');
+        viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName })');
+
+        viewer.start();
+        viewer2.start();
+
+        });
+
     </script>
 
 
