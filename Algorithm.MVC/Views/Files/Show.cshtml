@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Show";
 }
-@model FileData
+@model List<FileData>
 
 
 
@@ -13,12 +13,18 @@
 <div id="content" class="container">
     <div class="row">
         <div class="col-md-12">
-            <canvas id="xbim-viewer" height="400" style="width:100%"></canvas>
+            <canvas id="viewer-Archeticture" height="400" style="width:100%"></canvas>
         </div>
     </div>
 </div>
 
-
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <canvas id="viewer-structure" height="400" style="width:100%"></canvas>
+        </div>
+    </div>
+</div>
 
 @section scripts{
     <script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
@@ -26,11 +32,16 @@
 
         $(document).ready(function () {
 
-            var viewer = new xViewer('xbim-viewer');
+            var viewer = new xViewer('viewer-structure');
 
-        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName })');
+        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
         viewer.start();
 
+
+            var viewer = new xViewer('viewer-Archeticture');
+
+        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[1].FileName })');
+        viewer.start();
 
 
 

@@ -22,15 +22,13 @@ namespace Algorithm.MVC.Controllers
 {
     public class FilesController : Controller
     {
-
-        // GET: Files
+        #region Upload
         public ActionResult Upload()
         {
 
 
             return View(new UploadVM());
         }
-
         [HttpPost]
         public  ActionResult Upload(UploadVM model, IEnumerable<HttpPostedFileBase> files)
         {
@@ -91,30 +89,51 @@ namespace Algorithm.MVC.Controllers
 
 
         }
-        public ActionResult Show(FileData fileData)
+
+        #endregion
+
+        #region Show Models Methods
+
+        //public ActionResult Show(FileData fileData)
+        //{
+
+
+        //    //if (! IfcHandler.CheckFileExist(fileData.wexBIMPath))
+        //    //{
+        //    //    IfcHandler.ToWexBim(fileData.InputPath, fileData.wexBIMPath);
+        //    //} 
+
+        //    return View(fileData);
+        //}
+
+
+        public ActionResult Show(List< FileData> fileData)
         {
+            fileData = new List<FileData>() { new FileData(), new FileData() };
 
-
-            if (! IfcHandler.CheckFileExist(fileData.wexBIMPath))
-            {
-                IfcHandler.ToWexBim(fileData.InputPath, fileData.wexBIMPath);
-            } 
+            //if (! IfcHandler.CheckFileExist(fileData.wexBIMPath))
+            //{
+            //    IfcHandler.ToWexBim(fileData.InputPath, fileData.wexBIMPath);
+            //} 
 
             return View(fileData);
         }
-
         public ActionResult Viewer(string FileName)
         {
+           
+            FileName = "a7la-home.WexBIM";
             return File(new FileData(FileName).wexBIMPath, "application/octet-stream", FileName);
         }
 
+
+        #endregion
+
+        #region Design Methods
 
         public ActionResult Design()
         {
             return View();
         }
-
-
         [HttpPost]
         public void Design(string fileName)
         {
@@ -138,11 +157,11 @@ namespace Algorithm.MVC.Controllers
 
 
         }
+        #endregion
 
 
 
 
-      
 
     }
 }
