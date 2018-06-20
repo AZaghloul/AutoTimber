@@ -39,6 +39,9 @@
     <Reference Include="log4net">
       <HintPath>..\Refrences\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Spatial">
+      <HintPath>..\Refrences\MathNet.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -92,6 +95,7 @@
     <Compile Include="Configuration\General\Interfaces\IVersion.cs" />
     <Compile Include="Ifc\Enums\AxisEnum.cs" />
     <Compile Include="Ifc\Enums\DirectionEnum.cs" />
+    <Compile Include="Ifc\Enums\IfUnitEnum.cs" />
     <Compile Include="Ifc\Enums\OptionEnum.cs" />
     <Compile Include="Ifc\IfBuilding.cs" />
     <Compile Include="Ifc\IfColor.cs" />
@@ -111,7 +115,10 @@
     <Compile Include="Ifc\IfModel.cs" />
     <Compile Include="Ifc\IfObject.cs" />
     <Compile Include="Ifc\IfOpening.cs" />
+    <Compile Include="Ifc\IfProperties.cs" />
+    <Compile Include="Ifc\IfQuantity.cs" />
     <Compile Include="Ifc\IfSill.cs" />
+    <Compile Include="Ifc\IfSingleValue.cs" />
     <Compile Include="Ifc\IfStory.cs" />
     <Compile Include="Ifc\IfStud.cs" />
     <Compile Include="Ifc\IfUnit.cs" />
@@ -124,6 +131,7 @@
     <Compile Include="Polygon\Region.cs" />
     <Compile Include="Polygon\WallPolygon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="test.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">

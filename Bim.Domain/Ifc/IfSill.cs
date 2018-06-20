@@ -9,6 +9,8 @@ using Xbim.Ifc4.SharedBldgElements;
 using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
 using Bim.Domain.Configuration;
+using Xbim.Ifc4.Kernel;
+using Xbim.Ifc4.PropertyResource;
 
 namespace Bim.Domain.Ifc
 {
@@ -167,6 +169,10 @@ namespace Bim.Domain.Ifc
                 default:
                     break;
             }
+        }
+
+        private void SetProperties()
+        {
         }
         #endregion
 

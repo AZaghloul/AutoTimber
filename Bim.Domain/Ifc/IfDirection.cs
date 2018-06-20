@@ -26,6 +26,12 @@ namespace Bim.Domain.Ifc
 
             Normalize();
         }
+        public IfDirection(double x,double y ,double z)
+        {
+            X = x;
+            Y = y;
+            Z = z;
+        }
 
         private void Normalize()
         {

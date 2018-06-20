@@ -9,6 +9,7 @@ using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
 using Xbim.Ifc4.GeometricModelResource;
 using Bim.Domain.Configuration;
+using MathNet.Spatial.Euclidean;
 
 namespace Bim.Domain.Ifc
 {
@@ -65,17 +66,12 @@ namespace Bim.Domain.Ifc
             //rectangle profile
             body.SweptArea = recProfile;
             body.ExtrudedDirection = ifcModel.Instances.New<IfcDirection>();
-            body.ExtrudedDirection.SetXYZ(IfFloor.ShortDirection.X, IfFloor.ShortDirection.Y, 0);
-            //parameters to insert the geometry in the model
-            // var origin = ifcModel.Instances.New<IfcCartesianPoint>();
+            body.ExtrudedDirection.SetXYZ(0, 0, 1);
+            //  body.ExtrudedDirection.SetXYZ();
 
-            /*          Set Stud Location */
-            //origin.SetXYZ(IfLocation.X, IfLocation.Y, IfLocation.Z);
 
             var point = ifcModel.Instances.New<IfcCartesianPoint>();
-            point.SetXYZ(IfFloor.IfLocation.X, IfFloor.IfLocation.Y, IfFloor.IfLocation.Z);
-            //point.SetXYZ(0, 0, 0);
-
+            point.SetXYZ(0, 0, 0);
             body.Position = ifcModel.Instances.New<IfcAxis2Placement3D>();
             body.Position.Location = point;
 
@@ -86,12 +82,9 @@ namespace Bim.Domain.Ifc
             shape.RepresentationType = "SweptSolid";
             shape.RepresentationIdentifier = "Body";
             shape.Items.Add(body);
-
             var rep = ifcModel.Instances.New<IfcProductDefinitionShape>();
             rep.Representations.Add(shape);
-
             // linear segment as IfcPolyline with two points is required for IfcWall
-
             var ifcPolyline = ifcModel.Instances.New<IfcPolyline>();
             var startPoint = ifcModel.Instances.New<IfcCartesianPoint>();
             startPoint.SetXY(IfLocation.X, IfLocation.Y);
@@ -111,32 +104,58 @@ namespace Bim.Domain.Ifc
         }
         private void SetLocation(IfcStore ifcModel)
         {
-            //parameters to insert the geometry in the model
-            var origin = ifcModel.Instances.New<IfcCartesianPoint>();
-
-            /*          Set Stud Location */
-            origin.SetXYZ(IfLocation.X, IfLocation.Y, IfLocation.Z);
-
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
-            var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
-            /*          Set Stud Location */
-            lp.PlacementRelTo = (IfcLocalPlacement)IfFloor.LocalPlacement;
-            ax3D.Location = origin;
-            ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
-            try
-            {
-                ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
-                ax3D.RefDirection.SetXYZ(0, 0, 0);// ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
-                ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
-                ax3D.Axis = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis; //z-axis direction
-                lp.RelativePlacement = ax3D;
-            }
-            catch (System.Exception e)
-            {
+            var relPlacement = ifcModel.Instances.New<IfcLocalPlacement>();
 
+            var placment = ifcModel.Instances.New<IfcAxis2Placement3D>();
+            //
+            // setting the location
+            //
+            placment.Location = ifcModel.Instances.New<IfcCartesianPoint>();
+            placment.Location.SetXYZ(
+                IfLocation.X,
+               IfLocation.Y,
+              IfLocation.Z
+                );
+            placment.RefDirection = ifcModel.Instances.New<IfcDirection>();
+            placment.Axis = ifcModel.Instances.New<IfcDirection>();
 
-            }
+            placment.Axis.SetXYZ(
+                IfFloor.ShortDirection.X,
+                IfFloor.ShortDirection.Y,
+                IfFloor.ShortDirection.Z
+                );
 
+            var zDirc = new Vector3D(
+                IfFloor.ShortDirection.X,
+                IfFloor.ShortDirection.Y,
+                IfFloor.ShortDirection.Z);
+
+            var nDirc = new Vector3D(
+                IfFloor.LongDirection.X,
+                IfFloor.LongDirection.Y,
+                IfFloor.LongDirection.Z
+                );
+            var xDir = zDirc.CrossProduct(nDirc);
+            //placment.Axis.SetXYZ(
+            //    0,0,1
+            //    );
+
+            // placment.RefDirection.SetXYZ(xDir.X, xDir.Y,xDir.Z);
+            placment.RefDirection.SetXYZ(
+                IfFloor.LongDirection.X,
+                 IfFloor.LongDirection.Y,
+                 IfFloor.LongDirection.Z
+                );
+            lp.RelativePlacement = placment;
+
+            //setting the relativ placement
+            lp.PlacementRelTo = relPlacement;
+            relPlacement.PlacementRelTo = ((IfcLocalPlacement)IfFloor.IfcSlab.ObjectPlacement).PlacementRelTo;
+
+            var loc = (IfcCartesianPoint)IfFloor.PolyLine.Points[0];
+            relPlacement.RelativePlacement = ifcModel.Instances.New<IfcAxis2Placement3D>();
+            ((IfcAxis2Placement3D)relPlacement.RelativePlacement).Location = (IfcCartesianPoint)IfFloor.PolyLine.Points[0];
 
             IfcElement.ObjectPlacement = lp;
         }
