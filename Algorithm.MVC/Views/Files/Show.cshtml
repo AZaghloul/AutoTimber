@@ -21,31 +21,107 @@
 
 <h2>Show</h2>
 
+<div class="panel panel-default" style="margin-bottom:30px;">
+    <div class="panel-heading" style="padding:0px 0px;">
+        <!-- Nav tabs -->
+        <ul class="nav nav-tabs" role="tablist">
+            <li class="active"><a href="#OnClick" role="tab" data-toggle="tab">On Click</a></li>
+            <li><a href="#View" role="tab" data-toggle="tab">View</a></li>
+            <li><a href="#Clip" role="tab" data-toggle="tab">Clip</a></li>
+            <li><a href="#Insert" role="tab" data-toggle="tab">Insert</a></li>
+            <li><a href="#Annotate" role="tab" data-toggle="tab">Annotate</a></li>
+            <li><a href="#Analyze" role="tab" data-toggle="tab">Analyze</a></li>
+            <li><a href="#View" role="tab" data-toggle="tab">View</a></li>
+            <li><a href="#Add-ins" role="tab" data-toggle="tab">Add-ins</a></li>
+        </ul>
+
+    </div>
+    <!-- Tab panes + Panel body -->
+    <div class="panel-body tab-content" style="padding:0px;">
+        <div class="tab-pane active" id="OnClick">
+            <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'zoom';">Zoom </button>
+            <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'orbit'">orbit </button>
+            <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'pan'">pan </button>
+            <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'free-orbit'">free-orbit </button>
+        </div>
+        <div class="tab-pane" id="View">
+            <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('front'); viewer2.show('front');">Front</button>
+            <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('back');  viewer2.show('back');">Back</button>
+            <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('top');   viewer2.show('top');">Top</button>
+            <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('bottom');viewer2.show('bottom');">Bottom</button>
+            <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('left');  viewer2.show('left');">Left</button>
+            <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('right'); viewer2.show('right');">Right</button>
+            <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.setCameraPosition([50, 50, 50]); viewer2.setCameraPosition([50, 50, 50]); viewer.zoomTo(); viewer2.zoomTo();">3D</button>
+        </div>
+        <div class="tab-pane" id="Clip">
+            <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.clip()  ">clip </button>
+            <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.unclip()  ">Unclip </button>
+        </div>
+
+        <div class="tab-pane" id="Insert">
+            <button type="button" class="btn btn-primary">Modify</button>
+            <button type="button" class="btn btn-primary">Link CAD</button>
+            <button type="button" class="btn btn-primary">Decal</button>
+            <button type="button" class="btn btn-primary">Load Family</button>
+
+        </div>
+        <div class="tab-pane" id="Annotate">
+            <button type="button" class="btn btn-primary">Modify</button>
+            <button type="button" class="btn btn-primary">Aligned</button>
+            <button type="button" class="btn btn-primary">Angular</button>
+            <button type="button" class="btn btn-primary">Radial</button>
+            <button type="button" class="btn btn-primary">Diameter</button>
+            <button type="button" class="btn btn-primary">Arc Length</button>
+        </div>
+        <div class="tab-pane" id="Analyze">
+            <button type="button" class="btn btn-primary">Materials</button>
+            <button type="button" class="btn btn-primary">Boundary Condition</button>
+            <button type="button" class="btn btn-primary">Functions</button>
+            <button type="button" class="btn btn-primary">Load Patterns</button>
+            <button type="button" class="btn btn-primary">Load Cases</button>
+            <button type="button" class="btn btn-primary">Load Combinations</button>
+            <button type="button" class="btn btn-primary">Run Analysis</button>
+
+
+
+        </div>
+
+        <div class="tab-pane" id="View">
+            <button type="button" class="btn btn-primary">3D View</button>
+            <button type="button" class="btn btn-primary">2D View</button>
+            <button type="button" class="btn btn-primary">Zoom(Menu)</button>
+            <button type="button" class="btn btn-primary">Selection(Menu)</button>
+            <button type="button" class="btn btn-primary">Display(Menu)</button>
+
+        </div>
+        <div class="tab-pane" id="Manage"></div>
+        <div class="tab-pane" id="Add-ins">
+            <button type="button" class="btn btn-primary"> Add Plugin</button>
+        </div>
+
+    </div>
+</div>
+
+
+
 <div class="tab-pane active" id="home">
-    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'zoom';">Zoom </button>
-    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'orbit'">orbit </button>
-    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'pan'">pan </button>
-    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'free-orbit'">free-orbit </button>
 
-    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('front'); viewer2.show('front');">Front</button>
-    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('back');  viewer2.show('back');">Back</button>
-    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('top');   viewer2.show('top');">Top</button>
-    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('bottom');viewer2.show('bottom');">Bottom</button>
-    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('left');  viewer2.show('left');">Left</button>
-    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('right'); viewer2.show('right');">Right</button>
-    @*<button type="button" class="btn btn-primary" onclick="if (viewer) viewer.setCameraPosition([50, 50, 50]); viewer2.setCameraPosition([50, 50, 50]);">3D</button>*@
-    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.zoomTo(); viewer2.zoomTo();">3D</button>
 
-    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.clip()  ">clip </button>
-    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.unclip()  ">Unclip </button>
     <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.setStyle(colorsEnum.red, xProductType.IFCWALLSTANDARDCASE)">Color Beams</button>
     <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.resetStyles(xProductType.IFCWALLSTANDARDCASE)">reset Beams color</button>
     <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.setState(xState.HIGHLIGHTED,xProductType.IFCWALLSTANDARDCASE)">Highlight Beams</button>
     <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.setState(xState.XRAYVISIBLE,xProductType.IFCWALLSTANDARDCASE)">xray visible Beams</button>
     <button type="button" class="btn btn-primary" id="asdasd">Rotate</button>
     <button type="button" class="btn btn-primary" onclick="Recolour()">Recolour by type</button>
-    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.resetStyles();">Reset styles</button>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.resetStates(); viewer2.resetStates();">Reset styles</button>
 
+    <select id="cmbHide" class="selectpicker btn btn-primary">
+        <option value="noAction">No action</option>
+        <option value="hideProduct">Hide product</option>
+        <option value="hideType">Hide type</option>
+        <option value="highlight">Highlight</option>
+    </select>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.resetStates(); viewer2.resetStates();">Show all</button>
 </div>
 
 
@@ -158,6 +234,25 @@
             //    span.innerHTML = id ? id : 'model';
             //}
 
+        });
+
+        viewer.on('pick', function (args) {
+            var cmb = document.getElementById('cmbHide');
+            var option = cmb.value;
+            switch (option) {
+                case 'hideProduct':
+                    viewer.setState(xState.HIDDEN, [args.id]);
+                    break;
+                case 'hideType':
+                    var type = viewer.getProductType(args.id);
+                    viewer.setState(xState.HIDDEN, type);
+                    break;
+                case 'highlight':
+                    viewer.setState(xState.HIGHLIGHTED, [args.id]);
+                    break;
+                default:
+                    break;
+            }
         });
 
 
