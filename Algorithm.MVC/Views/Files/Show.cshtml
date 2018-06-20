@@ -2,7 +2,7 @@
 @{
     ViewBag.Title = "Show";
 }
-@model FileData
+@model List<FileData>
 
 
 
@@ -11,6 +11,7 @@
 <h2>Show</h2>
 
 <div id="content" class="container">
+<<<<<<< HEAD
 <div class="row">
      </div>
             <div class="col-md-3 asd">
@@ -22,12 +23,30 @@
     </div>
 </div>
 
+=======
+    <div class="row">
+        <div class="col-md-12">
+            <canvas id="viewer-Archeticture" height="400" style="width:100%"></canvas>
+        </div>
+    </div>
+</div>
+
+<div id="content" class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <canvas id="viewer-structure" height="400" style="width:100%"></canvas>
+        </div>
+    </div>
+</div>
+
+>>>>>>> e226b8c1636cc7518014bdcf91ea2e2bb98235b7
 @section scripts{
     <script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
 
+<<<<<<< HEAD
         var viewer = new xViewer("viewer");
         var viewer2 = new xViewer("viewer2");
 
@@ -66,15 +85,29 @@
 
                 var distanceVec2 = vec3.subtract(vec3.create(), origin2, camera2);
                 var distance2 = Math.max(vec3.length(distanceVec2), viewer2._handles[0]._model.meter);
+=======
+            var viewer = new xViewer('viewer-structure');
+
+        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
+        viewer.start();
+>>>>>>> e226b8c1636cc7518014bdcf91ea2e2bb98235b7
 
                 //move to the navigation origin in view space
                 var transform = mat4.translate(mat4.create(), mat4.create(), mvOrigin)
                 var transform2 = mat4.translate(mat4.create(), mat4.create(), mvOrigin2)
 
+<<<<<<< HEAD
                 //z rotation around model z axis
                 var mvZ = vec3.transformMat3(vec3.create(), [0, 0, 1], mat3.fromMat4(mat3.create(), viewer._mvMatrix));
                 mvZ = vec3.normalize(vec3.create(), mvZ);
                 transform = mat4.rotate(mat4.create(), transform, Math.PI / 700.0, mvZ);
+=======
+            var viewer = new xViewer('viewer-Archeticture');
+
+        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[1].FileName })');
+        viewer.start();
+
+>>>>>>> e226b8c1636cc7518014bdcf91ea2e2bb98235b7
 
                 var mvZ2 = vec3.transformMat3(vec3.create(), [0, 0, 1], mat3.fromMat4(mat3.create(), viewer2._mvMatrix));
                 mvZ2 = vec3.normalize(vec3.create(), mvZ2);
