@@ -11,6 +11,7 @@ using Bim.Application.IRCWood.Common;
 using Bim.Application.IRCWood.IRC;
 using System.Diagnostics;
 using Bim.IO;
+using System.IO;
 
 namespace AlgorithmProject
 {
@@ -30,11 +31,12 @@ namespace AlgorithmProject
             #endregion
             StudTable.FilePath = @"..\..\Tables\StudSpacingTable.csv";
             Table502_3_1.FilePath = @"..\..\Tables\table502.3.1(1).txt";
-            string fileName = @"..\..\Models\ITI.Qondos.2-Solved.ifc";
+            string fileName = @"..\..\Models\outer-walls-4.ifc";
+            string outPut = Path.GetFileNameWithoutExtension(fileName)+ "-structure"+".ifc";
             //   IfModel model = IfModel.Open(fileName);
 
-            IfcHandler.ToWexBim(@"D:\ITI\myProjects\Algorithm Project\AlgorithmProject\AlgorithmProject\Models\ITI.Qondos.2-Solved.ifc"
-);
+            
+
 
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -42,6 +44,10 @@ namespace AlgorithmProject
 
             var startup = new IfStartup();
             IfModel model = IfModel.Open(fileName);
+            model.Delete<IfcWall>();
+            model.Save(outPut);
+            IfcHandler.ToWexBim(outPut);
+            //
             WoodFrame wf = new WoodFrame(model);
             startup.Configure(model,wf);
             startup.Configuration(model);
@@ -49,7 +55,7 @@ namespace AlgorithmProject
             wf.GetPolygons();
             wf.Optimize();
             wf.Write();
-            model.Save(fileName + "-structure");
+            model.Save(outPut);
             model.Delete<IfcBeam>();
             model.Delete<IfcColumn>();
             sw.Stop();

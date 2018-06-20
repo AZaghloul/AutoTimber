@@ -121,7 +121,7 @@ namespace Algorithm.MVC.Controllers
         public ActionResult Viewer(string FileName)
         {
            
-            FileName = "OuterWalls.WexBIM";
+            FileName = "outer-walls-4-structure.wexBIM";
             return File(new FileData(FileName).wexBIMPath, "application/octet-stream", FileName);
         }
 
