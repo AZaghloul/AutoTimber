@@ -8,18 +8,48 @@
 <style>
     .asd {
         display: inline-block;
-        left: 10%;
+        /*left: 10%;*/
         padding-top: 25%;
     }
 
     .bsd {
-        left: 6%;
+        left: 7%;
     }
 </style>
 
 
 
 <h2>Show</h2>
+
+<div class="tab-pane active" id="home">
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'zoom';">Zoom </button>
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'orbit'">orbit </button>
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'pan'">pan </button>
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.navigationMode = 'free-orbit'">free-orbit </button>
+
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('front'); viewer2.show('front');">Front</button>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('back');  viewer2.show('back');">Back</button>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('top');   viewer2.show('top');">Top</button>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('bottom');viewer2.show('bottom');">Bottom</button>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('left');  viewer2.show('left');">Left</button>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.show('right'); viewer2.show('right');">Right</button>
+    @*<button type="button" class="btn btn-primary" onclick="if (viewer) viewer.setCameraPosition([50, 50, 50]); viewer2.setCameraPosition([50, 50, 50]);">3D</button>*@
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.zoomTo(); viewer2.zoomTo();">3D</button>
+
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.clip()  ">clip </button>
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.unclip()  ">Unclip </button>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.setStyle(colorsEnum.red, xProductType.IFCWALLSTANDARDCASE)">Color Beams</button>
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.resetStyles(xProductType.IFCWALLSTANDARDCASE)">reset Beams color</button>
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.setState(xState.HIGHLIGHTED,xProductType.IFCWALLSTANDARDCASE)">Highlight Beams</button>
+    <button type="button" class="btn btn-primary" onclick="if(viewer) viewer.setState(xState.XRAYVISIBLE,xProductType.IFCWALLSTANDARDCASE)">xray visible Beams</button>
+    <button type="button" class="btn btn-primary" id="asdasd">Rotate</button>
+    <button type="button" class="btn btn-primary" onclick="Recolour()">Recolour by type</button>
+    <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.resetStyles();">Reset styles</button>
+
+</div>
+
+
+
 <div id="content" class="container">
     <div class="row">
     </div>
@@ -31,12 +61,7 @@
     </div>
 </div>
 
-
-@section scripts{
-    <script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
-    <script type="text/javascript">
-
-        $(document).ready(function () {
+<script>
 
         var viewer = new xViewer('viewer-structure');
         var viewer2 = new xViewer('viewer-Archeticture');
@@ -46,8 +71,24 @@
         viewer.background = [0, 0, 0, 0];
         viewer2.background = [0, 0, 0, 0];
 
-        var cam1 = viewer.getCameraPosition();
-        var cam2 = viewer2.getCameraPosition();
+        viewer.renderingMode = "normal";
+        viewer2.renderingMode = "normal";
+
+        viewer.defineStyle(0, [255, 0, 0, 255]);
+        viewer2.defineStyle(0, [255, 0, 0, 255]);
+
+        var pickFunc = function (arg) {
+
+            viewer.setState(xState.HIGHLIGHTED, [arg.id]);
+            viewer2.setState(xState.HIGHLIGHTED, [arg.id]);
+            //document.getElementById("productId").value = arg.id;
+
+        }
+            
+        //viewer.on('loaded', function () { viewer.background = [255, 255, 255, 255] })
+        viewer.on('pick', pickFunc);
+            viewer.on('dblclick', function (arg) { viewer.zoomTo(arg.id); viewer2.zoomTo(arg.id); })
+
 
 
         viewer.on("loaded", function () {
@@ -103,6 +144,8 @@
             }
             $("#viewer-Archeticture").mousedown(function () { shouldRotate = false; });
             $("#viewer-structure").mousedown(function () { shouldRotate = false; });
+            $(":button").mousedown(function () { shouldRotate = false; });
+            $("#asdasd").mousedown(function () { shouldRotate = true; });
             setInterval(rotate, 20);
         });
 
@@ -110,30 +153,58 @@
             var id = args.id;
             viewer.setState(xState.HIDDEN, [args.id]);
             viewer2.setState(xState.HIDDEN, [args.id]);
-            var span = document.getElementById('productId');
-            if (span) {
-                span.innerHTML = id ? id : 'model';
+            //var span = document.getElementById('productId');
+            //if (span) {
+            //    span.innerHTML = id ? id : 'model';
+            //}
+
+        });
+
+
+        function SubmitData() {
+            var pId = $("#productId")[0].value;
+            var newX = $("#newX")[0].value;
+            var newY = $("#newY")[0].value;
+            $.get("ModifyProducts.aspx?Id=" + pId + "&newX=" + newX + "&newY=" + newY).done(function (data) {
+                alert('done');
+                viewer.setState(xState.UNDEFINED, [parseInt(pId)]);
+                viewer.setStyle(0, [parseInt(pId)]);
+            });
+        }
+
+        function UnRegister() {
+            viewer.off('pick', func);
+        }
+
+        //Reclour the elemnts by type
+        function Recolour() {
+            if (!viewer) return;
+            var index = 0;
+            for (var i in xProductType) {
+                var type = xProductType[i];
+                var colour = [Math.random() * 255, Math.random() * 255, Math.random() * 255, 255];
+                viewer.defineStyle(index, colour);
+                viewer.setStyle(index, type);
+                index++;
             }
+        };
 
-        });
-
-
-            var navCube = new xNavigationCube();
-            navCube.ratio = .1;
-            viewer.addPlugin(navCube);
-
-            viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model[1].FileName })');
-            viewer2.start();
-            viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
-            viewer.start();
+        //Add Navigation Cube
+        var navCube = new xNavigationCube();
+        navCube.ratio = .1;
+        viewer.addPlugin(navCube);
 
 
+        //Load Architecture and Structure Models and start the viewers
+        viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model[1].FileName })');
+        viewer2.start();
+        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
+        viewer.start();
 
-        });
 
-    </script>
+</script>
 
-
-
+@section scripts{
+    <script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
 }
 
