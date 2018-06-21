@@ -76,7 +76,7 @@ namespace AlgorithmProject
 
                 model.Save(saveName);
                 // OpenWindow(fileName);
-                OpenWindow(saveName);
+              //  OpenWindow(saveName);
 
                 List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
                 List<IfFloor> floors = model.Instances.OfType<IfFloor>().ToList();
@@ -101,7 +101,9 @@ namespace AlgorithmProject
                 }
                 GeometryCollection GC1 = new GeometryCollection();
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
-              
+                GC1.AddToCollection(model.Instances.OfType<IfStud>());
+                GC1.AddToCollection(model.Instances.OfType<IfSill>());
+               var coll= GC1.ToExcel(GC1.BOQTable, "Testing Excel", false,"Number", "Collection");
             }
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;

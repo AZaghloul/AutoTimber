@@ -14,6 +14,8 @@ namespace Bim.Application.IRCWood.IRC
 {
     public class Table502_3_1
     {
+        public static string JoistTableLivingAreasPath { get; set; }
+        public static string JoistTableSleepingAreasPath { get; set; }
         public List<TableCell> Cells { get; set; }
         public Table502_3_1()
         {
@@ -33,6 +35,8 @@ namespace Bim.Application.IRCWood.IRC
         }
         public static Table Load(string filePath)
         {
+            //get the static filePath
+            
             var table = new Table();
             string[] file = File.ReadAllLines(filePath).Where(e => e != ",,,,,,,,").ToArray();
 

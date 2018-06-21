@@ -14,10 +14,14 @@ namespace Bim.Application.IRCWood.IRC
 {
     public class Table502_5
     {
+        public static string HeadersTableExteriorPath { get; set; }
+        public static string HeadersTableInteriorPath { get; set; }
         public List<TableCell> Cells { get; set; }
         public Table502_5() => Cells = new List<TableCell>();
         public static Table Load(string filePath)
         {
+            //get the static filePath
+           
             Table T = new Table();
             string[] TableDataLines = File.ReadAllLines(filePath).Where(e => e != ",,,,,,,,,,,,,,,,,").ToArray();
             string[] GSnowLoad = TableDataLines[0].Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries);

@@ -6,10 +6,11 @@
 <table class="table">
     <tr>
         <th>
+           @* <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />*@
             @Html.DisplayNameFor(model => model.Project.Thumbnail)
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Project.FileName)
+            @Html.DisplayNameFor(model => model.Project.Title)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.Project.DesignState)
@@ -17,6 +18,11 @@
         <th>
             @Html.DisplayNameFor(model => model.Project.AddToGallery)
         </th>
+        
+        <th>
+            <input type="button" value="Design" class="glyphicon glyphicon-triangle-right">
+        </th>
+
         <th></th>
     </tr>
 

@@ -3,6 +3,7 @@ using Bim.Domain.Ifc;
 using Bim.Domain.Polygon;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 
 namespace Bim.Application.IRCWood.Physical
@@ -28,11 +29,12 @@ namespace Bim.Application.IRCWood.Physical
         public void FrameWalls()
         {
             
-            var studTable =  StudTable.Load(@"..\..\Tables\StudSpacingTable.txt");
-            Table502_3_1 JoistTableLivingAreas = Table502_3_1.Load(@"..\..\..\IRCWoodWall\Tables\table502.3.1(2).csv");
-            Table502_3_1 JoistTableSleepingAreas = Table502_3_1.Load(@"..\..\..\IRCWoodWall\Tables\table502.3.1(1).csv");
-            Table502_5 HeadersTableExterior = Table502_5.Load(@"..\..\..\IRCWoodWall\Tables\table502.5(1).csv");
-            Table502_5 HeadersTableInterior = Table502_5.Load(@"..\..\..\IRCWoodWall\Tables\table502.5(2).csv");
+            var studTable =  StudTable.Load(StudTable.FilePath);
+            var exist = File.Exists(Table502_3_1.JoistTableLivingAreasPath);
+            Table502_3_1 JoistTableLivingAreas = Table502_3_1.Load(Table502_3_1.JoistTableLivingAreasPath);
+            Table502_3_1 JoistTableSleepingAreas = Table502_3_1.Load(Table502_3_1.JoistTableSleepingAreasPath);
+            Table502_5 HeadersTableExterior = Table502_5.Load(Table502_5.HeadersTableExteriorPath);
+            Table502_5 HeadersTableInterior = Table502_5.Load(Table502_5.HeadersTableInteriorPath);
 
 
             var walls = IfModel.Instances.OfType<IfWall>().ToList();

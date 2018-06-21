@@ -11,6 +11,7 @@ namespace Bim.Application.IRCWood.IRC
 {
     public class StudTable
     {
+        public static string FilePath { get; set; }
         public string[] Spacing { get; set; }
         public string[] Keys { get; set; }
         public int Floors { get; set; }
@@ -76,8 +77,10 @@ namespace Bim.Application.IRCWood.IRC
             return tableMilliMeters;
         }
 
-        public static StudTable Load(string filePath)
+        public static StudTable Load(string filePath="")
         {
+            //get the static filePath
+            filePath = filePath ?? FilePath;
             var table = new StudTable();
             string[] data = File.ReadAllLines(filePath);
             table.Spacing = data[0].Split(',');
