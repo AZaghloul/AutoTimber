@@ -4,13 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
-<<<<<<< HEAD
+
 using Xbim.Ifc4.SharedBldgElements;
 using MathNet.Spatial.Euclidean;
 
-=======
+
 using Bim.Common.Measures;
->>>>>>> BOQ
+
 namespace Bim.Domain.Ifc
 {
     /// <summary>
@@ -37,17 +37,17 @@ namespace Bim.Domain.Ifc
         {
 
         }
-<<<<<<< HEAD
+
         public IfWall(IfModel ifModel, IIfcWallStandardCase ifcWall)
         {
             base.IfcElement = (IfcWallStandardCase)ifcWall;
             IfModel = ifModel;
             IfModel.WallCollection.Add(this);
-=======
+
         public IfWall(IfModel ifModel, IIfcWall ifcWall) : base(ifModel)
         {
             IfcWall = ifcWall;
->>>>>>> BOQ
+
             Initialize();
         }
 
@@ -237,13 +237,13 @@ namespace Bim.Domain.Ifc
         {
             WallAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcElement.ObjectPlacement).RelativePlacement);
             var location = WallAxis.Location;
-<<<<<<< HEAD
+
             LocalPlacement = (IIfcLocalPlacement)IfcElement.ObjectPlacement;
             IfLocation = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
-=======
+  
             LocalPlacement = (IIfcLocalPlacement)IfcWall.ObjectPlacement;
             IfLocation = new IfLocation(Length.FromFeet(location.X).Inches, Length.FromFeet(location.Y).Inches, Length.FromFeet(location.Z).Inches);
->>>>>>> BOQ
+ 
         }
         private void GetDimension()
         {

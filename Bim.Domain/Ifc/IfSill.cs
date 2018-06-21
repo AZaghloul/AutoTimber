@@ -8,13 +8,13 @@ using Xbim.Ifc4.RepresentationResource;
 using Xbim.Ifc4.SharedBldgElements;
 using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
-<<<<<<< HEAD
+
 using Bim.Domain.General;
-=======
+
 using Bim.Domain.Configuration;
 using Xbim.Ifc4.Kernel;
 using Xbim.Ifc4.PropertyResource;
->>>>>>> BOQ
+
 
 namespace Bim.Domain.Ifc
 {
@@ -138,15 +138,15 @@ namespace Bim.Domain.Ifc
             ax3D.Location = origin;
             if (((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection!=null)
             {
-<<<<<<< HEAD
+
                 ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
                 ax3D.RefDirection.SetXYZ(1, 0, 0);// ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
                 ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
                 ax3D.Axis = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis; //z-axis direction
                 lp.RelativePlacement = ax3D;
-=======
+  
                 ax3D.RefDirection = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection;
->>>>>>> BOQ
+ 
             }
 
             else
@@ -160,11 +160,11 @@ namespace Bim.Domain.Ifc
                 ax3D.RefDirection.SetXYZ(1, 0, 0);// ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
             }
 
-<<<<<<< HEAD
+
 
             }
 
-=======
+  
             if ( ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis !=null)
             {
                 ax3D.Axis = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis;
@@ -180,7 +180,7 @@ namespace Bim.Domain.Ifc
             }
 
             lp.RelativePlacement = ax3D;
->>>>>>> BOQ
+ 
 
             IfcElement.ObjectPlacement = lp;
         }

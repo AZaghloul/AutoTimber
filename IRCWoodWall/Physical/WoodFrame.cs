@@ -16,7 +16,7 @@ namespace Bim.Application.IRCWood.Physical
 
 
         public IfModel IfModel { get; set; }
-<<<<<<< HEAD
+
         private List<WallFrame> WallFrames { get; set; }
         private List<FloorFrame> FloorFrames { get; set; }
         #endregion
@@ -33,10 +33,10 @@ namespace Bim.Application.IRCWood.Physical
 
         #endregion
 
-=======
+
         List<WallFrame> WallFrames { get; set; }
         List<FloorFrame> FloorFrames { get; set; }
->>>>>>> BOQ
+
 
         #region Constructor
         public WoodFrame()
@@ -54,8 +54,7 @@ namespace Bim.Application.IRCWood.Physical
 
         public void FrameWalls()
         {
-<<<<<<< HEAD
-=======
+
             
             var studTable =  StudTable.Load(@"..\..\Tables\StudSpacingTable.txt");
             Table502_3_1 JoistTableLivingAreas = Table502_3_1.Load(@"..\..\..\IRCWoodWall\Tables\table502.3.1(2).csv");
@@ -66,7 +65,7 @@ namespace Bim.Application.IRCWood.Physical
 
             var walls = IfModel.Instances.OfType<IfWall>().ToList();
             var polygons = WallPolygon.GetPolygons(walls);
->>>>>>> BOQ
+
             WallFrame wf;
             foreach (var polygon in WallPolygonCollection)
             {

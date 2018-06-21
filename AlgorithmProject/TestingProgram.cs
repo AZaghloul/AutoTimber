@@ -1,25 +1,13 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System;
-using Bim.IO.Utilities;
-using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
-using Bim.Domain.Polygon;
-using Bim.Application.IRCWood.Physical;
-using Bim.Domain;
-using Bim.Application.IRCWood.Common;
-using Bim.Application.IRCWood.IRC;
-<<<<<<< HEAD
 using System.Diagnostics;
-using Bim.IO;
 using System.IO;
-=======
 using Xbim.Ifc;
-using Bim.BOQ;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.ProductExtension;
-using Bim.Domain.Ifc.Enums;
->>>>>>> BOQ
+
 
 namespace AlgorithmProject
 {
@@ -37,7 +25,7 @@ namespace AlgorithmProject
             "-------------------------------------------- ".Print(ConsoleColor.White);
 
             #endregion
-<<<<<<< HEAD
+
             StudTable.FilePath = @"..\..\Tables\StudSpacingTable.csv";
             Table502_3_1.FilePath = @"..\..\Tables\table502.3.1(1).txt";
             string fileName = @"..\..\Models\ITI.Qondos.2-Solved.ifc";
@@ -87,7 +75,7 @@ namespace AlgorithmProject
                 $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
                 $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                 i++;
-=======
+
             var d = Split.Equal(13, .65);
 
             string fileName = @"..\..\Models\ITI.Qondos.2.ifc";
@@ -158,7 +146,7 @@ namespace AlgorithmProject
                 GeometryCollection GC1 = new GeometryCollection();
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
                 int q = 0;
->>>>>>> BOQ
+
             }
 
             #region Footer
@@ -171,10 +159,7 @@ namespace AlgorithmProject
         {
             System.Diagnostics.Process.Start(filePath);
         }
-<<<<<<< HEAD
-      
-=======
->>>>>>> BOQ
+
 
 
     }

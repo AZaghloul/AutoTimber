@@ -8,13 +8,13 @@ using Xbim.Ifc4.SharedBldgElements;
 using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
 using Xbim.Ifc4.GeometricModelResource;
-<<<<<<< HEAD
+
 using Bim.Domain.General;
-=======
+
 using Bim.Domain.Configuration;
 using System;
 using Bim.Common.Measures;
->>>>>>> BOQ
+
 
 namespace Bim.Domain.Ifc
 {

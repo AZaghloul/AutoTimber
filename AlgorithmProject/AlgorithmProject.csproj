@@ -241,13 +241,12 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-<<<<<<< HEAD
-=======
+
     <ProjectReference Include="..\Bim.BOQ\Bim.BOQ.csproj">
       <Project>{91E959B4-6103-483C-8498-A1A0EB89D5B7}</Project>
       <Name>Bim.BOQ</Name>
     </ProjectReference>
->>>>>>> BOQ
+
     <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">
       <Project>{04c837cf-0f12-45e5-8399-f8a53ddc9586}</Project>
       <Name>Bim.Common</Name>

@@ -29,10 +29,8 @@ namespace Bim.Domain.Ifc
         {
             IfcStory = ifcStory;
             Initialize();
-<<<<<<< HEAD
             IfModel.StoriesCollection.Add(this);
-=======
->>>>>>> BOQ
+
         }
         private void Initialize()
         {
