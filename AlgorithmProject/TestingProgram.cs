@@ -98,6 +98,7 @@ namespace AlgorithmProject
                     $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
                     $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                     i++;
+
                 }
                 GeometryCollection GC1 = new GeometryCollection();
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
