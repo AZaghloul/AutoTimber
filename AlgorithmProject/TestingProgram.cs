@@ -9,14 +9,20 @@ using Bim.Application.IRCWood.Physical;
 using Bim.Domain;
 using Bim.Application.IRCWood.Common;
 using Bim.Application.IRCWood.IRC;
+<<<<<<< HEAD
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
+=======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 using System.Diagnostics;
 using System.IO;
+<<<<<<< HEAD
 <<<<<<< HEAD
 using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.ProductExtension;
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 
@@ -37,7 +43,10 @@ namespace AlgorithmProject
 
             #endregion
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
             StudTable.FilePath = @"..\..\Tables\StudSpacingTable.csv";
@@ -89,6 +98,7 @@ namespace AlgorithmProject
                 $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
                 $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                 i++;
+<<<<<<< HEAD
 <<<<<<< HEAD
 
             var d = Split.Equal(13, .65);
@@ -164,6 +174,8 @@ namespace AlgorithmProject
 
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
             }
 
             #region Footer
@@ -178,7 +190,11 @@ namespace AlgorithmProject
             System.Diagnostics.Process.Start(filePath);
         }
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
       
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC

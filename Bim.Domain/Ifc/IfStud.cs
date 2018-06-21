@@ -9,6 +9,7 @@ using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
 using Xbim.Ifc4.GeometricModelResource;
 <<<<<<< HEAD
+<<<<<<< HEAD
 
 using Bim.Domain.General;
 
@@ -16,6 +17,9 @@ using Bim.Domain.Configuration;
 using System;
 using Bim.Common.Measures;
 
+=======
+using Bim.Domain.General;
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 using Bim.Domain.General;
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC

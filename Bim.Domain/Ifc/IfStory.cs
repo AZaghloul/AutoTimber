@@ -30,7 +30,10 @@ namespace Bim.Domain.Ifc
             Initialize();
             IfModel.StoriesCollection.Add(this);
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
         }

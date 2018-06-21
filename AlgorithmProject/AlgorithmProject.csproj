@@ -242,12 +242,15 @@
   </ItemGroup>
   <ItemGroup>
 <<<<<<< HEAD
+<<<<<<< HEAD
 
     <ProjectReference Include="..\Bim.BOQ\Bim.BOQ.csproj">
       <Project>{91E959B4-6103-483C-8498-A1A0EB89D5B7}</Project>
       <Name>Bim.BOQ</Name>
     </ProjectReference>
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
     <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">
