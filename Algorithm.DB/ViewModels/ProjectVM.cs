@@ -9,15 +9,13 @@ using System.Threading.Tasks;
 
 namespace Algorithm.DB.ViewModels
 {
-    class ProjectVM
+   public class ProjectVM
     {
-        public Guid Id { get; set; }
-        public string Thumbnail { get; set; }
-        public string FileName { get; set; }
-        public DesignOptions DesignOptions { get; set; }
-        public DesignState DesignState { get; set; }
-        public bool AddedToGallery { get; set; }
-
+        public Project Project { get; set; }
+        public ProjectVM(Project project)
+        {
+            Project = project;
+        }
 
     }
 }

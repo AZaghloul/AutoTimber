@@ -1,8 +1,9 @@
 ﻿
 @{
     ViewBag.Title = "Show";
+    Layout = null;
 }
-@model List<FileData>
+@model FileData
 
 
 <style>
@@ -128,14 +129,35 @@
 
 <div id="content" class="container">
     <div class="row">
-    </div>
-    <div class="col-md-3 asd">
-        <canvas id="viewer-Archeticture" width="350" height="200"></canvas>
-    </div>
-    <div class="col-md-6 bsd">
-        <canvas id="viewer-structure" width="800" height="500"></canvas>
+
+        <div class="col-md-3 ">
+            <canvas id="viewer-Archeticture" width="350" height="200"></canvas>
+        </div>
+        <div class="col-md-6 ">
+            <canvas id="viewer-structure" width="800" height="500"></canvas>
+        </div>
     </div>
 </div>
+
+
+<script src="~/Libs/gl-matrix.js"></script>
+<script src="~/Libs/webgl-utils.js"></script>
+<script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
+
+<script type="text/javascript" src="~/Viewer/xbim-product-type.debug.js"></script>
+<script type="text/javascript" src="~/Viewer/xbim-state.debug.js"></script>
+<script type="text/javascript" src="~/Viewer/xbim-shaders.debug.js"></script>
+<script type="text/javascript" src="~/Viewer/xbim-model-geometry.debug.js"></script>
+<script type="text/javascript" src="~/Viewer/xbim-model-handle.debug.js"></script>
+<script type="text/javascript" src="~/Viewer/xbim-binary-reader.debug.js"></script>
+<script type="text/javascript" src="~/Viewer/xbim-triangulated-shape.debug.js"></script>
+<script type="text/javascript" src="~/Viewer/xbim-viewer.debug.js"></script>
+
+<script src="~/Plugins/NavigationCube/xbim-navigation-cube-textures.debug.js"></script>
+<script src="~/Plugins/NavigationHome/xbim-navigation-home-textures.debug.js"></script>
+<script src="~/Plugins/NavigationHome/xbim-navigation-home.debug.js"></script>
+<script src="~/Plugins/NavigationCube/xbim-navigation-cube-shaders.debug.js"></script>
+<script src="~/Plugins/NavigationCube/xbim-navigation-cube.debug.js"></script>
 
 <script>
 
@@ -288,8 +310,8 @@
 
 
         //Load Architecture and Structure Models and start the viewers
-        viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model[1].FileName })');
-    viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
+        viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName ,Structure=false })');
+    viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName, Structure = true })');
 
     //var navCube = new xNavigationCube();
     //navCube.ratio = .1;

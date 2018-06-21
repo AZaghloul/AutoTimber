@@ -22,6 +22,7 @@ namespace Algorithm.MVC.Controllers
 {
     public class FilesController : Controller
     {
+
         #region Upload
         public ActionResult Upload()
         {
@@ -30,12 +31,12 @@ namespace Algorithm.MVC.Controllers
             return View(new UploadVM());
         }
         [HttpPost]
-        public  ActionResult Upload(UploadVM model, IEnumerable<HttpPostedFileBase> files)
+        public ActionResult Upload(UploadVM model, IEnumerable<HttpPostedFileBase> files)
         {
-            FileData fileData=new FileData();
+            FileData fileData = new FileData();
 
             //if found the same file redirect to the show Action
-           
+
             try
             {
                 foreach (var file in files)
@@ -45,18 +46,17 @@ namespace Algorithm.MVC.Controllers
                     {
 
                         //create FileData object to hold all file paths
-                         fileData = new FileData(file.FileName);
+                        fileData = new FileData(file.FileName);
 
                         if (IfcHandler.CheckFileExist(fileData.InputPath))
                         {
-                           return RedirectToAction("Show", "Files", fileData);
+                            return PartialView(@"~/Views/Files/Show.cshtml", fileData);
                         }
                         //write the file to the desk
                         file.SaveAs(fileData.InputPath);
 
                         //send the input data to the database
                         UnitOfWork uow = new UnitOfWork(new AlgorithmDB());
-                        var l = Guid.TryParse(User.Identity.GetUserId(), out Guid userid);
                         model.FileName = file.FileName;
 
                         var proj = new Project()
@@ -65,13 +65,13 @@ namespace Algorithm.MVC.Controllers
                             Title = model.Title,
                             Description = model.Desciption,
                             FileName = model.FileName,
-                            UserId = userid
+                            UserId = User.Identity.GetUserId()
                         };
                         uow.Projects.Insert(proj);
                         uow.SaveChanges();
                         //send the data Model to the Show Action
-                        return RedirectToAction("Show", "Files", fileData);
-                        
+                        return PartialView(@"~/Views/Files/Show.cshtml", fileData);
+
                     }
                 }
 
@@ -94,22 +94,9 @@ namespace Algorithm.MVC.Controllers
 
         #region Show Models Methods
 
-        //public ActionResult Show(FileData fileData)
-        //{
-
-
-        //    //if (! IfcHandler.CheckFileExist(fileData.wexBIMPath))
-        //    //{
-        //    //    IfcHandler.ToWexBim(fileData.InputPath, fileData.wexBIMPath);
-        //    //} 
-
-        //    return View(fileData);
-        //}
-
-
-        public ActionResult Show(List< FileData> fileData)
+        public ActionResult Show(FileData fileData)
         {
-            fileData = new List<FileData>() { new FileData(), new FileData() };
+
 
             //if (! IfcHandler.CheckFileExist(fileData.wexBIMPath))
             //{
@@ -118,11 +105,34 @@ namespace Algorithm.MVC.Controllers
 
             return View(fileData);
         }
-        public ActionResult Viewer(string FileName)
+
+
+        //public ActionResult Show(List<FileData> fileData)
+        //{
+
+
+        //    if (!IfcHandler.CheckFileExist(fileData.wexBIMPath))
+        //    {
+        //        IfcHandler.ToWexBim(fileData.InputPath, fileData.wexBIMPath);
+        //    }
+
+        //    return View(fileData);
+        //}
+        public ActionResult Viewer(string FileName,bool Structure)
         {
+            if (Structure==true)
+            {
+                FileName = "ITI.Qondos.2-Solved-structure.wexBIM";
+                return File(new FileData(FileName).wexBIMPath, "application/octet-stream", FileName);
+            }
+            else
+            {
+
+                FileName = "ITI.Qondos.2-Solved-structure.wexBIM";
+                return File(new FileData(FileName).wexBIMPath, "application/octet-stream", FileName);
+
+            }
            
-            FileName = "outer-walls-4-structure.wexBIM";
-            return File(new FileData(FileName).wexBIMPath, "application/octet-stream", FileName);
         }
 
 

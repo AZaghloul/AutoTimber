@@ -14,6 +14,7 @@ namespace Algorithm.DB
     {
         public DbSet<Project> Projects { get; set; }
         public DbSet<DesignOptions> DesignOptions { get; set; }
+        public DbSet<User> Users { get; set; }
         public AlgorithmDB() : base("DefaultConnection")
         {
 
@@ -25,6 +26,6 @@ namespace Algorithm.DB
 
         }
 
-
     }
-}
+    }
+

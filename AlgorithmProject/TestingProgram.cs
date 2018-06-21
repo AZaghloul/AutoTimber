@@ -31,7 +31,7 @@ namespace AlgorithmProject
             #endregion
             StudTable.FilePath = @"..\..\Tables\StudSpacingTable.csv";
             Table502_3_1.FilePath = @"..\..\Tables\table502.3.1(1).txt";
-            string fileName = @"..\..\Models\outer-walls-4.ifc";
+            string fileName = @"..\..\Models\ITI.Qondos.2-Solved.ifc";
             string outPut = Path.GetFileNameWithoutExtension(fileName)+ "-structure"+".ifc";
             //   IfModel model = IfModel.Open(fileName);
 

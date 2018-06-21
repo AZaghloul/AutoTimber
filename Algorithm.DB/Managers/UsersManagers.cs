@@ -1,5 +1,5 @@
 ﻿using Algorithm.DB.DAL;
-using Bim.Domain.General;
+using Algorithm.DB.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity;
@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace Algorithm.DB.Managers
 {
-    public class DesignOptionsManager : Repository<DesignOptions>
+   public class UsersManagers:Repository<User>
     {
-        public DesignOptionsManager(DbContext ctx) : base(ctx)
+        public UsersManagers(DbContext ctx):base(ctx)
         {
 
         }

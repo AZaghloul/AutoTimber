@@ -1,7 +1,12 @@
-﻿using Bim.Application.IRCWood.Common;
+﻿using Algorithm.DB;
+using Algorithm.DB.Models;
+using Algorithm.DB.ViewModels;
+using Algorithm.MVC.DAL;
+using Bim.Application.IRCWood.Common;
 using Bim.Application.IRCWood.IRC;
 using Bim.Application.IRCWood.Physical;
 using Bim.Domain.Ifc;
+using Microsoft.AspNet.Identity;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,10 +21,29 @@ namespace Algorithm.MVC.Controllers
 {
     public class DashBoardController : Controller
     {
-        // GET: DashBoard
+        
         public ActionResult Index()
         {
-            return View();
+            var userId = User.Identity.GetUserId();
+
+            UnitOfWork uow = new UnitOfWork(new AlgorithmDB());
+            var user = uow.Users.FindById(userId);
+            //if user not found
+            if (user==null)
+            {
+                uow.Users.Insert(new User() {
+                    Id = userId
+                });
+                uow.SaveChanges();
+                //get the user from db
+                user = uow.Users.FindById(userId);
+
+            }
+            var projects = uow.Projects.FindBy(e => e.UserId == userId);
+
+            DashBoardVM dashBoardVM = DashBoardVM.Load(user, projects);
+
+            return View(dashBoardVM);
         }
         [HttpGet]
         public ActionResult Upload()

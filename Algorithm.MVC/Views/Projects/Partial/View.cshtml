@@ -1,0 +1,45 @@
+﻿@model IEnumerable<ProjectVM>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.Thumbnail)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.FileName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.DesignState)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Project.AddToGallery)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.Thumbnail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.FileName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.DesignState)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Project.AddToGallery)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.Project.Id }) |
+            @Html.ActionLink("Details", "Details", new { id= item.Project.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.Project.Id })
+        </td>
+    </tr>
+}
+
+</table>

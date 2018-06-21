@@ -52,6 +52,7 @@
     <Compile Include="DAL\Repository.cs" />
     <Compile Include="DAL\UnitOfWork.cs" />
     <Compile Include="Managers\DesignOptionsManager.cs" />
+    <Compile Include="Managers\UsersManagers.cs" />
     <Compile Include="Migrations\201806200043210_InitialCreate.cs" />
     <Compile Include="Migrations\201806200043210_InitialCreate.Designer.cs">
       <DependentUpon>201806200043210_InitialCreate.cs</DependentUpon>
@@ -68,11 +69,29 @@
     <Compile Include="Migrations\201806201418430_OptionsClass.Designer.cs">
       <DependentUpon>201806201418430_OptionsClass.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201806202304274_userClass.cs" />
+    <Compile Include="Migrations\201806202304274_userClass.Designer.cs">
+      <DependentUpon>201806202304274_userClass.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806202317212_again.cs" />
+    <Compile Include="Migrations\201806202317212_again.Designer.cs">
+      <DependentUpon>201806202317212_again.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806202330429_ChangeKey.cs" />
+    <Compile Include="Migrations\201806202330429_ChangeKey.Designer.cs">
+      <DependentUpon>201806202330429_ChangeKey.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201806202351559_aaBa.cs" />
+    <Compile Include="Migrations\201806202351559_aaBa.Designer.cs">
+      <DependentUpon>201806202351559_aaBa.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\DesignState.cs" />
     <Compile Include="Managers\ProjectsManager.cs" />
     <Compile Include="Models\Project.cs" />
+    <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ViewModels\DashBoardVM.cs" />
     <Compile Include="ViewModels\GalleryVM.cs" />
     <Compile Include="ViewModels\ProjectVM.cs" />
     <Compile Include="ViewModels\UploadVM.cs" />
@@ -93,6 +112,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201806201418430_OptionsClass.resx">
       <DependentUpon>201806201418430_OptionsClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806202304274_userClass.resx">
+      <DependentUpon>201806202304274_userClass.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806202317212_again.resx">
+      <DependentUpon>201806202317212_again.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806202330429_ChangeKey.resx">
+      <DependentUpon>201806202330429_ChangeKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201806202351559_aaBa.resx">
+      <DependentUpon>201806202351559_aaBa.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

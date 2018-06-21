@@ -12,6 +12,16 @@ namespace Algorithm.MVC.DAL
             get { return new ProjectsManager(_ctx); }
         }
 
+        public UsersManagers Users
+        {
+            get { return new UsersManagers(_ctx); }
+        }
+
+        public DesignOptionsManager DesignOptions
+        {
+            get { return new DesignOptionsManager(_ctx); }
+        }
+
         public UnitOfWork(DbContext dbContext)
         {
             _ctx = dbContext;

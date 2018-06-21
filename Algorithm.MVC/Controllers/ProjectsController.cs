@@ -9,6 +9,7 @@ using System.Web;
 using System.Web.Mvc;
 using Algorithm.DB;
 using Algorithm.DB.Models;
+using Algorithm.DB.ViewModels;
 
 namespace Algorithm.MVC.Controllers
 {
@@ -19,8 +20,9 @@ namespace Algorithm.MVC.Controllers
         // GET: Projects
         public async Task<ActionResult> Index()
         {
-            return View(await db.Projects.ToListAsync());
+            return PartialView(@"~/Views/Projects/Partial/View.cshtml", new List<ProjectVM>());
         }
+      
 
         // GET: Projects/Details/5
         public async Task<ActionResult> Details(Guid? id)

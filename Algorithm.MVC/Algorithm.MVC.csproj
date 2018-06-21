@@ -271,6 +271,7 @@
     <Content Include="App_Data\Tables\table502.3.1%281%29.txt" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\style4.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -370,22 +371,24 @@
     <Content Include="Views\Files\ViewFile.cshtml" />
     <Content Include="Views\Files\Design.cshtml" />
     <Content Include="Views\Files\Show.cshtml" />
-    <Content Include="Views\Projects\Create.cshtml" />
-    <Content Include="Views\Projects\Delete.cshtml" />
-    <Content Include="Views\Projects\Details.cshtml" />
-    <Content Include="Views\Projects\Edit.cshtml" />
-    <Content Include="Views\Projects\Index.cshtml" />
     <Content Include="Views\DesignOptions\Create.cshtml" />
     <Content Include="Views\DesignOptions\Delete.cshtml" />
     <Content Include="Views\DesignOptions\Details.cshtml" />
     <Content Include="Views\DesignOptions\Edit.cshtml" />
     <Content Include="Views\DesignOptions\Index.cshtml" />
+    <Content Include="Views\DashBoard\Index.cshtml" />
+    <Content Include="Views\Projects\Create.cshtml" />
+    <Content Include="Views\Projects\Delete.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Projects\Edit.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Projects\View.cshtml" />
+    <Content Include="Views\Projects\Partial\View.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Users\input-files\" />
     <Folder Include="Users\output-files\" />
     <Folder Include="Users\wexbim-files\" />
-    <Folder Include="Views\DashBoard\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
