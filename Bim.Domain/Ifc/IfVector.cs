@@ -17,7 +17,6 @@ namespace Bim.Domain.Ifc
             X = x;
             Y = y;
             Z = z;
-
         }
 
         public IfVector()

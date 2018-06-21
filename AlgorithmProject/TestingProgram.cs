@@ -2,12 +2,23 @@
 using System.Linq;
 using System;
 using Xbim.Ifc4.SharedBldgElements;
+<<<<<<< HEAD
+=======
+using Bim.Domain.Polygon;
+using Bim.Application.IRCWood.Physical;
+using Bim.Domain;
+using Bim.Application.IRCWood.Common;
+using Bim.Application.IRCWood.IRC;
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 using System.Diagnostics;
 using System.IO;
+<<<<<<< HEAD
 using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.ProductExtension;
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 
 namespace AlgorithmProject
 {
@@ -25,7 +36,10 @@ namespace AlgorithmProject
             "-------------------------------------------- ".Print(ConsoleColor.White);
 
             #endregion
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
             StudTable.FilePath = @"..\..\Tables\StudSpacingTable.csv";
             Table502_3_1.FilePath = @"..\..\Tables\table502.3.1(1).txt";
             string fileName = @"..\..\Models\ITI.Qondos.2-Solved.ifc";
@@ -75,6 +89,7 @@ namespace AlgorithmProject
                 $"\t {wallPolygons.Last().RBottom.Count} bot regions".Print(ConsoleColor.Cyan);
                 $"\t {wallPolygons.Last().RBetween.Count} middle regions".Print(ConsoleColor.Cyan);
                 i++;
+<<<<<<< HEAD
 
             var d = Split.Equal(13, .65);
 
@@ -147,6 +162,8 @@ namespace AlgorithmProject
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
                 int q = 0;
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
             }
 
             #region Footer
@@ -154,12 +171,17 @@ namespace AlgorithmProject
             Console.WriteLine("Done!");
             #endregion
             Console.ReadLine();
+
         }
         public static void OpenWindow(string filePath)
         {
             System.Diagnostics.Process.Start(filePath);
         }
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 
 
     }

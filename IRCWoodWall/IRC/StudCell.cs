@@ -36,6 +36,7 @@ namespace Bim.Application.IRCWood.IRC
             {
                 Spacing = Length.FromInches(Spacing).Meter,
                 Height = Length.FromFeet(Height).Meter,
+                Dimension = Dimension.ToMeters(),
                 Floor = Floor
             };
             return s;
@@ -46,6 +47,7 @@ namespace Bim.Application.IRCWood.IRC
             {
                 Spacing = Length.FromInches(Spacing).MilliMeter,
                 Height = Length.FromFeet(Height).MilliMeter,
+                Dimension = Dimension.ToMilliMeters(),
                 Floor = Floor
             };
             return s;

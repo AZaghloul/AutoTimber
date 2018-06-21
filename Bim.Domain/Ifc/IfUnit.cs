@@ -14,8 +14,8 @@ namespace Bim.Domain.Ifc
         MILLIMETRE,
         SQUAREMETRE,
         CUBICMETRE,
-        SQUAREFEET,
-        CUBICFEET,
+        SQUAREFOOT,
+        CUBICFOOT,
         FOOT,
         METRE,
     }
@@ -43,7 +43,6 @@ namespace Bim.Domain.Ifc
             if (unitCtx.LengthUnitName.Contains("MILLI"))
             {
                 LengthUnit = UnitName.MILLIMETRE;
-                
             }
             else if (unitCtx.LengthUnitName.Contains("FOOT"))
             {
@@ -61,7 +60,7 @@ namespace Bim.Domain.Ifc
             }
             else
             {
-                AreaUnit = UnitName.SQUAREFEET;
+                AreaUnit = UnitName.SQUAREFOOT;
             }
 
             //Set volume Unit
@@ -71,7 +70,7 @@ namespace Bim.Domain.Ifc
             }
             else
             {
-                VolumeUnit = UnitName.CUBICFEET;
+                VolumeUnit = UnitName.CUBICFOOT;
             }
             //VolumeUnit = unitCtx.VolumeUnit.FullName;
 

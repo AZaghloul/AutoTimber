@@ -27,7 +27,7 @@ namespace Bim.Application.IRCWood.IRC
                 e.WoodType == WT &&
                 e.DeadLoadPsF >= DeadLoadPsf &&
                 e.SpanToInch > SpanInInches &&
-                e.Section.Depth.Inches >= SectionDepth)
+                e.Section.Depth >= SectionDepth)
                 .OrderBy(e => e.Section.Depth)
                 .OrderBy(e => e.SpanToInch)
                 .ToList();
@@ -52,7 +52,7 @@ namespace Bim.Application.IRCWood.IRC
                 for (int j = 3; j < 7; j++)
                 {
                     Double space = Double.Parse(cells[i][0]);
-                    RecSection section = new RecSection(int.Parse(Keys[j].Split('*')[0]), int.Parse(Keys[j].Split('*')[1]));
+                    TimperSection section = new TimperSection(int.Parse(Keys[j].Split('*')[0]), int.Parse(Keys[j].Split('*')[1]));
                     Length L = Length.FromFeetAndInches(int.Parse(cells[i][j].Split('-')[0]), int.Parse(cells[i][j].Split('-')[1]));
                     //Domain.Ifc.IfDimension Dim = new Domain.Ifc.IfDimension(int.Parse(Keys[j].Split('*')[0]),
                     //    int.Parse(Keys[j].Split('*')[1]),

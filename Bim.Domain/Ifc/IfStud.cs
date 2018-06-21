@@ -8,6 +8,7 @@ using Xbim.Ifc4.SharedBldgElements;
 using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
 using Xbim.Ifc4.GeometricModelResource;
+<<<<<<< HEAD
 
 using Bim.Domain.General;
 
@@ -15,6 +16,9 @@ using Bim.Domain.Configuration;
 using System;
 using Bim.Common.Measures;
 
+=======
+using Bim.Domain.General;
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 
 namespace Bim.Domain.Ifc
 {
@@ -28,10 +32,10 @@ namespace Bim.Domain.Ifc
         #endregion
         public static Setup Setup { get; set; }
         #region Constructor
-        public IfStud() : base(null)
+        public IfStud()
         {
         }
-        public IfStud(IfWall wall) : base(wall.IfModel)
+        public IfStud(IfWall wall)
         {
             IfWall = wall;
         }
@@ -67,11 +71,11 @@ namespace Bim.Domain.Ifc
 
             //filling proerties eshta y3ny
             recProfile.ProfileType = IfcProfileTypeEnum.AREA;
-            recProfile.XDim = IfDimension.XDim.Feet;
-            recProfile.YDim = IfDimension.YDim.Feet;
+            recProfile.XDim = IfDimension.XDim;
+            recProfile.YDim = IfDimension.YDim;
 
             var body = ifcModel.Instances.New<IfcExtrudedAreaSolid>();
-            body.Depth = IfDimension.ZDim.Feet;
+            body.Depth = IfDimension.ZDim;
             //rectangle profile
             body.SweptArea = recProfile;
             body.ExtrudedDirection = ifcModel.Instances.New<IfcDirection>();
@@ -187,18 +191,16 @@ namespace Bim.Domain.Ifc
         private void SetLocation(IfcStore ifcModel)
         {
             var origin = ifcModel.Instances.New<IfcCartesianPoint>();
-            origin.SetXYZ(IfLocation.X.Feet, IfLocation.Y.Feet, IfLocation.Z.Feet);
-
-            var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
-            ax3D.Location = origin;
-            ax3D.RefDirection = ifcModel.Instances.OfType<IfcDirection>().Where(e => e.X == 1 && e.Y == 0 && e.Z == 0).FirstOrDefault() ?? ifcModel.Instances.New<IfcDirection>();
-            ax3D.RefDirection.SetXYZ(1, 0, 0);
-            ax3D.Axis = ifcModel.Instances.OfType<IfcDirection>().Where(e => e.X == 0 && e.Y == 0 && e.Z == 1).FirstOrDefault() ?? ifcModel.Instances.New<IfcDirection>();
-            ax3D.Axis.SetXYZ(0, 0, 1);
-
-            /*          Set Stud Location */
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
+            var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
+            /*          Set Stud Location */
+            origin.SetXYZ(IfLocation.X, IfLocation.Y, IfLocation.Z);
             lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
+            ax3D.Location = origin;
+            ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
+            ax3D.RefDirection.SetXYZ(1, 0, 0);
+            ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
+            ax3D.Axis.SetXYZ(0, 0, 1);
             lp.RelativePlacement = ax3D;
             IfcElement.ObjectPlacement = lp;
 
@@ -209,13 +211,13 @@ namespace Bim.Domain.Ifc
             switch (unit)
             {
                 case UnitName.METRE:
-                    IfDimension = IfDimension;
-                    IfLocation = IfLocation;
+                    IfDimension = IfDimension.ToMeters();
+                    IfLocation = IfLocation.ToMeters();
                     break;
 
                 case UnitName.MILLIMETRE:
-                    IfDimension = IfDimension;
-                    IfLocation = IfLocation;
+                    IfDimension = IfDimension.ToMilliMeters();
+                    IfLocation = IfLocation.ToMilliMeters();
                     break;
 
                 case UnitName.FOOT:
@@ -224,11 +226,5 @@ namespace Bim.Domain.Ifc
                     break;
             }
         }
-
-        public override string ToString()
-        {
-            return $"Wall Stud {Math.Round(IfDimension.XDim.Inches, 0)} × {Math.Round(IfDimension.YDim.Inches)} × {Math.Round(IfDimension.ZDim.Inches)}";
-        }
-
     }
 }
