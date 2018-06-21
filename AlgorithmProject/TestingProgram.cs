@@ -61,6 +61,7 @@ namespace AlgorithmProject
             sw.Stop();
             Console.WriteLine($"time Elapsed{sw.ElapsedMilliseconds}");
             OpenWindow(fileName + "-structure"+".ifc");
+            OpenWindow(outPut);
 
             List<IfWall> walls = model.WallCollection.OfType<IfWall>().ToList();
             $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
