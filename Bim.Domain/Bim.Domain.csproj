@@ -82,22 +82,12 @@
     <Reference Include="log4net">
       <HintPath>..\Refrences\log4net.dll</HintPath>
     </Reference>
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
     <Reference Include="MathNet.Numerics, Version=3.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MathNet.Numerics.3.8.0\lib\net40\MathNet.Numerics.dll</HintPath>
     </Reference>
     <Reference Include="MathNet.Spatial, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MathNet.Spatial.0.4.0\lib\net40\MathNet.Spatial.dll</HintPath>
     </Reference>
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />

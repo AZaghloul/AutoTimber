@@ -8,25 +8,7 @@ using Xbim.Ifc4.RepresentationResource;
 using Xbim.Ifc4.SharedBldgElements;
 using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.ProductExtension;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 using Bim.Domain.General;
-
-using Bim.Domain.Configuration;
-using Xbim.Ifc4.Kernel;
-using Xbim.Ifc4.PropertyResource;
-
-=======
-using Bim.Domain.General;
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-using Bim.Domain.General;
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-using Bim.Domain.General;
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 
 namespace Bim.Domain.Ifc
 {
@@ -151,72 +133,18 @@ namespace Bim.Domain.Ifc
             ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
             try
             {
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
                 ax3D.RefDirection = ifcModel.Instances.New<IfcDirection>();
                 ax3D.RefDirection.SetXYZ(1, 0, 0);// ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
                 ax3D.Axis = ifcModel.Instances.New<IfcDirection>();
                 ax3D.Axis = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis; //z-axis direction
                 lp.RelativePlacement = ax3D;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-  
-                ax3D.RefDirection = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection;
- 
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
             }
             catch (System.Exception e)
             {
 
-<<<<<<< HEAD
-
 
             }
 
-<<<<<<< HEAD
-  
-            if ( ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis !=null)
-            {
-                ax3D.Axis = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis;
-            }
-            else
-            {
-                ax3D.Axis = ifcModel.Instances.OfType<IfcDirection>().Where
-                    (e=> e.X == 0 &&
-                    e.Y == 0 &&
-                    e.Z == 1).FirstOrDefault() ??
-                    ifcModel.Instances.New<IfcDirection>();
-                ax3D.Axis.SetXYZ(0, 0, 1);
-            }
-
-            lp.RelativePlacement = ax3D;
- 
-=======
-
-            }
-
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-
-            }
-
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 
             IfcElement.ObjectPlacement = lp;
         }

@@ -326,21 +326,7 @@ namespace Bim.Application.IRCWood.Physical
             var storyNo = WallPolygon.IfWall.Story.StoryNo;
             var height = WallPolygon.IfWall.IfDimension.ZDim;
             var dim = IfStud.Setup.Get<IfDimension>("Dimension");
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-            var s = StudTable.GetSpace(storyNo + 1, height.Inches, dim).LastOrDefault();
-
-=======
             var s = StudTable.GetSpace(storyNo, height, dim).LastOrDefault();
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-            var s = StudTable.GetSpace(storyNo, height, dim).LastOrDefault();
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-            var s = StudTable.GetSpace(storyNo, height, dim).LastOrDefault();
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
             var maxdistance = s.Spacing;
 
             foreach (var region in WallPolygon.RBetween)
@@ -388,21 +374,7 @@ namespace Bim.Application.IRCWood.Physical
             var storyNo = WallPolygon.IfWall.Story.StoryNo;
             var height = WallPolygon.IfWall.IfDimension.ZDim;
             var dim = IfStud.Setup.Get<IfDimension>("Dimension");
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-            var maxdistance = StudTable.GetSpace(storyNo + 1, height.Inches, dim).LastOrDefault().Spacing;
-
-=======
             var maxdistance = StudTable.GetSpace(storyNo, height, dim).LastOrDefault().Spacing;
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-            var maxdistance = StudTable.GetSpace(storyNo, height, dim).LastOrDefault().Spacing;
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-            var maxdistance = StudTable.GetSpace(storyNo, height, dim).LastOrDefault().Spacing;
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 
 
             foreach (var region in WallPolygon.RRight)

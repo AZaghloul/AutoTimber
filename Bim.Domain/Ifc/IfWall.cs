@@ -4,31 +4,9 @@ using System.Collections.Generic;
 using System.Linq;
 using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
 using Xbim.Ifc4.SharedBldgElements;
 using MathNet.Spatial.Euclidean;
 
-
-using Bim.Common.Measures;
-
-=======
-using Xbim.Ifc4.SharedBldgElements;
-using MathNet.Spatial.Euclidean;
-
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-using Xbim.Ifc4.SharedBldgElements;
-using MathNet.Spatial.Euclidean;
-
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-using Xbim.Ifc4.SharedBldgElements;
-using MathNet.Spatial.Euclidean;
-
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 namespace Bim.Domain.Ifc
 {
     /// <summary>
@@ -55,35 +33,11 @@ namespace Bim.Domain.Ifc
         {
 
         }
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
         public IfWall(IfModel ifModel, IIfcWallStandardCase ifcWall)
         {
             base.IfcElement = (IfcWallStandardCase)ifcWall;
             IfModel = ifModel;
             IfModel.WallCollection.Add(this);
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-        public IfWall(IfModel ifModel, IIfcWall ifcWall) : base(ifModel)
-        {
-            IfcWall = ifcWall;
-
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
             Initialize();
         }
 
@@ -259,28 +213,8 @@ namespace Bim.Domain.Ifc
         {
             WallAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcElement.ObjectPlacement).RelativePlacement);
             var location = WallAxis.Location;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-
             LocalPlacement = (IIfcLocalPlacement)IfcElement.ObjectPlacement;
             IfLocation = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
-  
-            LocalPlacement = (IIfcLocalPlacement)IfcWall.ObjectPlacement;
-            IfLocation = new IfLocation(Length.FromFeet(location.X).Inches, Length.FromFeet(location.Y).Inches, Length.FromFeet(location.Z).Inches);
- 
-=======
-            LocalPlacement = (IIfcLocalPlacement)IfcElement.ObjectPlacement;
-            IfLocation = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-            LocalPlacement = (IIfcLocalPlacement)IfcElement.ObjectPlacement;
-            IfLocation = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
-=======
-            LocalPlacement = (IIfcLocalPlacement)IfcElement.ObjectPlacement;
-            IfLocation = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
->>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
         }
         private void GetDimension()
         {
