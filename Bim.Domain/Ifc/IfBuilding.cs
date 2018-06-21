@@ -18,13 +18,11 @@ namespace Bim.Domain.Ifc
         protected List<IfStory> IfStories { get; set; }
         public IModel Model { get; set; }
         #region Constructor
-        public IfBuilding()
+        public IfBuilding() : base(null)
         {
         }
-        public IfBuilding(IfModel ifModel)
+        public IfBuilding(IfModel ifModel):base(ifModel)
         {
-            IfModel = ifModel;
-            IfModel.Instances.Add(this);
             Intialize();
         }
         #endregion
@@ -66,24 +64,7 @@ namespace Bim.Domain.Ifc
         {
             List<IfBuilding> ifBuildings = new List<IfBuilding>();
             IfBuilding ifBuidling;
-
-            var buidlings = ifModel.IfcStore.Instances.OfType<IIfcBuilding>();
-            var buildingCount = buidlings.Count();
-
-            //state of building
-            #region Updat Model State
-            if (buildingCount<1)
-            {
-                ifModel.State.Warrnings("There is No building found!", "Re export the ifc file again");
-            }
-            else if(buildingCount >= 1)
-            {
-                ifModel.State.HasBuilding = true;
-                ifModel.State.Passed($"{buildingCount} building(s) found!"," ");
-            }
-            #endregion
-            //
-            foreach (var building in buidlings)
+            foreach (var building in ifModel.IfcStore.Instances.OfType<IIfcBuilding>())
             {
                 ifBuidling = new IfBuilding(ifModel)
                 {
@@ -92,7 +73,6 @@ namespace Bim.Domain.Ifc
                 };
                 ifBuildings.Add(ifBuidling);
             }
-            
 
             return ifBuildings;
         }

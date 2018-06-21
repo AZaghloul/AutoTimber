@@ -77,7 +77,7 @@ namespace Bim.Application.IRCWood.Common
             Task<StudTable> LoadStudTablesAsync = Task.Factory.StartNew(() =>
            {
                //  load Tables;
-               return StudTable.Load();
+               return StudTable.Load(" ");
            });
 
             Task<Table502_3_1> LoadHeaderTablesAsync = Task.Factory.StartNew(() =>
@@ -90,12 +90,12 @@ namespace Bim.Application.IRCWood.Common
             #endregion
 
             //load model design option and configuration
-            ifModel.DesignOptions = LoadDesignOptionsAsync.Result;
+            //ifModel.DesignOptions = LoadDesignOptionsAsync.Result;
             
 
-            //load wood frame tables
-            woodFrame.StudTable= LoadStudTablesAsync.Result;
-            woodFrame.JoistTable = LoadHeaderTablesAsync.Result;
+            ////load wood frame tables
+            //woodFrame.StudTable= LoadStudTablesAsync.Result;
+            //woodFrame.JoistTable = LoadHeaderTablesAsync.Result;
 
         }
 

@@ -90,6 +90,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Geometery\Split.cs" />
+    <Compile Include="IBuilding.cs" />
+    <Compile Include="IModel.cs" />
+    <Compile Include="IObject.cs" />
+    <Compile Include="IVersion.cs" />
     <Compile Include="Measures\Quantity.cs" />
     <Compile Include="Measures\Length.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

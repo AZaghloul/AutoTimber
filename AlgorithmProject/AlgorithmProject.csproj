@@ -235,12 +235,16 @@
     <Content Include="bin\Debug\Xbim.IO.dll" />
     <Content Include="bin\Debug\Xbim.ModelGeometry.Scene.dll" />
     <Content Include="bin\Debug\Xbim.Tessellator.dll" />
-    <None Include="Tables\StudSpacingTable.csv" />
+    <Content Include="Tables\StudSpacingTable.txt" />
     <Content Include="Tables\table502.3.1%281%29.txt">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Bim.BOQ\Bim.BOQ.csproj">
+      <Project>{baa4804c-244e-41a5-a4b9-e04fb207fa23}</Project>
+      <Name>Bim.BOQ</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">
       <Project>{04c837cf-0f12-45e5-8399-f8a53ddc9586}</Project>
       <Name>Bim.Common</Name>

@@ -14,7 +14,6 @@ namespace Bim.Application.IRCWood.IRC
 {
     public class Table502_3_1
     {
-        public static string FilePath { get; set; }
         public List<TableCell> Cells { get; set; }
         public Table502_3_1()
         {
@@ -27,16 +26,13 @@ namespace Bim.Application.IRCWood.IRC
                 e.WoodType == WT &&
                 e.DeadLoadPsF >= DeadLoadPsf &&
                 e.SpanToInch > SpanInInches &&
-                e.Section.Depth >= SectionDepth)
+                e.Section.Depth.Inches >= SectionDepth)
                 .OrderBy(e => e.Section.Depth)
                 .OrderBy(e => e.SpanToInch)
                 .ToList();
         }
         public static Table Load(string filePath)
         {
-            //get filepath from load function or use the default one
-            filePath = filePath ?? FilePath;
-            //
             var table = new Table();
             string[] file = File.ReadAllLines(filePath).Where(e => e != ",,,,,,,,").ToArray();
 
@@ -52,7 +48,7 @@ namespace Bim.Application.IRCWood.IRC
                 for (int j = 3; j < 7; j++)
                 {
                     Double space = Double.Parse(cells[i][0]);
-                    TimperSection section = new TimperSection(int.Parse(Keys[j].Split('*')[0]), int.Parse(Keys[j].Split('*')[1]));
+                    RecSection section = new RecSection(int.Parse(Keys[j].Split('*')[0]), int.Parse(Keys[j].Split('*')[1]));
                     Length L = Length.FromFeetAndInches(int.Parse(cells[i][j].Split('-')[0]), int.Parse(cells[i][j].Split('-')[1]));
                     //Domain.Ifc.IfDimension Dim = new Domain.Ifc.IfDimension(int.Parse(Keys[j].Split('*')[0]),
                     //    int.Parse(Keys[j].Split('*')[1]),

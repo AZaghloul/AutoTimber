@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Bim.Domain;
+using System.Collections.Generic;
 
 namespace Bim.Common
 {
@@ -8,6 +9,6 @@ namespace Bim.Common
         void Save(string filePath );
          IVersion Version { get; set; }
          List<IObject> Instances { get; set; }
-        public List<IBuilding> Buildings { get; set; }
+        
     }
 }

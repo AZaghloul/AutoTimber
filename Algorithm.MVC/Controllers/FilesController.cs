@@ -147,8 +147,8 @@ namespace Algorithm.MVC.Controllers
         [HttpPost]
         public void Design(string fileName)
         {
-            StudTable.FilePath = Server.MapPath(@"~\App_Data\Tables\StudSpacingTable.csv");
-            Table502_3_1.FilePath = Server.MapPath(@"~\App_Data\Tables\table502.3.1(1).txt");
+            //StudTable.FilePath = Server.MapPath(@"~\App_Data\Tables\StudSpacingTable.csv");
+            //Table502_3_1.FilePath = Server.MapPath(@"~\App_Data\Tables\table502.3.1(1).txt");
             fileName = fileName ?? "home-2floor-ft.ifc";
             var filePath = Server.MapPath($"~/Users/input-files/{fileName}");
             var outputFile = Server.MapPath($"~/Users/output-files/{fileName}-Structure");
@@ -159,9 +159,9 @@ namespace Algorithm.MVC.Controllers
             WoodFrame wf = new WoodFrame(model);
             startup.Configure(model, wf);
             startup.Configuration(model);
-            wf.GetPolygons();
-            wf.Optimize();
-            wf.Write();
+            //wf.GetPolygons();
+            //wf.Optimize();
+            //wf.Write();
             model.Save(outputFile);
 
 

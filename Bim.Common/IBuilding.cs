@@ -8,6 +8,6 @@ namespace Bim.Domain
 {
     public interface IBuilding
     {
-         List<IStory> Stories { get; set; }
+         
     }
 }

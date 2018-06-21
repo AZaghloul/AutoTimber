@@ -104,6 +104,10 @@
       <Project>{04C837CF-0F12-45E5-8399-F8A53DDC9586}</Project>
       <Name>Bim.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bim.Domain\Bim.Domain.csproj">
+      <Project>{b468fbb6-cc77-40d7-a0e9-32b1f345b448}</Project>
+      <Name>Bim.Domain</Name>
+    </ProjectReference>
     <ProjectReference Include="..\IRCWoodWall\Bim.Application.IRCWood.csproj">
       <Project>{9aec83fb-ad0f-46cb-8b09-ea2e8073f4c3}</Project>
       <Name>Bim.Application.IRCWood</Name>

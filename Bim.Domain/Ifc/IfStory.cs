@@ -12,6 +12,8 @@ namespace Bim.Domain.Ifc
         IIfcBuildingStorey _ifcBuildingStorey;
         public int StoryNo { get; set; }
         public List<IfWall> IfWalls { get; set; }
+        public List<IfFloor> IfFloors { get; set; }
+
         public IfBuilding IfBuilding { get; set; }
         public IIfcBuildingStorey IfcStory
         {
@@ -19,16 +21,14 @@ namespace Bim.Domain.Ifc
             set { _ifcBuildingStorey = value; Initialize(); }
         }
         public IBuilding Building { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IfStory()
+        public IfStory():base(null)
         {
 
         }
-        public IfStory(IfModel ifModel, IIfcBuildingStorey ifcStory)
+        public IfStory(IfModel ifModel, IIfcBuildingStorey ifcStory):base(ifModel)
         {
-            IfModel = ifModel;
             IfcStory = ifcStory;
             Initialize();
-            IfModel.StoriesCollection.Add(this);
         }
         private void Initialize()
         {
@@ -36,9 +36,16 @@ namespace Bim.Domain.Ifc
             Label = IfcStory.EntityLabel;
             Description = IfcStory.Description;
 
-            if (IfWalls != null) return;
+            if (IfWalls != null)
+                return;
+            else
+                IfWalls = IfWall.GetWalls(this);
 
-            IfWalls = IfWall.GetWalls(this);
+            if (IfFloors != null)
+                return;
+            else
+                IfFloors = IfFloor.GetFloors(this);
+
         }
 
         public static List<IfStory> GetStories(IfBuilding ifBuilding)
@@ -46,27 +53,14 @@ namespace Bim.Domain.Ifc
             var ifStories = new List<IfStory>();
             var ifcStories = ifBuilding.IfModel.IfcStore.Instances.OfType<IIfcBuildingStorey>();
             IfStory ifStory;
-            int counter = ifcStories.Count();
-
-            //state of stories
-            #region Updat Model State
-            if (counter < 1)
-            {
-                ifBuilding.IfModel.State.Warrnings("There is No Stories found!", "Re export the ifc file again");
-            }
-            else if (counter >= 1)
-            {
-                ifBuilding.IfModel.State.HasBuilding = true;
-                ifBuilding.IfModel.State.Passed($"{counter} Stories(s) found!", " ");
-            }
-            #endregion
-
+            int counter = 0;
             foreach (var story in ifcStories)
             {
                 ifStory = new IfStory(ifBuilding.IfModel, story);
                 ifStory.StoryNo = counter;
+
                 ifStories.Add(ifStory);
-                counter--;
+                counter++;
             }
 
             return ifStories;

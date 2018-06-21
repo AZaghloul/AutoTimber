@@ -26,8 +26,8 @@ namespace Bim.Domain.General
             int n = points.Count(), k = 0;
             List<IfLocation> H = new List<IfLocation>(new IfLocation[2 * n]);
 
-            points.Sort((a, b) =>
-                 a.X == b.X ? a.Y.CompareTo(b.Y) : a.X.CompareTo(b.X));
+            //points.Sort((a, b) =>
+            //     a.X == b.X ? a.Y.CompareTo(b.Y) : a.X.CompareTo(b.X));
 
             // Build lower hull
             for (int i = 0; i < n; ++i)
