@@ -61,7 +61,7 @@ namespace AlgorithmProject
             //prop.FindByValue("Both joins enabled");
             //prop.FindSVProperty(new IfSingleValue("Join Status", "Both joins enabled"));
         //prop.New();
-        //    ifcStore.SaveAs((fileName + "prop"));
+       
 
             using (IfModel model = IfModel.Open(fileName))
             {
