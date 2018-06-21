@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{9AEC83FB-AD0F-46CB-8B09-EA2E8073F4C3}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>IRCWoodWall</RootNamespace>
-    <AssemblyName>IRCWoodWall</AssemblyName>
+    <RootNamespace>Bim.Application.IRCWood</RootNamespace>
+    <AssemblyName>Bim.Application.IRCWood</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -87,6 +87,9 @@
     <Reference Include="log4net, Version=2.0.8.0, Culture=neutral, PublicKeyToken=669e0ddf0bb1aa2a, processorArchitecture=MSIL">
       <HintPath>..\packages\log4net.2.0.8\lib\net45-full\log4net.dll</HintPath>
     </Reference>
+    <Reference Include="MathNet.Spatial">
+      <HintPath>..\Refrences\MathNet.Spatial.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
@@ -137,7 +140,6 @@
     <Compile Include="IRC\TableCell502.5.cs" />
     <Compile Include="Physical\Blank.cs" />
     <Compile Include="Physical\FloorFrame.cs" />
-    <Compile Include="Physical\FloorPolygon.cs" />
     <Compile Include="Physical\Joist.cs" />
     <Compile Include="Physical\Plate.cs" />
     <Compile Include="Physical\WallFrame.cs" />

@@ -9,16 +9,23 @@ namespace Bim.Domain.Ifc
 {
    public class IfLocation : ILocation
     {
-        public double X { get; set; }
-        public double Y { get; set; }
-        public double Z { get; set; }
+        public Length X { get; set; }
+        public Length Y { get; set; }
+        public Length Z { get; set; }
         public IfLocation(double x,double y,double z)
+        {
+            X = Length.FromInches(x);
+            Y = Length.FromInches(y);
+            Z = Length.FromInches(z);
+        }
+        public IfLocation(Length x, Length y, Length z)
         {
             X = x;
             Y = y;
             Z = z;
         }
-        public IfLocation()
+
+        public IfLocation():this(0,0,0)
         {
 
         }
@@ -29,22 +36,9 @@ namespace Bim.Domain.Ifc
             Z = location.Z;
         }
 
-        public IfLocation ToMeters()
+        public override string ToString()
         {
-            var d = new IfLocation();
-            d.X = Length.FromInches(X).Meter;
-            d.Y = Length.FromInches(Y).Meter;
-            d.Z = Length.FromInches(Z).Meter;
-            return d;
-        }
-        public IfLocation ToMilliMeters()
-        {
-            var d = new IfLocation();
-            d.X = Length.FromInches(X).MilliMeter;
-            d.Y = Length.FromInches(Y).MilliMeter;
-            d.Z = Length.FromInches(Z).MilliMeter;
-
-            return d;
+            return $"{X.Inches} x {Y.Inches} x {Z.Inches}";
         }
 
     }

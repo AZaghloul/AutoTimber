@@ -1,4 +1,5 @@
 ﻿using Bim.Common.Measures;
+using Bim.Domain.Ifc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +12,7 @@ namespace Bim.Application.IRCWood.IRC
     {
         public Length Span { get; set; }
         public double SpanToInch { get { return Span.Inches; } }
-        public TimperSection Section { get; set; }
+        public RecSection Section { get; set; }
         public int NoOfHeaders { get; set; }
         public int NoOfJackStuds { get; set; }
         public Length BuildingWidth { get; set; }
@@ -29,7 +30,7 @@ namespace Bim.Application.IRCWood.IRC
         /// <param name="groundSnowLoad">Load in PSF units</param>
         /// <param name="storiesAbove">no of stories above the header</param>
         /// <param name="floorBearing">True for ClearSpan</param>
-        public TableCell502_5(Length span, TimperSection section,int NuHeaders, int NuJackStuds, Length buildingWidth, double groundSnowLoad, int storiesAbove, bool floorBearing)
+        public TableCell502_5(Length span, RecSection section,int NuHeaders, int NuJackStuds, Length buildingWidth, double groundSnowLoad, int storiesAbove, bool floorBearing)
         {
             Span = span;
             Section = section;
@@ -44,7 +45,7 @@ namespace Bim.Application.IRCWood.IRC
         {
             BuildingWidth = new Length();
             Span = new Length();
-            Section = new TimperSection();
+            Section = new RecSection();
         }
     }
 }

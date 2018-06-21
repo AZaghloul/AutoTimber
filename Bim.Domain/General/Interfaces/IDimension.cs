@@ -1,10 +1,12 @@
-﻿namespace Bim.Domain
+﻿using Bim.Common.Measures;
+
+namespace Bim.Domain
 {
     public interface IDimension
     {
-        double ZDim { get; set; }
-        double XDim { get; set; }
-        double YDim { get; set; }
+        Length ZDim { get; set; }
+        Length XDim { get; set; }
+        Length YDim { get; set; }
     }
    
 }

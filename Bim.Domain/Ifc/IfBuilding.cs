@@ -18,13 +18,11 @@ namespace Bim.Domain.Ifc
         protected List<IfStory> IfStories { get; set; }
         public IModel Model { get; set; }
         #region Constructor
-        public IfBuilding()
+        public IfBuilding() : base(null)
         {
         }
-        public IfBuilding(IfModel ifModel)
+        public IfBuilding(IfModel ifModel):base(ifModel)
         {
-            IfModel = ifModel;
-            IfModel.Instances.Add(this);
             Intialize();
         }
         #endregion

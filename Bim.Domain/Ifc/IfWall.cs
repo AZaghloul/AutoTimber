@@ -4,9 +4,13 @@ using System.Collections.Generic;
 using System.Linq;
 using Xbim.Ifc;
 using Xbim.Ifc4.Interfaces;
+<<<<<<< HEAD
 using Xbim.Ifc4.SharedBldgElements;
 using MathNet.Spatial.Euclidean;
 
+=======
+using Bim.Common.Measures;
+>>>>>>> BOQ
 namespace Bim.Domain.Ifc
 {
     /// <summary>
@@ -29,15 +33,21 @@ namespace Bim.Domain.Ifc
         #endregion
 
         #region Constructors
-        public IfWall()
+        public IfWall() : base(null)
         {
 
         }
+<<<<<<< HEAD
         public IfWall(IfModel ifModel, IIfcWallStandardCase ifcWall)
         {
             base.IfcElement = (IfcWallStandardCase)ifcWall;
             IfModel = ifModel;
             IfModel.WallCollection.Add(this);
+=======
+        public IfWall(IfModel ifModel, IIfcWall ifcWall) : base(ifModel)
+        {
+            IfcWall = ifcWall;
+>>>>>>> BOQ
             Initialize();
         }
 
@@ -63,7 +73,21 @@ namespace Bim.Domain.Ifc
                                 .SelectMany(a => a.Items)
                                 .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
                                 .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                                .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
+                            wall.Representation.Representations
+                                .SelectMany(a => a.Items)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                                .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
+                            wall.Representation.Representations
+                                .SelectMany(a => a.Items)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                                .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
                                 .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+
 
                 //get the wall x,y,z
                 if (recD != null)
@@ -213,8 +237,13 @@ namespace Bim.Domain.Ifc
         {
             WallAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcElement.ObjectPlacement).RelativePlacement);
             var location = WallAxis.Location;
+<<<<<<< HEAD
             LocalPlacement = (IIfcLocalPlacement)IfcElement.ObjectPlacement;
             IfLocation = new IfLocation((float)location.X, (float)location.Y, (float)location.Z);
+=======
+            LocalPlacement = (IIfcLocalPlacement)IfcWall.ObjectPlacement;
+            IfLocation = new IfLocation(Length.FromFeet(location.X).Inches, Length.FromFeet(location.Y).Inches, Length.FromFeet(location.Z).Inches);
+>>>>>>> BOQ
         }
         private void GetDimension()
         {
@@ -227,12 +256,49 @@ namespace Bim.Domain.Ifc
                          .SelectMany(a => a.Items)
                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
                          .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
-                         .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+                         .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
+                       IfcWall.Representation.Representations
+                         .SelectMany(a => a.Items)
+                         .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                         .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                         .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                         .OfType<IIfcRectangleProfileDef>().FirstOrDefault() ??
+                      IfcWall.Representation.Representations
+                          .SelectMany(a => a.Items)
+                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                          .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                          .OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea)
+                          .OfType<IIfcRectangleProfileDef>().FirstOrDefault();
+
+
 
             var depth =
                  IfcElement.Representation.Representations
                         .SelectMany(a => a.Items)
                         .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
+            if (depth == 0)
+                depth =
+                 IfcWall.Representation.Representations
+                        .SelectMany(a => a.Items)
+                        .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                        .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
+            if (depth == 0)
+                depth =
+                 IfcWall.Representation.Representations
+                        .SelectMany(a => a.Items)
+                        .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                        .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                        .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
+            if (depth == 0)
+                depth =
+                 IfcWall.Representation.Representations
+                        .SelectMany(a => a.Items)
+                        .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                        .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                        .OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand)
+                        .OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth).FirstOrDefault();
+
 
             if (depth == 0)
             {
@@ -264,7 +330,7 @@ namespace Bim.Domain.Ifc
             //using the Wall Class;
             if (recD != null && depth != null)
             {
-                IfDimension = new IfDimension(recD.XDim, recD.YDim, depth);
+                IfDimension = new IfDimension(Length.FromFeet(recD.XDim).Inches, Length.FromFeet(recD.YDim).Inches, Length.FromFeet(depth).Inches);
             }
         }
         private void GetDirection()

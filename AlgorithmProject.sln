@@ -9,17 +9,42 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.IO", "Bim.IO\Bim.IO.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Domain", "Bim.Domain\Bim.Domain.csproj", "{B468FBB6-CC77-40D7-A0E9-32B1F345B448}"
 EndProject
+<<<<<<< HEAD
+=======
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refrences", "Refrences", "{6BE81686-FB55-43D2-9BC4-D42FA6E73117}"
+	ProjectSection(SolutionItems) = preProject
+		Refrences\Esent.Interop.dll = Refrences\Esent.Interop.dll
+		Refrences\ICSharpCode.SharpZipLib.dll = Refrences\ICSharpCode.SharpZipLib.dll
+		Refrences\log4net.dll = Refrences\log4net.dll
+		Refrences\Xbim.CobieExpress.dll = Refrences\Xbim.CobieExpress.dll
+		Refrences\Xbim.Common.dll = Refrences\Xbim.Common.dll
+		Refrences\Xbim.Ifc.dll = Refrences\Xbim.Ifc.dll
+		Refrences\Xbim.Ifc.Extensions.dll = Refrences\Xbim.Ifc.Extensions.dll
+		Refrences\Xbim.Ifc2x3.dll = Refrences\Xbim.Ifc2x3.dll
+		Refrences\Xbim.Ifc2x3.IO.dll = Refrences\Xbim.Ifc2x3.IO.dll
+		Refrences\Xbim.Ifc4.dll = Refrences\Xbim.Ifc4.dll
+		Refrences\Xbim.IO.dll = Refrences\Xbim.IO.dll
+		Refrences\Xbim.Tessellator.dll = Refrences\Xbim.Tessellator.dll
+	EndProjectSection
+EndProject
+>>>>>>> BOQ
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Common", "Bim.Common\Bim.Common.csproj", "{04C837CF-0F12-45E5-8399-F8A53DDC9586}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Application.IRCWood", "IRCWoodWall\Bim.Application.IRCWood.csproj", "{9AEC83FB-AD0F-46CB-8B09-EA2E8073F4C3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCWoodTest", "IRCWoodTest\IRCWoodTest.csproj", "{29CF04D7-B7AD-49A7-A124-814BEDAD1794}"
 EndProject
+<<<<<<< HEAD
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.MVC", "Algorithm.MVC\Algorithm.MVC.csproj", "{911F84F8-8D37-4412-8D52-28F6B5EB9314}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.MVC.Tests", "Algorithm.MVC.Tests\Algorithm.MVC.Tests.csproj", "{7019E960-E54D-4AD8-8894-8C0AE9C383C7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.DB", "Algorithm.DB\Algorithm.DB.csproj", "{36B75ECB-2B2A-47F3-91AC-DF26352F7B32}"
+=======
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.BOQ", "Bim.BOQ\Bim.BOQ.csproj", "{91E959B4-6103-483C-8498-A1A0EB89D5B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.BOQ.Test", "Bim.BOQ.Test\Bim.BOQ.Test.csproj", "{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}"
+>>>>>>> BOQ
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -63,10 +88,13 @@ Global
 		{B468FBB6-CC77-40D7-A0E9-32B1F345B448}.Debug|x86.Build.0 = Debug|x86
 		{B468FBB6-CC77-40D7-A0E9-32B1F345B448}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B468FBB6-CC77-40D7-A0E9-32B1F345B448}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{B468FBB6-CC77-40D7-A0E9-32B1F345B448}.Release|x64.ActiveCfg = Release|x64
 		{B468FBB6-CC77-40D7-A0E9-32B1F345B448}.Release|x64.Build.0 = Release|x64
 		{B468FBB6-CC77-40D7-A0E9-32B1F345B448}.Release|x86.ActiveCfg = Release|x86
 		{B468FBB6-CC77-40D7-A0E9-32B1F345B448}.Release|x86.Build.0 = Release|x86
+=======
+>>>>>>> BOQ
 		{04C837CF-0F12-45E5-8399-F8A53DDC9586}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04C837CF-0F12-45E5-8399-F8A53DDC9586}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{04C837CF-0F12-45E5-8399-F8A53DDC9586}.Debug|x64.ActiveCfg = Debug|x64
@@ -99,6 +127,7 @@ Global
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Debug|x86.Build.0 = Debug|x86
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|Any CPU.Build.0 = Release|Any CPU
+<<<<<<< HEAD
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|x64.ActiveCfg = Release|x64
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|x64.Build.0 = Release|x64
 		{29CF04D7-B7AD-49A7-A124-814BEDAD1794}.Release|x86.ActiveCfg = Release|x86
@@ -139,6 +168,16 @@ Global
 		{36B75ECB-2B2A-47F3-91AC-DF26352F7B32}.Release|x64.Build.0 = Release|Any CPU
 		{36B75ECB-2B2A-47F3-91AC-DF26352F7B32}.Release|x86.ActiveCfg = Release|Any CPU
 		{36B75ECB-2B2A-47F3-91AC-DF26352F7B32}.Release|x86.Build.0 = Release|Any CPU
+=======
+		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Release|Any CPU.Build.0 = Release|Any CPU
+>>>>>>> BOQ
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

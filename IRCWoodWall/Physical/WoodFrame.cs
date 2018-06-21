@@ -2,7 +2,6 @@
 using Bim.Application.IRCWood.IRC;
 using Bim.Domain.Ifc;
 using Bim.Domain.Polygon;
-using IRCWoodWall.Physical;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +16,7 @@ namespace Bim.Application.IRCWood.Physical
 
 
         public IfModel IfModel { get; set; }
+<<<<<<< HEAD
         private List<WallFrame> WallFrames { get; set; }
         private List<FloorFrame> FloorFrames { get; set; }
         #endregion
@@ -33,6 +33,10 @@ namespace Bim.Application.IRCWood.Physical
 
         #endregion
 
+=======
+        List<WallFrame> WallFrames { get; set; }
+        List<FloorFrame> FloorFrames { get; set; }
+>>>>>>> BOQ
 
         #region Constructor
         public WoodFrame()
@@ -50,6 +54,19 @@ namespace Bim.Application.IRCWood.Physical
 
         public void FrameWalls()
         {
+<<<<<<< HEAD
+=======
+            
+            var studTable =  StudTable.Load(@"..\..\Tables\StudSpacingTable.txt");
+            Table502_3_1 JoistTableLivingAreas = Table502_3_1.Load(@"..\..\..\IRCWoodWall\Tables\table502.3.1(2).csv");
+            Table502_3_1 JoistTableSleepingAreas = Table502_3_1.Load(@"..\..\..\IRCWoodWall\Tables\table502.3.1(1).csv");
+            Table502_5 HeadersTableExterior = Table502_5.Load(@"..\..\..\IRCWoodWall\Tables\table502.5(1).csv");
+            Table502_5 HeadersTableInterior = Table502_5.Load(@"..\..\..\IRCWoodWall\Tables\table502.5(2).csv");
+
+
+            var walls = IfModel.Instances.OfType<IfWall>().ToList();
+            var polygons = WallPolygon.GetPolygons(walls);
+>>>>>>> BOQ
             WallFrame wf;
             foreach (var polygon in WallPolygonCollection)
             {
@@ -119,6 +136,26 @@ namespace Bim.Application.IRCWood.Physical
                 //Method implementation here
             });
             #endregion
+
+            var Floors = IfModel.Instances.OfType<IfFloor>().ToList();
+            var floorPolygon = FloorPolygon.GetPolygons(Floors);
+            FloorFrame Ff;
+            foreach (var polygon in floorPolygon)
+            {
+                try
+                {
+                    Ff = new FloorFrame(polygon);
+                    Ff.JoistTable= JoistTableLivingAreas;
+                    Ff.New();
+                }
+                catch (Exception e)
+                {
+
+                    Console.WriteLine("Error: " + e.Message);
+                }
+
+
+            }
 
 
         }

@@ -1,10 +1,13 @@
-﻿namespace Bim.Domain
+﻿
+using Bim.Common.Measures;
+
+namespace Bim.Domain
 {
     public interface ILocation
     {
-        double X { get; set; }
-        double Y { get; set; }
-        double Z { get; set; }
+        Length X { get; set; }
+        Length Y { get; set; }
+        Length Z { get; set; }
     }
    
 }

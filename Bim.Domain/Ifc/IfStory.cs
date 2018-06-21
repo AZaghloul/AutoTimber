@@ -12,6 +12,8 @@ namespace Bim.Domain.Ifc
         IIfcBuildingStorey _ifcBuildingStorey;
         public int StoryNo { get; set; }
         public List<IfWall> IfWalls { get; set; }
+        public List<IfFloor> IfFloors { get; set; }
+
         public IfBuilding IfBuilding { get; set; }
         public IIfcBuildingStorey IfcStory
         {
@@ -19,16 +21,18 @@ namespace Bim.Domain.Ifc
             set { _ifcBuildingStorey = value; Initialize(); }
         }
         public IBuilding Building { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IfStory()
+        public IfStory():base(null)
         {
 
         }
-        public IfStory(IfModel ifModel, IIfcBuildingStorey ifcStory)
+        public IfStory(IfModel ifModel, IIfcBuildingStorey ifcStory):base(ifModel)
         {
-            IfModel = ifModel;
             IfcStory = ifcStory;
             Initialize();
+<<<<<<< HEAD
             IfModel.StoriesCollection.Add(this);
+=======
+>>>>>>> BOQ
         }
         private void Initialize()
         {
@@ -36,9 +40,16 @@ namespace Bim.Domain.Ifc
             Label = IfcStory.EntityLabel;
             Description = IfcStory.Description;
 
-            if (IfWalls != null) return;
+            if (IfWalls != null)
+                return;
+            else
+                IfWalls = IfWall.GetWalls(this);
 
-            IfWalls = IfWall.GetWalls(this);
+            if (IfFloors != null)
+                return;
+            else
+                IfFloors = IfFloor.GetFloors(this);
+
         }
 
         public static List<IfStory> GetStories(IfBuilding ifBuilding)
