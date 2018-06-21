@@ -52,8 +52,8 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#" id="btn-projects">
+                <li id="btn-projects">
+                    <a href="#" >
                         <i class="fas fa-briefcase"></i>
                         Projects
                     </a>
@@ -73,14 +73,14 @@
                         </li>
                     </ul>
                 </li>
-                <li>
-                    <a href="#" id="btn-upload">
+                <li id="btn-upload">
+                    <a href="#" >
                         <i class="fas fa-image"></i>
                         Upload
                     </a>
                 </li>
-                <li>
-                    <a href="#" id="btn-view">
+                <li id="btn-view">
+                    <a href="#" >
                         <i class="fas fa-question"></i>
                         View
                     </a>
@@ -137,9 +137,7 @@
                 </div>
             </nav>
 
-            <div class="row">
-                <h3>Content</h3>
-            </div>
+          
             <div id="div-content">
                 <div id="mycontent">
 
@@ -161,6 +159,10 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
+        var refresh="@Model.Refresh";
+            console.log(refresh);
+            //side menue
             $('#sidebarCollapse').on('click', function () {
                 $('#sidebar').toggleClass('active');
             });
@@ -234,6 +236,8 @@
 
 
             });
+
+
         });
     </script>
 </body>

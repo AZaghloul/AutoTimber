@@ -10,6 +10,8 @@ using System.Web.Mvc;
 using Algorithm.DB;
 using Algorithm.DB.Models;
 using Algorithm.DB.ViewModels;
+using Algorithm.MVC.DAL;
+using Microsoft.AspNet.Identity;
 
 namespace Algorithm.MVC.Controllers
 {
@@ -20,7 +22,11 @@ namespace Algorithm.MVC.Controllers
         // GET: Projects
         public async Task<ActionResult> Index()
         {
-            return PartialView(@"~/Views/Projects/Partial/View.cshtml", new List<ProjectVM>());
+            var userId = User.Identity.GetUserId();
+            UnitOfWork uow = new UnitOfWork();
+            var projects= uow.Projects.FindBy(e => e.UserId == userId);
+             
+            return PartialView(@"~/Views/Projects/Partial/View.cshtml", ProjectVM.Load(projects));
         }
       
 
@@ -50,11 +56,12 @@ namespace Algorithm.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "Id,UserId,FileName,Title,Description,Thumbnail,DesignState,AddToGallery,DesignOptions")] Project project)
+        public async Task<ActionResult> Create( Project project)
         {
-            if (ModelState.IsValid)
+            if (!ModelState.IsValid)
             {
                 project.Id = Guid.NewGuid();
+                project.DesignOptions.Id= Guid.NewGuid();
                 db.Projects.Add(project);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

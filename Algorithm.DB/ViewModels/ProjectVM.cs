@@ -16,6 +16,15 @@ namespace Algorithm.DB.ViewModels
         {
             Project = project;
         }
+        public static List<ProjectVM> Load(IEnumerable<Project> projects)
+        {
+            var vm = new List<ProjectVM>();
+            foreach (var project in projects)
+            {
+               vm.Add(new ProjectVM(project));
+            }
 
+            return vm;
+        }
     }
 }

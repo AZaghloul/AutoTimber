@@ -33,5 +33,6 @@ namespace Algorithm.DB.ViewModels
             return db;
 
         }
+        public string Refresh { get; set; }
     }
 }

@@ -14,6 +14,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using System.Web;
+using System.Web.Helpers;
 using System.Web.Mvc;
 using Xbim.Ifc4.SharedBldgElements;
 
@@ -22,8 +23,10 @@ namespace Algorithm.MVC.Controllers
     public class DashBoardController : Controller
     {
         
-        public ActionResult Index()
+        public ActionResult Index(string Refresh)
         {
+            Refresh = "view,upload,name";
+          
             var userId = User.Identity.GetUserId();
 
             UnitOfWork uow = new UnitOfWork(new AlgorithmDB());
@@ -42,6 +45,7 @@ namespace Algorithm.MVC.Controllers
             var projects = uow.Projects.FindBy(e => e.UserId == userId);
 
             DashBoardVM dashBoardVM = DashBoardVM.Load(user, projects);
+            dashBoardVM.Refresh = Refresh;
 
             return View(dashBoardVM);
         }
