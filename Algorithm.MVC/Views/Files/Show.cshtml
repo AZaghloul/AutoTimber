@@ -5,50 +5,41 @@
 @model List<FileData>
 
 
+<style>
+    .asd {
+        display: inline-block;
+        left: 10%;
+        padding-top: 25%;
+    }
+
+    .bsd {
+        left: 6%;
+    }
+</style>
 
 
 
 <h2>Show</h2>
-
-<div id="content" class="container">
-<<<<<<< HEAD
-<div class="row">
-     </div>
-            <div class="col-md-3 asd">
-                <canvas id="viewer" width="350" height="200"></canvas>
-            </div>
-            <div class="col-md-6 bsd">
-                <canvas id="viewer2" width="800" height="500"></canvas>
-            </div>
-    </div>
-</div>
-
-=======
-    <div class="row">
-        <div class="col-md-12">
-            <canvas id="viewer-Archeticture" height="400" style="width:100%"></canvas>
-        </div>
-    </div>
-</div>
-
 <div id="content" class="container">
     <div class="row">
-        <div class="col-md-12">
-            <canvas id="viewer-structure" height="400" style="width:100%"></canvas>
-        </div>
+    </div>
+    <div class="col-md-3 asd">
+        <canvas id="viewer-Archeticture" width="350" height="200"></canvas>
+    </div>
+    <div class="col-md-6 bsd">
+        <canvas id="viewer-structure" width="800" height="500"></canvas>
     </div>
 </div>
 
->>>>>>> e226b8c1636cc7518014bdcf91ea2e2bb98235b7
+
 @section scripts{
     <script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
     <script type="text/javascript">
 
         $(document).ready(function () {
 
-<<<<<<< HEAD
-        var viewer = new xViewer("viewer");
-        var viewer2 = new xViewer("viewer2");
+        var viewer = new xViewer('viewer-structure');
+        var viewer2 = new xViewer('viewer-Archeticture');
 
         colorsEnum = Object.freeze({ 'red': 0, 'blue': 1 });
 
@@ -63,7 +54,7 @@
             var shouldRotate = true;
 
             function rotate() {
-                viewer.setCameraPosition(viewer2.getCameraPosition());
+                viewer2.setCameraPosition(viewer.getCameraPosition());
 
                 if (!shouldRotate) {
                     return;
@@ -85,29 +76,15 @@
 
                 var distanceVec2 = vec3.subtract(vec3.create(), origin2, camera2);
                 var distance2 = Math.max(vec3.length(distanceVec2), viewer2._handles[0]._model.meter);
-=======
-            var viewer = new xViewer('viewer-structure');
-
-        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
-        viewer.start();
->>>>>>> e226b8c1636cc7518014bdcf91ea2e2bb98235b7
 
                 //move to the navigation origin in view space
                 var transform = mat4.translate(mat4.create(), mat4.create(), mvOrigin)
                 var transform2 = mat4.translate(mat4.create(), mat4.create(), mvOrigin2)
 
-<<<<<<< HEAD
                 //z rotation around model z axis
                 var mvZ = vec3.transformMat3(vec3.create(), [0, 0, 1], mat3.fromMat4(mat3.create(), viewer._mvMatrix));
                 mvZ = vec3.normalize(vec3.create(), mvZ);
                 transform = mat4.rotate(mat4.create(), transform, Math.PI / 700.0, mvZ);
-=======
-            var viewer = new xViewer('viewer-Archeticture');
-
-        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[1].FileName })');
-        viewer.start();
-
->>>>>>> e226b8c1636cc7518014bdcf91ea2e2bb98235b7
 
                 var mvZ2 = vec3.transformMat3(vec3.create(), [0, 0, 1], mat3.fromMat4(mat3.create(), viewer2._mvMatrix));
                 mvZ2 = vec3.normalize(vec3.create(), mvZ2);
@@ -124,8 +101,8 @@
 
                 viewer2._mvMatrix = mat4.multiply(mat4.create(), transform2, viewer2._mvMatrix);
             }
-            $("#viewer").mousedown(function () { shouldRotate = false; });
-            $("#viewer2").mousedown(function () { shouldRotate = false; });
+            $("#viewer-Archeticture").mousedown(function () { shouldRotate = false; });
+            $("#viewer-structure").mousedown(function () { shouldRotate = false; });
             setInterval(rotate, 20);
         });
 
@@ -141,12 +118,16 @@
         });
 
 
+            var navCube = new xNavigationCube();
+            navCube.ratio = .1;
+            viewer.addPlugin(navCube);
 
-        viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName })');
-        viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName })');
+            viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model[1].FileName })');
+            viewer2.start();
+            viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model[0].FileName })');
+            viewer.start();
 
-        viewer.start();
-        viewer2.start();
+
 
         });
 
