@@ -89,6 +89,19 @@ namespace Bim.Common.Measures
             return !(L1 == L2);
         }
 
+        public static Length operator -(Length L1, Length L2)
+        {
+            return Length.FromInches(L1.Inches-L2.Inches);
+        }
+        public static Length operator +(Length L1, Length L2)
+        {
+            return Length.FromInches(L1.Inches + L2.Inches);
+        }
+
+        public static implicit operator double(Length L)
+        {
+            return L.Inches;
+        }
     }
 
 

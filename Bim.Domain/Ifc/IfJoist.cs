@@ -10,6 +10,7 @@ using Xbim.Ifc4.ProductExtension;
 using Xbim.Ifc4.GeometricModelResource;
 using Bim.Domain.Configuration;
 using MathNet.Spatial.Euclidean;
+using System;
 
 namespace Bim.Domain.Ifc
 {
@@ -20,15 +21,17 @@ namespace Bim.Domain.Ifc
         public IfFloor IfFloor { get; set; }
         public IfcAxis2Placement3D RelativeAxis { get; set; }
         public IfcLocalPlacement LocalPlacement { get; set; }
+        public IfDirection IfDirection { get; set; }
         #endregion
         public static Setup Setup { get; set; }
 
-        public IfJoist()
+        public IfJoist() : base(null)
         {
         }
-        public IfJoist(IfFloor floor)
+        public IfJoist(IfFloor floor) : base(floor.IfModel)
         {
             IfFloor = floor;
+            IfDirection = floor.ShortDirection;
         }
 
         public void New()
@@ -53,27 +56,66 @@ namespace Bim.Domain.Ifc
         #region Helper Method
         private void SetShape(IfcStore ifcModel)
         {
+            var rep = ifcModel.Instances.New<IfcProductDefinitionShape>();
 
-            var recProfile = ifcModel.Instances.New<IfcRectangleProfileDef>();
-
-            //filling proerties eshta y3ny
+            #region Extruded Representation
+            var recProfile = ifcModel.Instances.OfType<IfcRectangleProfileDef>()
+                .Where(e =>
+                e.ProfileType == IfcProfileTypeEnum.AREA &&
+                e.XDim == IfDimension.XDim.Feet &&
+                e.YDim == IfDimension.YDim.Feet)
+                .FirstOrDefault() ??
+                ifcModel.Instances.New<IfcRectangleProfileDef>();
             recProfile.ProfileType = IfcProfileTypeEnum.AREA;
-            recProfile.XDim = IfDimension.XDim / 12;
-            recProfile.YDim = IfDimension.YDim / 12;
+            recProfile.XDim = IfDimension.XDim.Feet;
+            recProfile.YDim = IfDimension.YDim.Feet;
+            //filling proerties eshta y3ny
 
             var body = ifcModel.Instances.New<IfcExtrudedAreaSolid>();
-            body.Depth = IfDimension.ZDim;
+            body.Depth = IfDimension.ZDim.Feet;
             //rectangle profile
             body.SweptArea = recProfile;
-            body.ExtrudedDirection = ifcModel.Instances.New<IfcDirection>();
+            body.ExtrudedDirection = ifcModel.Instances.OfType<IfcDirection>().Where(e =>
+                e.X == 0 &&
+                e.Y == 0 &&
+                e.Z == 1).FirstOrDefault() ??
+                ifcModel.Instances.New<IfcDirection>();
             body.ExtrudedDirection.SetXYZ(0, 0, 1);
-            //  body.ExtrudedDirection.SetXYZ();
 
-
-            var point = ifcModel.Instances.New<IfcCartesianPoint>();
+            var point = ifcModel.Instances.OfType<IfcCartesianPoint>()
+                .Where(e => e.X == 0 && e.Y == 0 && e.Z == 0).FirstOrDefault() ??
+                ifcModel.Instances.New<IfcCartesianPoint>();
             point.SetXYZ(0, 0, 0);
+
             body.Position = ifcModel.Instances.New<IfcAxis2Placement3D>();
             body.Position.Location = point;
+            body.Position.RefDirection = ifcModel.Instances.OfType<IfcDirection>().Where(e =>
+                e.X == 1 &&
+                e.Y == 0 &&
+                e.Z == 0)
+            .FirstOrDefault() ??
+            ifcModel.Instances.New<IfcDirection>();
+
+            // placment.RefDirection.SetXYZ(xDir.X, xDir.Y,xDir.Z);
+            body.Position.RefDirection.SetXYZ(
+                1,
+                0,
+                0
+                );
+
+            body.Position.Axis = ifcModel.Instances.OfType<IfcDirection>().Where(e =>
+                e.X == 0 &&
+                e.Y == 0 &&
+                e.Z == 1)
+                .FirstOrDefault() ??
+                ifcModel.Instances.New<IfcDirection>();
+
+            body.Position.Axis.SetXYZ(
+                0,
+                0,
+                1
+                );
+
 
             //Create a Definition shape to hold the geometry
             var shape = ifcModel.Instances.New<IfcShapeRepresentation>();
@@ -82,109 +124,157 @@ namespace Bim.Domain.Ifc
             shape.RepresentationType = "SweptSolid";
             shape.RepresentationIdentifier = "Body";
             shape.Items.Add(body);
-            var rep = ifcModel.Instances.New<IfcProductDefinitionShape>();
             rep.Representations.Add(shape);
+            #endregion
+
+            #region Axis Representation
             // linear segment as IfcPolyline with two points is required for IfcWall
             var ifcPolyline = ifcModel.Instances.New<IfcPolyline>();
             var startPoint = ifcModel.Instances.New<IfcCartesianPoint>();
-            startPoint.SetXY(IfLocation.X, IfLocation.Y);
+            startPoint.SetXY(IfLocation.X.Feet, IfLocation.Y.Feet);
             var endPoint = ifcModel.Instances.New<IfcCartesianPoint>();
             /*          Set Stud Location */
-            endPoint.SetXY(IfLocation.X + IfDimension.XDim, IfLocation.Y + IfDimension.YDim);
+            endPoint.SetXY(IfLocation.X.Feet + IfDimension.ZDim.Feet * IfDirection.X, IfLocation.Y.Feet + IfDimension.ZDim.Feet * IfDirection.Y);
             ifcPolyline.Points.Add(startPoint);
             ifcPolyline.Points.Add(endPoint);
-
             var shape2D = ifcModel.Instances.New<IfcShapeRepresentation>();
             shape2D.ContextOfItems = modelContext;
             shape2D.RepresentationIdentifier = "Axis";
             shape2D.RepresentationType = "Curve2D";
             shape2D.Items.Add(ifcPolyline);
             rep.Representations.Add(shape2D);
+            #endregion
+
             IfcElement.Representation = rep;
+
         }
         private void SetLocation(IfcStore ifcModel)
         {
-            var lp = ifcModel.Instances.New<IfcLocalPlacement>();
-            var relPlacement = ifcModel.Instances.New<IfcLocalPlacement>();
 
-            var placment = ifcModel.Instances.New<IfcAxis2Placement3D>();
+            var JoistLocalPlacement = ifcModel.Instances.New<IfcLocalPlacement>();
+            var JoistRelativePlacment = ifcModel.Instances.New<IfcAxis2Placement3D>();
             //
             // setting the location
             //
-            placment.Location = ifcModel.Instances.New<IfcCartesianPoint>();
-            placment.Location.SetXYZ(
-                IfLocation.X,
-               IfLocation.Y,
-              IfLocation.Z
-                );
-            placment.RefDirection = ifcModel.Instances.New<IfcDirection>();
-            placment.Axis = ifcModel.Instances.New<IfcDirection>();
 
-            placment.Axis.SetXYZ(
-                IfFloor.ShortDirection.X,
-                IfFloor.ShortDirection.Y,
-                IfFloor.ShortDirection.Z
+            #region relative location
+            JoistRelativePlacment.Location = ifcModel.Instances.OfType<IfcCartesianPoint>().Where(
+                e => e.X == IfLocation.X.Feet &&
+                e.Y == IfLocation.Y.Feet &&
+                e.Z == IfLocation.Z.Feet)
+                .FirstOrDefault() ??
+                ifcModel.Instances.New<IfcCartesianPoint>();
+
+            JoistRelativePlacment.Location.SetXYZ(
+                IfLocation.X.Feet,
+                IfLocation.Y.Feet,
+                IfLocation.Z.Feet
                 );
 
-            var zDirc = new Vector3D(
+            var zDir = new Vector3D(
                 IfFloor.ShortDirection.X,
                 IfFloor.ShortDirection.Y,
                 IfFloor.ShortDirection.Z);
 
-            var nDirc = new Vector3D(
+            var nDir = new Vector3D(
                 IfFloor.LongDirection.X,
                 IfFloor.LongDirection.Y,
                 IfFloor.LongDirection.Z
                 );
-            var xDir = zDirc.CrossProduct(nDirc);
+            var xDir = zDir.CrossProduct(nDir);
+
+            JoistRelativePlacment.RefDirection = ifcModel.Instances.OfType<IfcDirection>().Where(e =>
+                e.X == nDir.X &&
+                e.Y == nDir.Y &&
+                e.Z == nDir.Z)
+                .FirstOrDefault() ??
+                ifcModel.Instances.New<IfcDirection>();
+
+            // placment.RefDirection.SetXYZ(xDir.X, xDir.Y,xDir.Z);
+            JoistRelativePlacment.RefDirection.SetXYZ(
+                nDir.X,
+                nDir.Y,
+                nDir.Z
+                );
+
+            JoistRelativePlacment.Axis = ifcModel.Instances.OfType<IfcDirection>().Where(e =>
+                e.X == zDir.X &&
+                e.Y == zDir.Y &&
+                e.Z == zDir.Z)
+                .FirstOrDefault() ??
+                ifcModel.Instances.New<IfcDirection>();
+
+            JoistRelativePlacment.Axis.SetXYZ(
+                zDir.X,
+                zDir.Y,
+                zDir.Z
+                );
+
             //placment.Axis.SetXYZ(
             //    0,0,1
             //    );
 
-            // placment.RefDirection.SetXYZ(xDir.X, xDir.Y,xDir.Z);
-            placment.RefDirection.SetXYZ(
-                IfFloor.LongDirection.X,
-                 IfFloor.LongDirection.Y,
-                 IfFloor.LongDirection.Z
-                );
-            lp.RelativePlacement = placment;
+            JoistLocalPlacement.RelativePlacement = JoistRelativePlacment;
+            #endregion
+
+            #region intermideate local placement
+            var intermideateLocalPLacement = ifcModel.Instances.New<IfcLocalPlacement>();
+            var intermideatePlacementRelTo = ifcModel.Instances.New<IfcLocalPlacement>();
+            var intermideateRelativePlacment = ifcModel.Instances.New<IfcAxis2Placement3D>();
+            intermideateRelativePlacment.Location = ifcModel.Instances.OfType<IfcCartesianPoint>()
+                .Where(e =>
+                    e.X == IfFloor.IfLocation.X.Feet &&
+                    e.Y == IfFloor.IfLocation.Y.Feet &&
+                    e.Z == IfFloor.IfLocation.Z.Feet)
+                .FirstOrDefault() ??
+                ifcModel.Instances.New<IfcCartesianPoint>();
+
+            intermideateRelativePlacment.Location.X = IfFloor.IfLocation.X.Feet;
+            intermideateRelativePlacment.Location.Y = IfFloor.IfLocation.Y.Feet;
+            intermideateRelativePlacment.Location.Z = IfFloor.IfLocation.Z.Feet;
+            //intermideateRelativePlacment.Location.Z = 0;
+
+            intermideateRelativePlacment.Axis =
+                ifcModel.Instances.OfType<IfcDirection>().Where
+                (e => e.X == 0 &&
+                e.Y == 0 &&
+                e.Z == 1).FirstOrDefault() ??
+                ifcModel.Instances.New<IfcDirection>();
+            intermideateRelativePlacment.Axis.SetXYZ(0, 0, 1);
+
+            intermideateRelativePlacment.RefDirection =
+                ifcModel.Instances.OfType<IfcDirection>().Where
+                (e => e.X == 1 &&
+                e.Y == 0 &&
+                e.Z == 0).FirstOrDefault() ??
+                ifcModel.Instances.New<IfcDirection>();
+            intermideateRelativePlacment.RefDirection.SetXYZ(1, 0, 0);
+
+            var storyLocalPlacement = (IfcLocalPlacement)(((IfcLocalPlacement)IfFloor.IfcSlab.ObjectPlacement).PlacementRelTo);
+            //var storyLocalPlacement = ((IfcLocalPlacement)IfFloor.IfcSlab.ObjectPlacement);
+            intermideatePlacementRelTo = storyLocalPlacement;
+            intermideateLocalPLacement.RelativePlacement = intermideateRelativePlacment;
+            intermideateLocalPLacement.PlacementRelTo = intermideatePlacementRelTo;
+            #endregion
+
+            //IfcAxis2Placement3D OriginRelativePlacment = ifcModel.Instances.OfType<IfcAxis2Placement3D>()
+            //    .Where(e => e.Location.X == 0 && e.Location.Y == 0 && e.Location.Z == 0).FirstOrDefault();
+            //IfcLocalPlacement Origin = ifcModel.Instances.OfType<IfcLocalPlacement>()
+            //    .Where(
+            //    e => e.RelativePlacement == OriginRelativePlacment
+            //    ).FirstOrDefault();
+
+            JoistLocalPlacement.PlacementRelTo = intermideateLocalPLacement;
 
             //setting the relativ placement
-            lp.PlacementRelTo = relPlacement;
-            relPlacement.PlacementRelTo = ((IfcLocalPlacement)IfFloor.IfcSlab.ObjectPlacement).PlacementRelTo;
-
-            var loc = (IfcCartesianPoint)IfFloor.PolyLine.Points[0];
-            relPlacement.RelativePlacement = ifcModel.Instances.New<IfcAxis2Placement3D>();
-            ((IfcAxis2Placement3D)relPlacement.RelativePlacement).Location = (IfcCartesianPoint)IfFloor.PolyLine.Points[0];
-
-            IfcElement.ObjectPlacement = lp;
+            IfcElement.ObjectPlacement = JoistLocalPlacement;
         }
-        private void CheckUnits()
-        {
-            var unit = IfModel.IfUnit.LengthUnit;
-            switch (unit)
-            {
-                case UnitName.METRE:
-                    IfDimension = IfDimension.ToMeters();
-                    IfLocation = IfLocation.ToMeters();
-                    break;
 
-                case UnitName.MILLIMETRE:
-                    IfDimension = IfDimension.ToMilliMeters();
-                    IfLocation = IfLocation.ToMilliMeters();
-                    break;
-
-                case UnitName.FOOT:
-                    break;
-                default:
-                    break;
-            }
-        }
         #endregion
 
         public override string ToString()
         {
-            return $"Floor Joist {IfDimension.XDim} × {IfDimension.YDim} × {IfDimension.ZDim}";
+            return $"Floor Joist {IfDimension.XDim.Inches} × {IfDimension.YDim.Inches} × {Math.Round(IfDimension.ZDim.Inches, 0)}";
         }
     }
 }

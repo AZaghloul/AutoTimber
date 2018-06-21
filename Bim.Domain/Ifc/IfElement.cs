@@ -16,6 +16,11 @@ namespace Bim.Domain.Ifc
         public IfLocation IfLocation { get; set; }
         public IfMaterial IfMaterial { get; set; }
 
+        public IfElement(IfModel ifModel)
+        {
+            IfModel = ifModel ?? new IfModel();
+            IfModel.Instances.Add(this);
+        }
         //public override string ToString()
         //{
         //    return $"GeneralElement {IfDimension.XDim} × {IfDimension.YDim} × {IfDimension.ZDim}";

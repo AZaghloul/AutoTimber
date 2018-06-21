@@ -1,5 +1,7 @@
 ﻿
 
+using Bim.Common.Measures;
+
 namespace Bim.Domain.Ifc
 {
     public class IfDoor : IDoor
@@ -7,6 +9,12 @@ namespace Bim.Domain.Ifc
         public ILocation Location { get; set; }
         public IDimension Dimensions { get; set; }
         public IfDoor(double xDim, double yDim, double ZDim, double x, double y, double z)
+        {
+            Location = new IfLocation(x, y, z);
+            Dimensions = new IfDimension(xDim, yDim, ZDim);
+        }
+
+        public IfDoor(Length xDim, Length yDim, Length ZDim, double x, double y, double z)
         {
             Location = new IfLocation(x, y, z);
             Dimensions = new IfDimension(xDim, yDim, ZDim);

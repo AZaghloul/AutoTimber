@@ -89,9 +89,7 @@ namespace Bim.Domain.Polygon
             else
             {
                 IsOpen = true;
-                Openings = Openings.OrderBy(open => open.IfLocation.X).ToList();
-
-
+                Openings = Openings.OrderBy(open => open.IfLocation.X.Inches).ToList();
               
                 if (Openings.Count == 1)
                 {
@@ -119,7 +117,6 @@ namespace Bim.Domain.Polygon
 
                     switch (Openings[0].OpeningType)
                     {
-
                         case OpeningType.Door:
                             Region drt = new Region(
                                 tempOpening.IfDimension.XDim,

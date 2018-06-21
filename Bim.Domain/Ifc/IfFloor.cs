@@ -5,6 +5,7 @@ using Xbim.Ifc4.Interfaces;
 using System;
 using Bim.Domain.Configuration;
 using MathNet.Spatial.Euclidean;
+using Bim.Common.Measures;
 
 namespace Bim.Domain.Ifc
 {
@@ -25,15 +26,13 @@ namespace Bim.Domain.Ifc
 
         #region Constructors
 
-        public IfFloor()
+        public IfFloor():base(null)
         {
 
         }
-        public IfFloor(IfModel ifModel, IIfcSlab ifcSlab)
+        public IfFloor(IfModel ifModel, IIfcSlab ifcSlab):base(ifModel)
         {
             IfcSlab = ifcSlab;
-            IfModel = ifModel;
-            IfModel.Instances.Add(this);
             Initialize();
         }
         #endregion
@@ -54,7 +53,11 @@ namespace Bim.Domain.Ifc
             SlabAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcSlab.ObjectPlacement).RelativePlacement);
             var location = SlabAxis.Location;
             LocalPlacement = (IIfcLocalPlacement)IfcSlab.ObjectPlacement;
-            IfLocation = new IfLocation((float)Loc.X, (float)Loc.Y, (float)Loc.Z);
+            double z;
+            if (double.IsNaN(Loc.Z))
+                z = 0;
+            else z = Loc.Z;
+            IfLocation = new IfLocation(Length.FromFeet(Loc.X), Length.FromFeet(Loc.Y), Length.FromFeet(z)) ;
         }
         private void GetDimension()
         {
@@ -77,13 +80,13 @@ namespace Bim.Domain.Ifc
             }
             for (int i = 0; i < noOfPoints - 1; i++)
             {
-                double Length = Math.Sqrt(GetLengthSquare(PolyLine.Points[i], PolyLine.Points[i + 1]));
-                if (shortDimension > Length)
+                double L = Math.Sqrt(GetLengthSquare(PolyLine.Points[i], PolyLine.Points[i + 1]));
+                if (shortDimension > L)
                 {
-                    shortDimension = Length;
-                    ShortDirection = new IfDirection(PolyLine.Points[i], PolyLine.Points[i + 1]);
+                    shortDimension = L;
+                    ShortDirection = new IfDirection((PolyLine.Points[i]), (PolyLine.Points[i + 1]));
                 }
-                LongDimension = Math.Max(LongDimension, Length);
+                LongDimension = Math.Max(LongDimension, L);
             }
 
             var depth =
@@ -117,7 +120,7 @@ namespace Bim.Domain.Ifc
             var vec = zDir.CrossProduct(sDir);
             LongDirection = new IfDirection(vec.X, vec.Y, vec.Z);
 
-            IfDimension = new IfDimension(shortDimension, LongDimension, depth);
+            IfDimension = new IfDimension(Length.FromFeet(shortDimension), Length.FromFeet(LongDimension), Length.FromFeet(depth));
 
 
 

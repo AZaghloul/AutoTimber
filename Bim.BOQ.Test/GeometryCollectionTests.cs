@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Bim.Domain.Ifc;
+using Bim.Common.Measures;
 
 namespace Bim.BOQ.Tests
 {

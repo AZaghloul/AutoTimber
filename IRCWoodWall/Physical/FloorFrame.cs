@@ -48,23 +48,23 @@ namespace Bim.Application.IRCWood.Physical
             WoodGrade WG = IfJoist.Setup.Get<WoodGrade>("WoodGrade");
             foreach (var reg in FloorPolygon.Regions)
             {
-                double span = reg.IfDimension.XDim;
+                double span = reg.IfDimension.XDim.Inches;
                 var Cells = JoistTable.Cells.Where(e =>
                     e.WoodGrade == WG &&
                     e.WoodType == WT &&
-                    e.SpanToInch >= span*12 &&
+                    e.SpanToInch >= span &&
                     e.DeadLoadPsF == 10 &&
                     e.Section == section)
                     .OrderBy(e =>
                     e.SpanToInch).ToList();
-                double S = Cells[0].Spacing/12;
-                var spaces = Split.Equal(reg.IfDimension.YDim, S);
+                double S = Cells[0].Spacing;
+                var spaces = Split.Equal(reg.IfDimension.YDim - section.Width, S);
 
                 for (int i = 0; i < spaces.Count; i++)
                 {
                     //var spacingVec = new Vector3D(spaces[i], spaces[i], spaces[i]);
                     var DircVec = new IfLocation(
-                        FloorPolygon.IfFloor.ShortDirection.Y*spaces[i],
+                        FloorPolygon.IfFloor.ShortDirection.Y * spaces[i],
                         FloorPolygon.IfFloor.ShortDirection.X * spaces[i],
                         FloorPolygon.IfFloor.ShortDirection.Z * spaces[i]
                         );
@@ -78,7 +78,7 @@ namespace Bim.Application.IRCWood.Physical
                         IfDimension = new IfDimension(
                                        section.Width.Inches,
                                         section.Depth.Inches,
-                                       reg.IfDimension.XDim),
+                                       reg.IfDimension.XDim.Inches),
 
                         IfMaterial = IfMaterial.Setup.Get<IfMaterial>("Joist")
                     };

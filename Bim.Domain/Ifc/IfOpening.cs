@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Bim.Common.Measures;
 using Bim.Domain;
 using Xbim.Ifc4.GeometricConstraintResource;
 using Xbim.Ifc4.Interfaces;
@@ -22,18 +23,16 @@ namespace Bim.Domain.Ifc
 
         public IIfcRelVoidsElement IfcOpening { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
-        public IfOpening()
+        public IfOpening():base(null)
         {
 
         }
-        public IfOpening(IfWall ifWall, IIfcRelVoidsElement ifcOpening)
+        public IfOpening(IfWall ifWall, IIfcRelVoidsElement ifcOpening):base(ifWall.IfModel)
         {
             IfWall = ifWall;
-            IfModel = IfWall.IfModel;
             IfcOpening = ifcOpening;
-            IfModel.Instances.Add(this);
         }
-        public IfOpening( IfOpening opening)
+        public IfOpening( IfOpening opening):base(opening.IfModel)
         {
             IfWall = opening.IfWall;
             OpeningType = opening.OpeningType;
@@ -107,20 +106,20 @@ namespace Bim.Domain.Ifc
                 }
 
 
-                ifopening.IfLocation = new IfLocation(oLocation.X, oLocation.Y, oLocation.Z);
+                ifopening.IfLocation = new IfLocation(Length.FromFeet(oLocation.X).Inches, Length.FromFeet(oLocation.Y).Inches, Length.FromFeet(oLocation.Z).Inches);
 
-                ifopening.IfDimension = new IfDimension(recProfile.YDim, recDepth, recProfile.XDim);
+                ifopening.IfDimension = new IfDimension(Length.FromFeet(recProfile.YDim).Inches, Length.FromFeet(recDepth).Inches, Length.FromFeet(recProfile.XDim).Inches);
 
                 switch (filling)
                 {
                     case "IfcDoor":
                         ifopening.OpeningType = OpeningType.Door;
-                        ifopening.IfDimension = new IfDimension(recProfile.XDim, recDepth, recProfile.YDim);
+                        ifopening.IfDimension = new IfDimension(Length.FromFeet(recProfile.XDim).Inches, Length.FromFeet(recDepth).Inches, Length.FromFeet(recProfile.YDim).Inches);
 
                         break;
                     case "IfcWindow":
                         ifopening.OpeningType = OpeningType.Window;
-                        ifopening.IfDimension = new IfDimension(recProfile.YDim, recDepth, recProfile.XDim);
+                        ifopening.IfDimension = new IfDimension(Length.FromFeet(recProfile.YDim).Inches, Length.FromFeet(recDepth).Inches, Length.FromFeet(recProfile.XDim).Inches);
                         break;
                     default:
                         ifopening.OpeningType = OpeningType.Window;

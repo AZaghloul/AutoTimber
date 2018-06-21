@@ -34,7 +34,7 @@ namespace Bim.Domain.Polygon
             IfLocation = new IfLocation(x, y, z);
             IfDimension = new IfDimension(xDim, yDim, height);
         }
-        public Region(IDimension dimensions, ILocation l) : this(dimensions.XDim, dimensions.YDim, dimensions.ZDim, l.X, l.Y, l.Z)
+        public Region(IDimension dimensions, ILocation l) : this(dimensions.XDim.Inches, dimensions.YDim.Inches, dimensions.ZDim.Inches, l.X, l.Y, l.Z)
         {
 
         }
@@ -42,7 +42,7 @@ namespace Bim.Domain.Polygon
         {
 
         }
-        public Region(IDimension dimensions) : this(dimensions.XDim, dimensions.YDim, dimensions.ZDim, 0, 0, 0)
+        public Region(IDimension dimensions) : this(dimensions.XDim.Inches, dimensions.YDim.Inches, dimensions.ZDim.Inches, 0, 0, 0)
         {
 
         }

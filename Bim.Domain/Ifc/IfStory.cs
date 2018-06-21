@@ -21,17 +21,14 @@ namespace Bim.Domain.Ifc
             set { _ifcBuildingStorey = value; Initialize(); }
         }
         public IBuilding Building { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
-        public IfStory()
+        public IfStory():base(null)
         {
 
         }
-        public IfStory(IfModel ifModel, IIfcBuildingStorey ifcStory)
+        public IfStory(IfModel ifModel, IIfcBuildingStorey ifcStory):base(ifModel)
         {
-            IfModel = ifModel;
             IfcStory = ifcStory;
             Initialize();
-            IfModel.Instances.Add(this);
-
         }
         private void Initialize()
         {

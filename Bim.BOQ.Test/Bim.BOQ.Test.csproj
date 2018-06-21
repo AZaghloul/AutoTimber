@@ -59,6 +59,10 @@
       <Project>{91E959B4-6103-483C-8498-A1A0EB89D5B7}</Project>
       <Name>Bim.BOQ</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Bim.Common\Bim.Common.csproj">
+      <Project>{04C837CF-0F12-45E5-8399-F8A53DDC9586}</Project>
+      <Name>Bim.Common</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Bim.Domain\Bim.Domain.csproj">
       <Project>{B468FBB6-CC77-40D7-A0E9-32B1F345B448}</Project>
       <Name>Bim.Domain</Name>

@@ -35,7 +35,7 @@ namespace AlgorithmProject
             #endregion
             var d = Split.Equal(13, .65);
 
-            string fileName = @"..\..\Models\beam-amr-setup.ifc";
+            string fileName = @"..\..\Models\ITI.Qondos.2.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
 
             IfcStore ifcStore = IfcStore.Open(fileName);
@@ -55,23 +55,25 @@ namespace AlgorithmProject
                 new IfQuantity("test Quantity value2", "200",IfUnitEnum.AREAUNIT),
                 new IfQuantity("test Quantity value2", "300",IfUnitEnum.AREAUNIT),
             };
-            prop.AddSingleValue("sss value List", sList);
-            prop.AddQuantities("Quantity value List", qList);
-            prop.FindByName("Join Status");
-            prop.FindByValue("Both joins enabled");
-            prop.FindSVProperty(new IfSingleValue("Join Status", "Both joins enabled"));
-        prop.New();
-            ifcStore.SaveAs((fileName + "prop"));
+            //prop.AddSingleValue("sss value List", sList);
+            //prop.AddQuantities("Quantity value List", qList);
+            //prop.FindByName("Join Status");
+            //prop.FindByValue("Both joins enabled");
+            //prop.FindSVProperty(new IfSingleValue("Join Status", "Both joins enabled"));
+        //prop.New();
+        //    ifcStore.SaveAs((fileName + "prop"));
 
             using (IfModel model = IfModel.Open(fileName))
             {
                 Startup.Configuration(model);
                 model.Save(fileName);
-                //model.Delete<IfcBeam>();
-                // model.Delete<IfcColumn>();
+                model.Delete<IfcBeam>();
+                model.Delete<IfcColumn>();
                 WoodFrame wf = new WoodFrame(model);
                 wf.FrameWalls();
-                //model.Delete<IfcWall>();
+                model.Delete<IfcWall>();
+                model.Delete<IfcSlab>();
+
                 model.Save(saveName);
                 // OpenWindow(fileName);
                 OpenWindow(saveName);
