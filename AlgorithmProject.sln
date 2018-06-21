@@ -11,6 +11,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Domain", "Bim.Domain\Bi
 EndProject
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Refrences", "Refrences", "{6BE81686-FB55-43D2-9BC4-D42FA6E73117}"
 	ProjectSection(SolutionItems) = preProject
 		Refrences\Esent.Interop.dll = Refrences\Esent.Interop.dll
@@ -31,6 +32,8 @@ EndProject
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Common", "Bim.Common\Bim.Common.csproj", "{04C837CF-0F12-45E5-8399-F8A53DDC9586}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Application.IRCWood", "IRCWoodWall\Bim.Application.IRCWood.csproj", "{9AEC83FB-AD0F-46CB-8B09-EA2E8073F4C3}"
@@ -44,10 +47,13 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.DB", "Algorithm.DB\Algorithm.DB.csproj", "{36B75ECB-2B2A-47F3-91AC-DF26352F7B32}"
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.BOQ", "Bim.BOQ\Bim.BOQ.csproj", "{91E959B4-6103-483C-8498-A1A0EB89D5B7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.BOQ.Test", "Bim.BOQ.Test\Bim.BOQ.Test.csproj", "{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}"
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
@@ -173,6 +179,7 @@ Global
 		{36B75ECB-2B2A-47F3-91AC-DF26352F7B32}.Release|x86.Build.0 = Release|Any CPU
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{91E959B4-6103-483C-8498-A1A0EB89D5B7}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -197,6 +204,8 @@ Global
 		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Release|x64.Build.0 = Release|Any CPU
 		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Release|x86.ActiveCfg = Release|Any CPU
 		{B3D9C1FF-B6E8-4463-9BEF-907D38BEC218}.Release|x86.Build.0 = Release|Any CPU
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======

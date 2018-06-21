@@ -19,7 +19,10 @@ namespace Bim.Application.IRCWood.Physical
         public IfModel IfModel { get; set; }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
@@ -42,10 +45,13 @@ namespace Bim.Application.IRCWood.Physical
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
         List<WallFrame> WallFrames { get; set; }
         List<FloorFrame> FloorFrames { get; set; }
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
@@ -69,6 +75,7 @@ namespace Bim.Application.IRCWood.Physical
         {
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 
             
             var studTable =  StudTable.Load(@"..\..\Tables\StudSpacingTable.txt");
@@ -81,6 +88,8 @@ namespace Bim.Application.IRCWood.Physical
             var walls = IfModel.Instances.OfType<IfWall>().ToList();
             var polygons = WallPolygon.GetPolygons(walls);
 
+=======
+>>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
 >>>>>>> parent of c0e791d... Merge branch 'BOQ' into Algorithm-MVC
 =======
