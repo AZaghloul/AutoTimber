@@ -7,6 +7,17 @@ using System.Web.Hosting;
 
 namespace Algorithm.MVC.Helper
 {
+    public enum FileType
+    {
+        InputName,
+        OutputName,
+        WexBIMArcName,
+        WexBIMStrName,
+        InputPath,
+        OutputPath,
+        WexBIMPathArc,
+        WexBIMPAthStr,
+    }
     public struct FileData
     {
         #region Static Variable
@@ -19,9 +30,9 @@ namespace Algorithm.MVC.Helper
         #endregion
 
         #region Properties
-        
-        public string FileName { get; set; }
 
+        public string FileName { get; set; }
+        public bool Structure { get; set; }
         public string InputName { get; set; }
         public string OutputName { get; set; }
         public string WexBIMArcName { get; set; }
@@ -29,13 +40,13 @@ namespace Algorithm.MVC.Helper
         public string InputPath { get; set; }
         public string OutputPath { get; set; }
         public string WexBIMPathArc { get; set; }
-        public string WexBIMPAthStr { get; set; }
+        public string WexBIMPathStr { get; set; }
         #endregion
         public FileData(string fileName)
         {
             // get File Name To store in DB;
             FileName = fileName;
-
+            Structure = true;
             //set /data
             InputName = FileName;
             var ext = Path.GetExtension(FileName);
@@ -47,7 +58,7 @@ namespace Algorithm.MVC.Helper
             InputPath = HostingEnvironment.MapPath(InputDirectory + InputName);
             OutputPath = HostingEnvironment.MapPath(OutputDirectory + OutputName);
             WexBIMPathArc = HostingEnvironment.MapPath(WexBIMDirectory + WexBIMArcName);
-            WexBIMPAthStr = HostingEnvironment.MapPath(WexBIMDirectory + WexBIMStrName);
+            WexBIMPathStr = HostingEnvironment.MapPath(WexBIMDirectory + WexBIMStrName);
         }
         public void FromName(string name)
         {
@@ -66,7 +77,39 @@ namespace Algorithm.MVC.Helper
             InputPath = HostingEnvironment.MapPath(InputDirectory + InputName);
             OutputPath = HostingEnvironment.MapPath(OutputDirectory + OutputName);
             WexBIMPathArc = HostingEnvironment.MapPath(WexBIMDirectory + WexBIMArcName);
-            WexBIMPAthStr = HostingEnvironment.MapPath(WexBIMDirectory + WexBIMStrName);
+            WexBIMPathStr = HostingEnvironment.MapPath(WexBIMDirectory + WexBIMStrName);
+        }
+        public bool Exists(FileType fileType)
+        {
+            switch (fileType)
+            {
+                case FileType.InputName:
+                    return File.Exists(InputName);
+
+                case FileType.OutputName:
+                    return File.Exists(OutputName);
+
+                case FileType.WexBIMArcName:
+                    return File.Exists(WexBIMArcName);
+
+                case FileType.WexBIMStrName:
+                    return File.Exists(WexBIMStrName);
+
+                case FileType.InputPath:
+                    return File.Exists(InputPath);
+
+                case FileType.OutputPath:
+                    return File.Exists(OutputPath);
+
+                case FileType.WexBIMPathArc:
+                    return File.Exists(WexBIMPathArc);
+
+                case FileType.WexBIMPAthStr:
+                    return File.Exists(WexBIMPathStr);
+                default:
+                    return false;
+            }
+
         }
     }
 }

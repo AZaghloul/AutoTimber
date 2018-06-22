@@ -3,10 +3,7 @@
     Layout = null;
 
 }
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th style="text-align:center">
             @* <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />*@
@@ -36,8 +33,35 @@
                 @Html.DisplayFor(modelItem => item.Project.Title)
             </td>
             <td>
-
                 @Html.DisplayFor(modelItem => item.Project.DesignState)
+                @if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Waiting)
+                {
+
+                    string txt = "Start Framing";
+                    @:<input type="button" class="btn-Design btn btn-default" value=@txt />
+                    @Html.HiddenFor(modelItem => item.Project.Id)
+
+                }
+                else if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Designed)
+                {
+
+                    string txt = "Reframe";
+                    @:<input type="button" class="btn-Design btn btn-default" value=@txt />
+                    @Html.HiddenFor(modelItem => item.Project.Id)
+
+                }
+
+
+                else
+                {
+                    string txt = "Start Framing";
+                    @:<input type="button" class="btn-Design btn btn-default" value=@txt disabled />
+                    @Html.HiddenFor(modelItem => item.Project.Id)
+
+
+                }
+
+
 
             </td>
             <td id="td-project">
@@ -48,24 +72,24 @@
                         @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
 
-                    <span style="margin:5px">
+                    <span style="margin:5px" class="btn-download">
                         <i class="fas fa-download" style="margin-right:3px"></i>download
+                        @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
                     @*BOQ*@
-                    <span style="margin:5px" id="btn-boq">
-                        <i class="fas fa-file-excel" style="margin-right:3px"></i>
-
-                        @Html.ActionLink("BOQ", "downloadexcel", new { id = item.Project.Id })
-
+                    <span style="margin:5px" class="btn-boq">
+                        <i class="fas fa-file-excel" style="margin-right:3px"></i>BOQ
+                        @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
 
                     @*download all*@
-                    <span style="margin:5px">
+                    <span class="btn-archive" style="margin:5px">
                         <i class="fas fa-file-archive" style="margin-right:3px"></i>archive
+                        @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
 
                     @*Settings*@
-                    <span id="btn-settings" style="margin:5px" data-toggle="modal" data-target="#myModal">
+                    <span class="btn-settings" style="margin:5px" data-toggle="modal" data-target="#myModal">
                         <i class="fas fa-cog" style="margin-right:3px"></i>settings
                         @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
@@ -144,26 +168,89 @@
 
 
         //Selected project Id
-        $('#btn-settings').click(function () {
-
+        $('.btn-settings').click(function () {
             selectedProjectId = $(this).find('input[type=hidden]').val();
-           
+
         });
 
+        //btn showww
         $('.btn-show').click(function () {
 
             selectedProjectId = $(this).find('input[type=hidden]').val();
-            console.log(selectedProjectId);
+
+            var divElement = $("<div id='mycontent' >Loading..</div>");
+            $('#div-content > #mycontent').remove();
+            //add the div content again
+            $('#div-content').html(divElement);
+
+            $.ajax({
+                url: '/files/show',
+                dataType: 'html',
+                data: { Id: selectedProjectId },
+                success: function (data) {
+
+                    $('#mycontent').html(data);
+
+                }
+            });
+
         });
 
 
-        //upload file
-        $('#btn-boq').click(function () {
+        // btn BOQ
+        $('.btn-boq').click(function () {
+            selectedProjectId = $(this).find('input[type=hidden]').val();
 
+            $.ajax({
+                url: '/files/boq',
+                dataType: 'html',
+                data: { Id: selectedProjectId },
+                success: function (data) {
+
+                    //$('#mycontent').html(data);
+                }
+            });
+        });
+
+        //btn design
+        $('.btn-Design').click(function () {
+            selectedProjectId = $(this).next('input[type=hidden]').val();
+
+            $.ajax({
+                url: '/projects/design',
+                dataType: 'html',
+                data: { Id: selectedProjectId },
+                success: function (data) {
+
+                    //$('#mycontent').html(data);
+                }
+            });
+        });
+
+
+        // Atchive Download
+        $('.btn-archive').click(function () {
+            selectedProjectId = $(this).find('input[type=hidden]').val();
+
+            $.ajax({
+                url: '/files/archive',
+                dataType: 'html',
+                data: { Id: selectedProjectId },
+                success: function (data) {
+
+                    //$('#mycontent').html(data);
+                }
+            });
+        });
+        // btn Download
+
+        $('.btn-download').click(function () {
+            selectedProjectId = $(this).find('input[type=hidden]').val();
 
             $.ajax({
                 url: '/files/download',
                 dataType: 'html',
+                data: { Id: selectedProjectId },
                 success: function (data) {
 
                     //$('#mycontent').html(data);
@@ -173,8 +260,8 @@
 
         //settings
 
-        $('#btn-settings-close').click(function () {
-
+        $('.btn-settings-close').click(function () {
+            selectedProjectId = $(this).find('input[type=hidden]').val();
             // creating object
             settings = new Settings();
             settings.ProjectId = selectedProjectId;
@@ -201,25 +288,10 @@
             });
         });
 
-      
-        //btn View
 
-        $('#btn-show').click(function () {
-            var divElement = $("<div id='mycontent' >Loading..</div>");
-            $('#div-content > #mycontent').remove();
-            //add the div content again
-            $('#div-content').html(divElement);
+        //btn show
 
-            $.ajax({
-                url: '/files/show',
-                dataType: 'html',
-                success: function (data) {
 
-                    $('#mycontent').html(data);
-
-                }
-            });
-        });
 
         //
 

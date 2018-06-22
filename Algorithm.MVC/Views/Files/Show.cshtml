@@ -151,6 +151,11 @@
         viewer.defineStyle(0, [255, 0, 0, 255]);
         viewer2.defineStyle(0, [255, 0, 0, 255]);
 
+
+            //Load Architecture and Structure Models and start the viewers
+    
+   
+
         var pickFunc = function (arg) {
 
             viewer.setState(xState.HIGHLIGHTED, [arg.id]);
@@ -285,11 +290,14 @@
         };
 
         //Add Navigation Cube
+   
+        viewer2.load('@Url.Action("Viewer", "Files",new { FileName=Model.FileName,Structure="false"})');
+
+    
+    viewer.load('@Url.Action("Viewer", "Files",new { FileName = Model.FileName,Structure= !Model.Structure})');
 
 
-        //Load Architecture and Structure Models and start the viewers
-        viewer2.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName ,Structure=false })');
-    viewer.load('@Url.Action("Viewer", "Files",new {FileName= Model.FileName, Structure = true })');
+
 
     //var navCube = new xNavigationCube();
     //navCube.ratio = .1;

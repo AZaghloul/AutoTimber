@@ -98,15 +98,15 @@ namespace Bim.IO
 
         #endregion
 
-        public static void ToWexBim(string filePath)
+        public static void ToWexBim(string InputPath,string outputPath)
         {
-            using (var model = IfcStore.Open(filePath))
+            using (var model = IfcStore.Open(InputPath))
             {
                 var context = new Xbim3DModelContext(model);
                 context.CreateContext();
 
-                var wexBimFilename = Path.ChangeExtension(filePath, "wexBIM");
-                using (var wexBiMfile = File.Create(wexBimFilename))
+                
+                using (var wexBiMfile = File.Create(outputPath))
                 {
                     using (var wexBimBinaryWriter = new BinaryWriter(wexBiMfile))
                     {
