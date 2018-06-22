@@ -1,261 +1,31 @@
 ﻿@{
-    Layout = "~/Views/Shared/_HomeLayout.cshtml";
-}
-
-
-
-@{
     ViewBag.Title = "Home Page";
 }
 
-<script>
-    function changeActive() {
-        var home = document.getElementById("home");
-        var login = document.getElementById("login");
-        var signup = document.getElementById("signup");
-        home.classList.add("active");
-        login.classList.remove("active");
-        signup.classList.remove("active");
-    }
-
-    changeActive();
-</script>
-<!-- //navigation -->
-<div class="banner-w3text w3layouts">
-    <h2>Welcome To <span>AutoTimber</span></h2>
-    <div class="aboali">
-        <a href="~/Account/Register" class="ali" role="button">Register</a>
-        <a href="~/Account/Login" class="ali" role="button">Log in</a>
-    </div>
-    <style>
-        .aboali {
-            position: relative;
-            left: 460px;
-            width: 600px;
-            top: 15px;
-            height: 50px;
-        }
-
-        .ali {
-            outline: none;
-            color: #fff;
-            padding: 0.8em 5.8em .8em 5.8em;
-            margin-left: 2.8em;
-            width: 100%;
-            font-size: 1em;
-            -webkit-appearance: none;
-            background: #00aec5;
-            border: solid 1px #00aec5;
-            -webkit-border-radius: 35px;
-            -moz-border-radius: 35px;
-            -o-border-radius: 35px;
-            -ms-border-radius: 35px;
-            border-radius: 35px;
-            -webkit-transition: 0.5s all;
-            -moz-transition: 0.5s all;
-            -o-transition: 0.5s all;
-            -ms-transition: 0.5s all;
-            transition: 0.5s all;
-        }
-
-            .ali:hover {
-                background-color: transparent;
-                color: #00aec5;
-                letter-spacing: 5px;
-            }
-    </style>
-    @*<div class="wthree-bnr-login">
-            <div class="relative">
-                <form action="#" method="post">
-                    <ul>
-                        <li><input type="submit" value="Register"></li>
-                    </ul>
-                </form>
-            </div>
-            <div class="absolute">
-                <form action="~/Account/Login" method="post">
-                    <ul>
-                        <li><input type="submit" value="Log in"></li>
-                    </ul>
-                </form>
-            </div>
-        </div>*@
-    <h6>Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit</h6>
+<div class="jumbotron">
+    <h1>ASP.NET</h1>
+    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
+    <p><a href="https://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
 </div>
-	</div>
 
-
-<!-- banner-bottom -->
-<div class="banner-bottom w3-agileits-bnr-btm">
-    <div class="col-sm-6 col-xs-6 bnr-btm-left">
-        <h5>Lorem ipsum </h5>
-        <p>Duis aute irure dolor in reprehenderit</p>
+<div class="row">
+    <div class="col-md-4">
+        <h2>Getting started</h2>
+        <p>
+            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
+            enables a clean separation of concerns and gives you full control over markup
+            for enjoyable, agile development.
+        </p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
     </div>
-    <div class="col-sm-6 col-xs-6 bnr-btm-right">
-        <h5>Reprehen</h5>
-        <p>Voluptate velit esse cillum dolore eu</p>
+    <div class="col-md-4">
+        <h2>Get more libraries</h2>
+        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
     </div>
-    <div class="clearfix"> </div>
-</div>
-<!-- //banner-bottom -->
-<!-- about -->
-<div class="about">
-    <div class="container">
-        <h3 class="agileits-title">About Us</h3>
-        <div class="about-agileinfo">
-            <div class="col-md-6 agileits_about_right">
-                <div class="w3ls_about_right">
-                    <img src="~/src/LayoutSrc/images/img2.jpg" alt=" " class="img-responsive" />
-                    <div class="w3ls_about_right_pos">
-                        <img src="~/src/LayoutSrc/images/img1.jpg" alt=" " class="img-responsive" />
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-6 agileits_about_left">
-                <p class="w3l_para">
-                    Curabitur nec purus eget urna pulvinar placerat. Integer varius est vitae iaculis
-                    suscipit. Nam libero tempore cum soluta nobis est eligendi optio cumque nihil impedit quo minus id quod maxime placeat facere possimus omnis optio cumque nihil impedit quo minus id quod maxime placeat facere possimus.
-                </p>
-                <div class="w3l_social_icons">
-                    <div class="w3l_social_icon_grid">
-                        <div class="w3l_social_icon_gridl w3_facebook">
-                            <a href="#">
-                                <i class="fa fa-cogs" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="w3l_social_icon_gridr">
-                            <p class="counter">23,536</p>
-                        </div>
-                        <div class="clearfix"> </div>
-                        <div class="w3l_social_icon_grid_pos">
-                            <label>-</label>
-                        </div>
-                    </div>
-                    <div class="w3l_social_icon_grid w3ls_social_icon_grid">
-                        <div class="w3l_social_icon_gridl w3_dribbble">
-                            <a href="#">
-                                <i class="fa fa-group" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="w3l_social_icon_gridr">
-                            <p class="counter">13,676</p>
-                        </div>
-                        <div class="clearfix"> </div>
-                        <div class="w3l_social_icon_grid_pos">
-                            <label>-</label>
-                        </div>
-                    </div>
-                    <div class="w3l_social_icon_grid">
-                        <div class="w3l_social_icon_gridl w3_instagram">
-                            <a href="#">
-                                <i class="fa fa-cubes" aria-hidden="true"></i>
-                            </a>
-                        </div>
-                        <div class="w3l_social_icon_gridr">
-                            <p class="counter">45,342</p>
-                        </div>
-                        <div class="clearfix"> </div>
-                        <div class="w3l_social_icon_grid_pos">
-                            <label>-</label>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
+    <div class="col-md-4">
+        <h2>Web Hosting</h2>
+        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
+        <p><a class="btn btn-default" href="https://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
     </div>
 </div>
-<!-- //about -->
-<!-- services -->
-<div class="services">
-    <div class="container">
-        <h3 class="agileits-title">Services</h3>
-        <div class="services-row-agileinfo">
-            <div class="col-sm-4 col-xs-6 services-w3grid">
-                <span class="glyphicon glyphicon-heart hi-icon" aria-hidden="true"></span>
-                <h5>Cum soluta nobis</h5>
-                <p>Itaque earum rerum hic a sapiente delectus</p>
-            </div>
-            <div class="col-sm-4 col-xs-6 services-w3grid">
-                <span class="glyphicon glyphicon-list-alt hi-icon" aria-hidden="true"></span>
-                <h5>Soluta vum nobis</h5>
-                <p>Itaque earum rerum hic a sapiente delectus</p>
-            </div>
-            <div class="col-sm-4 col-xs-6 services-w3grid">
-                <span class="glyphicon glyphicon-leaf hi-icon" aria-hidden="true"></span>
-                <h5>Nobis cum soluta</h5>
-                <p>Itaque earum rerum hic a sapiente delectus</p>
-            </div>
-            <div class="col-sm-4 col-xs-6 services-w3grid bottom-grids wow fadeInUp animated" data-wow-delay=".5s">
-                <span class="glyphicon glyphicon-globe hi-icon" aria-hidden="true"></span>
-                <h5>Taaum solu nobis</h5>
-                <p>Itaque earum rerum hic a sapiente delectus</p>
-            </div>
-            <div class="col-sm-4 col-xs-6 services-w3grid bottom-grids">
-                <span class="glyphicon glyphicon-cutlery hi-icon" aria-hidden="true"></span>
-                <h5>Vum soluta nobis</h5>
-                <p>Itaque earum rerum hic a sapiente delectus</p>
-            </div>
-            <div class="col-sm-4 col-xs-6 services-w3grid bottom-grids">
-                <span class="glyphicon glyphicon-th-large hi-icon" aria-hidden="true"></span>
-                <h5>Bisno cum soluta</h5>
-                <p>Itaque earum rerum hic a sapiente delectus</p>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-        <div class="clearfix"> </div>
-    </div>
-</div>
-<!-- //services -->
-<!-- team -->
-<div class="team">
-    <div class="container">
-        <h3 class="agileits-title">Our Team</h3>
-        <div class="wthree_team_agileinfo">
-            <div class="col-sm-3 col-xs-3 wthree_team_grid_left" style="left: 130px !important;">
-                <figure class="effect-julia">
-                    <img src="~/src/LayoutSrc/images/t1.jpg" alt=" " class="img-responsive" />
-                    <div class="w3l_banner_figure">
-                        <p>Ahmed Zaghloul</p>
-                        <p>
-                            <a href="https://twitter.com/AhmedZag93" class="social-button twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="https://www.facebook.com/Ahmedzag93" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="https://www.linkedin.com/in/azaghloul/" class="social-button google"><i class="fa fa-linkedin"></i></a>
-                        </p>
-                        <p>BIM Software Developer</p>
-                    </div>
-                </figure>
-            </div>
-            <div class="col-sm-3 col-xs-3 wthree_team_grid_left" style="left: 130px !important;">
-                <figure class="effect-julia">
-                    <img src="~/src/LayoutSrc/images/t2.jpg" alt=" " class="img-responsive" />
-                    <div class="w3l_banner_figure">
-                        <p>Amr Fayez  </p>
-                        <p>
-                            <a href="https://twitter.com/AhmedZag93" class="social-button twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="https://www.facebook.com/Ahmedzag93" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="https://www.linkedin.com/in/azaghloul/" class="social-button google"><i class="fa fa-linkedin"></i></a>
-                        </p>
-                        <p>BIM Software Developer</p>
-                    </div>
-                </figure>
-            </div>
-            <div class="col-sm-3 col-xs-3 wthree_team_grid_left" style="left: 130px !important;">
-                <figure class="effect-julia">
-                    <img src="~/src/LayoutSrc/images/t3.jpg" alt=" " class="img-responsive" />
-                    <div class="w3l_banner_figure">
-                        <p>Mohamed Khalil</p>
-                        <p>
-                            <a href="https://twitter.com/AhmedZag93" class="social-button twitter"><i class="fa fa-twitter"></i></a>
-                            <a href="https://www.facebook.com/Ahmedzag93" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-                            <a href="https://www.linkedin.com/in/azaghloul/" class="social-button google"><i class="fa fa-linkedin"></i></a>
-                        </p>
-                        <p>BIM Software Developer</p>
-                    </div>
-                </figure>
-            </div>
-            <div class="clearfix"> </div>
-        </div>
-    </div>
-</div>
-<!-- //team -->
