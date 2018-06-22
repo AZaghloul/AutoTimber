@@ -40,7 +40,7 @@ namespace Algorithm.MVC.Controllers
         [HttpPost]
         public ActionResult Upload(UploadVM model, IEnumerable<HttpPostedFileBase> files)
         {
-            FileData fileData = new FileData();
+            FileData fileData;
 
             //if found the same file redirect to the show Action
 
@@ -174,13 +174,13 @@ namespace Algorithm.MVC.Controllers
             if (Structure == true)
             {
                 FileName = "ITI.Qondos.2-Solved-structure.wexBIM";
-                return File(new FileData(FileName).wexBIMPath, "application/octet-stream", FileName);
+                return File(new FileData(FileName).WexBIMPathArc, "application/octet-stream", FileName);
             }
             else
             {
 
                 FileName = "ITI.Qondos.2-Solved-structure.wexBIM";
-                return File(new FileData(FileName).wexBIMPath, "application/octet-stream", FileName);
+                return File(new FileData(FileName).WexBIMPathArc, "application/octet-stream", FileName);
 
             }
 

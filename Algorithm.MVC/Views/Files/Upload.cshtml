@@ -24,6 +24,7 @@
                 @Html.ValidationMessageFor(model => model.Desciption, "", new { @class = "text-danger" })
             </div>
         </div>
+
         <div class="custom-file">
             <input type="file" name="files" class="custom-file-input" id="files">
             <label class="custom-file-label" for="inputGroupFile03">Choose file</label>
@@ -37,49 +38,7 @@
 
     <script>
 
-    @*$('#btn-upload').on('click', function (e) {
-        var input = document.getElementById("input-upload");
-        var files = input.files;
 
-       
-        console.log(files);
-        //var myID = 3; //uncomment this to make sure the ajax URL works
-        if (files.length > 0) {
-            if (window.FormData !== undefined) {
-                var data = new FormData();
-                for (var x = 0; x < files.length; x++) {
-                    data.append("file" + x, files[x]);
-                }
 
-               
-                     
-                  
-                $.ajax({
-                    type: "POST",
-                    url: '@Url.Action("Upload", "Files")',
-                    contentType: false,
-                    processData: false,
-                    data: data,
-                    success: function (result) {
-                        console.log(result);
-                    }
-
-                });
-            }
-        }
-    }
-    );*@
-
-    $('#btn-design').click(() => {
-        $.ajax({
-            type: "POST",
-            url: './design/',
-            contentType: false,
-            processData: false,
-            success: function (result) {
-                console.log(result);
-            }
-
-        });
-    });
+   
     </script>
