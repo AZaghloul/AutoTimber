@@ -1,8 +1,11 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Algorithm.DB;
 using Algorithm.DB.Models;
@@ -10,12 +13,6 @@ using Algorithm.DB.ViewModels;
 using Algorithm.MVC.DAL;
 using Microsoft.AspNet.Identity;
 using Bim.Domain.General;
-using Bim.Application.IRCWood.IRC;
-using Bim.Domain.Ifc;
-using Xbim.Ifc4.SharedBldgElements;
-using Bim.Application.IRCWood.Physical;
-using Bim.BOQ;
-using Algorithm.MVC.Helper;
 
 namespace Algorithm.MVC.Controllers
 {
@@ -23,46 +20,13 @@ namespace Algorithm.MVC.Controllers
     {
         private AlgorithmDB db = new AlgorithmDB();
 
-        #region Design
-        public FileContentResult Design(Guid? Id)
+        #region download
+
+        public void DownloadExcel(Guid? id)
         {
-            UnitOfWork uow = new UnitOfWork();
-           var proj= uow.Projects.FindById(Id);
-            var file = new FileData(proj.FileName);
-            ///conteeeeeeeeeent
-
-            StudTable.FilePath = Server.MapPath(@"~/App_Data\Tables\StudSpacingTable.csv");
-
-            Table502_5.HeadersTableExteriorPath = Server.MapPath(@"~/App_Data\Tables\table502.5(1).csv");
-            Table502_5.HeadersTableInteriorPath = Server.MapPath(@"~/App_Data\Tables\table502.5(2).csv");
-
-            Table502_3_1.JoistTableLivingAreasPath = Server.MapPath(@"~/App_Data\Tables\table502.3.1(2).csv");
-            Table502_3_1.JoistTableSleepingAreasPath = Server.MapPath(@"~/App_Data\Tables\table502.3.1(1).csv");
-
-            using (IfModel model = IfModel.Open(file.InputPath))
-            {
-                Bim.Domain.Configuration.Startup.Configuration(model);
-
-                model.Delete<IfcBeam>();
-                model.Delete<IfcColumn>();
-                WoodFrame wf = new WoodFrame(model);
-                wf.FrameWalls();
-                model.Delete<IfcWall>();
-                model.Delete<IfcSlab>();
-
-                 model.Save(file.OutputPath);
-
-                GeometryCollection GC1 = new GeometryCollection();
-                GC1.AddToCollection(model.Instances.OfType<IfJoist>());
-                GC1.AddToCollection(model.Instances.OfType<IfStud>());
-                GC1.AddToCollection(model.Instances.OfType<IfSill>());
-                byte[] filecontent = GC1.ToExcel(GC1.BOQTable, "Testing Excel", false, "Number", "Collection");
-                proj.DesignState = DesignState.Failed;
-                uow.SaveChanges();
-                ///result
-                return File(filecontent, GC1.ExcelContentType, "test1.xlsx");
-            }
+           
         }
+
         #endregion
 
         #region Edit Settings
