@@ -30,9 +30,10 @@ namespace Bim.Domain.Ifc
         {
 
         }
-        public IfWall(IfModel ifModel, IIfcWall ifcWall) : base(ifModel)
+        public IfWall(IfStory ifStory, IIfcWall ifcWall) : base(ifStory.IfModel)
         {
             IfcWall = ifcWall;
+            Story = ifStory;
             Initialize();
         }
 
@@ -78,12 +79,7 @@ namespace Bim.Domain.Ifc
                 //get the wall x,y,z
                 if (recD != null)
                 {
-                    IfWall crntWall = new IfWall(ifStory.IfModel, wall)
-                    {
-                        Story = ifStory,
-                        IfModel = ifStory.IfModel
-                    };
-
+                    IfWall crntWall = new IfWall(ifStory, wall);
                     if (dir != null && dir.X < 0)
                     {
                         crntWall.Direction = Direction.Negative;
@@ -97,16 +93,13 @@ namespace Bim.Domain.Ifc
                     wallsList.Add(crntWall);
                 }
             }
-
             return wallsList;
         }
-
         public static void SetExternalWalls(List<IfWall> walls)
         {
 
         }
         #endregion
-
         #region Helper Private Functions
         private void Initialize()
         {
@@ -132,10 +125,11 @@ namespace Bim.Domain.Ifc
         }
         private void GetLocation()
         {
-            WallAxis = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcWall.ObjectPlacement).RelativePlacement);
-            var location = WallAxis.Location;
+            var polylineStartPoint = IfcWall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcPolyline>().FirstOrDefault().Points[0];
             LocalPlacement = (IIfcLocalPlacement)IfcWall.ObjectPlacement;
-            IfLocation = new IfLocation(Length.FromFeet(location.X).Inches, Length.FromFeet(location.Y).Inches, Length.FromFeet(location.Z).Inches);
+            WallAxis = ((IIfcAxis2Placement3D)(LocalPlacement.RelativePlacement));
+            var location = WallAxis.Location;
+            IfLocation = new IfLocation(Length.FromFeet(polylineStartPoint.X).Inches, Length.FromFeet(polylineStartPoint.Y).Inches, Length.FromFeet(location.Z).Inches);
         }
         private void GetDimension()
         {
@@ -209,31 +203,14 @@ namespace Bim.Domain.Ifc
 
 
             }
-
-
-
-            //var recD = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
-            //var recD1 = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand).OfType<IIfcExtrudedAreaSolid>().Select(a => a.SweptArea).OfType<IIfcRectangleProfileDef>().FirstOrDefault();
-            //var otherDepth = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcBooleanClippingResult>().Select(a => a.FirstOperand).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
-            //var depth = wall.Representation.Representations.SelectMany(a => a.Items).OfType<IIfcExtrudedAreaSolid>().Select(a => a.Depth);
-            //get the wall thickness
             var thickness = IfcWall.HasAssociations.OfType<IIfcRelAssociatesMaterial>().OfType<IIfcMaterialLayerSetUsage>().Select(a => a.OffsetFromReferenceLine);//.OfType<IfcPositiveLengthMeasure>();
-            var location = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcWall.ObjectPlacement).RelativePlacement).Location;
+            //var location = ((IIfcAxis2Placement3D)((IIfcLocalPlacement)IfcWall.ObjectPlacement).RelativePlacement).Location;
             //using the Wall Class;
             if (recD != null && depth != null)
             {
-                IfDimension = new IfDimension(Length.FromFeet(recD.XDim).Inches, Length.FromFeet(recD.YDim).Inches, Length.FromFeet(depth).Inches);
+                IfDimension = new IfDimension(Length.FromFeet(recD.XDim).Inches, Length.FromFeet(recD.YDim).Inches, Story.StoryHeight);
             }
         }
-        private void GetDirection()
-        {
-
-        }
         #endregion
-
-
-
     }
-
 }
-

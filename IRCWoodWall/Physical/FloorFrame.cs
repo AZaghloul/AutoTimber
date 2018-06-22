@@ -31,17 +31,15 @@ namespace Bim.Application.IRCWood.Physical
         {
 
             //SetHeaders();
-            IfJoist.Setup = new Setup
-            {
-                {"RecSection",new RecSection(2,10) },
-                {"WoodType", WoodType.Douglas_fir_larch },
-                {"WoodGrade", WoodGrade.SS }
-            };
 
             SetJoists();
 
         }
-
+        public static void FloorSetup()
+        {
+            IfJoist.Setup.Add("WoodType", WoodType.Douglas_fir_larch);
+            IfJoist.Setup.Add("WoodGrade", WoodGrade.SS);
+        }
         private void SetJoists()
         {
             RecSection section = IfJoist.Setup.Get<RecSection>("RecSection");

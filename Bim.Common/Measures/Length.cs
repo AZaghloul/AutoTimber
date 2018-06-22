@@ -102,6 +102,11 @@ namespace Bim.Common.Measures
         {
             return L.Inches;
         }
+
+        public override string ToString()
+        {
+            return $"{Math.Round(Inches,0)}\"";
+        }
     }
 
 

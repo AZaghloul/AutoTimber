@@ -112,7 +112,7 @@ namespace Bim.Application.IRCWood.Physical
 
                         IfDimension = new IfDimension(
                                        dim.XDim,
-                                        dim.YDim,
+                                       dim.YDim,
                                        region.IfDimension.ZDim),
 
                         IfMaterial = IfMaterial.Setup.Get<IfMaterial>("RLeft"),
@@ -131,20 +131,20 @@ namespace Bim.Application.IRCWood.Physical
             foreach (var region in WallPolygon.RRight)
             {
                 double distance = 0;
-                switch (unit)
-                {
-                    case UnitName.MILLIMETRE:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    case UnitName.FOOT:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    case UnitName.METRE:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    default:
-                        break;
-                }
+                //switch (unit)
+                //{
+                //    case UnitName.MILLIMETRE:
+                distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    case UnitName.FOOT:
+                //        distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    case UnitName.METRE:
+                //        distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    default:
+                //        break;
+                //}
 
                 var spaces = Split.Equal(distance - dim.XDim.Inches, maxdistance);
                 for (int i = 0; i < spaces.Count; i++)
@@ -160,7 +160,7 @@ namespace Bim.Application.IRCWood.Physical
 
                         IfDimension = new IfDimension(
                                        dim.XDim,
-                                        dim.YDim,
+                                       dim.YDim,
                                        region.IfDimension.ZDim),
 
                         IfMaterial = IfMaterial.Setup.Get<IfMaterial>("RRight")
@@ -181,20 +181,20 @@ namespace Bim.Application.IRCWood.Physical
             foreach (var region in WallPolygon.RBetween)
             {
                 double distance = 0;
-                switch (unit)
-                {
-                    case UnitName.MILLIMETRE:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    case UnitName.FOOT:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    case UnitName.METRE:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    default:
-                        break;
-                }
+                //switch (unit)
+                //{
+                //    case UnitName.MILLIMETRE:
+                distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    case UnitName.FOOT:
+                //        distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    case UnitName.METRE:
+                //        distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    default:
+                //        break;
+                //}
 
                 var spaces = Split.Equal(distance - dim.XDim.Inches, maxdistance);
 
@@ -232,20 +232,20 @@ namespace Bim.Application.IRCWood.Physical
             foreach (var region in WallPolygon.RBottom)
             {
                 double distance = 0;
-                switch (unit)
-                {
-                    case UnitName.MILLIMETRE:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    case UnitName.FOOT:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    case UnitName.METRE:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    default:
-                        break;
-                }
+                //switch (unit)
+                //{
+                //    case UnitName.MILLIMETRE:
+                //        distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    case UnitName.FOOT:
+                //        distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    case UnitName.METRE:
+                distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    default:
+                //        break;
+                //}
                 var spaces = Split.Equal(distance - dim.XDim.Inches, maxdistance);
                 for (int i = 0; i < spaces.Count; i++)
                 {
@@ -260,7 +260,7 @@ namespace Bim.Application.IRCWood.Physical
 
                         IfDimension = new IfDimension(
                                        dim.XDim,
-                                        dim.YDim,
+                                       dim.YDim,
                                        region.IfDimension.ZDim),
 
                         IfMaterial = IfMaterial.Setup.Get<IfMaterial>("BottomStud")
@@ -279,20 +279,20 @@ namespace Bim.Application.IRCWood.Physical
             foreach (var region in WallPolygon.RTop)
             {
                 double distance = 0;
-                switch (unit)
-                {
-                    case UnitName.MILLIMETRE:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    case UnitName.FOOT:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    case UnitName.METRE:
-                        distance = region.IfDimension.XDim.Inches;
-                        break;
-                    default:
-                        break;
-                }
+                //switch (unit)
+                //{
+                //    case UnitName.MILLIMETRE:
+                //        distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    case UnitName.FOOT:
+                //        distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    case UnitName.METRE:
+                distance = region.IfDimension.XDim.Inches;
+                //        break;
+                //    default:
+                //        break;
+                //}
                 var spaces = Split.Equal(distance - dim.XDim.Inches, maxdistance);
                 for (int i = 0; i < spaces.Count; i++)
                 {
@@ -307,7 +307,7 @@ namespace Bim.Application.IRCWood.Physical
 
                         IfDimension = new IfDimension(
                                        dim.XDim,
-                                        dim.YDim,
+                                       dim.YDim,
                                        region.IfDimension.ZDim),
 
                         IfMaterial = IfMaterial.Setup.Get<IfMaterial>("TopStud")
@@ -323,96 +323,6 @@ namespace Bim.Application.IRCWood.Physical
                 }
             }
         }
-        private void SetBetweenRegion()
-        {
-
-            var storyNo = WallPolygon.IfWall.Story.StoryNo;
-            var height = WallPolygon.IfWall.IfDimension.ZDim;
-            var dim = IfStud.Setup.Get<IfDimension>("Dimension");
-            var s = StudTable.GetSpace(storyNo + 1, height.Inches, dim).LastOrDefault();
-            var maxdistance = s.Spacing;
-
-            foreach (var region in WallPolygon.RBetween)
-            {
-
-                var spaces = Split.Distance(region.IfDimension.XDim.Inches, Convert.ToDouble(maxdistance) * 0.0254); //to inch
-
-                spaces = spaces.Where(e => e > .2).ToList();
-                spaces.Insert(0, 0);
-                for (int i = 0; i < spaces.Count; i++)
-                {
-                    if (i == 0) { spaces[i] += 0.05 / 2; };
-                    IfStud ifStud = new IfStud(WallPolygon.IfWall)
-                    {
-                        IfModel = WallPolygon.IfWall.IfModel,
-                        IfWall = WallPolygon.IfWall,
-                        IfLocation =
-                                     new IfLocation(region.IfLocation.X + spaces[i],
-                                     region.IfLocation.Y,
-                                     region.IfLocation.Z),
-
-                        IfDimension = new IfDimension(
-                                       .05f,
-                                        .4f,
-                                       region.IfDimension.ZDim.Inches),
-
-
-
-                    };
-
-
-                    ifStud.New();
-                    ifStud.IfMaterial.AttatchTo(ifStud);
-                    //add to studs elments
-                    IfStuds.Add(ifStud);
-
-                }
-
-            }
-
-        }
-        private void SetRightRegion()
-        {
-
-            var storyNo = WallPolygon.IfWall.Story.StoryNo;
-            var height = WallPolygon.IfWall.IfDimension.ZDim;
-            var dim = IfStud.Setup.Get<IfDimension>("Dimension");
-            var maxdistance = StudTable.GetSpace(storyNo + 1, height.Inches, dim).LastOrDefault().Spacing;
-
-
-            foreach (var region in WallPolygon.RRight)
-            {
-
-                var spaces = Split.Distance(region.IfDimension.XDim.Inches, Convert.ToDouble(maxdistance) * 0.0254); //to inch
-
-                spaces = spaces.Where(e => e > .2).ToList();
-                spaces.Insert(0, 0);
-                for (int i = 0; i < spaces.Count; i++)
-                {
-                    if (i == 0) { spaces[i] += 0.05 / 2; };
-                    IfStud ifStud = new IfStud(WallPolygon.IfWall)
-                    {
-                        IfModel = WallPolygon.IfWall.IfModel,
-                        IfWall = WallPolygon.IfWall,
-                        IfLocation =
-                                     new IfLocation(region.IfLocation.X + spaces[i],
-                                     region.IfLocation.Y,
-                                     region.IfLocation.Z),
-
-                        IfDimension = new IfDimension(
-                                       .05f,
-                                        .4f,
-                                       region.IfDimension.ZDim.Inches),
-                    };
-
-
-                    ifStud.New();
-                    ifStud.IfMaterial.AttatchTo(ifStud);
-                    //add to studs elments
-                    IfStuds.Add(ifStud);
-                }
-            }
-        }
         private void SetTopPlate()
         {
             var wl = WallPolygon.IfWall.IfLocation;
@@ -420,20 +330,7 @@ namespace Bim.Application.IRCWood.Physical
             var dim = IfSill.Setup.Get<IfDimension>("Dimension");
             UnitName unit = WallPolygon.IfWall.IfModel.IfUnit.LengthUnit;
 
-            switch (unit)
-            {
-                case UnitName.MILLIMETRE:
-                    //dim = dim.ToMilliMeters();
-                    break;
-                case UnitName.METRE:
-                    //dim = dim.ToMeters();
-                    break;
-                default:
-                    //dim = dim.ToFeet();
-                    break;
-            }
-
-            var location = new IfLocation(wd.XDim.Inches / 2, 0, wd.ZDim.Inches);
+            var location = new IfLocation(0, 0, 0);
             var plate = new IfSill(WallPolygon.IfWall)
             {
                 IfLocation = location,
@@ -585,7 +482,7 @@ namespace Bim.Application.IRCWood.Physical
 
 
         }
-        private void SetJackStuds(){}
+        private void SetJackStuds() { }
         public void New()
         {
 
@@ -593,7 +490,7 @@ namespace Bim.Application.IRCWood.Physical
             SetHeaders();
             SetBottomPlate();
             SetStudsRegions();
-            
+
         }
         private double FromInches(double value)
         {

@@ -114,7 +114,7 @@ namespace Bim.Domain.Ifc
 
         public override string ToString()
         {
-            return $"{XDim.Inches} x {YDim.Inches} x {ZDim.Inches}";
+            return $"{XDim} x {YDim} x {ZDim}";
         }
     }
 }

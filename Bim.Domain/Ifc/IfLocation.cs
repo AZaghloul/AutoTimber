@@ -38,7 +38,7 @@ namespace Bim.Domain.Ifc
 
         public override string ToString()
         {
-            return $"{X.Inches} x {Y.Inches} x {Z.Inches}";
+            return $"{X} x {Y} x {Z}";
         }
 
     }

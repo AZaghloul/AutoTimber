@@ -11,7 +11,6 @@ namespace Bim.Application.IRCWood.IRC
     public class TableCell502_5
     {
         public Length Span { get; set; }
-        public double SpanToInch { get { return Span.Inches; } }
         public RecSection Section { get; set; }
         public int NoOfHeaders { get; set; }
         public int NoOfJackStuds { get; set; }

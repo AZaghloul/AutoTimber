@@ -37,7 +37,11 @@ namespace AlgorithmProject
 
             string fileName = @"..\..\Models\ITI.Qondos.2.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
-
+            StudTable.FilePath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\StudSpacingTable.txt";
+            Table502_3_1.JoistTableLivingAreasPath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\table502.3.1(1).csv";
+            Table502_3_1.JoistTableSleepingAreasPath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\table502.3.1(2).csv";
+            Table502_5.HeadersTableExteriorPath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\table502.5(1).csv";
+            Table502_5.HeadersTableInteriorPath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\table502.5(2).csv";
             IfcStore ifcStore = IfcStore.Open(fileName);
             //  ifcStore.SaveAs(fileName, Xbim.IO.IfcStorageType.IfcXml);
             var beams = ifcStore.Instances.OfType<IIfcBeam>();
@@ -60,8 +64,8 @@ namespace AlgorithmProject
             //prop.FindByName("Join Status");
             //prop.FindByValue("Both joins enabled");
             //prop.FindSVProperty(new IfSingleValue("Join Status", "Both joins enabled"));
-        //prop.New();
-        //    ifcStore.SaveAs((fileName + "prop"));
+            //prop.New();
+            //    ifcStore.SaveAs((fileName + "prop"));
 
             using (IfModel model = IfModel.Open(fileName))
             {
@@ -71,12 +75,13 @@ namespace AlgorithmProject
                 model.Delete<IfcColumn>();
                 WoodFrame wf = new WoodFrame(model);
                 wf.FrameWalls();
+                wf.FrameFloors();
                 model.Delete<IfcWall>();
                 model.Delete<IfcSlab>();
 
                 model.Save(saveName);
                 // OpenWindow(fileName);
-              //  OpenWindow(saveName);
+                OpenWindow(saveName);
 
                 List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
                 List<IfFloor> floors = model.Instances.OfType<IfFloor>().ToList();
@@ -103,7 +108,7 @@ namespace AlgorithmProject
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
                 GC1.AddToCollection(model.Instances.OfType<IfStud>());
                 GC1.AddToCollection(model.Instances.OfType<IfSill>());
-               var coll= GC1.ToExcel(GC1.BOQTable, "Testing Excel", false,"Number", "Collection");
+                var coll = GC1.ToExcel(GC1.BOQTable, "Testing Excel", false, "Number", "Collection");
             }
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;
@@ -115,9 +120,5 @@ namespace AlgorithmProject
         {
             System.Diagnostics.Process.Start(filePath);
         }
-
-
     }
-
-
 }
