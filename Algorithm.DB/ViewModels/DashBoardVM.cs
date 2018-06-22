@@ -34,5 +34,6 @@ namespace Algorithm.DB.ViewModels
 
         }
         public string Refresh { get; set; }
+
     }
 }
