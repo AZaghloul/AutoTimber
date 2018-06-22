@@ -12,6 +12,7 @@ using Algorithm.DB.Models;
 using Algorithm.DB.ViewModels;
 using Algorithm.MVC.DAL;
 using Microsoft.AspNet.Identity;
+using Bim.Domain.General;
 
 namespace Algorithm.MVC.Controllers
 {
@@ -19,16 +20,31 @@ namespace Algorithm.MVC.Controllers
     {
         private AlgorithmDB db = new AlgorithmDB();
 
+        #region download
+
+        public void DownloadExcel(Guid? id)
+        {
+           
+        }
+
+        #endregion
+
+        #region Edit Settings
+        public void EditSettings(DesignOptions settings)
+        {
+
+        }
+        #endregion
         // GET: Projects
         public async Task<ActionResult> Index()
         {
             var userId = User.Identity.GetUserId();
             UnitOfWork uow = new UnitOfWork();
-            var projects= uow.Projects.FindBy(e => e.UserId == userId);
-             
+            var projects = uow.Projects.FindBy(e => e.UserId == userId);
+
             return PartialView(@"~/Views/Projects/Partial/View.cshtml", ProjectVM.Load(projects));
         }
-      
+
 
         // GET: Projects/Details/5
         public async Task<ActionResult> Details(Guid? id)
@@ -56,12 +72,12 @@ namespace Algorithm.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create( Project project)
+        public async Task<ActionResult> Create(Project project)
         {
             if (!ModelState.IsValid)
             {
                 project.Id = Guid.NewGuid();
-                project.DesignOptions.Id= Guid.NewGuid();
+                project.DesignOptions.Id = Guid.NewGuid();
                 db.Projects.Add(project);
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");

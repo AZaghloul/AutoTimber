@@ -1,0 +1,181 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>AutoTimber</title>
+
+    @*<title> @ViewBag.Title </title>*@
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    <script src="~/src/Libs/gl-matrix.js"></script>
+    <script src="~/src/Libs/webgl-utils.js"></script>
+    <script src="~/src/Scripts/xbim-viewer.debug.bundle.js"></script>
+
+    <script type="text/javascript" src="~/src/Viewer/xbim-product-type.debug.js"></script>
+    <script type="text/javascript" src="~/src/Viewer/xbim-state.debug.js"></script>
+    <script type="text/javascript" src="~/src/Viewer/xbim-shaders.debug.js"></script>
+    <script type="text/javascript" src="~/src/Viewer/xbim-model-geometry.debug.js"></script>
+    <script type="text/javascript" src="~/src/Viewer/xbim-model-handle.debug.js"></script>
+    <script type="text/javascript" src="~/src/Viewer/xbim-binary-reader.debug.js"></script>
+    <script type="text/javascript" src="~/src/Viewer/xbim-triangulated-shape.debug.js"></script>
+    <script type="text/javascript" src="~/src/Viewer/xbim-viewer.debug.js"></script>
+
+    <script src="~/src/Plugins/NavigationCube/xbim-navigation-cube-textures.debug.js"></script>
+    <script src="~/src/Plugins/NavigationHome/xbim-navigation-home-textures.debug.js"></script>
+    <script src="~/src/Plugins/NavigationHome/xbim-navigation-home.debug.js"></script>
+    <script src="~/src/Plugins/NavigationCube/xbim-navigation-cube-shaders.debug.js"></script>
+    <script src="~/src/Plugins/NavigationCube/xbim-navigation-cube.debug.js"></script>
+    <script src="~/src/Scripts/jquery-1.10.2.min.js"></script>
+    @*dashboard custom script*@
+    <link href="~/src/Content/style4.css" rel="stylesheet" />
+    <!-- Font Awesome JS -->
+
+    <script src="~/src/fonts/fontawesome.js"></script>
+    <script src="~/src/fonts/solid.js"></script>
+    @RenderSection("scripts", required: false)
+
+</head>
+
+    <body>
+
+        <div class="wrapper">
+            <!-- Sidebar  -->
+            <nav id="sidebar">
+                <div class="sidebar-header">
+                    <h3>DashBoard</h3>
+                    <strong>DB</strong>
+                </div>
+
+                <ul class="list-unstyled components">
+                    <li class="active">
+                        <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-home"></i>
+                            Home
+                        </a>
+                        <ul class="collapse list-unstyled" id="homeSubmenu">
+                            <li>
+                                <a href="#">Home 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Home 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Home 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="btn-projects">
+                        <a href="#">
+                            <i class="fas fa-briefcase"></i>
+                            Projects
+                        </a>
+                        <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <i class="fas fa-copy"></i>
+                            Pages
+                        </a>
+                        <ul class="collapse list-unstyled" id="pageSubmenu">
+                            <li>
+                                <a href="#">Page 1</a>
+                            </li>
+                            <li>
+                                <a href="#">Page 2</a>
+                            </li>
+                            <li>
+                                <a href="#">Page 3</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li id="btn-upload">
+                        <a href="#">
+                            <i class="fas fa-image"></i>
+                            Upload
+                        </a>
+                    </li>
+                    <li id="btn-view">
+                        <a href="#">
+                            <i class="fas fa-question"></i>
+                            View
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fas fa-paper-plane"></i>
+                            Contact
+                        </a>
+                    </li>
+                </ul>
+
+                <ul class="list-unstyled CTAs">
+                    <li>
+                        <a href="https://bootstrapious.com/tutorial/files/sidebar.zip" class="download">Download source</a>
+                    </li>
+                    <li>
+                        <a href="https://bootstrapious.com/p/bootstrap-sidebar" class="article">Back to article</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Page Content  -->
+            <div id="content">
+
+                <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                    <div class="container-fluid">
+
+                        <button type="button" id="sidebarCollapse" class="btn btn-info">
+                            <i class="fas fa-align-left"></i>
+                            @*Button Text Here*@
+                            <span></span>
+                        </button>
+                        <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                            <i class="fas fa-align-justify"></i>
+                        </button>
+
+                        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                            <ul class="nav navbar-nav ml-auto">
+                                <li class="nav-item active">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="#">Page</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+
+
+                <div id="div-content">
+                    <div id="mycontent">
+                        @RenderBody()
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+
+     
+
+       
+        
+    </body>
+
+</html>

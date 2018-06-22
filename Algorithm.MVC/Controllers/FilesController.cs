@@ -57,7 +57,8 @@ namespace Algorithm.MVC.Controllers
 
                         if (IfcHandler.CheckFileExist(fileData.InputPath))
                         {
-                            return PartialView(@"~/Views/Files/Show.cshtml", fileData);
+                            //return PartialView(@"~/Views/Files/Show.cshtml", fileData);
+                           
                         }
                         //write the file to the desk
                         file.SaveAs(fileData.InputPath);
@@ -77,7 +78,9 @@ namespace Algorithm.MVC.Controllers
                         uow.Projects.Insert(proj);
                         uow.SaveChanges();
                         //send the data Model to the Show Action
-                        return PartialView(@"~/Views/Files/Show.cshtml", fileData);
+                        // return PartialView(@"~/Views/Files/Show.cshtml", fileData);
+
+                        RedirectToAction("Index", "DashBoard",new { Id=proj.Id});
 
                     }
                 }
@@ -142,9 +145,9 @@ namespace Algorithm.MVC.Controllers
 
         #region Show Models Methods
 
-        public ActionResult Show(FileData fileData)
+        public ActionResult Show(Guid? Id)
         {
-
+            var fileData = new FileData();
 
             //if (! IfcHandler.CheckFileExist(fileData.wexBIMPath))
             //{
@@ -216,7 +219,7 @@ namespace Algorithm.MVC.Controllers
 
         }
 
-        
+
         #endregion
 
 

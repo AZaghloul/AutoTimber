@@ -23,9 +23,9 @@ namespace Algorithm.MVC.Controllers
     public class DashBoardController : Controller
     {
         
-        public ActionResult Index(string Refresh)
+        public ActionResult Index(Guid? Id, string refresh)
         {
-            Refresh = "view,upload,name";
+            refresh = "view,upload,name";
           
             var userId = User.Identity.GetUserId();
 
@@ -45,7 +45,7 @@ namespace Algorithm.MVC.Controllers
             var projects = uow.Projects.FindBy(e => e.UserId == userId);
 
             DashBoardVM dashBoardVM = DashBoardVM.Load(user, projects);
-            dashBoardVM.Refresh = Refresh;
+            dashBoardVM.Refresh = refresh;
 
             return View(dashBoardVM);
         }

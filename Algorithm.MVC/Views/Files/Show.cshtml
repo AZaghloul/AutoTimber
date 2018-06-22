@@ -100,7 +100,6 @@
 </div>
 
 
-
 <div class="tab-pane active" id="home">
 
 
@@ -135,25 +134,6 @@
     </div>
 </div>
 
-
-<script src="~/Libs/gl-matrix.js"></script>
-<script src="~/Libs/webgl-utils.js"></script>
-<script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
-
-<script type="text/javascript" src="~/Viewer/xbim-product-type.debug.js"></script>
-<script type="text/javascript" src="~/Viewer/xbim-state.debug.js"></script>
-<script type="text/javascript" src="~/Viewer/xbim-shaders.debug.js"></script>
-<script type="text/javascript" src="~/Viewer/xbim-model-geometry.debug.js"></script>
-<script type="text/javascript" src="~/Viewer/xbim-model-handle.debug.js"></script>
-<script type="text/javascript" src="~/Viewer/xbim-binary-reader.debug.js"></script>
-<script type="text/javascript" src="~/Viewer/xbim-triangulated-shape.debug.js"></script>
-<script type="text/javascript" src="~/Viewer/xbim-viewer.debug.js"></script>
-
-<script src="~/Plugins/NavigationCube/xbim-navigation-cube-textures.debug.js"></script>
-<script src="~/Plugins/NavigationHome/xbim-navigation-home-textures.debug.js"></script>
-<script src="~/Plugins/NavigationHome/xbim-navigation-home.debug.js"></script>
-<script src="~/Plugins/NavigationCube/xbim-navigation-cube-shaders.debug.js"></script>
-<script src="~/Plugins/NavigationCube/xbim-navigation-cube.debug.js"></script>
 
 <script>
 
@@ -297,7 +277,9 @@
                 var type = xProductType[i];
                 var colour = [Math.random() * 255, Math.random() * 255, Math.random() * 255, 255];
                 viewer.defineStyle(index, colour);
+                viewer2.defineStyle(index, colour);
                 viewer.setStyle(index, type);
+                viewer2.setStyle(index, type);
                 index++;
             }
         };
@@ -319,7 +301,5 @@
 
 </script>
 
-@section scripts{
-    <script src="~/Scripts/xbim-viewer.debug.bundle.js"></script>
-}
+
 

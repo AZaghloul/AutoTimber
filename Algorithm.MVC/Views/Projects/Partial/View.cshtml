@@ -1,51 +1,231 @@
 ﻿@model IEnumerable<ProjectVM>
+@{
+    Layout = null;
 
+}
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
-        <th>
-           @* <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />*@
+        <th style="text-align:center">
+            @* <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />*@
             @Html.DisplayNameFor(model => model.Project.Thumbnail)
         </th>
-        <th>
+        <th style="text-align:center">
             @Html.DisplayNameFor(model => model.Project.Title)
         </th>
-        <th>
+        <th style="text-align:center">
             @Html.DisplayNameFor(model => model.Project.DesignState)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Project.AddToGallery)
+        <th style="text-align:center">
+            <label>Actions</label>
         </th>
-        
-        <th>
-            <input type="button" value="Design" class="glyphicon glyphicon-triangle-right">
-        </th>
+
 
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project.Thumbnail)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project.FileName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project.DesignState)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Project.AddToGallery)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Project.Id }) |
-            @Html.ActionLink("Details", "Details", new { id= item.Project.Id }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Project.Id })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Thumbnail)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Project.Title)
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.Project.DesignState)
+
+            </td>
+            <td id="td-project">
+                <div>
+
+                    <span style="margin:5px" class="btn-show">
+                        <i class="fas fa-eye" style="margin-right:3px"></i>view
+                        @Html.HiddenFor(modelItem => item.Project.Id)
+                    </span>
+
+                    <span style="margin:5px">
+                        <i class="fas fa-download" style="margin-right:3px"></i>download
+                    </span>
+                    @*BOQ*@
+                    <span style="margin:5px" id="btn-boq">
+                        <i class="fas fa-file-excel" style="margin-right:3px"></i>
+
+                        @Html.ActionLink("BOQ", "downloadexcel", new { id = item.Project.Id })
+
+                    </span>
+
+                    @*download all*@
+                    <span style="margin:5px">
+                        <i class="fas fa-file-archive" style="margin-right:3px"></i>archive
+                    </span>
+
+                    @*Settings*@
+                    <span id="btn-settings" style="margin:5px" data-toggle="modal" data-target="#myModal">
+                        <i class="fas fa-cog" style="margin-right:3px"></i>settings
+                        @Html.HiddenFor(modelItem => item.Project.Id)
+                    </span>
+
+                    @*Delete Button*@
+                    <span style="margin:5px">
+                        <i class="fas fa-trash-alt" style="margin-right:3px">
+                        </i> @Html.ActionLink("delete", "Delete", new { id = item.Project.Id })
+                    </span>
+
+
+                </div>
+            </td>
+
+        </tr>
+    }
 
 </table>
+
+
+@* Modaaaaaaaaaaaaaaaaaaaaaaaaaals *@
+
+@*Settings Modal*@
+<div id="myModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Modal Header</h4>
+            </div>
+            <div class="modal-body">
+                <label>FrameWalls</label>  <input id="txt-frameWalls" type="text" />
+                <label>FrameFloors</label>  <input id="txt-FrameFloors" type="text" />
+                <label>FrameRafter</label>  <input id="txt-FrameRafter" type="text" />
+                <label>DetectExternalWalls</label>  <input id="txt-DetectExternalWalls" type="text" />
+                <label>OptimizeWalls</label>  <input id="txt-OptimizeWalls" type="text" />
+                <label>OptimizeRafter</label>  <input id="txt-OptimizeRafter" type="text" />
+                <label>Exclude</label>  <input id="txt-Exclude" type="text" />
+                <label>DeleteArcWalls</label>  <input id="txt-DeleteArcWalls" type="text" />
+            </div>
+            <div class="modal-footer">
+                <button id="btn-settings-close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+
+        var Settings = function () {
+
+            this.ProjectId = 0;
+            this.FrameWalls = 0;
+            this.FrameFloors = 0;
+            this.FrameRafter = 0;
+            this.DetectExternalWalls = 0;
+            this.OptimizeWalls = 0;
+            this.OptimizeFloors = 0;
+            this.OptimizeRafter = 0;
+            this.Exclude = 0;
+            this.DeleteArcWalls = 0;
+
+        };
+
+        var userSettings = [] //array to store user settings from server
+
+
+        var selectedProjectId;
+        var settings;
+
+
+
+        //Selected project Id
+        $('#btn-settings').click(function () {
+
+            selectedProjectId = $(this).find('input[type=hidden]').val();
+           
+        });
+
+        $('.btn-show').click(function () {
+
+            selectedProjectId = $(this).find('input[type=hidden]').val();
+            console.log(selectedProjectId);
+        });
+
+
+        //upload file
+        $('#btn-boq').click(function () {
+
+
+            $.ajax({
+                url: '/files/download',
+                dataType: 'html',
+                success: function (data) {
+
+                    //$('#mycontent').html(data);
+                }
+            });
+        });
+
+        //settings
+
+        $('#btn-settings-close').click(function () {
+
+            // creating object
+            settings = new Settings();
+            settings.ProjectId = selectedProjectId;
+            settings.Id = settings.ProjectId;
+            settings.FrameWalls = $('#txt-FrameWalls').val();
+            settings.FrameFloors = $('#txt-FrameFloors').val();
+            settings.FrameRafter = $('#txt-FrameRafter').val();
+            settings.DetectExternalWalls = $('#txt-DetectExternalWalls').val();
+            settings.OptimizeWalls = $('#txt-OptimizeWalls').val();
+            settings.OptimizeFloors = $('#txt-OptimizeFloors').val();
+            settings.OptimizeRafter = $('#txt-OptimizeRafter').val();
+            settings.Exclude = $('#txt-Exclude').val();
+            settings.DeleteArcWalls = $('#txt-DeleteArcWalls').val();
+
+            $.ajax({
+
+                url: '/projects/editsettings',
+                dataType: 'html',
+                data: settings,
+                success: function (data) {
+
+                    //$('#mycontent').html(data);
+                }
+            });
+        });
+
+      
+        //btn View
+
+        $('#btn-show').click(function () {
+            var divElement = $("<div id='mycontent' >Loading..</div>");
+            $('#div-content > #mycontent').remove();
+            //add the div content again
+            $('#div-content').html(divElement);
+
+            $.ajax({
+                url: '/files/show',
+                dataType: 'html',
+                success: function (data) {
+
+                    $('#mycontent').html(data);
+
+                }
+            });
+        });
+
+        //
+
+
+
+
+
+    });
+</script>
