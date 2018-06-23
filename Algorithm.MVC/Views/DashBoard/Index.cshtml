@@ -61,27 +61,9 @@
 
             //view files
 
-            $('#btn-view').on('click', function () {
+            //$('#btn-home').on('click', function () {
 
-                $('#div-content > #mycontent').remove();
-
-                $('#div-content > #mycontent').html(divElement);
-
-                //ajax call
-
-                $.ajax({
-                    url: '/files/show',
-                    dataType: 'html',
-                    success: function (data) {
-                        $('#div-content').html(divElement);
-                        $('#mycontent').html(data);
-                    }
-                });
-
-
-
-
-            });
+            //});
 
 
         });

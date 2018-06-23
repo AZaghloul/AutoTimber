@@ -16,6 +16,7 @@ using Xbim.Ifc4.SharedBldgElements;
 using Bim.Application.IRCWood.Physical;
 using Bim.BOQ;
 using Algorithm.MVC.Helper;
+using Bim.IO;
 
 namespace Algorithm.MVC.Controllers
 {
@@ -27,7 +28,7 @@ namespace Algorithm.MVC.Controllers
         public FileContentResult Design(Guid? Id)
         {
             UnitOfWork uow = new UnitOfWork();
-           var proj= uow.Projects.FindById(Id);
+            var proj = uow.Projects.FindById(Id);
             var file = new FileData(proj.FileName);
             ///conteeeeeeeeeent
 
@@ -50,14 +51,21 @@ namespace Algorithm.MVC.Controllers
                 model.Delete<IfcWall>();
                 model.Delete<IfcSlab>();
 
-                 model.Save(file.OutputPath);
+                model.Save(file.OutputPath);
+                // save the Structure WexBim handler.
+                IfcHandler.ToWexBim(file.OutputPath, file.WexBIMPathStr);
 
+                ////
                 GeometryCollection GC1 = new GeometryCollection();
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
                 GC1.AddToCollection(model.Instances.OfType<IfStud>());
                 GC1.AddToCollection(model.Instances.OfType<IfSill>());
                 byte[] filecontent = GC1.ToExcel(GC1.BOQTable, "Testing Excel", false, "Number", "Collection");
-                proj.DesignState = DesignState.Failed;
+
+
+                proj.DesignState = DesignState.Designed;
+
+
                 uow.SaveChanges();
                 ///result
                 return File(filecontent, GC1.ExcelContentType, "test1.xlsx");
@@ -74,11 +82,11 @@ namespace Algorithm.MVC.Controllers
         public ActionResult Gallery(Guid Id)
         {
             UnitOfWork uow = new UnitOfWork();
-            var proj=uow.Projects.FindById(Id);
+            var proj = uow.Projects.FindById(Id);
             proj.AddToGallery = !proj.AddToGallery;
             uow.Projects.Update(proj);
             uow.SaveChanges();
-           return  RedirectToAction( "Index","Gallery");
+            return RedirectToAction("Index", "Gallery");
         }
         #endregion
         // GET: Projects
@@ -118,7 +126,7 @@ namespace Algorithm.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-       
+
 
         // GET: Projects/Edit/5
         public async Task<ActionResult> Edit(Guid? id)

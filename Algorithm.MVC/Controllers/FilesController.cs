@@ -1,13 +1,8 @@
-﻿using Bim.Application.IRCWood.Common;
-using Bim.Application.IRCWood.IRC;
-using Bim.Application.IRCWood.Physical;
-using Bim.Domain.Ifc;
-using Bim.IO;
+﻿using Bim.IO;
 
 using System;
 using System.IO;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Algorithm.DB.ViewModels;
 using System.Web;
@@ -17,15 +12,7 @@ using Algorithm.DB;
 using Algorithm.DB.Models;
 using Microsoft.AspNet.Identity;
 using Algorithm.MVC.Helper;
-using Xbim.Ifc;
 using System.Linq;
-using Xbim.Ifc4.Interfaces;
-using Xbim.Ifc4.ProductExtension;
-using Bim.Domain.Ifc.Enums;
-using Xbim.Ifc4.SharedBldgElements;
-using Bim.BOQ;
-using System.Runtime.InteropServices;
-using ICSharpCode.SharpZipLib.Zip;
 using System.IO.Compression;
 
 namespace Algorithm.MVC.Controllers
@@ -155,6 +142,7 @@ namespace Algorithm.MVC.Controllers
 
         public ActionResult Show(Guid? Id)
         {
+            
             if (Id == null)
             {
                 return RedirectToAction("Index", "Dashboard");
@@ -173,19 +161,25 @@ namespace Algorithm.MVC.Controllers
                 IfcHandler.ToWexBim(fileData.InputPath, fileData.WexBIMPathStr);
             }
 
+            
             return View(fileData);
         }
 
-        public ActionResult Viewer(FileData file, string Structure)
+        public ActionResult Viewer(string FileName)
         {
-            var s = Request["Structure"];
-            var n = Request["FileName"];
-            var m = new FileData();
-            m.FromName(file.FileName);
-            m.Structure = file.Structure;
-            if (!file.Structure)
+            if (TempData["Structure"]==null)
             {
-                return File(m.WexBIMPathArc, "application/octet-stream", m.InputName);
+                TempData["Structure"] = true;
+            }
+            
+           
+            var m = new FileData(FileName);
+           
+            if ((bool)TempData["Structure"]==true)
+            {
+                TempData["Structure"] = false;
+                return File(m.WexBIMPathStr, "application/octet-stream", m.InputName);
+               
             }
             // return str files
             else
@@ -202,10 +196,11 @@ namespace Algorithm.MVC.Controllers
                 //{
                 //    return null;
                 //}
-
-                return File(m.WexBIMPathStr, "application/octet-stream", m.InputName);
+                TempData["Structure"] = null;
+                return File(m.WexBIMPathArc, "application/octet-stream", m.InputName);
+               
             }
-
+           
 
         }
 

@@ -1,7 +1,77 @@
-﻿@{
+﻿﻿@{
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<script>
+    function changeActive() {
+        var home = document.getElementById("home");
+        var login = document.getElementById("login");
+        var signup = document.getElementById("signup");
+        home.classList.remove("active");
+        login.classList.add("active");
+        signup.classList.remove("active");
+    }
+
+    changeActive();
+</script>
+
+
+@{
     ViewBag.Title = "About";
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information.</p>
+<div class="container">
+    <h2>@ViewBag.Title.</h2>
+    <!-- team -->
+    <div class="team">
+        <div class="container">
+            <h3 class="agileits-title">Our Team</h3>
+            <div class="wthree_team_agileinfo">
+                <div class="col-sm-3 col-xs-3 wthree_team_grid_left" style="left: 130px !important;">
+                    <figure class="effect-julia">
+                        <img src="~/src/LayoutSrc/images/t1.jpg" alt=" " class="img-responsive" />
+                        <div class="w3l_banner_figure">
+                            <p>Ahmed Zaghloul</p>
+                            <p>
+                                <a href="https://twitter.com/AhmedZag93" class="social-button twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="https://www.facebook.com/Ahmedzag93" class="social-button facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.linkedin.com/in/azaghloul/" class="social-button google"><i class="fa fa-linkedin"></i></a>
+                            </p>
+                            <p>BIM Software Developer</p>
+                        </div>
+                    </figure>
+                </div>
+                <div class="col-sm-3 col-xs-3 wthree_team_grid_left" style="left: 130px !important;">
+                    <figure class="effect-julia">
+                        <img src="~/src/LayoutSrc/images/t2.jpg" alt=" " class="img-responsive" />
+                        <div class="w3l_banner_figure">
+                            <p>Amr Fayez  </p>
+                            <p>
+                                <a href="https://twitter.com/AhmedZag93" class="social-button twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="https://www.facebook.com/Ahmedzag93" class="social-button facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.linkedin.com/in/azaghloul/" class="social-button google"><i class="fa fa-linkedin"></i></a>
+                            </p>
+                            <p>BIM Software Developer</p>
+                        </div>
+                    </figure>
+                </div>
+                <div class="col-sm-3 col-xs-3 wthree_team_grid_left" style="left: 130px !important;">
+                    <figure class="effect-julia">
+                        <img src="~/src/LayoutSrc/images/t3.jpg" alt=" " class="img-responsive" />
+                        <div class="w3l_banner_figure">
+                            <p>Mohamed Khalil</p>
+                            <p>
+                                <a href="https://twitter.com/AhmedZag93" class="social-button twitter"><i class="fa fa-twitter"></i></a>
+                                <a href="https://www.facebook.com/Ahmedzag93" class="social-button facebook"><i class="fa fa-facebook"></i></a>
+                                <a href="https://www.linkedin.com/in/azaghloul/" class="social-button google"><i class="fa fa-linkedin"></i></a>
+                            </p>
+                            <p>BIM Software Developer</p>
+                        </div>
+                    </figure>
+                </div>
+                <div class="clearfix"> </div>
+            </div>
+        </div>
+    </div>
+    <!-- //team -->
+</div>

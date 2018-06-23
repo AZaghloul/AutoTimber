@@ -10,32 +10,67 @@
     ViewBag.Title = "Log in";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-	</div>
+<script>
+    function changeActive() {
+        var home = document.getElementById("home");
+        var login = document.getElementById("login");
+        var signup = document.getElementById("signup");
+        home.classList.remove("active");
+        login.classList.remove("active");
+        signup.classList.remove("active");
+    }
+
+    changeActive();
+</script>
+
 <div class="container">
     <h2>@ViewBag.Title.</h2>
-    <div class="row">
-        <div class="col-md-12">
+
+    <style>
+        .aboali {
+            position: relative;
+            left: 460px;
+            width: 600px;
+            top: 15px;
+            height: 50px;
+        }
+
+        .ali {
+            outline: none;
+            color: #fff;
+            padding: 0.8em 5.8em .8em 5.8em;
+            margin-left: 2.8em;
+            width: 100%;
+            font-size: 1em;
+            -webkit-appearance: none;
+            background: #00aec5;
+            border: solid 1px #00aec5;
+            -webkit-border-radius: 35px;
+            -moz-border-radius: 35px;
+            -o-border-radius: 35px;
+            -ms-border-radius: 35px;
+            border-radius: 35px;
+            -webkit-transition: 0.5s all;
+            -moz-transition: 0.5s all;
+            -o-transition: 0.5s all;
+            -ms-transition: 0.5s all;
+            transition: 0.5s all;
+        }
+
+            .ali:hover {
+                background-color: transparent;
+                color: #00aec5;
+                letter-spacing: 5px;
+            }
+    </style>
+
+    <div class="row" style="align-content:center;">
+        <div class="col-md-4">
             <section id="loginForm">
                 @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
                 {
                     @Html.AntiForgeryToken()
-                    <h4>Use a local account to log in.</h4>
-                    <hr />
+
                     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <div class="form-group">
                         @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
@@ -61,7 +96,7 @@
                     </div>
                     <div class="form-group">
                         <div class="col-md-offset-2 col-md-10">
-                            <input type="submit" value="Log in" class="btn btn-default" />
+                            <input type="submit" value="Log in" class="ali" />
                         </div>
                     </div>
                     <p>
@@ -75,6 +110,7 @@
             </section>
         </div>
     </div>
+</div>
 </div>
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")

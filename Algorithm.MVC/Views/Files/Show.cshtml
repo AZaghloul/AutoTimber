@@ -291,10 +291,10 @@
 
         //Add Navigation Cube
    
-        viewer2.load('@Url.Action("Viewer", "Files",new { FileName=Model.FileName,Structure="false"})');
+        viewer.load('@Url.Action("Viewer", "Files",new { FileName=Model.FileName})');
 
     
-    viewer.load('@Url.Action("Viewer", "Files",new { FileName = Model.FileName,Structure= !Model.Structure})');
+    viewer2.load('@Url.Action("Viewer", "Files",new { FileName = Model.FileName})');
 
 
 
