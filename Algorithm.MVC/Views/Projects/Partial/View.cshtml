@@ -18,9 +18,11 @@
         <th style="text-align:center">
             <label>Actions</label>
         </th>
+        <th style="text-align:center">
+            <label>Gallery</label>
+        </th>
 
-
-        <th></th>
+        
     </tr>
 
     @foreach (var item in Model)
@@ -104,6 +106,12 @@
                 </div>
             </td>
 
+            <td>
+                <span class="btn-gallery">
+                    @Html.CheckBoxFor(modelItem => item.Project.AddToGallery)
+                    @Html.HiddenFor(modelItem => item.Project.Id)
+                </span>
+            </td>
         </tr>
     }
 
@@ -123,17 +131,81 @@
                 <h4 class="modal-title">Modal Header</h4>
             </div>
             <div class="modal-body">
-                <label>FrameWalls</label>  <input id="txt-frameWalls" type="text" />
-                <label>FrameFloors</label>  <input id="txt-FrameFloors" type="text" />
-                <label>FrameRafter</label>  <input id="txt-FrameRafter" type="text" />
-                <label>DetectExternalWalls</label>  <input id="txt-DetectExternalWalls" type="text" />
-                <label>OptimizeWalls</label>  <input id="txt-OptimizeWalls" type="text" />
-                <label>OptimizeRafter</label>  <input id="txt-OptimizeRafter" type="text" />
-                <label>Exclude</label>  <input id="txt-Exclude" type="text" />
-                <label>DeleteArcWalls</label>  <input id="txt-DeleteArcWalls" type="text" />
+                @*Modal Body*@
+              
+                <div id="accordion">
+                    @*Design Options*@
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Design Options
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                <label>FrameWalls</label>  <input id="txt-frameWalls" type="text" />
+                                <label>FrameFloors</label>  <input id="txt-FrameFloors" type="text" />
+                                <label>FrameRafter</label>  <input id="txt-FrameRafter" type="text" />
+                                <label>DetectExternalWalls</label>  <input id="txt-DetectExternalWalls" type="text" />
+                                <label>OptimizeWalls</label>  <input id="txt-OptimizeWalls" type="text" />
+                                <label>OptimizeRafter</label>  <input id="txt-OptimizeRafter" type="text" />
+                                <label>Exclude</label>  <input id="txt-Exclude" type="text" />
+                                <label>DeleteArcWalls</label>  <input id="txt-DeleteArcWalls" type="text" />
+                            </div>
+                        </div>
+                    </div>
+                                       @*Section Properties*@
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                   Section Properties
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                @*Header Section*@
+                                <div>
+                                    <label>Header Section</label>
+                                    <select id="inputState" class="form-control">
+                                        <option selected>Section 2x 4</option>
+                                        <option>Section 2x 6</option>
+                                        <option>Section 2x 8</option>
+                                        <option>Section 2x 10</option>
+                                        <option>Section 2x 12</option>
+                                    </select>
+                                </div>
+                                @*Joist Section*@
+                                <div>
+                                    <label>Joist Section</label>
+                                    <select id="inputState" class="form-control">
+                                       
+                                        <option>Section 2x 6</option>
+                                        <option>Section 2x 8</option>
+                                        <option>Section 2x 10</option>
+                                        <option>Section 2x 12</option>
+                                    </select>
+                                </div>
+                                @*Stud Section*@
+                                <div>
+                                    <label>Stud Section</label>
+                                    <select id="inputState" class="form-control">
+                                        <option selected>Section 2x 4</option>
+                                        <option>Section 2x 6</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button id="btn-settings-close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id=" btn-settings-ok" type="button" class="btn btn-primary fa-book " style="float: left;width:50px;" data-dismiss="modal">OK</button>
             </div>
         </div>
 
@@ -289,7 +361,28 @@
         });
 
 
-        //btn show
+        //btn gallery
+        $('.btn-gallery').click(function () {
+
+            selectedProjectId = $(this).find('#item_Project_Id').val();
+            console.log(selectedProjectId);
+            var divElement = $("<div id='mycontent' >Loading..</div>");
+            $('#div-content > #mycontent').remove();
+            //add the div content again
+            $('#div-content').html(divElement);
+            var vals = $(this).find('input[type=checkbox]').val();
+            $.ajax({
+                url: '/projects/gallery',
+                dataType: 'html',
+                data: { Id: selectedProjectId },
+                success: function (response) {
+                    window.location.href = '@Url.Action("Index", "Gallery")';
+                   // $('#mycontent').html(data);
+
+                }
+            });
+
+        });
 
 
 

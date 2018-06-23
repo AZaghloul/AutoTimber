@@ -70,6 +70,16 @@ namespace Algorithm.MVC.Controllers
         {
 
         }
+
+        public ActionResult Gallery(Guid Id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            var proj=uow.Projects.FindById(Id);
+            proj.AddToGallery = !proj.AddToGallery;
+            uow.Projects.Update(proj);
+            uow.SaveChanges();
+           return  RedirectToAction( "Index","Gallery");
+        }
         #endregion
         // GET: Projects
         public async Task<ActionResult> Index()
@@ -108,19 +118,7 @@ namespace Algorithm.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Project project)
-        {
-            if (!ModelState.IsValid)
-            {
-                project.Id = Guid.NewGuid();
-                project.DesignOptions.Id = Guid.NewGuid();
-                db.Projects.Add(project);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            return View(project);
-        }
+       
 
         // GET: Projects/Edit/5
         public async Task<ActionResult> Edit(Guid? id)

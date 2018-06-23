@@ -5,14 +5,14 @@
 }
 
 <h2>Upload</h2>
-@using (Html.BeginForm("Upload","Files", FormMethod.Post,  new { enctype ="multipart/form-data" }))
+@using (Html.BeginForm("Upload", "Files", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     <div class="input-group mb-10">
 
         <div class="form-group">
             @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "control-label col-md-5" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control" , id="txt-title" } })
+                @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "txt-title" } })
                 @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -20,7 +20,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Desciption, htmlAttributes: new { @class = "control-label col-md-5" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Desciption, new { htmlAttributes = new { @class = "form-control", id="txt-description" } })
+                @Html.EditorFor(model => model.Desciption, new { htmlAttributes = new { @class = "form-control", id = "txt-description" } })
                 @Html.ValidationMessageFor(model => model.Desciption, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -33,12 +33,6 @@
             <button id="btn-upload" class="btn btn-outline-secondary" type="submit">Upload</button>
         </div>
     </div>
+
 }
 
-
-    <script>
-
-
-
-   
-    </script>
