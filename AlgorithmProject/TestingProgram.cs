@@ -26,6 +26,14 @@ namespace AlgorithmProject
         static void Main(string[] args)
         {
 
+            StudTable.FilePath = @"..\..\Tables\StudSpacingTable.txt";
+
+            Table502_5.HeadersTableExteriorPath = @"..\..\Tables\table502.5(1).csv";
+            Table502_5.HeadersTableInteriorPath = @"..\..\Tables\table502.5(2).csv";
+
+            Table502_3_1.JoistTableLivingAreasPath = @"..\..\Tables\table502.3.1(2).csv";
+            Table502_3_1.JoistTableSleepingAreasPath = @"..\..\Tables\table502.3.1(1).csv";
+
             #region Header
             "Wall Framing Solutions ".Header(ConsoleColor.Yellow, ConsoleColor.Black);
             "Starting....".Print(ConsoleColor.Cyan);
@@ -76,7 +84,7 @@ namespace AlgorithmProject
 
                 model.Save(saveName);
                 // OpenWindow(fileName);
-              //  OpenWindow(saveName);
+                OpenWindow(saveName);
 
                 List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
                 List<IfFloor> floors = model.Instances.OfType<IfFloor>().ToList();

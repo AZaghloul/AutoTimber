@@ -130,9 +130,12 @@ namespace Bim.Domain.Ifc
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
             var ax3D = ifcModel.Instances.New<IfcAxis2Placement3D>();
             /*          Set Stud Location */
-            lp.PlacementRelTo =( IfcLocalPlacement)IfWall.LocalPlacement;
+      
             ax3D.Location = origin;
-            if (((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection!=null)
+
+            var refDirc = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection;
+            var axisDirc=((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis;
+            if (refDirc!=null)
             {
                 ax3D.RefDirection = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection;
             }
@@ -148,7 +151,7 @@ namespace Bim.Domain.Ifc
                 ax3D.RefDirection.SetXYZ(1, 0, 0);// ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).RefDirection; //x-axis direction
             }
 
-            if ( ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis !=null)
+            if ( axisDirc !=null)
             {
                 ax3D.Axis = ((IfcAxis2Placement3D)LocalPlacement.RelativePlacement).Axis;
             }
@@ -163,6 +166,20 @@ namespace Bim.Domain.Ifc
             }
 
             lp.RelativePlacement = ax3D;
+            if (axisDirc!=null && refDirc !=null)
+            {
+                lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
+                ax3D.RefDirection = ifcModel.Instances.OfType<IfcDirection>().Where
+                     (e => e.X == 1 &&
+                     e.Y == 0 &&
+                     e.Z == 0).FirstOrDefault() ??
+                     ifcModel.Instances.New<IfcDirection>();
+                ax3D.RefDirection.SetXYZ(1, 0, 0);// 
+            }
+            else
+            {
+                lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
+            }
 
             IfcElement.ObjectPlacement = lp;
         }
