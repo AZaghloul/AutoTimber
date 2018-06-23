@@ -41,5 +41,6 @@ namespace Bim.Domain.Ifc
             return $"{X} x {Y} x {Z}";
         }
 
+       
     }
 }

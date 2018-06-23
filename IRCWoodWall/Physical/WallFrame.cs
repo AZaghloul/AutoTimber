@@ -678,26 +678,35 @@ namespace Bim.Application.IRCWood.Physical
             var wl = WallPolygon2.IfWall.IfLocation;
             var wd = WallPolygon2.IfWall.IfDimension;
             UnitName unit = WallPolygon2.IfWall.IfModel.IfUnit.LengthUnit;
-            var regions = WallPolygon.RTop;
+            var regions = WallPolygon2.RTop;
             foreach (var region in regions)
             {
-                var Cells = HeadersTable.GetCells(region.IfDimension.XDim, Length.FromFeetAndInches(28, 0), 10, WallPolygon2.IfWall.Story.IfBuilding.IfStories.Count - 1 - WallPolygon2.IfWall.Story.StoryNo, true);
-                var header = new IfSill(WallPolygon.IfWall);
-                var l = region.IfLocation;
                 var d = region.IfDimension;
-                //Cells[0].NoOfHeaders;
-                //Cells[0].NoOfJackStuds;
-                //Cells[0].Section.Width;
-                //Cells[0].Section.Depth;
+                var Cells = HeadersTable.GetCells(d.XDim, Length.FromFeetAndInches(36, 0), 10, WallPolygon2.IfWall.Story.IfBuilding.IfStories.Count - 1 - WallPolygon2.IfWall.Story.StoryNo, true);
+                var l = region.IfLocation;
+                int NoOfHeaders = Cells[0].NoOfHeaders;
+                int NoOfJackStuds = Cells[0].NoOfJackStuds;
+                Length SectionWidth = Cells[0].Section.Width;
+                double StudWidth = IfStuds[0].IfDimension.YDim.Inches;
+                l.Y = Length.FromInches(l.Y.Inches + StudWidth / 2 - SectionWidth.Inches / 2);
+                Length SectionDepth = Cells[0].Section.Depth;
+                l.Z += Length.FromInches(SectionDepth.Inches / 2);
+                Length space = Length.FromInches((StudWidth - SectionWidth.Inches) / (NoOfHeaders-1));
                 //header.IfDimension = new IfDimension(d.XDim.Inches, dim.YDim.Inches, d.ZDim.Inches / 4);
-                header.IfModel = WallPolygon.IfWall.IfModel;
-                header.LocalPlacement = region.LocalPlacement;
-                header.New();
-                Headers.Add(header);
-                header.IfMaterial = IfMaterial.Setup.Get<IfMaterial>("Header");
-                header.IfMaterial.AttatchTo(header);
-                region.IfDimension.ZDim -= header.IfDimension.ZDim;
-                region.IfLocation.Z += header.IfDimension.ZDim;
+                for (int i = 0; i < NoOfHeaders; i++)
+                {
+                    var header = new IfSill(WallPolygon2.IfWall)
+                    {
+                        IfLocation = new IfLocation(l.X,l.Y,l.Z),
+                        IfDimension = new IfDimension(SectionDepth,SectionWidth , region.IfDimension.XDim),
+                        IfDirection = new IfDirection(1, 0, 0),
+                        IfMaterial = IfMaterial.Setup.Get<IfMaterial>("Header")
+                    };
+                    header.IfMaterial.AttatchTo(header);
+                    header.New2();
+                    Headers.Add(header);
+                    l.Y -= space;
+                }
             }
         }
 
@@ -767,9 +776,9 @@ namespace Bim.Application.IRCWood.Physical
         {
 
             SetTopPlate2();
-            //SetHeaders2();
             SetBottomPlate2();
             SetStudsRegions2();
+            SetHeaders2();
 
         }
 

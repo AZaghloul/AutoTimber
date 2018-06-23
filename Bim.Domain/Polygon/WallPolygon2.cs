@@ -112,7 +112,7 @@ namespace Bim.Domain.Polygon
                 }
                 else
                 {
-                    var Openi = Openings.Where(Open => Open.IfLocation.X == DivisionLines[i].X || Open.IfLocation.X + Open.IfDimension.XDim * Open.IfDirection.X == DivisionLines[i].X).FirstOrDefault();
+                    IfOpening2 Openi = Openings.Where(Open => Open.IfLocation.X.Inches == DivisionLines[i].X.Inches || Open.IfLocation.X.Inches == DivisionLines[i + 1].X.Inches).FirstOrDefault();
 
                     switch (Openi.OpeningType)
                     {

@@ -81,7 +81,7 @@ namespace Bim.Common.Measures
 
         public static bool operator== (Length L1 , Length L2)
         {
-            return L1.Inches - L2.Inches < 0.0001;
+            return L1.Inches - L2.Inches < 0.001;
         }
 
         public static bool operator !=(Length L1, Length L2)
