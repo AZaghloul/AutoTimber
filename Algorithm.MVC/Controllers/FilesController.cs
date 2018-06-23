@@ -40,7 +40,7 @@ namespace Algorithm.MVC.Controllers
         [HttpPost]
         public ActionResult Upload(UploadVM model, IEnumerable<HttpPostedFileBase> files)
         {
-            FileData fileData;
+            FileData fileData = new FileData();
 
             //if found the same file redirect to the show Action
 
