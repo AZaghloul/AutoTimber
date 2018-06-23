@@ -89,12 +89,12 @@ namespace AlgorithmProject
                 $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
                 $"{floors.Count} floors are found".Print(ConsoleColor.Cyan);
 
-                List<WallPolygon> wallPolygons = new List<WallPolygon>();
+                List<WallPolygon2> wallPolygons = new List<WallPolygon2>();
                 int i = 0;
                 foreach (var item in walls)
                 {
                     $"wall no {i}".Print(ConsoleColor.Cyan);
-                    //wallPolygons.Add(new WallPolygon(item));
+                    wallPolygons.Add(new WallPolygon2(item));
                     $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
                     $"\t {wallPolygons.Last().Openings.Count} opens".Print(ConsoleColor.Cyan);
                     $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);

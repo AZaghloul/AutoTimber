@@ -12,6 +12,7 @@ using Xbim.Ifc4.ProductExtension;
 using Xbim.Ifc4.Kernel;
 using Xbim.Ifc4.PropertyResource;
 using Bim.Domain.General;
+using Bim.Common.Measures;
 
 namespace Bim.Domain.Ifc
 {
@@ -21,6 +22,7 @@ namespace Bim.Domain.Ifc
         #region Properties
         public IfWall IfWall { get; set; }
         public IfWall2 IfWall2 { get; set; }
+        public IfDirection IfDirection { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
         #endregion
 
@@ -39,6 +41,7 @@ namespace Bim.Domain.Ifc
         public IfSill(IfWall2 wall) : base(wall.IfModel)
         {
             IfWall2 = wall;
+            IfDirection = wall.IfDirection;
         }
 
         #endregion
@@ -160,9 +163,9 @@ namespace Bim.Domain.Ifc
             //recProfile.XDim = IfDimension.XDim.Feet;
             //recProfile.YDim = IfDimension.YDim.Feet;
             var recProfile = ifcModel.Instances.OfType<IfcRectangleProfileDef>()
-                .Where(e=>e.XDim == IfDimension.XDim.Feet && 
+                .Where(e => e.XDim == IfDimension.XDim.Feet &&
                 e.YDim == IfDimension.YDim.Feet).FirstOrDefault() ??
-                ifcModel.Instances.New<IfcRectangleProfileDef>(e => 
+                ifcModel.Instances.New<IfcRectangleProfileDef>(e =>
                 {
                     e.XDim = IfDimension.XDim.Feet;
                     e.YDim = IfDimension.YDim.Feet;
@@ -186,16 +189,16 @@ namespace Bim.Domain.Ifc
             //rectangle profile
             body.SweptArea = recProfile;
             body.ExtrudedDirection = ifcModel.Instances.OfType<IfcDirection>()
-                .Where(e => e.X == 0 && e.Y == 0 && e.Z == 1 ).FirstOrDefault() ?? ifcModel.Instances.New<IfcDirection>
-                ( e=> { e.SetXYZ(0, 0, 1); });
+                .Where(e => e.X == 0 && e.Y == 0 && e.Z == 1).FirstOrDefault() ?? ifcModel.Instances.New<IfcDirection>
+                (e => { e.SetXYZ(0, 0, 1); });
             //var point = ifcModel.Instances.OfType<IfcCartesianPoint>()
             //    .Where(e => e.X == 0 && e.Y == 0 && e.Z == 0).FirstOrDefault() ??
             //    ifcModel.Instances.New<IfcCartesianPoint>();
             //point.SetXYZ(0, 0, 0);
 
             var point = ifcModel.Instances.OfType<IfcCartesianPoint>().Where(e =>
-                e.X == 0 && e.Y == 0 && e.Z == 0 ).FirstOrDefault() ??
-                ifcModel.Instances.New<IfcCartesianPoint>(e =>{e.SetXYZ(0,0,0);});
+                e.X == 0 && e.Y == 0 && e.Z == 0).FirstOrDefault() ??
+                ifcModel.Instances.New<IfcCartesianPoint>(e => { e.SetXYZ(0, 0, 0); });
             //body.Position = ifcModel.Instances.New<IfcAxis2Placement3D>();
             //body.Position.Location = point;
             //body.Position.RefDirection = ifcModel.Instances.OfType<IfcDirection>().Where(e =>
@@ -211,7 +214,7 @@ namespace Bim.Domain.Ifc
                 .Where(e => e.X == 1 && e.Y == 0 && e.Z == 0).FirstOrDefault() ?? ifcModel.Instances.New<IfcDirection>
                 (e => { e.SetXYZ(1, 0, 0); });
             body.Position.Axis = ifcModel.Instances.OfType<IfcDirection>()
-                .Where(e => e.X == 0 && e.Y == 0 && e.Z ==1).FirstOrDefault() ?? ifcModel.Instances.New<IfcDirection>
+                .Where(e => e.X == 0 && e.Y == 0 && e.Z == 1).FirstOrDefault() ?? ifcModel.Instances.New<IfcDirection>
                 (e => { e.SetXYZ(0, 0, 1); });
             //// placment.RefDirection.SetXYZ(xDir.X, xDir.Y,xDir.Z);
             //body.Position.RefDirection.SetXYZ(
@@ -374,11 +377,11 @@ namespace Bim.Domain.Ifc
 
             var SillPlacementRelTo = ifcModel.Instances.New<IfcLocalPlacement>();
             var SillRelativePlacementLocation = ifcModel.Instances.OfType<IfcCartesianPoint>().Where(e =>
-                e.X == IfLocation.X && e.Y == IfLocation.Y && e.Z == IfLocation.Z //&&
+                e.X == (IfLocation.X.Feet) && e.Y == (IfLocation.Y.Feet) && e.Z == IfLocation.Z.Feet //&&
                 ).FirstOrDefault() ??
                 ifcModel.Instances.New<IfcCartesianPoint>(e =>
                 {
-                    e.X = IfLocation.X; e.Y = IfLocation.Y; e.Z = IfLocation.Z;
+                    e.X = IfLocation.X.Feet; e.Y = IfLocation.Y.Feet; e.Z = IfLocation.Z.Feet;
                 });
 
             //JoistRelativePlacment.Axis = ifcModel.Instances.OfType<IfcDirection>().Where(e =>
@@ -395,11 +398,11 @@ namespace Bim.Domain.Ifc
             //    );
 
             var Axis = ifcModel.Instances.OfType<IfcDirection>().Where(e =>
-                e.X == IfWall2.IfDirection.X && e.Y == IfWall2.IfDirection.Y && e.Z == IfWall2.IfDirection.Z //&&
+                e.X == 1 && e.Y == 0 && e.Z == 0 //&&
                 ).FirstOrDefault() ??
                 ifcModel.Instances.New<IfcDirection>(e =>
                 {
-                    e.X = IfWall2.IfDirection.X; e.Y = IfWall2.IfDirection.Y; e.Z = IfWall2.IfDirection.Z;
+                    e.X = 1; e.Y = 0; e.Z = 0;
                 });
 
             //JoistRelativePlacment.RefDirection = ifcModel.Instances.OfType<IfcDirection>().Where(e =>

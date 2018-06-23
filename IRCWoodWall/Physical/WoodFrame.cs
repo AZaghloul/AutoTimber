@@ -40,22 +40,29 @@ namespace Bim.Application.IRCWood.Physical
             var walls = IfModel.Instances.OfType<IfWall2>().ToList();
             var polygons = WallPolygon2.GetPolygons(walls);
             WallFrame wf;
-            foreach (var polygon in polygons)
+            for (int i = 0; i < polygons.Count; i++)
             {
-                try
-                {
-                    wf = new WallFrame(polygon);
-                    wf.StudTable = studTable;
-                    wf.New2();
-                }
-                catch (Exception e)
-                {
-
-                    Console.WriteLine("Error: " + e.Message);
-                }
-
-
+                wf = new WallFrame(polygons[i]);
+                wf.StudTable = studTable;
+                wf.HeadersTable = HeadersTableExterior;
+                wf.New2();
             }
+            //foreach (var polygon in polygons)
+            //{
+            //    try
+            //    {
+            //        wf = new WallFrame(polygon);
+            //        wf.StudTable = studTable;
+            //        wf.New2();
+            //    }
+            //    catch (Exception e)
+            //    {
+
+            //        Console.WriteLine("Error: " + e.Message);
+            //    }
+
+
+            //}
 
 
         }

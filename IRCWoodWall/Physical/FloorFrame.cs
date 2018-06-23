@@ -65,7 +65,7 @@ namespace Bim.Application.IRCWood.Physical
                     var DircVec = new IfLocation(
                         FloorPolygon.IfFloor.ShortDirection.Y * spaces[i],
                         FloorPolygon.IfFloor.ShortDirection.X * spaces[i],
-                        FloorPolygon.IfFloor.ShortDirection.Z * spaces[i]
+                        FloorPolygon.IfFloor.ShortDirection.Z * spaces[i] - Cells[0].Section.Depth.Inches / 2
                         );
 
                     var ifJoist = new IfJoist(FloorPolygon.IfFloor)
