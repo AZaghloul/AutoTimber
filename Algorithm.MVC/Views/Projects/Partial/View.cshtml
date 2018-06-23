@@ -22,7 +22,7 @@
             <label>Gallery</label>
         </th>
 
-        
+
     </tr>
 
     @foreach (var item in Model)
@@ -39,7 +39,7 @@
                 @if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Waiting)
                 {
 
-                    string txt = "Start Framing";
+                    string txt = "Frame";
                     @:<input type="button" class="btn-Design btn btn-default" value=@txt />
                     @Html.HiddenFor(modelItem => item.Project.Id)
 
@@ -56,10 +56,9 @@
 
                 else
                 {
-                    string txt = "Start Framing";
+                    string txt = "Fix";
                     @:<input type="button" class="btn-Design btn btn-default" value=@txt disabled />
                     @Html.HiddenFor(modelItem => item.Project.Id)
-
 
                 }
 
@@ -128,12 +127,81 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Project Settings</h4>
             </div>
             <div class="modal-body">
                 @*Modal Body*@
-              
+
                 <div id="accordion">
+
+                    @*Section Properties*@
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Section Properties
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                @*Header Section*@
+                                <div>
+                                    <label>Header Section</label>
+                                    <select id="slct-header" class="form-control">
+                                        <option selected>Section 2x 4</option>
+                                        <option>Section 2x 6</option>
+                                        <option>Section 2x 8</option>
+                                        <option>Section 2x 10</option>
+                                        <option>Section 2x 12</option>
+                                    </select>
+                                </div>
+                                @*Joist Section*@
+                                <div>
+                                    <label>Joist Section</label>
+                                    <select id="slct-joist" class="form-control">
+
+                                        <option>Section 2x 6</option>
+                                        <option>Section 2x 8</option>
+                                        <option>Section 2x 10</option>
+                                        <option>Section 2x 12</option>
+                                    </select>
+                                </div>
+                                @*Stud Section*@
+                                <div>
+                                    <label>Stud Section</label>
+                                    <select id="slct-stud" class="form-control">
+                                        <option selected>Section 2x 4</option>
+                                        <option>Section 2x 6</option>
+                                    </select>
+                                </div>
+                                @*WoodSpecies*@
+                                <div>
+                                    <label class="">Wood Species</label>
+                                    <select id="slct-woodSpecies" class="form-control ">
+                                        <option selected>
+                                            Douglas fir
+                                        </option>
+
+                                        <option>Hem fir</option>
+                                        <option>Southern pine</option>
+                                        <option>Spruce pine fir</option>
+                                    </select>
+                                </div>
+                                @*WoodGrade*@
+                                <div>
+                                    <label class="">Stud Section</label>
+                                    <select class="form-control " id="slct-woodGrade">
+                                        <option value="0" selected>SS</option>
+                                        <option value="1">#1</option>
+                                        <option value="2">#2</option>
+                                        <option value="3">#3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     @*Design Options*@
                     <div class="card">
                         <div class="card-header" id="headingTwo">
@@ -145,58 +213,62 @@
                         </div>
                         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
                             <div class="card-body">
-                                <label>FrameWalls</label>  <input id="txt-frameWalls" type="text" />
-                                <label>FrameFloors</label>  <input id="txt-FrameFloors" type="text" />
-                                <label>FrameRafter</label>  <input id="txt-FrameRafter" type="text" />
-                                <label>DetectExternalWalls</label>  <input id="txt-DetectExternalWalls" type="text" />
-                                <label>OptimizeWalls</label>  <input id="txt-OptimizeWalls" type="text" />
-                                <label>OptimizeRafter</label>  <input id="txt-OptimizeRafter" type="text" />
-                                <label>Exclude</label>  <input id="txt-Exclude" type="text" />
-                                <label>DeleteArcWalls</label>  <input id="txt-DeleteArcWalls" type="text" />
-                            </div>
-                        </div>
-                    </div>
-                                       @*Section Properties*@
-                    <div class="card">
-                        <div class="card-header" id="headingThree">
-                            <h5 class="mb-0">
-                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                                   Section Properties
-                                </button>
-                            </h5>
-                        </div>
-                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
-                            <div class="card-body">
-                                @*Header Section*@
+                                @*Wall frame*@
                                 <div>
-                                    <label>Header Section</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Section 2x 4</option>
-                                        <option>Section 2x 6</option>
-                                        <option>Section 2x 8</option>
-                                        <option>Section 2x 10</option>
-                                        <option>Section 2x 12</option>
+                                    <label>Frame Walls</label>
+                                    <select id="slct-Walls" class="form-control">
+                                        <option value="0" selected>Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2">Disabled</option>
                                     </select>
                                 </div>
-                                @*Joist Section*@
+
+                                @*Wall frame*@
                                 <div>
-                                    <label>Joist Section</label>
-                                    <select id="inputState" class="form-control">
-                                       
-                                        <option>Section 2x 6</option>
-                                        <option>Section 2x 8</option>
-                                        <option>Section 2x 10</option>
-                                        <option>Section 2x 12</option>
+                                    <label>Frame Rafter</label>
+                                    <select id="slct-Rafter" class="form-control">
+                                        <option value="0" selected>Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2">Disabled</option>
                                     </select>
                                 </div>
-                                @*Stud Section*@
+                                @*Wall frame*@
                                 <div>
-                                    <label>Stud Section</label>
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Section 2x 4</option>
-                                        <option>Section 2x 6</option>
+                                    <label>Detect External Walls</label>
+                                    <select id="slct-ExternalWalls" class="form-control">
+                                        <option value="0" selected>Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2">Disabled</option>
                                     </select>
                                 </div>
+                                @*Wall frame*@
+                                <div>
+                                    <label>Optimize </label>
+                                    <select id="slct-OptimizeWalls" class="form-control">
+                                        <option value="0" selected>Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2">Disabled</option>
+                                    </select>
+                                </div>
+                                @*Wall frame*@
+                                <div>
+                                    <label>Exclude</label>
+                                    <select id="slct-Exclude" class="form-control">
+                                        <option value="0">Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2" selected>Disabled</option>
+                                    </select>
+                                </div>
+                                @*Wall frame*@
+                                <div>
+                                    <label>Delete Architecture Elements</label>
+                                    <select id="slct-DeleteArcWalls" class="form-control">
+                                        <option value="0">Auto</option>
+                                        <option value="1" selected>Enabled</option>
+                                        <option value="2">Disabled</option>
+                                    </select>
+                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -205,7 +277,7 @@
             </div>
             <div class="modal-footer">
                 <button id="btn-settings-close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button id=" btn-settings-ok" type="button" class="btn btn-primary fa-book " style="float: left;width:50px;" data-dismiss="modal">OK</button>
+                <button id="btn-settings-ok" type="button" class="btn btn-primary fa-book " style="float: left;width:50px;" data-dismiss="modal">OK</button>
             </div>
         </div>
 
@@ -228,7 +300,11 @@
             this.OptimizeRafter = 0;
             this.Exclude = 0;
             this.DeleteArcWalls = 0;
-
+            this.HeaderSection = 0;
+            this.StudSection = 0;
+            this.JoistSection = 0;
+            this.WoodGrade = 0;
+            this.WoodSpecies = 0;
         };
 
         var userSettings = [] //array to store user settings from server
@@ -273,15 +349,19 @@
         $('.btn-boq').click(function () {
             selectedProjectId = $(this).find('input[type=hidden]').val();
 
-            $.ajax({
-                url: '/files/boq',
-                dataType: 'html',
-                data: { Id: selectedProjectId },
-                success: function (data) {
+            window.open(`/files/boq?Id=${selectedProjectId}` );
 
-                    //$('#mycontent').html(data);
-                }
-            });
+            //$.ajax({
+            //    url: '/files/boq',
+            //    dataType: 'html',
+            //    data: { Id: selectedProjectId },
+            //    success: function (data) {
+
+            //        if (d.success) {
+            //            window.location = '/files/boq';
+            //        }
+            //    }
+            //});
         });
 
         //btn design
@@ -304,49 +384,57 @@
         $('.btn-archive').click(function () {
             selectedProjectId = $(this).find('input[type=hidden]').val();
 
-            $.ajax({
-                url: '/files/archive',
-                dataType: 'html',
-                data: { Id: selectedProjectId },
-                success: function (data) {
+            window.open(`/files/archive?Id=${selectedProjectId}`);
 
-                    //$('#mycontent').html(data);
-                }
-            });
+            //$.ajax({
+            //    url: '/files/archive',
+            //    dataType: 'html',
+            //    data: { Id: selectedProjectId },
+            //    success: function (data) {
+
+            //        //$('#mycontent').html(data);
+            //    }
+            //});
         });
         // btn Download
 
         $('.btn-download').click(function () {
             selectedProjectId = $(this).find('input[type=hidden]').val();
 
-            $.ajax({
-                url: '/files/download',
-                dataType: 'html',
-                data: { Id: selectedProjectId },
-                success: function (data) {
+            window.open(`/files/download?Id=${selectedProjectId}`);
+            //$.ajax({
+            //    url: '/files/download',
+            //    dataType: 'html',
+            //    data: { Id: selectedProjectId },
+            //    success: function (data) {
 
-                    //$('#mycontent').html(data);
-                }
-            });
+            //        //$('#mycontent').html(data);
+            //    }
+            //});
         });
 
         //settings
 
-        $('.btn-settings-close').click(function () {
+        $('#btn-settings-ok').click(function () {
             selectedProjectId = $(this).find('input[type=hidden]').val();
             // creating object
             settings = new Settings();
             settings.ProjectId = selectedProjectId;
             settings.Id = settings.ProjectId;
-            settings.FrameWalls = $('#txt-FrameWalls').val();
-            settings.FrameFloors = $('#txt-FrameFloors').val();
-            settings.FrameRafter = $('#txt-FrameRafter').val();
-            settings.DetectExternalWalls = $('#txt-DetectExternalWalls').val();
-            settings.OptimizeWalls = $('#txt-OptimizeWalls').val();
+            settings.FrameWalls = $('#slct-Walls').val();
+            settings.FrameFloors = $('#slct-Rafter').val();
+            settings.FrameRafter = $('#slct-ExternalWalls').val();
+            settings.DetectExternalWalls = $('#slct-ExternalWalls').val();
+            settings.OptimizeWalls = $('#slct-OptimizeWalls').val();
             settings.OptimizeFloors = $('#txt-OptimizeFloors').val();
             settings.OptimizeRafter = $('#txt-OptimizeRafter').val();
-            settings.Exclude = $('#txt-Exclude').val();
-            settings.DeleteArcWalls = $('#txt-DeleteArcWalls').val();
+            settings.Exclude = $('#slct-Exclude').val();
+            settings.DeleteArcWalls = $('#slct-DeleteArcWalls').val();
+            settings.HeaderSection = $("#slct-header option:selected").text();
+            settings.JoistSection = $("#slct-joist option:selected").text();
+            settings.StudSection = $("#slct-stud option:selected").text();
+            settings.WoodGrade = $("#slct-woodGrade option:selected").text();
+            settings.WoodSpecies = $("#slct-woodSpecies option:selected").text();
 
             $.ajax({
 

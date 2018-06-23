@@ -112,6 +112,7 @@
     <Compile Include="ViewModels\DashBoardVM.cs" />
     <Compile Include="ViewModels\GalleryVM.cs" />
     <Compile Include="ViewModels\ProjectVM.cs" />
+    <Compile Include="ViewModels\SettingsVM.cs" />
     <Compile Include="ViewModels\UploadVM.cs" />
   </ItemGroup>
   <ItemGroup>
