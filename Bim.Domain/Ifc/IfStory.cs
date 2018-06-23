@@ -14,7 +14,7 @@ namespace Bim.Domain.Ifc
         public int StoryNo { get; set; }
         public Length StoryElevation { get; set; }
         public Length StoryHeight { get; set; }
-        public List<IfWall> IfWalls { get; set; }
+        public List<IfWall2> IfWalls { get; set; }
         public List<IfFloor> IfFloors { get; set; }
         public IfBuilding IfBuilding { get; set; }
         public IIfcBuildingStorey IfcStory
@@ -45,7 +45,7 @@ namespace Bim.Domain.Ifc
             if (IfWalls != null)
                 return;
             else
-                IfWalls = IfWall.GetWalls(this);
+                IfWalls = IfWall2.GetWalls(this);
 
         }
         public void GetFloors()

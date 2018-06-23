@@ -13,7 +13,6 @@ namespace Bim.Domain.Ifc
     {
         public static Option DetectExternalWalls { get; set; } = Option.Auto;
         #region wall Object Properties
-
         public IfStory Story { get; set; }
         public List<IDoor> Doors { get; set; }
         public List<IWindow> Windows { get; set; }

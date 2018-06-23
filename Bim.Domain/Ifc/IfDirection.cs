@@ -33,6 +33,10 @@ namespace Bim.Domain.Ifc
             Z = z;
         }
 
+        public IfDirection():this(1,0,0)
+        {
+        }
+
         private void Normalize()
         {
             double Length = Math.Sqrt(X * X + Y * Y + Z * Z);

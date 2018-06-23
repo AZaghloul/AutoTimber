@@ -124,7 +124,6 @@ namespace Bim.Domain.Ifc
                     default:
                         ifopening.OpeningType = OpeningType.Window;
                         break;
-
                 }
 
                 if (dir!=null &&dir.X < 0)

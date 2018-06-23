@@ -83,7 +83,7 @@ namespace AlgorithmProject
                 // OpenWindow(fileName);
                 OpenWindow(saveName);
 
-                List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
+                List<IfWall2> walls = model.Instances.OfType<IfWall2>().ToList();
                 List<IfFloor> floors = model.Instances.OfType<IfFloor>().ToList();
 
                 $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
@@ -94,7 +94,7 @@ namespace AlgorithmProject
                 foreach (var item in walls)
                 {
                     $"wall no {i}".Print(ConsoleColor.Cyan);
-                    wallPolygons.Add(new WallPolygon(item));
+                    //wallPolygons.Add(new WallPolygon(item));
                     $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
                     $"\t {wallPolygons.Last().Openings.Count} opens".Print(ConsoleColor.Cyan);
                     $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);

@@ -37,8 +37,8 @@ namespace Bim.Application.IRCWood.Physical
             Table502_5 HeadersTableInterior = Table502_5.Load(Table502_5.HeadersTableInteriorPath);
 
 
-            var walls = IfModel.Instances.OfType<IfWall>().ToList();
-            var polygons = WallPolygon.GetPolygons(walls);
+            var walls = IfModel.Instances.OfType<IfWall2>().ToList();
+            var polygons = WallPolygon2.GetPolygons(walls);
             WallFrame wf;
             foreach (var polygon in polygons)
             {
@@ -46,7 +46,7 @@ namespace Bim.Application.IRCWood.Physical
                 {
                     wf = new WallFrame(polygon);
                     wf.StudTable = studTable;
-                    wf.New();
+                    wf.New2();
                 }
                 catch (Exception e)
                 {

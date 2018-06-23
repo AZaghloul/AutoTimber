@@ -20,6 +20,7 @@ namespace Bim.Domain.Ifc
         #region Properties
 
         public IfWall IfWall { get; set; }
+        public IfWall2 IfWall2 { get; set; }
         public IfcAxis2Placement3D RelativeAxis { get; set; }
         public IfcLocalPlacement LocalPlacement { get; set; }
         #endregion
@@ -31,6 +32,10 @@ namespace Bim.Domain.Ifc
         public IfStud(IfWall wall) : base(wall.IfModel)
         {
             IfWall = wall;
+        }
+        public IfStud(IfWall2 wall) : base(wall.IfModel)
+        {
+            IfWall2 = wall;
         }
 
 

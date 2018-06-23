@@ -18,6 +18,7 @@ namespace Bim.Domain.Polygon
     {
         public IfLocation IfLocation { get; set; }
         public IfDimension IfDimension { get; set; }
+        public IfDirection IfDirection { get; set; }
         public RegionLocation RegionLocation { get; set; }
         public Direction Direction { get; set; }
         public IIfcLocalPlacement LocalPlacement { get; set; }
@@ -33,6 +34,8 @@ namespace Bim.Domain.Polygon
         {
             IfLocation = new IfLocation(x, y, z);
             IfDimension = new IfDimension(xDim, yDim, height);
+            RegionLocation = RegionLocation.Left;
+            IfDirection = new IfDirection(1,0,0);
         }
         public Region(IDimension dimensions, ILocation l) : this(dimensions.XDim.Inches, dimensions.YDim.Inches, dimensions.ZDim.Inches, l.X, l.Y, l.Z)
         {
@@ -46,11 +49,10 @@ namespace Bim.Domain.Polygon
         {
 
         }
-        public Region()
+        public Region():this(0,0,0,0,0,0)
         {
 
         }
-
         public void Flip(Axis axis)
         {
             switch (axis)
@@ -71,7 +73,6 @@ namespace Bim.Domain.Polygon
                     break;
             }
         }
-
         public override string ToString()
         {
             return $"{IfDimension} in {IfLocation}";
