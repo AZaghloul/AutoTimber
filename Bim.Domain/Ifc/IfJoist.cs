@@ -12,6 +12,7 @@ using Bim.Domain.Configuration;
 using MathNet.Spatial.Euclidean;
 using System;
 using Bim.Domain.General;
+using Bim.Common.Measures;
 
 namespace Bim.Domain.Ifc
 {
@@ -157,19 +158,19 @@ namespace Bim.Domain.Ifc
             //
             // setting the location
             //
-
+            var RelativeZ = Length.FromInches(IfLocation.Z.Inches - IfDimension.YDim/2);
             #region relative location
             JoistRelativePlacment.Location = ifcModel.Instances.OfType<IfcCartesianPoint>().Where(
                 e => e.X == IfLocation.X.Feet &&
                 e.Y == IfLocation.Y.Feet &&
-                e.Z == IfLocation.Z.Feet)
+                e.Z == RelativeZ.Feet)
                 .FirstOrDefault() ??
                 ifcModel.Instances.New<IfcCartesianPoint>();
 
             JoistRelativePlacment.Location.SetXYZ(
                 IfLocation.X.Feet,
                 IfLocation.Y.Feet,
-                IfLocation.Z.Feet
+                RelativeZ.Feet
                 );
 
             var zDir = new Vector3D(
