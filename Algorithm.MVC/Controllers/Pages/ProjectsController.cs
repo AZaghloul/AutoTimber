@@ -16,6 +16,7 @@ using Xbim.Ifc4.SharedBldgElements;
 using Bim.Application.IRCWood.Physical;
 using Bim.BOQ;
 using Algorithm.MVC.Helper;
+using Bim.IO;
 
 namespace Algorithm.MVC.Controllers
 {
@@ -24,11 +25,12 @@ namespace Algorithm.MVC.Controllers
         private AlgorithmDB db = new AlgorithmDB();
 
         #region Design
-        public FileContentResult Design(Guid? Id)
+        public void Design(Guid? Id)
         {
             UnitOfWork uow = new UnitOfWork();
-           var proj= uow.Projects.FindById(Id);
-            var file = new FileData(proj.FileName);
+            var proj = uow.Projects.FindById(Id);
+            var userId = User.Identity.GetUserId();
+            var file = new FileData(proj.FileName, userId);
             ///conteeeeeeeeeent
 
             StudTable.FilePath = Server.MapPath(@"~/App_Data\Tables\StudSpacingTable.csv");
@@ -50,25 +52,45 @@ namespace Algorithm.MVC.Controllers
                 model.Delete<IfcWall>();
                 model.Delete<IfcSlab>();
 
-                 model.Save(file.OutputPath);
+                model.Save(file.OutputPath);
+                // save the Structure WexBim handler.
+                IfcHandler.ToWexBim(file.OutputPath, file.WexBIMPathStr);
 
+                ////
                 GeometryCollection GC1 = new GeometryCollection();
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
                 GC1.AddToCollection(model.Instances.OfType<IfStud>());
                 GC1.AddToCollection(model.Instances.OfType<IfSill>());
-                byte[] filecontent = GC1.ToExcel(GC1.BOQTable, "Testing Excel", false, "Number", "Collection");
-                proj.DesignState = DesignState.Failed;
+                //saving Excel bytes
+                GC1.ToExcel(file.BoqPath,file.FileName+"BOQ");
+
+                proj.DesignState = DesignState.Designed;
                 uow.SaveChanges();
                 ///result
-                return File(filecontent, GC1.ExcelContentType, "test1.xlsx");
+                
             }
         }
         #endregion
 
         #region Edit Settings
-        public void EditSettings(DesignOptions settings)
+        public void EditSettings(WoodSetup settings)
         {
+            UnitOfWork uow = new UnitOfWork();
+           var projSettings= uow.Projects.FindById(settings.ProjectId);
 
+            //set new data from user
+
+
+        }
+
+        public ActionResult Gallery(Guid Id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            var proj = uow.Projects.FindById(Id);
+            proj.AddToGallery = !proj.AddToGallery;
+            uow.Projects.Update(proj);
+            uow.SaveChanges();
+            return RedirectToAction("Index", "Gallery");
         }
         #endregion
         // GET: Projects
@@ -108,19 +130,7 @@ namespace Algorithm.MVC.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Project project)
-        {
-            if (!ModelState.IsValid)
-            {
-                project.Id = Guid.NewGuid();
-                project.DesignOptions.Id = Guid.NewGuid();
-                db.Projects.Add(project);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
 
-            return View(project);
-        }
 
         // GET: Projects/Edit/5
         public async Task<ActionResult> Edit(Guid? id)

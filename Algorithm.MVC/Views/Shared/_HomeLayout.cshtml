@@ -71,22 +71,34 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <h1><a href="~/Home/Index"><span class="glyphicon glyphicon-signal" aria-hidden="true"></span> AutoTimber</a></h1>
+                    <h1><a href="~/Home/Index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> AutoTimber</a></h1>
                 </div>
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <div class="w3menu navbar-left">
                         <ul class="nav navbar">
-                            <li><a id="home" href="~/Home/Index"         class="">Home</a></li>
-                            <li><a id="login" href="~/Account/Login"      class="active">Log In</a></li>
-                            <li><a id="signup" href="~/Account/Register"  class="">Sign Up</a></li>
+                            <li><a id="home" href="~/Home/Index" class="">Home</a></li>
+                            <li><a id="login" href="#team" class="active js-btn">About</a></li>
+                            @*<li><a id="signup" href="~/Home/Contact"  class="">Contact us</a></li>*@
                         </ul>
                     </div>
-                    <div class="w3ls-bnr-icons social-icon navbar-right">
-                        <a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a>
-                        <a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a>
-                        <a href="#" class="social-button google"><i class="fa fa-google-plus"></i></a>
-                        <a href="#" class="social-button dribbble"><i class="fa fa-dribbble"></i></a>
+                    @*<script>
+                        $(function () {
+                            $(".js-btn").on("click", function () {
+                                window.location = "Index/#team";
+                            });
+                        })
+                    </script>*@
+                    @*<div class="w3ls-bnr-icons social-icon navbar-right">
+            <a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="social-button google"><i class="fa fa-google-plus"></i></a>
+            <a href="#" class="social-button dribbble"><i class="fa fa-dribbble"></i></a>
+        </div>*@
+                    <div>
+                        @{
+            Html.RenderPartial("_LoginPartial");
+                        }
                     </div>
                     <div class="clearfix"> </div>
                 </div>
@@ -115,11 +127,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                 <div class="footer-bottom">
                     <div class="col-sm-4 col-xs-4 footer-grids">
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-                            eiusmod tempor incididunt ut labore et dolore magna aliqua.
-                            Ut enim ad minim veniam.
+                            Automated Design Of Wood Structure
                         </p>
-                        <h6>consectetur<a href="#"> Christ Richard.</a> </h6>
+                        <h6>Developed By<a href="#"> ITI Students</a> </h6>
                     </div>
                     <div class="col-sm-4 col-xs-4 footer-grids footer-mdl">
                         <div class="col-md-6 col-xs-6 grid-left">
@@ -127,12 +137,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                                 <li><a href="index.html"><i class="fa fa-angle-right"></i>Home</a></li>
                                 <li><a href="about.html"><i class="fa fa-angle-right"></i>About</a></li>
                                 <li><a href="gallery.html"><i class="fa fa-angle-right"></i>Gallery</a></li>
-                                <li><a href="icons.html"><i class="fa fa-angle-right"></i>Web Icons</a></li>
                             </ul>
                         </div>
                         <div class="col-md-6 col-xs-6 grid-left">
                             <ul>
-                                <li><a href="codes.html"><i class="fa fa-angle-right"></i>Short Codes</a></li>
                                 <li><a href="contact.html"><i class="fa fa-angle-right"></i>Contact</a></li>
                                 <li><a href="about.html"><i class="fa fa-angle-right"></i>Team</a></li>
                             </ul>
@@ -141,11 +149,10 @@ License URL: http://creativecommons.org/licenses/by/3.0/
                     </div>
                     <div class="col-sm-4 col-xs-4 footer-grids">
                         <ul>
-                            <li class="phn"><i class="fa fa-phone"></i>1111-111-111</li>
-                            <li><a href="mailto:example@mail.com"><i class="fa fa-envelope-o"></i> mail@example.com</a></li>
+                            <li class="phn"><i class="fa fa-phone"></i>01061559896</li>
+                            <li><a href="mailto:example@mail.com"><i class="fa fa-envelope-o"></i> info@autoTimber.com</a></li>
                         </ul>
-                        <p>© 2017 Invent . All rights reserved | Design by <a href="http://w3layouts.com">W3layouts</a></p>
-                        <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+                        <p>&copy; @DateTime.Now.Year -<i class="fa fa-home"></i> AutoTimber</p>
 
                     </div>
                     <div class="clearfix"> </div>

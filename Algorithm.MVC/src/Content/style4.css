@@ -62,7 +62,7 @@ span {
 }
 
 #sidebar {
-    min-width: 250px;
+    min-width: 190px;
     max-width: 250px;
     background: #7386D5;
     color: #fff;
@@ -70,7 +70,7 @@ span {
 }
 
 #sidebar.active {
-    min-width: 80px;
+    min-width: 90px;
     max-width: 80px;
     text-align: center;
 }
@@ -198,7 +198,7 @@ a.article:hover {
 #content {
     width: 100%;
     padding: 20px;
-    min-height: 100vh;
+    min-height: 75vh;
     transition: all 0.3s;
 }
 

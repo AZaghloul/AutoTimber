@@ -13,20 +13,74 @@
         var signup = document.getElementById("signup");
         home.classList.remove("active");
         login.classList.remove("active");
-        signup.classList.add("active");
+        signup.classList.remove("active");
     }
 
     changeActive();
 </script>
+<style>
+    .aboali {
+        position: relative;
+        left: 460px;
+        width: 600px;
+        top: 15px;
+        height: 50px;
+    }
+
+    .ali {
+        outline: none;
+        color: #fff;
+        padding: 0.8em 5.8em .8em 5.8em;
+        margin-left: 2.8em;
+        width: 100%;
+        font-size: 1em;
+        -webkit-appearance: none;
+        background: #00aec5;
+        border: solid 1px #00aec5;
+        -webkit-border-radius: 35px;
+        -moz-border-radius: 35px;
+        -o-border-radius: 35px;
+        -ms-border-radius: 35px;
+        border-radius: 35px;
+        -webkit-transition: 0.5s all;
+        -moz-transition: 0.5s all;
+        -o-transition: 0.5s all;
+        -ms-transition: 0.5s all;
+        transition: 0.5s all;
+    }
+
+        .ali:hover {
+            background-color: transparent;
+            color: #00aec5;
+            letter-spacing: 5px;
+        }
+</style>
+
 <div class="container">
 
     <h2 id="h2.-bootstrap-heading">@ViewBag.Title.</h2>
 
-    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal col-md-6", role = "form" }))
     {
         @Html.AntiForgeryToken()
         <h4>Create a new account.</h4>
         <hr />
+
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.FirstName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control" })
+            </div>
+        </div>
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(m => m.LastName, new { @class = "col-md-2 control-label" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(m => m.LastName, new { @class = "form-control" })
+            </div>
+        </div>
+
         @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="form-group">
             @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
@@ -48,7 +102,7 @@
         </div>
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" class="btn btn-default" value="Register" />
+                <input type="submit" class="ali" value="Register" />
             </div>
         </div>
     }
