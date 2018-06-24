@@ -1,13 +1,8 @@
-﻿using Bim.Application.IRCWood.Common;
-using Bim.Application.IRCWood.IRC;
-using Bim.Application.IRCWood.Physical;
-using Bim.Domain.Ifc;
-using Bim.IO;
+﻿using Bim.IO;
 
 using System;
 using System.IO;
 using System.Net;
-using System.Threading.Tasks;
 using System.Web.Mvc;
 using Algorithm.DB.ViewModels;
 using System.Web;
@@ -17,13 +12,8 @@ using Algorithm.DB;
 using Algorithm.DB.Models;
 using Microsoft.AspNet.Identity;
 using Algorithm.MVC.Helper;
-using Xbim.Ifc;
 using System.Linq;
-using Xbim.Ifc4.Interfaces;
-using Xbim.Ifc4.ProductExtension;
-using Bim.Domain.Ifc.Enums;
-using Xbim.Ifc4.SharedBldgElements;
-using Bim.BOQ;
+using System.IO.Compression;
 
 namespace Algorithm.MVC.Controllers
 {
@@ -40,63 +30,49 @@ namespace Algorithm.MVC.Controllers
         [HttpPost]
         public ActionResult Upload(UploadVM model, IEnumerable<HttpPostedFileBase> files)
         {
-            FileData fileData;
+
 
             //if found the same file redirect to the show Action
+            var file = files.FirstOrDefault();
 
-            try
+            if (file != null && file.ContentLength > 0)
             {
-                foreach (var file in files)
+                var userId = User.Identity.GetUserId();
+
+                // check if directoryExists;
+                FileData.CheckDirectory(userId);
+
+                //create FileData object to hold all file paths
+                var fileData = new FileData(file.FileName, userId);
+
+                //write the file to the desk
+                file.SaveAs(fileData.InputPath);
+                //Convert Arc file to wexBim;
+                IfcHandler.ToWexBim(fileData.InputPath, fileData.WexBIMPathArc);
+
+                //send the input data to the database
+                UnitOfWork uow = new UnitOfWork(new AlgorithmDB());
+                model.FileName = file.FileName;
+
+                var proj = new Project()
                 {
-
-                    if (file != null && file.ContentLength > 0)
-                    {
-
-                        //create FileData object to hold all file paths
-                        fileData = new FileData(file.FileName);
-
-                        if (IfcHandler.CheckFileExist(fileData.InputPath))
-                        {
-                            //return PartialView(@"~/Views/Files/Show.cshtml", fileData);
-                           
-                        }
-                        //write the file to the desk
-                        file.SaveAs(fileData.InputPath);
-
-                        //send the input data to the database
-                        UnitOfWork uow = new UnitOfWork(new AlgorithmDB());
-                        model.FileName = file.FileName;
-
-                        var proj = new Project()
-                        {
-                            Id = Guid.NewGuid(),
-                            Title = model.Title,
-                            Description = model.Desciption,
-                            FileName = model.FileName,
-                            UserId = User.Identity.GetUserId()
-                        };
-                        uow.Projects.Insert(proj);
-                        uow.SaveChanges();
-                        //send the data Model to the Show Action
-                        // return PartialView(@"~/Views/Files/Show.cshtml", fileData);
-
-                        RedirectToAction("Index", "DashBoard",new { Id=proj.Id});
-
-                    }
-                }
-
+                    Id = Guid.NewGuid(),
+                    Title = model.Title,
+                    Description = model.Desciption,
+                    FileName = model.FileName,
+                    UserId = User.Identity.GetUserId()
+                };
+                uow.Projects.Insert(proj);
+                uow.SaveChanges();
                 Response.StatusCode = (int)HttpStatusCode.OK;
 
+                return RedirectToAction("Index", "Dashboard");
             }
-            catch (Exception)
+            else
             {
-                return View();
+                Response.StatusCode = (int)HttpStatusCode.OK;
+                return RedirectToAction("Index", "Dashboard");
             }
-
-
-            return RedirectToAction("Show", "Files", fileData);
-
-
 
         }
 
@@ -104,42 +80,72 @@ namespace Algorithm.MVC.Controllers
 
         #region Download
 
-        public FileContentResult Download(string Id, string type)
+
+        public static byte[] ReadFully(Stream stream)
         {
-            ///conteeeeeeeeeent
-            var fileName = "home-2floor-ft.ifc";
-            var filePath = Server.MapPath($"~/Users/input-files/{fileName}");
-            var outputFile = Server.MapPath($"~/Users/output-files/{fileName}-Structure");
-            StudTable.FilePath = Server.MapPath(@"~/App_Data\Tables\StudSpacingTable.csv");
-
-            Table502_5.HeadersTableExteriorPath = Server.MapPath(@"~/App_Data\Tables\table502.5(1).csv");
-            Table502_5.HeadersTableInteriorPath = Server.MapPath(@"~/App_Data\Tables\table502.5(2).csv");
-
-            Table502_3_1.JoistTableLivingAreasPath = Server.MapPath(@"~/App_Data\Tables\table502.3.1(2).csv");
-            Table502_3_1.JoistTableSleepingAreasPath = Server.MapPath(@"~/App_Data\Tables\table502.3.1(1).csv");
-
-            using (IfModel model = IfModel.Open(filePath))
+            byte[] buffer = new byte[32768];
+            using (MemoryStream ms = new MemoryStream())
             {
-                Bim.Domain.Configuration.Startup.Configuration(model);
-
-                model.Delete<IfcBeam>();
-                model.Delete<IfcColumn>();
-                WoodFrame wf = new WoodFrame(model);
-                wf.FrameWalls();
-                model.Delete<IfcWall>();
-                model.Delete<IfcSlab>();
-
-                // model.Save(saveName);
-
-                GeometryCollection GC1 = new GeometryCollection();
-                GC1.AddToCollection(model.Instances.OfType<IfJoist>());
-                GC1.AddToCollection(model.Instances.OfType<IfStud>());
-                GC1.AddToCollection(model.Instances.OfType<IfSill>());
-                byte[] filecontent = GC1.ToExcel(GC1.BOQTable, "Testing Excel", false, "Number", "Collection");
-
-                ///result
-                return File(filecontent, GC1.ExcelContentType, "test1.xlsx");
+                while (true)
+                {
+                    int read = stream.Read(buffer, 0, buffer.Length);
+                    if (read <= 0)
+                        return ms.ToArray();
+                    ms.Write(buffer, 0, read);
+                }
             }
+        }
+
+        public FileContentResult Archive(Guid? Id)
+        {
+            var userId = User.Identity.GetUserId();
+            UnitOfWork uow = new UnitOfWork();
+            var proj = uow.Projects.FindById(Id);
+
+            var file = new FileData(proj.FileName, userId);
+            //To Archive
+            using (var memoryStream = new MemoryStream())
+            {
+                using (var ziparchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
+                {
+                    ziparchive.CreateEntryFromFile(file.InputPath, file.FileName);
+                    ziparchive.CreateEntryFromFile(file.OutputPath, file.OutputName);
+                    ziparchive.CreateEntryFromFile(file.BoqPath, file.BoqName);
+
+                }
+                return File(memoryStream.ToArray(), "application/zip", "Attachments.zip");
+            }
+            ///
+
+        }
+        public ActionResult Download(Guid? Id)
+        {
+
+
+            UnitOfWork uow = new UnitOfWork();
+            var proj = uow.Projects.FindById(Id);
+            var userId = User.Identity.GetUserId();
+            var file = new FileData(proj.FileName, userId);
+            //To Archive
+            var stream = System.IO.File.Open(file.OutputPath, FileMode.Open);
+            byte[] fileContent = ReadFully(stream);
+            stream.Close();
+            return File(fileContent, FileData.TextContentType, file.OutputName);
+
+          
+            ///
+
+        }
+
+        public FileContentResult Boq(Guid? Id)
+        {
+            UnitOfWork uow = new UnitOfWork();
+            var proj = uow.Projects.FindById(Id);
+            var file = new FileData(proj.FileName, proj.UserId);
+            var stream = System.IO.File.Open(file.BoqPath, FileMode.Open);
+            byte[] fileContent =   ReadFully(stream);
+            stream.Close();
+            return File(fileContent, FileData.ExcelContentType, file.BoqName);
         }
         #endregion
 
@@ -147,83 +153,58 @@ namespace Algorithm.MVC.Controllers
 
         public ActionResult Show(Guid? Id)
         {
-            var fileData = new FileData();
 
-            //if (! IfcHandler.CheckFileExist(fileData.wexBIMPath))
-            //{
-            //    IfcHandler.ToWexBim(fileData.InputPath, fileData.wexBIMPath);
-            //} 
+            if (Id == null)
+            {
+                return RedirectToAction("Index", "Dashboard");
+            }
+            UnitOfWork uow = new UnitOfWork();
+            var project = uow.Projects.FindById(Id);
 
-            return View(fileData);
+            var userId = User.Identity.GetUserId();
+            var file = new FileData(project.FileName, userId);
+            //check wexBim files Exists
+            if (!file.Exists(FileType.WexBIMPathArc))
+            {
+                IfcHandler.ToWexBim(file.InputPath, file.WexBIMPathArc);
+            }
+            else if (!file.Exists(FileType.WexBIMPAthStr))
+            {
+                IfcHandler.ToWexBim(file.InputPath, file.WexBIMPathStr);
+            }
+
+
+            return View(file);
         }
 
-
-        //public ActionResult Show(List<FileData> fileData)
-        //{
-
-
-        //    if (!IfcHandler.CheckFileExist(fileData.wexBIMPath))
-        //    {
-        //        IfcHandler.ToWexBim(fileData.InputPath, fileData.wexBIMPath);
-        //    }
-
-        //    return View(fileData);
-        //}
-        public ActionResult Viewer(string FileName, bool Structure)
+        public ActionResult Viewer(string FileName)
         {
-            if (Structure == true)
+            if (TempData["Structure"] == null)
             {
-                FileName = "ITI.Qondos.2-Solved-structure.wexBIM";
-                return File(new FileData(FileName).WexBIMPathArc, "application/octet-stream", FileName);
+                TempData["Structure"] = true;
             }
+
+
+            var userId = User.Identity.GetUserId();
+            var file = new FileData(FileName, userId);
+
+            if ((bool)TempData["Structure"] == true)
+            {
+                TempData["Structure"] = false;
+                return File(file.WexBIMPathStr, "application/octet-stream", file.FileName);
+
+            }
+            // return str files
             else
             {
 
-                FileName = "ITI.Qondos.2-Solved-structure.wexBIM";
-                return File(new FileData(FileName).WexBIMPathArc, "application/octet-stream", FileName);
-
+                TempData["Structure"] = null;
+                return File(file.WexBIMPathArc, "application/octet-stream", file.FileName);
             }
-
         }
 
 
         #endregion
-
-        #region Design Methods
-
-        public ActionResult Design()
-        {
-            return View();
-        }
-        [HttpPost]
-        public void Design(string fileName)
-        {
-            //StudTable.FilePath = Server.MapPath(@"~\App_Data\Tables\StudSpacingTable.csv");
-            //Table502_3_1.FilePath = Server.MapPath(@"~\App_Data\Tables\table502.3.1(1).txt");
-            fileName = fileName ?? "home-2floor-ft.ifc";
-            var filePath = Server.MapPath($"~/Users/input-files/{fileName}");
-            var outputFile = Server.MapPath($"~/Users/output-files/{fileName}-Structure");
-
-
-            var startup = new IfStartup();
-            IfModel model = IfModel.Open(filePath);
-            WoodFrame wf = new WoodFrame(model);
-            startup.Configure(model, wf);
-            startup.Configuration(model);
-            //wf.GetPolygons();
-            //wf.Optimize();
-            //wf.Write();
-            model.Save(outputFile);
-
-
-
-        }
-
-
-        #endregion
-
-
-
 
 
     }

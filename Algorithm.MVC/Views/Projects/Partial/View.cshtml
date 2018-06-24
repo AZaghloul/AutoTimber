@@ -3,10 +3,7 @@
     Layout = null;
 
 }
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
+<table class="table table-hover">
     <tr>
         <th style="text-align:center">
             @* <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />*@
@@ -21,9 +18,11 @@
         <th style="text-align:center">
             <label>Actions</label>
         </th>
+        <th style="text-align:center">
+            <label>Gallery</label>
+        </th>
 
 
-        <th></th>
     </tr>
 
     @foreach (var item in Model)
@@ -36,8 +35,34 @@
                 @Html.DisplayFor(modelItem => item.Project.Title)
             </td>
             <td>
-
                 @Html.DisplayFor(modelItem => item.Project.DesignState)
+                @if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Waiting)
+                {
+
+                    string txt = "Frame";
+                    @:<input type="button" class="btn-Design btn btn-default" value=@txt />
+                    @Html.HiddenFor(modelItem => item.Project.Id)
+
+                }
+                else if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Designed)
+                {
+
+                    string txt = "Reframe";
+                    @:<input type="button" class="btn-Design btn btn-default" value=@txt />
+                    @Html.HiddenFor(modelItem => item.Project.Id)
+
+                }
+
+
+                else
+                {
+                    string txt = "Fix";
+                    @:<input type="button" class="btn-Design btn btn-default" value=@txt disabled />
+                    @Html.HiddenFor(modelItem => item.Project.Id)
+
+                }
+
+
 
             </td>
             <td id="td-project">
@@ -48,24 +73,24 @@
                         @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
 
-                    <span style="margin:5px">
+                    <span style="margin:5px" class="btn-download">
                         <i class="fas fa-download" style="margin-right:3px"></i>download
+                        @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
                     @*BOQ*@
-                    <span style="margin:5px" id="btn-boq">
-                        <i class="fas fa-file-excel" style="margin-right:3px"></i>
-
-                        @Html.ActionLink("BOQ", "downloadexcel", new { id = item.Project.Id })
-
+                    <span style="margin:5px" class="btn-boq">
+                        <i class="fas fa-file-excel" style="margin-right:3px"></i>BOQ
+                        @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
 
                     @*download all*@
-                    <span style="margin:5px">
+                    <span class="btn-archive" style="margin:5px">
                         <i class="fas fa-file-archive" style="margin-right:3px"></i>archive
+                        @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
 
                     @*Settings*@
-                    <span id="btn-settings" style="margin:5px" data-toggle="modal" data-target="#myModal">
+                    <span class="btn-settings" style="margin:5px" data-toggle="modal" data-target="#myModal">
                         <i class="fas fa-cog" style="margin-right:3px"></i>settings
                         @Html.HiddenFor(modelItem => item.Project.Id)
                     </span>
@@ -80,6 +105,12 @@
                 </div>
             </td>
 
+            <td>
+                <span class="btn-gallery">
+                    @Html.CheckBoxFor(modelItem => item.Project.AddToGallery)
+                    @Html.HiddenFor(modelItem => item.Project.Id)
+                </span>
+            </td>
         </tr>
     }
 
@@ -96,20 +127,157 @@
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title">Modal Header</h4>
+                <h4 class="modal-title">Project Settings</h4>
             </div>
             <div class="modal-body">
-                <label>FrameWalls</label>  <input id="txt-frameWalls" type="text" />
-                <label>FrameFloors</label>  <input id="txt-FrameFloors" type="text" />
-                <label>FrameRafter</label>  <input id="txt-FrameRafter" type="text" />
-                <label>DetectExternalWalls</label>  <input id="txt-DetectExternalWalls" type="text" />
-                <label>OptimizeWalls</label>  <input id="txt-OptimizeWalls" type="text" />
-                <label>OptimizeRafter</label>  <input id="txt-OptimizeRafter" type="text" />
-                <label>Exclude</label>  <input id="txt-Exclude" type="text" />
-                <label>DeleteArcWalls</label>  <input id="txt-DeleteArcWalls" type="text" />
+                @*Modal Body*@
+
+                <div id="accordion">
+
+                    @*Section Properties*@
+                    <div class="card">
+                        <div class="card-header" id="headingThree">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                    Section Properties
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordion">
+                            <div class="card-body">
+                                @*Header Section*@
+                                <div>
+                                    <label>Header Section</label>
+                                    <select id="slct-header" class="form-control">
+                                        <option selected>Section 2x 4</option>
+                                        <option>Section 2x 6</option>
+                                        <option>Section 2x 8</option>
+                                        <option>Section 2x 10</option>
+                                        <option>Section 2x 12</option>
+                                    </select>
+                                </div>
+                                @*Joist Section*@
+                                <div>
+                                    <label>Joist Section</label>
+                                    <select id="slct-joist" class="form-control">
+
+                                        <option>Section 2x 6</option>
+                                        <option>Section 2x 8</option>
+                                        <option>Section 2x 10</option>
+                                        <option>Section 2x 12</option>
+                                    </select>
+                                </div>
+                                @*Stud Section*@
+                                <div>
+                                    <label>Stud Section</label>
+                                    <select id="slct-stud" class="form-control">
+                                        <option selected>Section 2x 4</option>
+                                        <option>Section 2x 6</option>
+                                    </select>
+                                </div>
+                                @*WoodSpecies*@
+                                <div>
+                                    <label class="">Wood Species</label>
+                                    <select id="slct-woodSpecies" class="form-control ">
+                                        <option selected>
+                                            Douglas fir
+                                        </option>
+
+                                        <option>Hem fir</option>
+                                        <option>Southern pine</option>
+                                        <option>Spruce pine fir</option>
+                                    </select>
+                                </div>
+                                @*WoodGrade*@
+                                <div>
+                                    <label class="">Stud Section</label>
+                                    <select class="form-control " id="slct-woodGrade">
+                                        <option value="0" selected>SS</option>
+                                        <option value="1">#1</option>
+                                        <option value="2">#2</option>
+                                        <option value="3">#3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    @*Design Options*@
+                    <div class="card">
+                        <div class="card-header" id="headingTwo">
+                            <h5 class="mb-0">
+                                <button class="btn btn-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                    Design Options
+                                </button>
+                            </h5>
+                        </div>
+                        <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordion">
+                            <div class="card-body">
+                                @*Wall frame*@
+                                <div>
+                                    <label>Frame Walls</label>
+                                    <select id="slct-Walls" class="form-control">
+                                        <option value="0" selected>Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2">Disabled</option>
+                                    </select>
+                                </div>
+
+                                @*Wall frame*@
+                                <div>
+                                    <label>Frame Rafter</label>
+                                    <select id="slct-Rafter" class="form-control">
+                                        <option value="0" selected>Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2">Disabled</option>
+                                    </select>
+                                </div>
+                                @*Wall frame*@
+                                <div>
+                                    <label>Detect External Walls</label>
+                                    <select id="slct-ExternalWalls" class="form-control">
+                                        <option value="0" selected>Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2">Disabled</option>
+                                    </select>
+                                </div>
+                                @*Wall frame*@
+                                <div>
+                                    <label>Optimize </label>
+                                    <select id="slct-OptimizeWalls" class="form-control">
+                                        <option value="0" selected>Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2">Disabled</option>
+                                    </select>
+                                </div>
+                                @*Wall frame*@
+                                <div>
+                                    <label>Exclude</label>
+                                    <select id="slct-Exclude" class="form-control">
+                                        <option value="0">Auto</option>
+                                        <option value="1">Enabled</option>
+                                        <option value="2" selected>Disabled</option>
+                                    </select>
+                                </div>
+                                @*Wall frame*@
+                                <div>
+                                    <label>Delete Architecture Elements</label>
+                                    <select id="slct-DeleteArcWalls" class="form-control">
+                                        <option value="0">Auto</option>
+                                        <option value="1" selected>Enabled</option>
+                                        <option value="2">Disabled</option>
+                                    </select>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
             </div>
             <div class="modal-footer">
                 <button id="btn-settings-close" type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button id="btn-settings-ok" type="button" class="btn btn-primary fa-book " style="float: left;width:50px;" data-dismiss="modal">OK</button>
             </div>
         </div>
 
@@ -123,16 +291,20 @@
         var Settings = function () {
 
             this.ProjectId = 0;
-            this.FrameWalls = 0;
-            this.FrameFloors = 0;
-            this.FrameRafter = 0;
-            this.DetectExternalWalls = 0;
-            this.OptimizeWalls = 0;
-            this.OptimizeFloors = 0;
-            this.OptimizeRafter = 0;
-            this.Exclude = 0;
-            this.DeleteArcWalls = 0;
-
+            //this.FrameWalls = 0;
+            //this.FrameFloors = 0;
+            //this.FrameRafter = 0;
+            //this.DetectExternalWalls = 0;
+            //this.OptimizeWalls = 0;
+            //this.OptimizeFloors = 0;
+            //this.OptimizeRafter = 0;
+            //this.Exclude = 0;
+            //this.DeleteArcWalls = 0;
+            this.HeaderSection = 0;
+            this.StudSection = 0;
+            this.JoistSection = 0;
+            this.WoodGrade = 0;
+            this.WoodSpecies = 0;
         };
 
         var userSettings = [] //array to store user settings from server
@@ -144,26 +316,50 @@
 
 
         //Selected project Id
-        $('#btn-settings').click(function () {
-
+        $('.btn-settings').click(function () {
             selectedProjectId = $(this).find('input[type=hidden]').val();
-           
+
         });
 
+        //btn showww
         $('.btn-show').click(function () {
 
             selectedProjectId = $(this).find('input[type=hidden]').val();
-            console.log(selectedProjectId);
+
+            var divElement = $("<div id='mycontent' >Loading..</div>");
+            $('#div-content > #mycontent').remove();
+            //add the div content again
+            $('#div-content').html(divElement);
+
+            $.ajax({
+                url: '/files/show',
+                dataType: 'html',
+                data: { Id: selectedProjectId },
+                success: function (data) {
+
+                    $('#mycontent').html(data);
+
+                }
+            });
+
         });
 
 
-        //upload file
-        $('#btn-boq').click(function () {
+        // btn BOQ
+        $('.btn-boq').click(function () {
+            selectedProjectId = $(this).find('input[type=hidden]').val();
+            window.open(`/files/boq?Id=${selectedProjectId}` );
+           
+        });
 
+        //btn design
+        $('.btn-Design').click(function () {
+            selectedProjectId = $(this).next('input[type=hidden]').val();
 
             $.ajax({
-                url: '/files/download',
+                url: '/projects/design',
                 dataType: 'html',
+                data: { Id: selectedProjectId },
                 success: function (data) {
 
                     //$('#mycontent').html(data);
@@ -171,23 +367,69 @@
             });
         });
 
+
+        // Atchive Download
+        $('.btn-archive').click(function () {
+            selectedProjectId = $(this).find('input[type=hidden]').val();
+
+            window.open(`/files/archive?Id=${selectedProjectId}`);
+          
+        });
+        // btn Download
+
+        $('.btn-download').click(function () {
+            selectedProjectId = $(this).find('input[type=hidden]').val();
+
+            window.open(`/files/download?Id=${selectedProjectId}`);
+          
+        });
+
+        var headerSec;
+        var studSec;
+        var joistSec;
+        var woodSpecies;
+        var woodGrade;
+
+        $('#slct-header').on('change', function () {
+           headerSec=this.value;
+        })
+        $('#slct-joist').on('change', function () {
+            joistSec = this.value;
+        })
+        $('#slct-stud').on('change', function () {
+            studSec = this.value;
+        })
+        $('#slct-woodGrade').on('change', function () {
+            woodGrade = this.value;
+        })
+        $('#slct-woodSpecies').on('change', function () {
+            woodSpecies = $(this).$('option:selected').attr('value');
+            var value = $(this).attr('value');
+            console.log(value);
+            console.log(woodSpecies);
+        })
         //settings
-
-        $('#btn-settings-close').click(function () {
-
+        
+        $('#btn-settings-ok').click(function () {
+            selectedProjectId = $(this).next('input[type=hidden]').val();
             // creating object
             settings = new Settings();
             settings.ProjectId = selectedProjectId;
-            settings.Id = settings.ProjectId;
-            settings.FrameWalls = $('#txt-FrameWalls').val();
-            settings.FrameFloors = $('#txt-FrameFloors').val();
-            settings.FrameRafter = $('#txt-FrameRafter').val();
-            settings.DetectExternalWalls = $('#txt-DetectExternalWalls').val();
-            settings.OptimizeWalls = $('#txt-OptimizeWalls').val();
-            settings.OptimizeFloors = $('#txt-OptimizeFloors').val();
-            settings.OptimizeRafter = $('#txt-OptimizeRafter').val();
-            settings.Exclude = $('#txt-Exclude').val();
-            settings.DeleteArcWalls = $('#txt-DeleteArcWalls').val();
+            //settings.Id = settings.ProjectId;
+            //settings.FrameWalls = $('#slct-Walls').val();
+            //settings.FrameFloors = $('#slct-Rafter').val();
+            //settings.FrameRafter = $('#slct-ExternalWalls').val();
+            //settings.DetectExternalWalls = $('#slct-ExternalWalls').val();
+            //settings.OptimizeWalls = $('#slct-OptimizeWalls').val();
+            //settings.OptimizeFloors = $('#txt-OptimizeFloors').val();
+            //settings.OptimizeRafter = $('#txt-OptimizeRafter').val();
+            //settings.Exclude = $('#slct-Exclude').val();
+            settings.DeleteArcWalls = $('#slct-DeleteArcWalls option:selected').val();
+            settings.HeaderSection = headerSec;
+            settings.JoistSection = joistSec;
+            settings.StudSection = studSec;
+            settings.WoodGrade = woodGrade;
+            settings.WoodSpecies = woodSpecies;
 
             $.ajax({
 
@@ -201,25 +443,31 @@
             });
         });
 
-      
-        //btn View
 
-        $('#btn-show').click(function () {
+        //btn gallery
+        $('.btn-gallery').click(function () {
+
+            selectedProjectId = $(this).find('#item_Project_Id').val();
+            console.log(selectedProjectId);
             var divElement = $("<div id='mycontent' >Loading..</div>");
             $('#div-content > #mycontent').remove();
             //add the div content again
             $('#div-content').html(divElement);
-
+            var vals = $(this).find('input[type=checkbox]').val();
             $.ajax({
-                url: '/files/show',
+                url: '/projects/gallery',
                 dataType: 'html',
-                success: function (data) {
-
-                    $('#mycontent').html(data);
+                data: { Id: selectedProjectId },
+                success: function (response) {
+                    window.location.href = '@Url.Action("Index", "Gallery")';
+                   // $('#mycontent').html(data);
 
                 }
             });
+
         });
+
+
 
         //
 

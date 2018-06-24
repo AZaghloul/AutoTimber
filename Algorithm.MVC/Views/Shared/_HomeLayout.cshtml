@@ -1,0 +1,213 @@
+﻿@{
+    Layout = null;
+}
+
+<!--
+Author: W3layouts
+Author URL: http://w3layouts.com
+License: Creative Commons Attribution 3.0 Unported
+License URL: http://creativecommons.org/licenses/by/3.0/
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Invent a Corporate Business Category Bootstrap Responsive website Template | Home :: w3layouts</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Invent Responsive web template, Bootstrap Web Templates, Flat Web Templates, Android Compatible web template,
+	SmartPhone Compatible web template, free WebDesigns for Nokia, Samsung, LG, Sony Ericsson, Motorola web design" />
+
+    <!-- ======================================= -->
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    <!-- ======================================= -->
+
+    <script type="application/x-javascript"> addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false); function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Custom Theme files -->
+    <link href="~/src/LayoutSrc/css/bootstrap.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/src/LayoutSrc/css/style.css" type="text/css" rel="stylesheet" media="all">
+    <link href="~/src/LayoutSrc/css/font-awesome.css" rel="stylesheet"> <!-- font-awesome icons -->
+    <!-- //Custom Theme files -->
+    <style>
+        div.absolute {
+            position: absolute;
+            right: -314px;
+            width: 959px;
+            top: 421px;
+        }
+
+        div.relative {
+            position: relative;
+            left: 137px;
+        }
+    </style>
+    <!-- js -->
+    <script src="~/src/LayoutSrc/js/jquery-2.2.3.min.js"></script>
+    <!-- //js -->
+    <!-- web-fonts -->
+    <link href="//fonts.googleapis.com/css?family=Open+Sans+Condensed:300,300i,700" rel="stylesheet">
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100,100italic,300,300italic,400italic,500,500italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    <!-- //web-fonts -->
+
+
+    @RenderSection("scripts", required: false)
+
+
+
+</head>
+<body>
+    <!-- banner -->
+    <div class="agileits-banner">
+        <!-- navigation -->
+        <div class="top-nav w3-agiletop">
+            <div class="container">
+                <div class="navbar-header w3llogo">
+                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <h1><a href="~/Home/Index"><span class="glyphicon glyphicon-home" aria-hidden="true"></span> AutoTimber</a></h1>
+                </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <div class="w3menu navbar-left">
+                        <ul class="nav navbar">
+                            <li><a id="home" href="~/Home/Index" class="">Home</a></li>
+                            <li><a id="login" href="#team" class="active js-btn">About</a></li>
+                            @*<li><a id="signup" href="~/Home/Contact"  class="">Contact us</a></li>*@
+                        </ul>
+                    </div>
+                    @*<script>
+                        $(function () {
+                            $(".js-btn").on("click", function () {
+                                window.location = "Index/#team";
+                            });
+                        })
+                    </script>*@
+                    @*<div class="w3ls-bnr-icons social-icon navbar-right">
+            <a href="#" class="social-button twitter"><i class="fa fa-twitter"></i></a>
+            <a href="#" class="social-button facebook"><i class="fa fa-facebook"></i></a>
+            <a href="#" class="social-button google"><i class="fa fa-google-plus"></i></a>
+            <a href="#" class="social-button dribbble"><i class="fa fa-dribbble"></i></a>
+        </div>*@
+                    <div>
+                        @{
+            Html.RenderPartial("_LoginPartial");
+                        }
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <!-- //navigation -->
+
+
+            @RenderBody()
+
+        <!-- footer -->
+        <div class="footer">
+            <div class="container">
+                <div class="footer-row w3l-newsletter">
+                    <div class="col-md-6 w3_agile_newsletter_left">
+                        <h4>Subscribe Newsletter</h4>
+                    </div>
+                    <div class="col-md-6 w3_agile_newsletter_right">
+                        <form action="#" method="post">
+                            <input type="email" name="Email" placeholder="Email..." required="">
+                            <input type="submit" value="Subscribe">
+                        </form>
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+                <div class="footer-bottom">
+                    <div class="col-sm-4 col-xs-4 footer-grids">
+                        <p>
+                            Automated Design Of Wood Structure
+                        </p>
+                        <h6>Developed By<a href="#"> ITI Students</a> </h6>
+                    </div>
+                    <div class="col-sm-4 col-xs-4 footer-grids footer-mdl">
+                        <div class="col-md-6 col-xs-6 grid-left">
+                            <ul>
+                                <li><a href="index.html"><i class="fa fa-angle-right"></i>Home</a></li>
+                                <li><a href="about.html"><i class="fa fa-angle-right"></i>About</a></li>
+                                <li><a href="gallery.html"><i class="fa fa-angle-right"></i>Gallery</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-6 col-xs-6 grid-left">
+                            <ul>
+                                <li><a href="contact.html"><i class="fa fa-angle-right"></i>Contact</a></li>
+                                <li><a href="about.html"><i class="fa fa-angle-right"></i>Team</a></li>
+                            </ul>
+                        </div>
+                        <div class="clearfix"> </div>
+                    </div>
+                    <div class="col-sm-4 col-xs-4 footer-grids">
+                        <ul>
+                            <li class="phn"><i class="fa fa-phone"></i>01061559896</li>
+                            <li><a href="mailto:example@mail.com"><i class="fa fa-envelope-o"></i> info@autoTimber.com</a></li>
+                        </ul>
+                        <p>&copy; @DateTime.Now.Year -<i class="fa fa-home"></i> AutoTimber</p>
+
+                    </div>
+                    <div class="clearfix"> </div>
+                </div>
+            </div>
+        </div>
+        <!-- footer -->
+        <!-- Stats -->
+        <script src="~/src/LayoutSrc/js/waypoints.min.js"></script>
+        <script src="~/src/LayoutSrc/js/counterup.min.js"></script>
+        <script>
+            jQuery(document).ready(function ($) {
+                $('.counter').counterUp({
+                    delay: 10,
+                    time: 2000
+                });
+            });
+        </script>
+        <!-- //Stats -->
+        <!-- start-smooth-scrolling -->
+        <script src="~/src/LayoutSrc/js/SmoothScroll.min.js"></script>
+        <script type="text/javascript" src="~/src/LayoutSrc/js/move-top.js"></script>
+        <script type="text/javascript" src="~/src/LayoutSrc/js/easing.js"></script>
+        <script type="text/javascript">
+            jQuery(document).ready(function ($) {
+                $(".scroll").click(function (event) {
+                    event.preventDefault();
+
+                    $('html,body').animate({ scrollTop: $(this.hash).offset().top }, 1000);
+                });
+            });
+        </script>
+        <!-- //end-smooth-scrolling -->
+        <!-- smooth-scrolling-of-move-up -->
+        <script type="text/javascript">
+            $(document).ready(function () {
+                /*
+                var defaults = {
+                    containerID: 'toTop', // fading element id
+                    containerHoverID: 'toTopHover', // fading element hover id
+                    scrollSpeed: 1200,
+                    easingType: 'linear'
+                };
+                */
+
+                $().UItoTop({ easingType: 'easeOutQuart' });
+
+            });
+        </script>
+        <!-- //smooth-scrolling-of-move-up -->
+        <!-- Bootstrap core JavaScript
+    ================================================== -->
+        <!-- Placed at the end of the document so the pages load faster -->
+        <script src="~/src/LayoutSrc/js/bootstrap.js"></script>
+        <script>
+        </script>
+</body>
+</html>

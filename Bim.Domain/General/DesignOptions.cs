@@ -11,7 +11,6 @@ namespace Bim.Domain.General
     public class DesignOptions
     {
         [Key]
-        public Guid Id { get; set; }
         public Guid ProjectId { get; set; }
         public Option FrameWalls { get; set; }
         public Option FrameFloors { get; set; }

@@ -1,0 +1,48 @@
+﻿
+    <div class="page-container">
+
+        >
+
+       
+
+        <label>Vertical Splitter Panes:</label>
+        <div class="panel-container-vertical">
+
+            <div class="panel-top">
+                top panel
+            </div>
+
+            <div class="splitter-horizontal">
+            </div>
+
+            <div class="panel-bottom">
+                bottom panel
+            </div>
+        </div>
+
+
+
+        <hr />
+
+        <p>
+            This example creates two resizables for the horizontal and vertical splitter panes:
+        </p>
+<pre>
+&lt;script src=&quot;//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;../src/jquery-resizable.js&quot;&gt;&lt;/script&gt;
+&lt;script&gt;
+    $(&quot;.panel-left&quot;).resizable({
+        handleSelector: &quot;.splitter&quot;,
+        resizeHeight: false
+    });
+    $(&quot;.panel-top&quot;).resizable({
+        handleSelector: &quot;.splitter-horizontal&quot;,
+        resizeWidth: false
+    });
+&lt;/script&gt;
+</pre>
+    </div>
+
+
+</body>
+</html>
