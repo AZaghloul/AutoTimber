@@ -5,10 +5,10 @@
 }
 <table class="table table-hover">
     <tr>
-        <th style="text-align:center">
-            @* <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />*@
+        @*<th style="text-align:center">
+             <img src="@Url.Content(@Model.Photo)" alt="@Model.AlternateText" />
             @Html.DisplayNameFor(model => model.Project.Thumbnail)
-        </th>
+        </th>*@
         <th style="text-align:center">
             @Html.DisplayNameFor(model => model.Project.Title)
         </th>
@@ -28,27 +28,29 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
+            @*<td>
                 @Html.DisplayFor(modelItem => item.Project.Thumbnail)
-            </td>
-            <td>
+            </td>*@
+            <td style="text-align:center">
                 @Html.DisplayFor(modelItem => item.Project.Title)
             </td>
-            <td>
+            <td style="text-align:center">
                 @Html.DisplayFor(modelItem => item.Project.DesignState)
                 @if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Waiting)
                 {
 
                     string txt = "Start Framing";
-                    @:<input type="button" class="btn-Design btn btn-default" value=@txt />
+                    @:<span class="glyphicon glyphicon-time" aria-hidden="true" style="left: 5px;"></span>
+                    @:<input type="button" class="btn-Design btn btn-default" style="margin-left: 32px;" value=@txt />
                     @Html.HiddenFor(modelItem => item.Project.Id)
 
                 }
                 else if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Designed)
                 {
 
+                    @:&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check"></i>
                     string txt = "Reframe";
-                    @:<input type="button" class="btn-Design btn btn-default" value=@txt />
+                    @:<input type="button" class="btn-Design btn btn-default" style="margin-left: 15px;" value=@txt />
                     @Html.HiddenFor(modelItem => item.Project.Id)
 
                 }
@@ -57,7 +59,8 @@
                 else
                 {
                     string txt = "Start Framing";
-                    @:<input type="button" class="btn-Design btn btn-default" value=@txt disabled />
+                    @:&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-times"></i>
+                    @:<input type="button" class="btn-Design btn btn-default" style="margin-left: 33px;" value=@txt disabled />
                     @Html.HiddenFor(modelItem => item.Project.Id)
 
 
@@ -66,7 +69,7 @@
 
 
             </td>
-            <td id="td-project">
+            <td id="td-project" style="text-align:center">
                 <div>
 
                     <span style="margin:5px" class="btn-show">
@@ -106,7 +109,7 @@
                 </div>
             </td>
 
-            <td>
+            <td style="text-align:center">
                 <span class="btn-gallery">
                     @Html.CheckBoxFor(modelItem => item.Project.AddToGallery)
                     @Html.HiddenFor(modelItem => item.Project.Id)
@@ -116,7 +119,15 @@
     }
 
 </table>
+<style>
+    tr:nth-child(even) {
+        background-color: #d5dafb;
+    }
+    tr:nth-child(odd) {
+        background-color: #fff;
+    }
 
+</style>
 
 @* Modaaaaaaaaaaaaaaaaaaaaaaaaaals *@
 
