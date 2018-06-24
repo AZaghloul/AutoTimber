@@ -28,8 +28,8 @@ namespace Bim.Application.IRCWood.Physical
         #region Methods
         public void FrameWalls()
         {
-            
-            var studTable =  StudTable.Load(StudTable.FilePath);
+
+            var studTable = StudTable.Load(StudTable.FilePath);
             var exist = File.Exists(Table502_3_1.JoistTableLivingAreasPath);
             Table502_3_1 JoistTableLivingAreas = Table502_3_1.Load(Table502_3_1.JoistTableLivingAreasPath);
             Table502_3_1 JoistTableSleepingAreas = Table502_3_1.Load(Table502_3_1.JoistTableSleepingAreasPath);
@@ -37,35 +37,58 @@ namespace Bim.Application.IRCWood.Physical
             Table502_5 HeadersTableInterior = Table502_5.Load(Table502_5.HeadersTableInteriorPath);
 
 
-            var walls = IfModel.Instances.OfType<IfWall>().ToList();
-            var polygons = WallPolygon.GetPolygons(walls);
+            var walls = IfModel.Instances.OfType<IfWall2>().ToList();
+            var polygons = WallPolygon2.GetPolygons(walls);
             WallFrame wf;
-            foreach (var polygon in polygons)
+            for (int i = 0; i < polygons.Count; i++)
             {
-                try
-                {
-                    wf = new WallFrame(polygon);
-                    wf.StudTable = studTable;
-                    wf.New();
-                }
-                catch (Exception e)
-                {
-
-                    Console.WriteLine("Error: " + e.Message);
-                }
-
-
+                wf = new WallFrame(polygons[i]);
+                wf.StudTable = studTable;
+                wf.HeadersTable = HeadersTableExterior;
+                wf.New2();
             }
+            //foreach (var polygon in polygons)
+            //{
+            //    try
+            //    {
+            //        wf = new WallFrame(polygon);
+            //        wf.StudTable = studTable;
+            //        wf.New2();
+            //    }
+            //    catch (Exception e)
+            //    {
+
+            //        Console.WriteLine("Error: " + e.Message);
+            //    }
+
+
+            //}
+
+
+        }
+
+
+
+
+        public void FrameFloors()
+        {
+            var studTable = StudTable.Load(StudTable.FilePath);
+            var exist = File.Exists(Table502_3_1.JoistTableLivingAreasPath);
+            Table502_3_1 JoistTableLivingAreas = Table502_3_1.Load(Table502_3_1.JoistTableLivingAreasPath);
+            Table502_3_1 JoistTableSleepingAreas = Table502_3_1.Load(Table502_3_1.JoistTableSleepingAreasPath);
+            Table502_5 HeadersTableExterior = Table502_5.Load(Table502_5.HeadersTableExteriorPath);
+            Table502_5 HeadersTableInterior = Table502_5.Load(Table502_5.HeadersTableInteriorPath);
 
             var Floors = IfModel.Instances.OfType<IfFloor>().ToList();
             var floorPolygon = FloorPolygon.GetPolygons(Floors);
+            FloorFrame.FloorSetup();
             FloorFrame Ff;
             foreach (var polygon in floorPolygon)
             {
                 try
                 {
                     Ff = new FloorFrame(polygon);
-                    Ff.JoistTable= JoistTableLivingAreas;
+                    Ff.JoistTable = JoistTableLivingAreas;
                     Ff.New();
                 }
                 catch (Exception e)
@@ -76,10 +99,8 @@ namespace Bim.Application.IRCWood.Physical
 
 
             }
-
-
+            #endregion
         }
-        #endregion
     }
 }
 

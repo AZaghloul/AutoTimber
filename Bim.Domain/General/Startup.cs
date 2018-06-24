@@ -36,6 +36,11 @@ namespace Bim.Domain.Configuration
                 {"Dimension",new IfDimension(2,6,2) }
             };
 
+            IfJoist.Setup = new Setup
+            {
+                {"RecSection",new RecSection(2,10) },
+            };
+
 
         }
 

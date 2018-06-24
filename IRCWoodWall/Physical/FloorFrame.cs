@@ -31,17 +31,15 @@ namespace Bim.Application.IRCWood.Physical
         {
 
             //SetHeaders();
-            IfJoist.Setup = new Setup
-            {
-                {"RecSection",new RecSection(2,10) },
-                {"WoodType", WoodType.Douglas_fir_larch },
-                {"WoodGrade", WoodGrade.SS }
-            };
 
             SetJoists();
 
         }
-
+        public static void FloorSetup()
+        {
+            IfJoist.Setup.Add("WoodType", WoodType.Douglas_fir_larch);
+            IfJoist.Setup.Add("WoodGrade", WoodGrade.SS);
+        }
         private void SetJoists()
         {
             RecSection section = IfJoist.Setup.Get<RecSection>("RecSection");
@@ -67,7 +65,7 @@ namespace Bim.Application.IRCWood.Physical
                     var DircVec = new IfLocation(
                         FloorPolygon.IfFloor.ShortDirection.Y * spaces[i],
                         FloorPolygon.IfFloor.ShortDirection.X * spaces[i],
-                        FloorPolygon.IfFloor.ShortDirection.Z * spaces[i]
+                        FloorPolygon.IfFloor.ShortDirection.Z * spaces[i] - Cells[0].Section.Depth.Inches / 2
                         );
 
                     var ifJoist = new IfJoist(FloorPolygon.IfFloor)

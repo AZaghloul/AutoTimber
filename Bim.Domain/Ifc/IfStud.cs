@@ -20,6 +20,7 @@ namespace Bim.Domain.Ifc
         #region Properties
 
         public IfWall IfWall { get; set; }
+        public IfWall2 IfWall2 { get; set; }
         public IfcAxis2Placement3D RelativeAxis { get; set; }
         public IfcLocalPlacement LocalPlacement { get; set; }
         #endregion
@@ -32,15 +33,18 @@ namespace Bim.Domain.Ifc
         {
             IfWall = wall;
         }
+        public IfStud(IfWall2 wall) : base(wall.IfModel)
+        {
+            IfWall2 = wall;
+        }
 
 
         #endregion
 
         #region Methods
-
         public void New()
         {
-            var ifcModel = IfWall.IfModel.IfcStore;
+            var ifcModel = IfWall2.IfModel.IfcStore;
             // CheckUnits();
 
             using (var txn = ifcModel.BeginTransaction("New Stud"))
@@ -51,13 +55,12 @@ namespace Bim.Domain.Ifc
                 SetLocation(ifcModel);
                 SetShape(ifcModel);
 
-                var story = IfWall.IfcWall.ContainedInStructure.FirstOrDefault().RelatedElements;
+                var story = IfWall2.IfcWall.ContainedInStructure.FirstOrDefault().RelatedElements;
                 story.Add(IfcElement);
                 txn.Commit();
             }
 
         }
-        #endregion
         private void SetShape(IfcStore ifcModel)
         {
             var recProfile = ifcModel.Instances.New<IfcRectangleProfileDef>();
@@ -195,32 +198,12 @@ namespace Bim.Domain.Ifc
 
             /*          Set Stud Location */
             var lp = ifcModel.Instances.New<IfcLocalPlacement>();
-            lp.PlacementRelTo = (IfcLocalPlacement)IfWall.LocalPlacement;
+            lp.PlacementRelTo = (IfcLocalPlacement)IfWall2.IfcWall.ObjectPlacement;
             lp.RelativePlacement = ax3D;
             IfcElement.ObjectPlacement = lp;
 
         }
-        private void CheckUnits()
-        {
-            var unit = IfModel.IfUnit.LengthUnit;
-            switch (unit)
-            {
-                case UnitName.METRE:
-                    IfDimension = IfDimension;
-                    IfLocation = IfLocation;
-                    break;
-
-                case UnitName.MILLIMETRE:
-                    IfDimension = IfDimension;
-                    IfLocation = IfLocation;
-                    break;
-
-                case UnitName.FOOT:
-                    break;
-                default:
-                    break;
-            }
-        }
+        #endregion
 
         public override string ToString()
         {

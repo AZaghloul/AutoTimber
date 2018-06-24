@@ -187,11 +187,14 @@
     <Compile Include="Ifc\IfUnit.cs" />
     <Compile Include="Ifc\IfVector.cs" />
     <Compile Include="Ifc\IfWall.cs" />
+    <Compile Include="Ifc\IfWall2.cs" />
     <Compile Include="Ifc\IfWindow.cs" />
     <Compile Include="Ifc\RecSection.cs" />
     <Compile Include="Ifc\Version.cs" />
+    <Compile Include="Ifc\IfOpening2.cs" />
     <Compile Include="Polygon\FloorPolygon.cs" />
     <Compile Include="Polygon\Region.cs" />
+    <Compile Include="Polygon\WallPolygon2.cs" />
     <Compile Include="Polygon\WallPolygon.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
