@@ -20,6 +20,8 @@ using Xbim.Ifc4.SharedBldgElements;
 
 namespace Algorithm.MVC.Controllers
 {
+
+    [Authorize]
     public class DashBoardController : Controller
     {
         

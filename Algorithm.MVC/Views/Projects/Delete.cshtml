@@ -11,13 +11,6 @@
     <h4>Project</h4>
     <hr />
     <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.UserId)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.UserId)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.FileName)
@@ -43,38 +36,7 @@
             @Html.DisplayFor(model => model.Description)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.Thumbnail)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Thumbnail)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DesignState)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DesignState)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.AddToGallery)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.AddToGallery)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.DesignOptions)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.DesignOptions)
-        </dd>
-
+      
     </dl>
 
     @using (Html.BeginForm()) {
@@ -82,7 +44,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @Html.ActionLink("Back to List", "Index")
+            @Html.ActionLink("Back", "Index","Dashboard")
         </div>
     }
 </div>
