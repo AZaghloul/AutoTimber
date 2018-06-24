@@ -282,6 +282,7 @@
     <Content Include="App_Data\Tables\table502.3.1%281%29.txt" />
     <Content Include="src\Content\bootstrap.css" />
     <Content Include="src\Content\bootstrap.min.css" />
+    <Content Include="src\Content\jquery-resizable.js" />
     <Content Include="src\Content\style4.css" />
     <Content Include="favicon.ico" />
     <Content Include="src\fonts\fontawesome.js" />
