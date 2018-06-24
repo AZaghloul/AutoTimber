@@ -39,9 +39,11 @@
                 @if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Waiting)
                 {
 
+
                     string txt = "Start Framing";
                     @:<span class="glyphicon glyphicon-time" aria-hidden="true" style="left: 5px;"></span>
                     @:<input type="button" class="btn-Design btn btn-default" style="margin-left: 32px;" value=@txt />
+
                     @Html.HiddenFor(modelItem => item.Project.Id)
 
                 }
@@ -299,6 +301,12 @@
 
     $(document).ready(function () {
 
+        var divElement = $("<div id='mycontent' > Loading..</div>");
+        //refresh projects
+        //refresh projects
+       
+/// end refresh projects
+
         var Settings = function () {
 
             this.ProjectId = 0;
@@ -373,7 +381,22 @@
                 data: { Id: selectedProjectId },
                 success: function (data) {
 
-                    //$('#mycontent').html(data);
+                    //refresh projects
+                    $('#div-content > #mycontent').remove();
+
+                    $('#div-content > #mycontent').html(divElement);
+
+                    //ajax call
+
+                    $.ajax({
+                        url: '/projects/index',
+                        dataType: 'html',
+                        success: function (data) {
+                            $('#div-content').html(divElement);
+                            $('#mycontent').html(data);
+                        }
+                    });
+
                 }
             });
         });
