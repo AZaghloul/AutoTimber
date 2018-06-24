@@ -291,15 +291,15 @@
         var Settings = function () {
 
             this.ProjectId = 0;
-            this.FrameWalls = 0;
-            this.FrameFloors = 0;
-            this.FrameRafter = 0;
-            this.DetectExternalWalls = 0;
-            this.OptimizeWalls = 0;
-            this.OptimizeFloors = 0;
-            this.OptimizeRafter = 0;
-            this.Exclude = 0;
-            this.DeleteArcWalls = 0;
+            //this.FrameWalls = 0;
+            //this.FrameFloors = 0;
+            //this.FrameRafter = 0;
+            //this.DetectExternalWalls = 0;
+            //this.OptimizeWalls = 0;
+            //this.OptimizeFloors = 0;
+            //this.OptimizeRafter = 0;
+            //this.Exclude = 0;
+            //this.DeleteArcWalls = 0;
             this.HeaderSection = 0;
             this.StudSection = 0;
             this.JoistSection = 0;
@@ -348,20 +348,8 @@
         // btn BOQ
         $('.btn-boq').click(function () {
             selectedProjectId = $(this).find('input[type=hidden]').val();
-
             window.open(`/files/boq?Id=${selectedProjectId}` );
-
-            //$.ajax({
-            //    url: '/files/boq',
-            //    dataType: 'html',
-            //    data: { Id: selectedProjectId },
-            //    success: function (data) {
-
-            //        if (d.success) {
-            //            window.location = '/files/boq';
-            //        }
-            //    }
-            //});
+           
         });
 
         //btn design
@@ -385,16 +373,7 @@
             selectedProjectId = $(this).find('input[type=hidden]').val();
 
             window.open(`/files/archive?Id=${selectedProjectId}`);
-
-            //$.ajax({
-            //    url: '/files/archive',
-            //    dataType: 'html',
-            //    data: { Id: selectedProjectId },
-            //    success: function (data) {
-
-            //        //$('#mycontent').html(data);
-            //    }
-            //});
+          
         });
         // btn Download
 
@@ -402,39 +381,55 @@
             selectedProjectId = $(this).find('input[type=hidden]').val();
 
             window.open(`/files/download?Id=${selectedProjectId}`);
-            //$.ajax({
-            //    url: '/files/download',
-            //    dataType: 'html',
-            //    data: { Id: selectedProjectId },
-            //    success: function (data) {
-
-            //        //$('#mycontent').html(data);
-            //    }
-            //});
+          
         });
 
-        //settings
+        var headerSec;
+        var studSec;
+        var joistSec;
+        var woodSpecies;
+        var woodGrade;
 
+        $('#slct-header').on('change', function () {
+           headerSec=this.value;
+        })
+        $('#slct-joist').on('change', function () {
+            joistSec = this.value;
+        })
+        $('#slct-stud').on('change', function () {
+            studSec = this.value;
+        })
+        $('#slct-woodGrade').on('change', function () {
+            woodGrade = this.value;
+        })
+        $('#slct-woodSpecies').on('change', function () {
+            woodSpecies = $(this).$('option:selected').attr('value');
+            var value = $(this).attr('value');
+            console.log(value);
+            console.log(woodSpecies);
+        })
+        //settings
+        
         $('#btn-settings-ok').click(function () {
-            selectedProjectId = $(this).find('input[type=hidden]').val();
+            selectedProjectId = $(this).next('input[type=hidden]').val();
             // creating object
             settings = new Settings();
             settings.ProjectId = selectedProjectId;
-            settings.Id = settings.ProjectId;
-            settings.FrameWalls = $('#slct-Walls').val();
-            settings.FrameFloors = $('#slct-Rafter').val();
-            settings.FrameRafter = $('#slct-ExternalWalls').val();
-            settings.DetectExternalWalls = $('#slct-ExternalWalls').val();
-            settings.OptimizeWalls = $('#slct-OptimizeWalls').val();
-            settings.OptimizeFloors = $('#txt-OptimizeFloors').val();
-            settings.OptimizeRafter = $('#txt-OptimizeRafter').val();
-            settings.Exclude = $('#slct-Exclude').val();
-            settings.DeleteArcWalls = $('#slct-DeleteArcWalls').val();
-            settings.HeaderSection = $("#slct-header option:selected").text();
-            settings.JoistSection = $("#slct-joist option:selected").text();
-            settings.StudSection = $("#slct-stud option:selected").text();
-            settings.WoodGrade = $("#slct-woodGrade option:selected").text();
-            settings.WoodSpecies = $("#slct-woodSpecies option:selected").text();
+            //settings.Id = settings.ProjectId;
+            //settings.FrameWalls = $('#slct-Walls').val();
+            //settings.FrameFloors = $('#slct-Rafter').val();
+            //settings.FrameRafter = $('#slct-ExternalWalls').val();
+            //settings.DetectExternalWalls = $('#slct-ExternalWalls').val();
+            //settings.OptimizeWalls = $('#slct-OptimizeWalls').val();
+            //settings.OptimizeFloors = $('#txt-OptimizeFloors').val();
+            //settings.OptimizeRafter = $('#txt-OptimizeRafter').val();
+            //settings.Exclude = $('#slct-Exclude').val();
+            settings.DeleteArcWalls = $('#slct-DeleteArcWalls option:selected').val();
+            settings.HeaderSection = headerSec;
+            settings.JoistSection = joistSec;
+            settings.StudSection = studSec;
+            settings.WoodGrade = woodGrade;
+            settings.WoodSpecies = woodSpecies;
 
             $.ajax({
 

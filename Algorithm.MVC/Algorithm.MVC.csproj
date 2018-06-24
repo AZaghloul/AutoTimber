@@ -1689,6 +1689,8 @@
     <Content Include="src\Viewer\xbim-state.debug.js" />
     <Content Include="src\Viewer\xbim-triangulated-shape.debug.js" />
     <Content Include="src\Viewer\xbim-viewer.debug.js" />
+    <Content Include="Users\Thumbnail\home-1.PNG" />
+    <Content Include="Users\Thumbnail\home-2.PNG" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
