@@ -92,23 +92,18 @@
 
 <div class="panel-container">
 
-    <div class="panel-left">
-        <canvas id="viewer-Archeticture" min-width="50" min-height="20"></canvas>
-
-    </div>
+        <canvas id="viewer-Archeticture" min-width="50" min-height="20" class="panel-left"></canvas>
 
     <div class="splitter">
     </div>
 
-    <div class="panel-right">
-        <canvas id="viewer-structure" width="800" height="500"></canvas>
-    </div>
+        <canvas id="viewer-structure" width="800" height="500" class="panel-right"></canvas>
 </div>
 <style>
     .panel-container {
         display: flex;
         flex-direction: row;
-        border: 1px solid silver;
+        /*border: 1px solid silver;*/
         overflow: hidden;
         /* avoid browser level touch actions */
         xtouch-action: none;
@@ -119,10 +114,12 @@
         /* only manually resize */
         padding: 10px;
         width: 370px;
-        min-height: 220px;
-        min-width: 0px;
+        /*min-height: 220px;
+        min-width: 0px;*/
+        max-height:250px;
+        max-width:370px;
         white-space: nowrap;
-        background: #838383;
+        background: #fafafa;
         color: white;
     }
 
@@ -141,7 +138,9 @@
         width: 100%;
         min-height: 200px;
         min-width: 200px;
-        background: #eee;
+        max-height: 500px;
+        max-width: 800px;
+        background: #fafafa;
     }
 </style>
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
