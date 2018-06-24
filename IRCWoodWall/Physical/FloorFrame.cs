@@ -53,10 +53,10 @@ namespace Bim.Application.IRCWood.Physical
                     e.WoodType == WT &&
                     e.SpanToInch >= span &&
                     e.DeadLoadPsF == 10 &&
-                    e.Section == section)
+                    e.Section ==  section)
                     .OrderBy(e =>
                     e.SpanToInch).ToList();
-                double S = Cells[0].Spacing;
+                double S = Cells.FirstOrDefault().Spacing;
                 var spaces = Split.Equal(reg.IfDimension.YDim - section.Width, S);
 
                 for (int i = 0; i < spaces.Count; i++)
@@ -65,7 +65,7 @@ namespace Bim.Application.IRCWood.Physical
                     var DircVec = new IfLocation(
                         FloorPolygon.IfFloor.ShortDirection.Y * spaces[i],
                         FloorPolygon.IfFloor.ShortDirection.X * spaces[i],
-                        FloorPolygon.IfFloor.ShortDirection.Z * spaces[i] - Cells[0].Section.Depth.Inches / 2
+                        0 //FloorPolygon.IfFloor.ShortDirection.Z * spaces[i] - Cells[0].Section.Depth.Inches / 2
                         );
 
                     var ifJoist = new IfJoist(FloorPolygon.IfFloor)

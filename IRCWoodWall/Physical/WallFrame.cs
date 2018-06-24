@@ -530,6 +530,15 @@ namespace Bim.Application.IRCWood.Physical
             }
         }
 
+        public void New()
+        {
+
+            SetTopPlate();
+            SetHeaders();
+            SetBottomPlate();
+            SetStudsRegions();
+
+        }
         private void SetTopPlate()
         {
             var wl = WallPolygon.IfWall.IfLocation;
@@ -548,24 +557,6 @@ namespace Bim.Application.IRCWood.Physical
             };
 
             plate.New();
-            plate.IfMaterial.AttatchTo(plate);
-        }
-        private void SetTopPlate2()
-        {
-            var wl = WallPolygon2.IfWall.IfLocation;
-            var wd = WallPolygon2.IfWall.IfDimension;
-            var dim = IfSill.Setup.Get<IfDimension>("Dimension");
-            var zLocation = WallPolygon2.Regions[0].IfDimension.ZDim + WallPolygon2.Regions[0].IfLocation.Z + Length.FromInches(1);
-            var location = new IfLocation(0, 0, zLocation);
-            var plate = new IfSill(WallPolygon2.IfWall)
-            {
-                IfLocation = location,
-                IfDimension = new IfDimension(dim.XDim, dim.YDim, wd.XDim),
-                IfMaterial = IfMaterial.Setup.Get<IfMaterial>("TopPlate"),
-                IfModel = WallPolygon2.IfWall.IfModel
-            };
-
-            plate.New2();
             plate.IfMaterial.AttatchTo(plate);
         }
         private void SetBottomPlate()
@@ -601,24 +592,6 @@ namespace Bim.Application.IRCWood.Physical
             };
 
             plate.New();
-            plate.IfMaterial.AttatchTo(plate);
-        }
-        private void SetBottomPlate2()
-        {
-            var wl = WallPolygon2.IfWall.IfLocation;
-            var wd = WallPolygon2.IfWall.IfDimension;
-            var dim = IfSill.Setup.Get<IfDimension>("Dimension");
-            var zLocation = WallPolygon2.Regions[0].IfLocation.Z + Length.FromInches(1);
-            var location = new IfLocation(0, 0, zLocation);
-            var plate = new IfSill(WallPolygon2.IfWall)
-            {
-                IfLocation = location,
-                IfDimension = new IfDimension(dim.XDim, dim.YDim, wd.XDim),
-                IfMaterial = IfMaterial.Setup.Get<IfMaterial>("TopPlate"),
-                IfModel = WallPolygon2.IfWall.IfModel
-            };
-
-            plate.New2();
             plate.IfMaterial.AttatchTo(plate);
         }
         private void SetHeaders()
@@ -672,6 +645,51 @@ namespace Bim.Application.IRCWood.Physical
             }
 
 
+        }
+        public void New2()
+        {
+
+            SetBottomPlate2();
+            SetTopPlate2();
+            SetStudsRegions2();
+            SetHeaders2();
+
+        }
+        private void SetBottomPlate2()
+        {
+            var wl = WallPolygon2.IfWall.IfLocation;
+            var wd = WallPolygon2.IfWall.IfDimension;
+            var dim = IfSill.Setup.Get<IfDimension>("Dimension");
+            var zLocation = Length.FromInches(1);
+            var location = new IfLocation(0, 0, zLocation);
+            var plate = new IfSill(WallPolygon2.IfWall)
+            {
+                IfLocation = location,
+                IfDimension = new IfDimension(dim.XDim, dim.YDim, wd.XDim),
+                IfMaterial = IfMaterial.Setup.Get<IfMaterial>("TopPlate"),
+                IfModel = WallPolygon2.IfWall.IfModel
+            };
+
+            plate.New2();
+            plate.IfMaterial.AttatchTo(plate);
+        }
+        private void SetTopPlate2()
+        {
+            var wl = WallPolygon2.IfWall.IfLocation;
+            var wd = WallPolygon2.IfWall.IfDimension;
+            var dim = IfSill.Setup.Get<IfDimension>("Dimension");
+            var zLocation = WallPolygon2.Regions[0].IfDimension.ZDim + WallPolygon2.Regions[0].IfLocation.Z + Length.FromInches(1);
+            var location = new IfLocation(0, 0, zLocation);
+            var plate = new IfSill(WallPolygon2.IfWall)
+            {
+                IfLocation = location,
+                IfDimension = new IfDimension(dim.XDim, dim.YDim, wd.XDim),
+                IfMaterial = IfMaterial.Setup.Get<IfMaterial>("TopPlate"),
+                IfModel = WallPolygon2.IfWall.IfModel
+            };
+
+            plate.New2();
+            plate.IfMaterial.AttatchTo(plate);
         }
         private void SetHeaders2()
         {
@@ -763,24 +781,6 @@ namespace Bim.Application.IRCWood.Physical
 
         }
         private void SetJackStuds() { }
-        public void New()
-        {
-
-            SetTopPlate();
-            SetHeaders();
-            SetBottomPlate();
-            SetStudsRegions();
-
-        }
-        public void New2()
-        {
-
-            SetTopPlate2();
-            SetBottomPlate2();
-            SetStudsRegions2();
-            SetHeaders2();
-
-        }
 
 
     }

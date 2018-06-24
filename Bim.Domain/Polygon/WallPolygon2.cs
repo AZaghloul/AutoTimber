@@ -89,12 +89,12 @@ namespace Bim.Domain.Polygon
             Length RegionHeight = IfWall.IfDimension.ZDim - JoistDepth - Length.FromInches(2 * 2);
             IfDimension WallDimension = new IfDimension(IfWall.IfDimension.XDim, IfWall.IfDimension.YDim, RegionHeight);
 
-            Regions.Add(new Region(DivisionLines[1].X.Inches, 0, WallDimension.ZDim, 0, 0, 0)
+            Regions.Add(new Region(DivisionLines[1].X.Inches, 0, WallDimension.ZDim, 0, 0, 2)
             {
                 RegionLocation = RegionLocation.Left
             });
             Regions.Add(new Region(DivisionLines.Last().X.Inches - DivisionLines[DivisionLines.Count - 2].X.Inches, 0, WallDimension.ZDim,
-                DivisionLines[DivisionLines.Count - 2].X.Inches, 0, 0)
+                DivisionLines[DivisionLines.Count - 2].X.Inches, 0, 2)
             {
                 RegionLocation = RegionLocation.Right
             });
@@ -105,7 +105,7 @@ namespace Bim.Domain.Polygon
                 {
                     Regions.Add(new Region()
                     {
-                        IfLocation = new IfLocation(DivisionLines[i].X,0,0),
+                        IfLocation = new IfLocation(DivisionLines[i].X,0,2),
                         IfDimension= new IfDimension(DivisionLines[i+1].X-DivisionLines[i].X,0,WallDimension.ZDim),
                         RegionLocation = RegionLocation.Middle
                     });
@@ -137,7 +137,7 @@ namespace Bim.Domain.Polygon
                             Regions.Add(new Region()
                             {
                                 IfLocation =
-                                    new IfLocation(DivisionLines[i].X, 0, 0),
+                                    new IfLocation(DivisionLines[i].X, 0, 2),
                                 IfDimension =
                                     new IfDimension(DivisionLines[i + 1].X - DivisionLines[i].X, 0, Openi.IfLocation.Z),
                                 RegionLocation = RegionLocation.Bottom

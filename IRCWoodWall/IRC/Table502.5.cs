@@ -103,7 +103,7 @@ namespace Bim.Application.IRCWood.IRC
         }
         public List<TableCell> GetCells(Length Span, Length BuildingWidth, double GroundSnowLoad, int storiesAbove, bool FloorBearingClearSpan)
         {
-            return Cells.Where(e => e.Span == Span && 
+            return Cells.Where(e => e.Span >= Span && 
                 e.BuildingWidth >= BuildingWidth && 
                 e.GroundSnowLoad >= GroundSnowLoad && 
                 e.StoriesAbove == storiesAbove 
