@@ -108,7 +108,7 @@ namespace AlgorithmProject
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
                 GC1.AddToCollection(model.Instances.OfType<IfStud>());
                 GC1.AddToCollection(model.Instances.OfType<IfSill>());
-                var coll = GC1.ToExcel(GC1.BOQTable, "Testing Excel", false, "Number", "Collection");
+                //var coll = GC1.ToExcel(GC1.BOQTable, "Testing Excel", false, "Number", "Collection");
             }
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;

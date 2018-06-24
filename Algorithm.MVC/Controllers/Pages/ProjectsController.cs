@@ -49,6 +49,8 @@ namespace Algorithm.MVC.Controllers
                 model.Delete<IfcColumn>();
                 WoodFrame wf = new WoodFrame(model);
                 wf.FrameWalls();
+                wf.FrameFloors();
+
                 model.Delete<IfcWall>();
                 model.Delete<IfcSlab>();
 
