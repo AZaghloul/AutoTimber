@@ -10,6 +10,7 @@ using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.MeasureResource;
 using Xbim.Common;
 using Bim.Domain.Ifc;
+using Bim.Common.Measures;
 
 namespace Bim.Domain.Polygon
 {
@@ -73,15 +74,17 @@ namespace Bim.Domain.Polygon
         #region Methods
         public void GetRegions()
         {
+            Length JoistDepth = Length.FromInches(IfJoist.Setup.Get<RecSection>("RecSection").Depth);
+            Length RegionHeight = IfWall.IfDimension.ZDim - JoistDepth - Length.FromInches(2*2);
+            IfDimension WallDimension = new IfDimension(IfWall.IfDimension.XDim, IfWall.IfDimension.YDim, RegionHeight);
             if (Openings.Count == 0)
             {
                 var reg = new Region()
                 {
-                    IfDimension = new IfDimension(IfWall.IfDimension),
+                    IfDimension = new IfDimension(WallDimension),
                     IfLocation = new IfLocation(),
                     RegionLocation = RegionLocation.Left,
                     Direction = IfWall.Direction
-
                 };
                 RLeft.Add(reg);
                 Regions.Add(reg);
@@ -90,7 +93,7 @@ namespace Bim.Domain.Polygon
             {
                 IsOpen = true;
                 Openings = Openings.OrderBy(open => open.IfLocation.X.Inches).ToList();
-              
+
                 if (Openings.Count == 1)
                 {
                     var tempOpening = new IfOpening(Openings[0]);
@@ -101,16 +104,20 @@ namespace Bim.Domain.Polygon
                     }
 
                     Region drr = new Region(
-                       Math.Abs( IfWall.IfDimension.XDim - ((tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim)),
+                        Math.Abs(IfWall.IfDimension.XDim - ((tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim)),
                         IfWall.IfDimension.YDim,
-                        IfWall.IfDimension.ZDim,
-                        Math.Abs((tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim), 0, 0, RegionLocation.Right, tempOpening.Direction);
+                        WallDimension.ZDim,
+                        Math.Abs((tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim),
+                        0,
+                        0,
+                        RegionLocation.Right, tempOpening.Direction);
 
 
                     Region drl = new Region(
                         tempOpening.IfLocation.X,
                         IfWall.IfDimension.YDim,
-                        IfWall.IfDimension.ZDim, 0, 0, 0, RegionLocation.Left, tempOpening.Direction);
+                        WallDimension.ZDim,
+                        0, 0, 0, RegionLocation.Left, tempOpening.Direction);
 
                     Regions.Add(drr);
                     Regions.Add(drl);
@@ -121,10 +128,11 @@ namespace Bim.Domain.Polygon
                             Region drt = new Region(
                                 tempOpening.IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
-                               Math.Abs(IfWall.IfDimension.ZDim - (tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim)),
+                                Math.Abs(WallDimension.ZDim - (tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim)),
                                 tempOpening.IfLocation.X,
                                 0,
-                                tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim, RegionLocation.Top,tempOpening.Direction);
+                                tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim,
+                                RegionLocation.Top, tempOpening.Direction);
                             drt.LocalPlacement = tempOpening.LocalPlacement;
                             Regions.Add(drt);
 
@@ -133,7 +141,7 @@ namespace Bim.Domain.Polygon
                             Region wrt = new Region(
                                 tempOpening.IfDimension.XDim,
                                 IfWall.IfDimension.YDim,
-                                IfWall.IfDimension.ZDim - (tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim),
+                                WallDimension.ZDim - (tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim),
                                 tempOpening.IfLocation.X, 0,
                                 tempOpening.IfLocation.Z + tempOpening.IfDimension.ZDim, RegionLocation.Top, tempOpening.Direction);
                             wrt.LocalPlacement = tempOpening.LocalPlacement;
@@ -142,7 +150,7 @@ namespace Bim.Domain.Polygon
                                 IfWall.IfDimension.YDim,
                                 tempOpening.IfLocation.Z,
                                 tempOpening.IfLocation.X,
-                                0, 0, RegionLocation.Bottom,tempOpening.Direction);
+                                0, 0, RegionLocation.Bottom, tempOpening.Direction);
                             wrt.LocalPlacement = tempOpening.LocalPlacement;
                             Regions.Add(wrt);
                             Regions.Add(wrb);
@@ -153,18 +161,18 @@ namespace Bim.Domain.Polygon
                 {
                     var tempOpening = new IfOpening(Openings.Last());
                     var flippedOpenning = new List<IfOpening>();
-                    if (tempOpening.Direction==Direction.Negative)
+                    if (tempOpening.Direction == Direction.Negative)
                     {
                         tempOpening.Flip(Axis.xAxis);
                     }
                     Region drr = new Region(
                         Math.Abs(IfWall.IfDimension.XDim - ((tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim)),
                         IfWall.IfDimension.YDim,
-                        IfWall.IfDimension.ZDim,
+                        WallDimension.ZDim,
                         (tempOpening.IfLocation.X) + tempOpening.IfDimension.XDim,
-                        0, 0, RegionLocation.Right,tempOpening.Direction);
+                        0, 0, RegionLocation.Right, tempOpening.Direction);
 
-                    tempOpening =new IfOpening( Openings[0]);
+                    tempOpening = new IfOpening(Openings[0]);
                     if (tempOpening.Direction == Direction.Negative)
                     {
                         tempOpening.Flip(Axis.xAxis);
@@ -172,33 +180,33 @@ namespace Bim.Domain.Polygon
                     Region drl = new Region(
                         tempOpening.IfLocation.X,
                         IfWall.IfDimension.YDim,
-                        IfWall.IfDimension.ZDim,
-                        0, 0, 0, RegionLocation.Left,tempOpening.Direction);
+                        WallDimension.ZDim,
+                        0, 0, 0, RegionLocation.Left, tempOpening.Direction);
 
                     Regions.Add(drr);
                     Regions.Add(drl);
+                    foreach (var opening in Openings)
+                    {
+                        flippedOpenning.Add(new IfOpening(opening));
+                    }
+                    foreach (var fo in flippedOpenning)
+                    {
+                        if (fo.Direction == Direction.Negative)
+                        {
+                            fo.Flip(Axis.xAxis);
+                            fo.Direction = Direction.Positive;
+                        }
+                    }
 
                     for (int i = 0; i < Openings.Count - 1; i++)
                     {
-                        
 
-                        foreach (var opening in Openings)
-                        {
-                            flippedOpenning.Add(new IfOpening(opening));
-                        }
-                        foreach (var fo in flippedOpenning)
-                        {
-                            if (fo.Direction==Direction.Negative)
-                            {
-                                fo.Flip(Axis.xAxis);
-                               fo.Direction= Direction.Positive;
-                            }
-                        }
+
                         Region rr = new Region();
                         Region rbetween = new Region(
                             Math.Abs(flippedOpenning[i + 1].IfLocation.X - (flippedOpenning[i].IfLocation.X + flippedOpenning[i].IfDimension.XDim)),
                             IfWall.IfDimension.YDim,
-                            IfWall.IfDimension.ZDim,
+                            WallDimension.ZDim,
                             flippedOpenning[i].IfLocation.X + flippedOpenning[i].IfDimension.XDim,
                             0, 0, RegionLocation.Middle, flippedOpenning[i].Direction);
 
@@ -209,7 +217,7 @@ namespace Bim.Domain.Polygon
                         Region rt = new Region(
                             flippedOpenning[i].IfDimension.XDim,
                             IfWall.IfDimension.YDim,
-                            IfWall.IfDimension.ZDim - (flippedOpenning[i].IfLocation.Z + flippedOpenning[i].IfDimension.ZDim),
+                            WallDimension.ZDim - (flippedOpenning[i].IfLocation.Z + flippedOpenning[i].IfDimension.ZDim),
                             flippedOpenning[i].IfLocation.X,
                             0,
                             flippedOpenning[i].IfLocation.Z + flippedOpenning[i].IfDimension.ZDim, RegionLocation.Top, flippedOpenning[i].Direction);

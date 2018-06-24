@@ -48,6 +48,8 @@ namespace Algorithm.MVC.Controllers
                 model.Delete<IfcColumn>();
                 WoodFrame wf = new WoodFrame(model);
                 wf.FrameWalls();
+                wf.FrameFloors();
+
                 model.Delete<IfcWall>();
                 model.Delete<IfcSlab>();
 
@@ -182,7 +184,7 @@ namespace Algorithm.MVC.Controllers
             Project project = await db.Projects.FindAsync(id);
             db.Projects.Remove(project);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","DashBoard");
         }
 
         protected override void Dispose(bool disposing)

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xbim.Ifc4.Interfaces;
 using Xbim.Ifc4.ProductExtension;
 
 namespace Bim.Domain.Ifc
@@ -11,7 +12,7 @@ namespace Bim.Domain.Ifc
     {
         
         public IfModel IfModel { get; set; }
-        public IfcBuildingElement IfcElement { get; set; }
+        public IIfcElement IfcElement { get; set; }
         public IfDimension IfDimension { get; set; }
         public IfLocation IfLocation { get; set; }
         public IfMaterial IfMaterial { get; set; }

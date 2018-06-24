@@ -35,8 +35,13 @@ namespace AlgorithmProject
             #endregion
             var d = Split.Equal(13, .65);
 
-            string fileName = @"..\..\Models\ITI.Qondos.2.ifc";
+            string fileName = @"F:\ITI Projects\ITI.Qondos\Helping Files\ITI.Qondos.Sample2-2Floors.ifc";
             string saveName = fileName.Split(new string[] { ".ifc" }, StringSplitOptions.RemoveEmptyEntries).FirstOrDefault() + @"-Solved.ifc";
+            StudTable.FilePath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\StudSpacingTable.txt";
+            Table502_3_1.JoistTableLivingAreasPath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\table502.3.1(1).csv";
+            Table502_3_1.JoistTableSleepingAreasPath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\table502.3.1(2).csv";
+            Table502_5.HeadersTableExteriorPath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\table502.5(1).csv";
+            Table502_5.HeadersTableInteriorPath = @"F:\ITI Projects\ITI.Qondos\AlgorithmProject\AlgorithmProject\Tables\table502.5(2).csv";
 
             IfcStore ifcStore = IfcStore.Open(fileName);
             //  ifcStore.SaveAs(fileName, Xbim.IO.IfcStorageType.IfcXml);
@@ -71,25 +76,26 @@ namespace AlgorithmProject
                 model.Delete<IfcColumn>();
                 WoodFrame wf = new WoodFrame(model);
                 wf.FrameWalls();
+                wf.FrameFloors();
                 model.Delete<IfcWall>();
                 model.Delete<IfcSlab>();
 
                 model.Save(saveName);
                 // OpenWindow(fileName);
-              //  OpenWindow(saveName);
+                OpenWindow(saveName);
 
-                List<IfWall> walls = model.Instances.OfType<IfWall>().ToList();
+                List<IfWall2> walls = model.Instances.OfType<IfWall2>().ToList();
                 List<IfFloor> floors = model.Instances.OfType<IfFloor>().ToList();
 
                 $"{walls.Count} walls are found".Print(ConsoleColor.Cyan);
                 $"{floors.Count} floors are found".Print(ConsoleColor.Cyan);
 
-                List<WallPolygon> wallPolygons = new List<WallPolygon>();
+                List<WallPolygon2> wallPolygons = new List<WallPolygon2>();
                 int i = 0;
                 foreach (var item in walls)
                 {
                     $"wall no {i}".Print(ConsoleColor.Cyan);
-                    wallPolygons.Add(new WallPolygon(item));
+                    wallPolygons.Add(new WallPolygon2(item));
                     $"{wallPolygons.Last().Regions.Count} regions are found".Print(ConsoleColor.Cyan);
                     $"\t {wallPolygons.Last().Openings.Count} opens".Print(ConsoleColor.Cyan);
                     $"\t {wallPolygons.Last().RLeft.Count} left regions".Print(ConsoleColor.Cyan);
@@ -103,7 +109,7 @@ namespace AlgorithmProject
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
                 GC1.AddToCollection(model.Instances.OfType<IfStud>());
                 GC1.AddToCollection(model.Instances.OfType<IfSill>());
-               var coll= GC1.ToExcel(GC1.BOQTable, "Testing Excel", false,"Number", "Collection");
+               //var coll= GC1.ToExcel(GC1.BOQTable, "Testing Excel", false,"Number", "Collection");
             }
             #region Footer
             Console.ForegroundColor = ConsoleColor.Yellow;

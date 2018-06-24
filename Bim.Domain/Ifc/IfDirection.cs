@@ -26,19 +26,23 @@ namespace Bim.Domain.Ifc
 
             Normalize();
         }
-        public IfDirection(double x,double y ,double z)
+        public IfDirection(double x, double y, double z)
         {
             X = x;
             Y = y;
             Z = z;
         }
 
+        public IfDirection():this(1,0,0)
+        {
+        }
+
         private void Normalize()
         {
             double Length = Math.Sqrt(X * X + Y * Y + Z * Z);
-            X = X / Length;
-            Y = Y / Length;
-            Z = Z / Length;
+            X = Math.Abs(X) / Length;
+            Y = Math.Abs(Y) / Length;
+            Z = Math.Abs(Z) / Length;
         }
     }
 }
