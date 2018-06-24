@@ -184,7 +184,7 @@ namespace Algorithm.MVC.Controllers
             Project project = await db.Projects.FindAsync(id);
             db.Projects.Remove(project);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","DashBoard");
         }
 
         protected override void Dispose(bool disposing)
