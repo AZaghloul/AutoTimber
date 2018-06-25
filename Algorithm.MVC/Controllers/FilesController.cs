@@ -24,22 +24,24 @@ namespace Algorithm.MVC.Controllers
         public ActionResult Upload()
         {
 
-
             return View(new UploadVM());
         }
         [HttpPost]
         public ActionResult Upload(UploadVM model, IEnumerable<HttpPostedFileBase> files)
         {
-            FileData fileData = new FileData();
 
             //if found the same file redirect to the show Action
             var file = files.FirstOrDefault();
 
             if (file != null && file.ContentLength > 0)
             {
+                var userId = User.Identity.GetUserId();
+
+                // check if directoryExists;
+                FileData.CheckDirectory(userId);
 
                 //create FileData object to hold all file paths
-                fileData = new FileData(file.FileName);
+                var fileData = new FileData(file.FileName, userId);
 
                 //write the file to the desk
                 file.SaveAs(fileData.InputPath);
@@ -76,22 +78,37 @@ namespace Algorithm.MVC.Controllers
 
         #region Download
 
-        public FileContentResult Excel(Guid Id)
+
+        public static byte[] ReadFully(Stream stream)
         {
-            return null;
+            byte[] buffer = new byte[32768];
+            using (MemoryStream ms = new MemoryStream())
+            {
+                while (true)
+                {
+                    int read = stream.Read(buffer, 0, buffer.Length);
+                    if (read <= 0)
+                        return ms.ToArray();
+                    ms.Write(buffer, 0, read);
+                }
+            }
         }
+
         public FileContentResult Archive(Guid? Id)
         {
+            var userId = User.Identity.GetUserId();
             UnitOfWork uow = new UnitOfWork();
             var proj = uow.Projects.FindById(Id);
-            var file = new FileData(proj.FileName);
+
+            var file = new FileData(proj.FileName, userId);
             //To Archive
             using (var memoryStream = new MemoryStream())
             {
                 using (var ziparchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
                 {
                     ziparchive.CreateEntryFromFile(file.InputPath, file.FileName);
-                    ziparchive.CreateEntryFromFile(file.InputPath, file.FileName);
+                    ziparchive.CreateEntryFromFile(file.OutputPath, file.OutputName);
+                    ziparchive.CreateEntryFromFile(file.BoqPath, file.BoqName);
 
                 }
                 return File(memoryStream.ToArray(), "application/zip", "Attachments.zip");
@@ -103,38 +120,25 @@ namespace Algorithm.MVC.Controllers
         {
             UnitOfWork uow = new UnitOfWork();
             var proj = uow.Projects.FindById(Id);
-            var file = new FileData(proj.FileName);
+            var userId = User.Identity.GetUserId();
+            var file = new FileData(proj.FileName, userId);
             //To Archive
-            using (var memoryStream = new MemoryStream())
-            {
-                using (var ziparchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
-                {
-                    ziparchive.CreateEntryFromFile(file.InputPath, file.FileName);
-                    ziparchive.CreateEntryFromFile(file.InputPath, file.FileName);
-                }
-                return File(memoryStream.ToArray(), "application/zip", "Attachments.zip");
-            }
+            var stream = System.IO.File.Open(file.OutputPath, FileMode.Open);
+            byte[] fileContent = ReadFully(stream);
+            stream.Close();
+            return File(fileContent, FileData.TextContentType, file.OutputName);
             ///
-
         }
 
-        public ActionResult Boq(Guid? Id)
+        public FileContentResult Boq(Guid? Id)
         {
             UnitOfWork uow = new UnitOfWork();
             var proj = uow.Projects.FindById(Id);
-            var file = new FileData(proj.FileName);
-            //To Archive
-            using (var memoryStream = new MemoryStream())
-            {
-                using (var ziparchive = new ZipArchive(memoryStream, ZipArchiveMode.Create, true))
-                {
-                    ziparchive.CreateEntryFromFile(file.InputPath, file.FileName);
-                    ziparchive.CreateEntryFromFile(file.InputPath, file.FileName);
-                }
-                return File(memoryStream.ToArray(), "application/zip", "Attachments.zip");
-            }
-            ///
-
+            var file = new FileData(proj.FileName, proj.UserId);
+            var stream = System.IO.File.Open(file.BoqPath, FileMode.Open);
+            byte[] fileContent = ReadFully(stream);
+            stream.Close();
+            return File(fileContent, FileData.ExcelContentType, file.BoqName);
         }
         #endregion
 
@@ -142,7 +146,7 @@ namespace Algorithm.MVC.Controllers
 
         public ActionResult Show(Guid? Id)
         {
-            
+
             if (Id == null)
             {
                 return RedirectToAction("Index", "Dashboard");
@@ -150,69 +154,51 @@ namespace Algorithm.MVC.Controllers
             UnitOfWork uow = new UnitOfWork();
             var project = uow.Projects.FindById(Id);
 
-            var fileData = new FileData(project.FileName);
+            var userId = User.Identity.GetUserId();
+            var file = new FileData(project.FileName, userId);
             //check wexBim files Exists
-            if (!fileData.Exists(FileType.WexBIMPathArc))
+            if (!file.Exists(FileType.WexBIMPathArc))
             {
-                IfcHandler.ToWexBim(fileData.InputPath, fileData.WexBIMPathArc);
+                IfcHandler.ToWexBim(file.InputPath, file.WexBIMPathArc);
             }
-            else if (!fileData.Exists(FileType.WexBIMPAthStr))
+            else if (!file.Exists(FileType.WexBIMPAthStr))
             {
-                IfcHandler.ToWexBim(fileData.InputPath, fileData.WexBIMPathStr);
+                IfcHandler.ToWexBim(file.InputPath, file.WexBIMPathStr);
             }
 
-            
-            return View(fileData);
+
+            return View(file);
         }
 
         public ActionResult Viewer(string FileName)
         {
-            if (TempData["Structure"]==null)
+            if (TempData["Structure"] == null)
             {
                 TempData["Structure"] = true;
             }
-            
-           
-            var m = new FileData(FileName);
-           
-            if ((bool)TempData["Structure"]==true)
+
+
+            var userId = User.Identity.GetUserId();
+            var file = new FileData(FileName, userId);
+
+            if ((bool)TempData["Structure"] == true)
             {
                 TempData["Structure"] = false;
-                return File(m.WexBIMPathStr, "application/octet-stream", m.InputName);
-               
+                return File(file.WexBIMPathStr, "application/octet-stream", file.FileName);
+
             }
             // return str files
             else
             {
-                ////if str file found retunrn it
-                //if (file.Exists(FileType.WexBIMPAthStr))
-                //{
 
-                //}
-
-
-                ////if str file found retunrn null
-                //else
-                //{
-                //    return null;
-                //}
                 TempData["Structure"] = null;
-                return File(m.WexBIMPathArc, "application/octet-stream", m.InputName);
-               
+                return File(file.WexBIMPathArc, "application/octet-stream", file.FileName);
             }
-           
-
         }
 
 
         #endregion
 
-        #region Design Methods
 
-        public ActionResult Design()
-        {
-            return View();
-        }
-        #endregion
     }
 }

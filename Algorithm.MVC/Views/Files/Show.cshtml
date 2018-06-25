@@ -62,7 +62,7 @@
 
         <div class="tab-pane" id="Colors">
             <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.setStyle(0, xProductType.IFCCOLUMNSTANDARDCASE);">Color Studs</button>
-            <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.setStyle(1, xProductType.IFCBEAMSTANDARDCASE)">Color Joits</button>
+            <button type="button" class="btn btn-primary" onclick="ColourJoists()">Color Joists</button>
             <button type="button" class="btn btn-primary" onclick="Recolour()">Recolour by type</button>
             <button type="button" class="btn btn-primary" onclick="if (viewer) viewer.resetStates(); viewer2.resetStates();">Reset styles</button>
         </div>
@@ -105,8 +105,7 @@
         flex-direction: row;
         /*border: 1px solid silver;*/
         overflow: hidden;
-        /* avoid browser level touch actions */
-        xtouch-action: none;
+       
     }
 
     .panel-left {
@@ -169,13 +168,13 @@
 
         viewer.renderingMode = "normal";
         viewer2.renderingMode = "normal";
-
+   
     viewer.defineStyle(0, [255, 0, 0, 255]);
         viewer.defineStyle(1, [0, 0, 255, 255]);
     viewer2.defineStyle(0, [255, 0, 0, 255]);
         viewer2.defineStyle(1, [0, 0, 255, 255]);
 
-
+   
             //Load Architecture and Structure Models and start the viewers
 
 
@@ -263,46 +262,58 @@
 
         });
 
-        viewer.on('pick', function (args) {
-            var cmb = document.getElementById('cmbHide');
-            var option = cmb.value;
-            switch (option) {
-                case 'hideProduct':
-                    viewer.setState(xState.HIDDEN, [args.id]);
-                    break;
-                case 'hideType':
-                    var type = viewer.getProductType(args.id);
-                    viewer.setState(xState.HIDDEN, type);
-                    break;
-                case 'highlight':
-                    viewer.setState(xState.HIGHLIGHTED, [args.id]);
-                    break;
-                default:
-                    break;
-            }
-        });
+  
+
+    viewer.on('pick', OnEntityClick);
+    function OnEntityClick(entity, object, element)
+    {
+        console.log(entity);
+        console.log(object);
+        console.log(element);
+    }
+
+    viewer.on('pick', onPick);
+
+    function onPick(args) {
+
+        console.log(args);
+        var product = viewer.getState(args.id);
+        var type = viewer.getProductType(args.id);
+        console.log(type);
+
+        var cmb = document.getElementById('cmbHide');
+        var option = cmb.value;
+        switch (option) {
+            case 'hideProduct':
+                viewer.setState(xState.HIDDEN, [args.id]);
+                
+                break;
+            case 'hideType':
+                var type = viewer.getProductType(args.id);
+                viewer.setState(xState.HIDDEN, type);
+                break;
+            case 'highlight':
+
+                viewer.setState(xState.HIGHLIGHTED, [args.id]);
 
 
-        function SubmitData() {
-            var pId = $("#productId")[0].value;
-            var newX = $("#newX")[0].value;
-            var newY = $("#newY")[0].value;
-            $.get("ModifyProducts.aspx?Id=" + pId + "&newX=" + newX + "&newY=" + newY).done(function (data) {
-                alert('done');
-                viewer.setState(xState.UNDEFINED, [parseInt(pId)]);
-                viewer.setStyle(0, [parseInt(pId)]);
-            });
-        }
+                break;
+            default:
+                break;
+
+        };
 
         function UnRegister() {
             viewer.off('pick', func);
         }
+    };
 
         //Reclour the elemnts by type
         function Recolour() {
             if (!viewer) return;
             var index = 0;
-            for (var i in xProductType) {
+            for (var i in xProductType)
+            {
                 var type = xProductType[i];
                 var colour = [Math.random() * 255, Math.random() * 255, Math.random() * 255, 255];
                 viewer.defineStyle(index, colour);
@@ -311,7 +322,15 @@
                 viewer2.setStyle(index, type);
                 index++;
             }
-        };
+    };
+
+    function ColorJoist() {
+
+        if (viewer)
+           
+            viewer.setStyle(1, xProductType.IFCBEAMSTANDARDCASE);
+
+    }
 
         //Add Navigation Cube
 

@@ -25,11 +25,12 @@ namespace Algorithm.MVC.Controllers
         private AlgorithmDB db = new AlgorithmDB();
 
         #region Design
-        public FileContentResult Design(Guid? Id)
+        public void Design(Guid? Id)
         {
             UnitOfWork uow = new UnitOfWork();
             var proj = uow.Projects.FindById(Id);
-            var file = new FileData(proj.FileName);
+            var userId = User.Identity.GetUserId();
+            var file = new FileData(proj.FileName, userId);
             ///conteeeeeeeeeent
 
             StudTable.FilePath = Server.MapPath(@"~/App_Data\Tables\StudSpacingTable.csv");
@@ -48,8 +49,6 @@ namespace Algorithm.MVC.Controllers
                 model.Delete<IfcColumn>();
                 WoodFrame wf = new WoodFrame(model);
                 wf.FrameWalls();
-                wf.FrameFloors();
-
                 model.Delete<IfcWall>();
                 model.Delete<IfcSlab>();
 
@@ -62,22 +61,25 @@ namespace Algorithm.MVC.Controllers
                 GC1.AddToCollection(model.Instances.OfType<IfJoist>());
                 GC1.AddToCollection(model.Instances.OfType<IfStud>());
                 GC1.AddToCollection(model.Instances.OfType<IfSill>());
-                byte[] filecontent = GC1.ToExcel(GC1.BOQTable, "Testing Excel", false, "Number", "Collection");
-
+                //saving Excel bytes
+                GC1.ToExcel(file.BoqPath, file.FileName + "BOQ");
 
                 proj.DesignState = DesignState.Designed;
-
-
                 uow.SaveChanges();
                 ///result
-                return File(filecontent, GC1.ExcelContentType, "test1.xlsx");
+
             }
         }
         #endregion
 
         #region Edit Settings
-        public void EditSettings(DesignOptions settings)
+        public void EditSettings(WoodSetup settings)
         {
+            UnitOfWork uow = new UnitOfWork();
+            var projSettings = uow.Projects.FindById(settings.ProjectId);
+
+            //set new data from user
+
 
         }
 
@@ -184,7 +186,7 @@ namespace Algorithm.MVC.Controllers
             Project project = await db.Projects.FindAsync(id);
             db.Projects.Remove(project);
             await db.SaveChangesAsync();
-            return RedirectToAction("Index","DashBoard");
+            return RedirectToAction("Index","Dashboard");
         }
 
         protected override void Dispose(bool disposing)
