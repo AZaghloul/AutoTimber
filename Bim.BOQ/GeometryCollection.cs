@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,6 @@ namespace Bim.BOQ
 {
     public class GeometryCollection
     {
-        public string ExcelContentType { get; set; }
         public DataTable BOQTable { get; set; }
         public List<IfElement> ElementCollection { get; set; }
         public List<int> NumberOfElements { get; set; }
@@ -25,7 +25,6 @@ namespace Bim.BOQ
             BOQTable = new DataTable("BOQ");
             BOQTable.Columns.Add("Elements Collection", typeof(string));
             BOQTable.Columns.Add("Number", typeof(int));
-            ExcelContentType = @"application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
         }
 
         public IfElement CheckElement(IfElement ifElement)
@@ -60,34 +59,22 @@ namespace Bim.BOQ
             }
         }
 
-        public byte[] ToExcel(DataTable dataTable, string heading = "", bool showSrNo = false, params string[] columnsToTake)
+        public byte[] ToExcel(string outputPath, string header)
         {
             byte[] result = null;
 
             using (ExcelPackage package = new ExcelPackage())
             {
-                ExcelWorksheet workSheet = package.Workbook.Worksheets.Add(String.Format("{0} Data", heading));
-                int startRowFrom = String.IsNullOrEmpty(heading) ? 1 : 3;
-
-                if (showSrNo)
-                {
-                    DataColumn dataColumn = dataTable.Columns.Add("#", typeof(int));
-                    dataColumn.SetOrdinal(0);
-                    int index = 1;
-                    foreach (DataRow item in dataTable.Rows)
-                    {
-                        item[0] = index;
-                        index++;
-                    }
-                }
+                ExcelWorksheet workSheet = package.Workbook.Worksheets.Add(String.Format("{0} Data", header));
+                int startRowFrom = String.IsNullOrEmpty(header) ? 1 : 3;
 
 
                 // add the content into the Excel file  
-                workSheet.Cells["A" + startRowFrom].LoadFromDataTable(dataTable, true);
+                workSheet.Cells["A" + startRowFrom].LoadFromDataTable(BOQTable, true);
 
                 // autofit width of cells with small content  
                 int columnIndex = 1;
-                foreach (DataColumn column in dataTable.Columns)
+                foreach (DataColumn column in BOQTable.Columns)
                 {
                     ExcelRange columnCells = workSheet.Cells[workSheet.Dimension.Start.Row, columnIndex, workSheet.Dimension.End.Row, columnIndex];
                     int maxLength = columnCells.Max(cell => cell.Value.ToString().Count());
@@ -101,7 +88,7 @@ namespace Bim.BOQ
                 }
 
                 // format header - bold, yellow on black  
-                using (ExcelRange r = workSheet.Cells[startRowFrom, 1, startRowFrom, dataTable.Columns.Count])
+                using (ExcelRange r = workSheet.Cells[startRowFrom, 1, startRowFrom, BOQTable.Columns.Count])
                 {
                     r.Style.Font.Color.SetColor(System.Drawing.Color.White);
                     r.Style.Font.Bold = true;
@@ -110,7 +97,7 @@ namespace Bim.BOQ
                 }
 
                 // format cells - add borders  
-                using (ExcelRange r = workSheet.Cells[startRowFrom + 1, 1, startRowFrom + dataTable.Rows.Count, dataTable.Columns.Count])
+                using (ExcelRange r = workSheet.Cells[startRowFrom + 1, 1, startRowFrom + BOQTable.Rows.Count, BOQTable.Columns.Count])
                 {
                     r.Style.Border.Top.Style = ExcelBorderStyle.Thin;
                     r.Style.Border.Bottom.Style = ExcelBorderStyle.Thin;
@@ -136,9 +123,9 @@ namespace Bim.BOQ
                 //    }
                 //}
 
-                if (!String.IsNullOrEmpty(heading))
+                if (!String.IsNullOrEmpty(header))
                 {
-                    workSheet.Cells["A1"].Value = heading;
+                    workSheet.Cells["A1"].Value = header;
                     workSheet.Cells["A1"].Style.Font.Size = 20;
 
                     workSheet.InsertColumn(1, 1);
@@ -149,7 +136,7 @@ namespace Bim.BOQ
                 result = package.GetAsByteArray();
             }
 
-
+            File.WriteAllBytes(outputPath, result);
             //
             return result;
         }
