@@ -1,8 +1,8 @@
 ﻿using Microsoft.Owin;
 using Owin;
 
-[assembly: OwinStartupAttribute(typeof(Algorithm.MVC.Startup))]
-namespace Algorithm.MVC
+[assembly: OwinStartupAttribute(typeof(AutoTimber.MVC.Startup))]
+namespace AutoTimber.MVC
 {
     public partial class Startup
     {

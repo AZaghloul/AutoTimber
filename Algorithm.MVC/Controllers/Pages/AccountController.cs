@@ -8,10 +8,10 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Algorithm.MVC.Models;
-using Algorithm.MVC.DAL;
+using AutoTimber.MVC.Models;
+using AutoTimber.MVC.DAL;
 
-namespace Algorithm.MVC.Controllers
+namespace AutoTimber.MVC.Controllers
 {
     [Authorize]
     public class AccountController : Controller

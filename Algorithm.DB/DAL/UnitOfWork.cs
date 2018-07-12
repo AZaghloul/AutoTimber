@@ -1,9 +1,9 @@
-﻿using Algorithm.DB;
-using Algorithm.DB.Managers;
+﻿using AutoTimber.DB;
+using AutoTimber.DB.Managers;
 using System.Data.Entity;
 using System.Runtime.InteropServices;
 
-namespace Algorithm.MVC.DAL
+namespace AutoTimber.MVC.DAL
 {
     public class UnitOfWork
     {

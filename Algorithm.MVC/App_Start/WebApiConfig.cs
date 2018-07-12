@@ -4,7 +4,7 @@ using System.Linq;
 using System.Net.Http.Formatting;
 using System.Web.Http;
 
-namespace Algorithm.MVC
+namespace AutoTimber.MVC
 {
     public static class WebApiConfig
     {

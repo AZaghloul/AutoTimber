@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
-namespace Algorithm.MVC.Models
+namespace AutoTimber.MVC.Models
 {
     public class ExternalLoginConfirmationViewModel
     {

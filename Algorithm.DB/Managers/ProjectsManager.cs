@@ -1,8 +1,8 @@
-﻿using Algorithm.DB.DAL;
-using Algorithm.DB.Models;
+﻿using AutoTimber.DB.DAL;
+using AutoTimber.DB.Models;
 using System.Data.Entity;
 
-namespace Algorithm.DB.Managers
+namespace AutoTimber.DB.Managers
 {
     public class ProjectsManager:Repository<Project>
     {

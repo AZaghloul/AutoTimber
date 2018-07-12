@@ -142,9 +142,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Algorithm.MVC\Algorithm.MVC.csproj">
+    <ProjectReference Include="..\Algorithm.MVC\AutoTimber.MVC.csproj">
       <Project>{911F84F8-8D37-4412-8D52-28F6B5EB9314}</Project>
-      <Name>Algorithm.MVC</Name>
+      <Name>AutoTimber.MVC</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

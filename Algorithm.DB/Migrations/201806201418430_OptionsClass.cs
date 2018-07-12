@@ -1,4 +1,4 @@
-namespace Algorithm.DB.Migrations
+namespace AutoTimber.DB.Migrations
 {
     using System;
     using System.Data.Entity.Migrations;

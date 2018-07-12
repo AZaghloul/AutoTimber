@@ -1763,13 +1763,13 @@
     <Content Include="src\Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Algorithm.DB\Algorithm.DB.csproj">
+    <ProjectReference Include="..\Algorithm.DB\AutoTimber.DB.csproj">
       <Project>{36b75ecb-2b2a-47f3-91ac-df26352f7b32}</Project>
-      <Name>Algorithm.DB</Name>
+      <Name>AutoTimber.DB</Name>
     </ProjectReference>
-    <ProjectReference Include="..\AlgorithmProject\AlgorithmProject.csproj">
+    <ProjectReference Include="..\AlgorithmProject\AutoTimberProject.csproj">
       <Project>{66c15a46-f605-449e-8a9f-67a5a1219d68}</Project>
-      <Name>AlgorithmProject</Name>
+      <Name>AutoTimberProject</Name>
     </ProjectReference>
     <ProjectReference Include="..\Bim.BOQ\Bim.BOQ.csproj">
       <Project>{baa4804c-244e-41a5-a4b9-e04fb207fa23}</Project>

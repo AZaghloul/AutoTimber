@@ -1,12 +1,12 @@
-﻿using Algorithm.DB.ViewModels;
-using Algorithm.MVC.DAL;
+﻿using AutoTimber.DB.ViewModels;
+using AutoTimber.MVC.DAL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace Algorithm.MVC.Controllers.Pages
+namespace AutoTimber.MVC.Controllers.Pages
 {
     public class GalleryController : Controller
     {

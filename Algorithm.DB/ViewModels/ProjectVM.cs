@@ -1,5 +1,5 @@
 ﻿
-using Algorithm.DB.Models;
+using AutoTimber.DB.Models;
 using Bim.Domain.General;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithm.DB.ViewModels
+namespace AutoTimber.DB.ViewModels
 {
    public class ProjectVM
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27130.2010
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AlgorithmProject", "AlgorithmProject\AlgorithmProject.csproj", "{66C15A46-F605-449E-8A9F-67A5A1219D68}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTimberProject", "AlgorithmProject\AutoTimberProject.csproj", "{66C15A46-F605-449E-8A9F-67A5A1219D68}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.IO", "Bim.IO\Bim.IO.csproj", "{9ABAE764-1E6E-4124-8D72-96332668D50E}"
 EndProject
@@ -15,11 +15,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.Application.IRCWood", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IRCWoodTest", "IRCWoodTest\IRCWoodTest.csproj", "{29CF04D7-B7AD-49A7-A124-814BEDAD1794}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.MVC", "Algorithm.MVC\Algorithm.MVC.csproj", "{911F84F8-8D37-4412-8D52-28F6B5EB9314}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTimber.MVC", "Algorithm.MVC\AutoTimber.MVC.csproj", "{911F84F8-8D37-4412-8D52-28F6B5EB9314}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.MVC.Tests", "Algorithm.MVC.Tests\Algorithm.MVC.Tests.csproj", "{7019E960-E54D-4AD8-8894-8C0AE9C383C7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTimber.MVC.Tests", "Algorithm.MVC.Tests\AutoTimber.MVC.Tests.csproj", "{7019E960-E54D-4AD8-8894-8C0AE9C383C7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Algorithm.DB", "Algorithm.DB\Algorithm.DB.csproj", "{36B75ECB-2B2A-47F3-91AC-DF26352F7B32}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AutoTimber.DB", "Algorithm.DB\AutoTimber.DB.csproj", "{36B75ECB-2B2A-47F3-91AC-DF26352F7B32}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Bim.BOQ", "Bim.BOQ\Bim.BOQ.csproj", "{BAA4804C-244E-41A5-A4B9-E04FB207FA23}"
 EndProject

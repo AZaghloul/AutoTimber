@@ -36,7 +36,7 @@
             </td>
             <td style="text-align:center">
                 @Html.DisplayFor(modelItem => item.Project.DesignState)
-                @if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Waiting)
+                @if (item.Project.DesignState == AutoTimber.DB.Models.DesignState.Waiting)
                 {
 
 
@@ -47,7 +47,7 @@
                     @Html.HiddenFor(modelItem => item.Project.Id)
 
                 }
-                else if (item.Project.DesignState == Algorithm.DB.Models.DesignState.Designed)
+                else if (item.Project.DesignState == AutoTimber.DB.Models.DesignState.Designed)
                 {
 
                     @:&nbsp;&nbsp;&nbsp;&nbsp;<i class="fa fa-check"></i>

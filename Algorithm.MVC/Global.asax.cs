@@ -7,7 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 
-namespace Algorithm.MVC
+namespace AutoTimber.MVC
 {
     public class MvcApplication : System.Web.HttpApplication
     {

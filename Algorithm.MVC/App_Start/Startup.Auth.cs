@@ -5,9 +5,9 @@ using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
-using Algorithm.MVC.Models;
+using AutoTimber.MVC.Models;
 
-namespace Algorithm.MVC
+namespace AutoTimber.MVC
 {
     public partial class Startup
     {

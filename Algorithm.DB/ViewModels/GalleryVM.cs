@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithm.DB.ViewModels
+namespace AutoTimber.DB.ViewModels
 {
    public class GalleryVM
     {

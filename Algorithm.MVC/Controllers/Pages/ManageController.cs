@@ -6,9 +6,9 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
-using Algorithm.MVC.Models;
+using AutoTimber.MVC.Models;
 
-namespace Algorithm.MVC.Controllers
+namespace AutoTimber.MVC.Controllers
 {
     [Authorize]
     public class ManageController : Controller

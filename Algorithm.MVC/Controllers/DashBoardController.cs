@@ -1,7 +1,7 @@
-﻿using Algorithm.DB;
-using Algorithm.DB.Models;
-using Algorithm.DB.ViewModels;
-using Algorithm.MVC.DAL;
+﻿using AutoTimber.DB;
+using AutoTimber.DB.Models;
+using AutoTimber.DB.ViewModels;
+using AutoTimber.MVC.DAL;
 using Bim.Application.IRCWood.Common;
 using Bim.Application.IRCWood.IRC;
 using Bim.Application.IRCWood.Physical;
@@ -18,7 +18,7 @@ using System.Web.Helpers;
 using System.Web.Mvc;
 using Xbim.Ifc4.SharedBldgElements;
 
-namespace Algorithm.MVC.Controllers
+namespace AutoTimber.MVC.Controllers
 {
     [Authorize]
     public class DashBoardController : Controller

@@ -1,7 +1,7 @@
 ﻿using System.Web;
 using System.Web.Mvc;
 
-namespace Algorithm.MVC
+namespace AutoTimber.MVC
 {
     public class FilterConfig
     {

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithm.DB.Models
+namespace AutoTimber.DB.Models
 {
     public enum WoodSpecies
     {

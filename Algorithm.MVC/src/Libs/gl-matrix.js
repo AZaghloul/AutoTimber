@@ -4227,7 +4227,7 @@ quat.normalize = vec4.normalize;
  * @function
  */
 quat.fromMat3 = function(out, m) {
-    // Algorithm in Ken Shoemake's article in 1987 SIGGRAPH course notes
+    // AutoTimber in Ken Shoemake's article in 1987 SIGGRAPH course notes
     // article "Quaternion Calculus and Fast Animation".
     var fTrace = m[0] + m[4] + m[8];
     var fRoot;

@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Web.Mvc;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Algorithm.MVC;
-using Algorithm.MVC.Controllers;
+using AutoTimber.MVC;
+using AutoTimber.MVC.Controllers;
 
-namespace Algorithm.MVC.Tests.Controllers
+namespace AutoTimber.MVC.Tests.Controllers
 {
     [TestClass]
     public class HomeControllerTest

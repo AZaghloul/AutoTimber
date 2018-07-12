@@ -4,10 +4,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Net;
 using System.Web.Mvc;
-using Algorithm.DB;
-using Algorithm.DB.Models;
-using Algorithm.DB.ViewModels;
-using Algorithm.MVC.DAL;
+using AutoTimber.DB;
+using AutoTimber.DB.Models;
+using AutoTimber.DB.ViewModels;
+using AutoTimber.MVC.DAL;
 using Microsoft.AspNet.Identity;
 using Bim.Domain.General;
 using Bim.Application.IRCWood.IRC;
@@ -15,10 +15,10 @@ using Bim.Domain.Ifc;
 using Xbim.Ifc4.SharedBldgElements;
 using Bim.Application.IRCWood.Physical;
 using Bim.BOQ;
-using Algorithm.MVC.Helper;
+using AutoTimber.MVC.Helper;
 using Bim.IO;
 
-namespace Algorithm.MVC.Controllers
+namespace AutoTimber.MVC.Controllers
 {
     [Authorize]
     public class ProjectsController : Controller

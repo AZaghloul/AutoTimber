@@ -5,7 +5,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Hosting;
 
-namespace Algorithm.MVC.Helper
+namespace AutoTimber.MVC.Helper
 {
     public enum FileType
     {

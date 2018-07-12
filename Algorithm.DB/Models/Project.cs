@@ -3,7 +3,7 @@ using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
-namespace Algorithm.DB.Models
+namespace AutoTimber.DB.Models
 {
     public class Project
     {

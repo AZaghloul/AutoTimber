@@ -4,18 +4,18 @@ using System;
 using System.IO;
 using System.Net;
 using System.Web.Mvc;
-using Algorithm.DB.ViewModels;
+using AutoTimber.DB.ViewModels;
 using System.Web;
 using System.Collections.Generic;
-using Algorithm.MVC.DAL;
-using Algorithm.DB;
-using Algorithm.DB.Models;
+using AutoTimber.MVC.DAL;
+using AutoTimber.DB;
+using AutoTimber.DB.Models;
 using Microsoft.AspNet.Identity;
-using Algorithm.MVC.Helper;
+using AutoTimber.MVC.Helper;
 using System.Linq;
 using System.IO.Compression;
 
-namespace Algorithm.MVC.Controllers
+namespace AutoTimber.MVC.Controllers
 {
     public class FilesController : Controller
     {

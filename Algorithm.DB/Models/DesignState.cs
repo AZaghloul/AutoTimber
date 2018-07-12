@@ -1,4 +1,4 @@
-﻿namespace Algorithm.DB.Models
+﻿namespace AutoTimber.DB.Models
 {
     public enum DesignState
     {

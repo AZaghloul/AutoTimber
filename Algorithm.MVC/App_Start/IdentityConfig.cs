@@ -10,9 +10,9 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
-using Algorithm.MVC.Models;
+using AutoTimber.MVC.Models;
 
-namespace Algorithm.MVC
+namespace AutoTimber.MVC
 {
     public class EmailService : IIdentityMessageService
     {

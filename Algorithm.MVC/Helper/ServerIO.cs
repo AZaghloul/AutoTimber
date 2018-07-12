@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Hosting;
 using System.Web.Mvc;
-namespace Algorithm.MVC.Helper
+namespace AutoTimber.MVC.Helper
 {
     public class ServerIO
     {

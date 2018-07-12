@@ -5,10 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.Entity;
 using System.Data.Entity.ModelConfiguration.Conventions;
-using Algorithm.DB.Models;
+using AutoTimber.DB.Models;
 using Bim.Domain.General;
 
-namespace Algorithm.DB
+namespace AutoTimber.DB
 {
     public class AlgorithmDB : DbContext
     {

@@ -1,4 +1,4 @@
-﻿using Algorithm.DB.DAL;
+﻿using AutoTimber.DB.DAL;
 using Bim.Domain.General;
 using System;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Algorithm.DB.Managers
+namespace AutoTimber.DB.Managers
 {
     public class DesignOptionsManager : Repository<DesignOptions>
     {
